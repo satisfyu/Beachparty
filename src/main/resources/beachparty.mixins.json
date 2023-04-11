@@ -1,9 +1,12 @@
 {
 	"required": true,
-	"package": "net.satisfyu.mixin",
+	"package": "net.satisfyu.beachparty.mixin",
 	"compatibilityLevel": "JAVA_17",
 	"mixins": [
-		"ExampleMixin"
+	],
+	"client": [
+		"ArmorFeatureRendererMixin",
+		"ArmorStandRendererMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1

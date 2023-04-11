@@ -1,0 +1,34 @@
+{
+  "variants": {
+    "facing=north,has_record=false": {
+      "model": "beachparty:block/radio"
+    },
+    "facing=south,has_record=false": {
+      "model": "beachparty:block/radio",
+      "y": 180
+    },
+    "facing=west,has_record=false": {
+      "model": "beachparty:block/radio",
+      "y": 270
+    },
+    "facing=east,has_record=false": {
+      "model": "beachparty:block/radio",
+      "y": 90
+    },
+    "facing=north,has_record=true": {
+      "model": "beachparty:block/radio"
+    },
+    "facing=south,has_record=true": {
+      "model": "beachparty:block/radio",
+      "y": 180
+    },
+    "facing=west,has_record=true": {
+      "model": "beachparty:block/radio",
+      "y": 270
+    },
+    "facing=east,has_record=true": {
+      "model": "beachparty:block/radio",
+      "y": 90
+    }
+  }
+}

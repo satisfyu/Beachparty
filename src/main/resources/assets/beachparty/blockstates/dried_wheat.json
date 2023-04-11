@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "beachparty:block/dried_wheat_block",
+        "weight": 1
+      }
+    ]
+  }
+}
