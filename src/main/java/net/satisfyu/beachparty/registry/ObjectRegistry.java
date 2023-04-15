@@ -19,6 +19,8 @@ import net.satisfyu.beachparty.BeachpartyIdentifier;
 import net.satisfyu.beachparty.block.*;
 import net.satisfyu.beachparty.item.BeachHatItem;
 import net.satisfyu.beachparty.item.CocktailItem;
+import net.satisfyu.beachparty.item.SandBucketItem;
+import net.satisfyu.beachparty.item.Swimsuit;
 
 import java.util.*;
 import java.util.function.BiFunction;
@@ -63,10 +65,14 @@ public class ObjectRegistry {
     public static final Block DRIED_WHEAT_SLAB = register("dried_wheat_slab", new SlabBlock(getSlabSettings().sounds(BlockSoundGroup.GRASS)));
     public static final Block PALM_LEAVES = register("palm_leaves", new LeavesBlock(FabricBlockSettings.copy(Blocks.JUNGLE_LEAVES)));
     public static final Item PALM_SAPLING = register("palm_sapling", new Item(getSettings()));
-    public static final Block PALM_TORCH = register("palm_torch", new TorchBlock(AbstractBlock.Settings.of(Material.DECORATION).noCollision().breakInstantly().luminance((state) -> {return 14;}).sounds(BlockSoundGroup.WOOD), ParticleTypes.FLAME));
-    public static final Block PALM_TORCH_TALL = register("palm_torch_tall", new TorchBlock(AbstractBlock.Settings.of(Material.DECORATION).noCollision().breakInstantly().luminance((state) -> {return 14;}).sounds(BlockSoundGroup.WOOD), ParticleTypes.FLAME));
-    public static final Block RADIO = register("radio", new Block(FabricBlockSettings.of(Material.DECORATION))); // RadioBlock(FabricBlockSettings.copy(Blocks.JUKEBOX)));
-    public static final Item SAND_BUCKET = register("sand_bucket", new Item(getSettings()));
+    public static final Block PALM_TORCH = register("palm_torch", new TorchBlock(AbstractBlock.Settings.of(Material.DECORATION).noCollision().breakInstantly().luminance((state) -> 14).sounds(BlockSoundGroup.WOOD), ParticleTypes.FLAME), false);
+    public static final Block PALM_WALL_TORCH = register("palm_wall_torch", new WallTorchBlock(AbstractBlock.Settings.of(Material.DECORATION).noCollision().breakInstantly().luminance((state) -> 14).sounds(BlockSoundGroup.WOOD).dropsLike(PALM_TORCH), ParticleTypes.FLAME), false);
+    public static final Item PALM_TORCH_ITEM = register("palm_torch_item", new WallStandingBlockItem(ObjectRegistry.PALM_TORCH, ObjectRegistry.PALM_WALL_TORCH, getSettings()));
+    public static final Block PALM_TALL_TORCH = register("palm_tall_torch", new TallTorchBlock(AbstractBlock.Settings.of(Material.DECORATION).noCollision().breakInstantly().luminance((state) -> 14).sounds(BlockSoundGroup.WOOD), ParticleTypes.FLAME));
+    public static final Block RADIO = register("radio", new RadioBlock(FabricBlockSettings.of(Material.DECORATION))); // RadioBlock(FabricBlockSettings.copy(Blocks.JUKEBOX)));
+    public static final Item SAND_BUCKET = register("sand_bucket", new SandBucketItem(getSettings()));
+    public static final Item EMPTY_SAND_BUCKET = register("empty_sand_bucket", new SandBucketItem(getSettings()));
+    public static final Block SAND_CASTLE = register("sand_castle", new SandCastleBlock(FabricBlockSettings.of(Material.SOIL)));
     public static final Block COCONUT = register("coconut", new CoconutBlock(FabricBlockSettings.of(Material.BAMBOO)));
     public static final Item COCONUT_OPEN = register("coconut_open", new Item(getSettings()));
     public static final Item COCONUT_COCKTAIL = register("coconut_cocktail", new CocktailItem(getSettings(), StatusEffects.INSTANT_HEALTH));
@@ -80,6 +86,8 @@ public class ObjectRegistry {
     public static final Item ICECREAM_CACTUS = register("icecream_cactus", new Item(getSettings().food(FoodComponents.COOKIE)));
     public static final Item ICECREAM_SWEETBERRIES = register("icecream_sweetberries", new Item(getSettings().food(FoodComponents.COOKIE)));
     public static final Item BEACH_HAT = register("beach_hat", new BeachHatItem(getSettings().rarity(Rarity.COMMON)));
+
+    public static final Item SWIMSUIT = register("swimsuit", new Swimsuit(getSettings().rarity(Rarity.COMMON)));
 
 
     private static PillarBlock registerLog(String path) {
