@@ -23,8 +23,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Supplier;
 
-public class LoungeChairBlock extends Block {
-     public LoungeChairBlock(Settings settings) {
+public class TikiChairBlock extends Block {
+     public TikiChairBlock(Settings settings) {
           super(settings);
      }
 
@@ -33,12 +33,18 @@ public class LoungeChairBlock extends Block {
 
          private static final Supplier<VoxelShape> voxelShapeSupplier = () -> {
               VoxelShape shape = VoxelShapes.empty();
-             shape = VoxelShapes.union(shape, VoxelShapes.cuboid(0.8125, 0, 0.75, 0.875, 0.75, 0.875));
-             shape = VoxelShapes.union(shape, VoxelShapes.cuboid(0.125, 0, 0.75, 0.1875, 0.75, 0.875));
-             shape = VoxelShapes.union(shape, VoxelShapes.cuboid(0.1875, 0.125, 0.75, 0.8125, 0.1875, 0.875));
-             shape = VoxelShapes.union(shape, VoxelShapes.cuboid(0.125, 0.3125, 0.25, 0.875, 0.375, 0.375));
-             shape = VoxelShapes.union(shape, VoxelShapes.cuboid(0.1875, 0.375, 0.375, 0.8125, 0.375, 0.6625));
-             shape = VoxelShapes.union(shape, VoxelShapes.cuboid(0.125, 0.90625, 0.90625, 0.875, 1.03125, 1.03125));
+             shape = VoxelShapes.union(shape, VoxelShapes.cuboid(0.3125, 0.1875, 0.375, 0.375, 0.25, 0.625));
+             shape = VoxelShapes.union(shape, VoxelShapes.cuboid(0.625, 0, 0.625, 0.6875, 0.5625, 0.6875));
+             shape = VoxelShapes.union(shape, VoxelShapes.cuboid(0.625, 0, 0.3125, 0.6875, 0.5625, 0.375));
+             shape = VoxelShapes.union(shape, VoxelShapes.cuboid(0.625, 0.1875, 0.375, 0.6875, 0.25, 0.625));
+             shape = VoxelShapes.union(shape, VoxelShapes.cuboid(0.375, 0.3125, 0.3125, 0.625, 0.375, 0.375));
+             shape = VoxelShapes.union(shape, VoxelShapes.cuboid(0.375, 0.3125, 0.625, 0.625, 0.375, 0.6875));
+             shape = VoxelShapes.union(shape, VoxelShapes.cuboid(0.3125, 0, 0.625, 0.375, 0.5625, 0.6875));
+             shape = VoxelShapes.union(shape, VoxelShapes.cuboid(0.3125, 0, 0.3125, 0.375, 0.5625, 0.375));
+             shape = VoxelShapes.union(shape, VoxelShapes.cuboid(0.25, 0.5625, 0.3125, 0.75, 0.6875, 0.6875));
+             shape = VoxelShapes.union(shape, VoxelShapes.cuboid(0.3125, 0.5625, 0.25, 0.6875, 0.6875, 0.3125));
+             shape = VoxelShapes.union(shape, VoxelShapes.cuboid(0.3125, 0.5625, 0.6875, 0.6875, 0.6875, 0.75));
+             shape = VoxelShapes.union(shape, VoxelShapes.cuboid(0.3125, 0.6875, 0.3125, 0.6875, 0.75, 0.6875));
 
 
               return shape;
@@ -54,12 +60,12 @@ public class LoungeChairBlock extends Block {
          public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
               return SHAPE.get(state.get(FACING));
          }
+    @Override
+    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand
+            hand, BlockHitResult hit) {
+        return ChairUtil.onUse(world, player, hand, hit, 0.2);
+    }
 
-         @Override
-         public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand
-         hand, BlockHitResult hit) {
-              return ChairUtil.onUse(world, player, hand, hit, -0.1);
-         }
 
          @Override
          public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {

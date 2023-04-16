@@ -1,4 +1,4 @@
-package net.satisfyu.beachparty.registry;
+package net.satisfyu.beachparty.util;
 
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.ArmorMaterial;
@@ -7,49 +7,7 @@ import net.minecraft.item.Items;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.sound.SoundEvent;
 
-public class MaterialsRegistry {
-
-    public static final ArmorMaterial BEACH_ARMOR = new ArmorMaterial() {
-        @Override
-        public int getDurability(EquipmentSlot slot) {
-            return ArmorMaterials.LEATHER.getDurability(slot);
-        }
-
-        @Override
-        public int getProtectionAmount(EquipmentSlot slot) {
-            return ArmorMaterials.LEATHER.getProtectionAmount(slot);
-        }
-
-        @Override
-        public int getEnchantability() {
-            return ArmorMaterials.LEATHER.getEnchantability();
-        }
-
-        @Override
-        public SoundEvent getEquipSound() {
-            return ArmorMaterials.LEATHER.getEquipSound();
-        }
-
-        @Override
-        public Ingredient getRepairIngredient() {
-            return ArmorMaterials.LEATHER.getRepairIngredient();
-        }
-
-        @Override
-        public String getName() {
-            return "beach";
-        }
-
-        @Override
-        public float getToughness() {
-            return ArmorMaterials.LEATHER.getToughness();
-        }
-
-        @Override
-        public float getKnockbackResistance() {
-            return ArmorMaterials.LEATHER.getKnockbackResistance();
-        }
-    };
+public class BeachpartyArmorMaterials {
 
     public static final ArmorMaterial TRUNKS = new ArmorMaterial() {
 
@@ -137,4 +95,3 @@ public class MaterialsRegistry {
         }
     };
 }
-

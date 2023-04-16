@@ -7,6 +7,8 @@ import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.minecraft.block.*;
+import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.*;
 import net.minecraft.particle.ParticleTypes;
@@ -19,6 +21,8 @@ import net.satisfyu.beachparty.BeachpartyIdentifier;
 import net.satisfyu.beachparty.block.*;
 import net.satisfyu.beachparty.item.BeachHatItem;
 import net.satisfyu.beachparty.item.CocktailItem;
+import net.satisfyu.beachparty.item.SwimwearArmorItem;
+import net.satisfyu.beachparty.util.BeachpartyArmorMaterials;
 
 import java.util.*;
 import java.util.function.BiFunction;
@@ -30,16 +34,18 @@ public class ObjectRegistry {
 
 
 
-    public static final Block BEACH_SAND = register("beach_sand", new Block(FabricBlockSettings.copyOf(Blocks.SAND)));
-    public static final Block BEACH_SAND_DIRTY = register("beach_sand_dirty", new Block(FabricBlockSettings.copyOf(Blocks.SAND)));
-    public static final Block BEACH_SAND_SEASTARS = register("beach_sand_seastars", new Block(FabricBlockSettings.copyOf(Blocks.SAND)));
-    public static final Block BEACH_SANDWAVES = register("beach_sandwaves", new Block(FabricBlockSettings.copyOf(Blocks.SAND)));
-    public static final Block BEACH_SAND_SLAB = register("beach_sand_slab", new SlabBlock(getSlabSettings().sounds(BlockSoundGroup.SAND)));
+    public static final Block BEACH_SAND = register("beach_sand", new SandBlock(14406560, AbstractBlock.Settings.of(Material.AGGREGATE, MapColor.PALE_YELLOW).strength(0.5F).sounds(BlockSoundGroup.SAND)));
+    public static final Block BEACH_SAND_DIRTY = register("beach_sand_dirty", new SandBlock(14406560, AbstractBlock.Settings.of(Material.AGGREGATE, MapColor.PALE_YELLOW).strength(0.5F).sounds(BlockSoundGroup.SAND)));
+    public static final Block BEACH_SAND_SEASTARS = register("beach_sand_seastars", new SandBlock(14406560, AbstractBlock.Settings.of(Material.AGGREGATE, MapColor.PALE_YELLOW).strength(0.5F).sounds(BlockSoundGroup.SAND)));
+    public static final Block BEACH_SANDWAVES = register("beach_sandwaves", new SandBlock(14406560, AbstractBlock.Settings.of(Material.AGGREGATE, MapColor.PALE_YELLOW).strength(0.5F).sounds(BlockSoundGroup.SAND)));
+    public static final Block BEACH_SAND_SLAB = register("beach_sand_slab", new SandSlabBlock(getSlabSettings().sounds(BlockSoundGroup.SAND)));
+    public static final Block DRY_BUSH = register("dry_bush", new DeadBushBlock(FabricBlockSettings.copyOf(Blocks.DANDELION)));
+    public static final Block DRY_BUSH_TALL = register("dry_bush_tall", new DeadBushTallBlock(FabricBlockSettings.copyOf(Blocks.ROSE_BUSH)));
     public static final Block LOUNGE_CHAIR = register("lounge_chair", new LoungeChairBlock(FabricBlockSettings.of(Material.WOOD).strength(2.0f, 3.0f).sounds(BlockSoundGroup.BAMBOO)));
     public static final Block CHAIR = register("chair", new ChairBlock(FabricBlockSettings.of(Material.WOOD).strength(2.0f, 3.0f).sounds(BlockSoundGroup.BAMBOO)));
     public static final Block TABLE = register("table", new TableBlock(FabricBlockSettings.copy(Blocks.OAK_PLANKS).sounds(BlockSoundGroup.BAMBOO)));
-    public static final Block BEACH_CHAIR = register("beach_chair", new BeachChair(FabricBlockSettings.copy(Blocks.OAK_PLANKS).sounds(BlockSoundGroup.BAMBOO)));
-    public static final Block TIKI_CHAIR = register("tiki_chair", new ChairBlock(FabricBlockSettings.copy(Blocks.OAK_PLANKS).sounds(BlockSoundGroup.BAMBOO)));
+    public static final Block BEACH_CHAIR = register("beach_chair", new BeachChairBlock(FabricBlockSettings.copy(Blocks.OAK_PLANKS).sounds(BlockSoundGroup.BAMBOO)));
+    public static final Block TIKI_CHAIR = register("tiki_chair", new TikiChairBlock(FabricBlockSettings.copy(Blocks.OAK_PLANKS).sounds(BlockSoundGroup.BAMBOO)));
     public static final Block TIKI_BAR = register("tiki_bar", new TikiBarBlock(FabricBlockSettings.copy(Blocks.OAK_PLANKS).sounds(BlockSoundGroup.BAMBOO)));
     public static final Block STRIPPED_PALM_LOG = registerLog("stripped_palm_log");
     public static final Block PALM_LOG = register("palm_log", new StrippableLogBlock(() -> STRIPPED_PALM_LOG, MapColor.OAK_TAN, getLogBlockSettings()));
@@ -80,6 +86,8 @@ public class ObjectRegistry {
     public static final Item ICECREAM_CACTUS = register("icecream_cactus", new Item(getSettings().food(FoodComponents.COOKIE)));
     public static final Item ICECREAM_SWEETBERRIES = register("icecream_sweetberries", new Item(getSettings().food(FoodComponents.COOKIE)));
     public static final Item BEACH_HAT = register("beach_hat", new BeachHatItem(getSettings().rarity(Rarity.COMMON)));
+    public static final Item TRUNKS = register("trunks", new SwimwearArmorItem(BeachpartyArmorMaterials.TRUNKS, EquipmentSlot.LEGS, getSettings().rarity(Rarity.COMMON)));
+    public static final Item BIKINI = register("bikini", new SwimwearArmorItem(BeachpartyArmorMaterials.BIKINI, EquipmentSlot.LEGS, getSettings().rarity(Rarity.COMMON)));
 
 
     private static PillarBlock registerLog(String path) {

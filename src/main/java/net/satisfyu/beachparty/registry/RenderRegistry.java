@@ -5,8 +5,7 @@ import net.minecraft.client.render.entity.model.EntityModel;
 import net.minecraft.client.render.entity.model.EntityModelLoader;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.Item;
-import net.minecraft.util.Identifier;
-import net.satisfyu.beachparty.BeachpartyIdentifier;
+import net.satisfyu.beachparty.Beachparty;
 import net.satisfyu.beachparty.client.model.feature.BeachHatModel;
 import net.satisfyu.beachparty.util.BeachpartyApi;
 
@@ -17,6 +16,10 @@ public class RenderRegistry implements BeachpartyApi {
     @Override
     public void registerBlocks(Set<Block> blocks) {
 
+    }
+
+    public static void init(){
+        Beachparty.LOGGER.debug("Registering Storage Block Renderers!");
     }
 
 
