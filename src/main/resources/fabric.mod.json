@@ -26,6 +26,9 @@
 		],
 		"fabric-datagen": [
 			"net.satisfyu.beachparty.datagen.BeachpartyDataGeneration"
+		],
+		"beachparty": [
+			"net.satisfyu.beachparty.registry.RenderRegistry"
 		]
 	},
 	"mixins": [
