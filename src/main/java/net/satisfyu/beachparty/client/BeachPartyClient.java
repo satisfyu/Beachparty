@@ -27,7 +27,9 @@ public class BeachPartyClient implements ClientModInitializer {
     public void onInitializeClient() {
         BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutout(), ObjectRegistry.TABLE, ObjectRegistry.CHAIR,
                 ObjectRegistry.TIKI_CHAIR, ObjectRegistry.PALM_TRAPDOOR, ObjectRegistry.PALM_DOOR, ObjectRegistry.PALM_TORCH,
-                ObjectRegistry.DRY_BUSH, ObjectRegistry.DRY_BUSH_TALL
+                ObjectRegistry.DRY_BUSH, ObjectRegistry.DRY_BUSH_TALL, ObjectRegistry.MELON_COCKTAIL, ObjectRegistry.COCONUT_COCKTAIL,
+                ObjectRegistry.HONEY_COCKTAIL, ObjectRegistry.SWEETBERRIES_COCKTAIL, ObjectRegistry.PUMPKIN_COCKTAIL,
+                ObjectRegistry.COCOA_COCKTAIL
 
 
         );

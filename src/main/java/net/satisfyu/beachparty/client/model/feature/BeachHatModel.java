@@ -12,15 +12,18 @@ public class BeachHatModel<T extends Entity> extends EntityModel<T> {
 
 	public static final EntityModelLayer LAYER_LOCATION = new EntityModelLayer(new BeachpartyIdentifier("beach_hat"), "main");
 
-	private final ModelPart top_part;
+	private final ModelPart beach_hat;
 	public BeachHatModel(ModelPart root) {
-		this.top_part = root.getChild("top_part");
+		this.beach_hat = root.getChild("beach_hat");
 	}
 	public static TexturedModelData getTexturedModelData() {
 		ModelData modelData = new ModelData();
 		ModelPartData modelPartData = modelData.getRoot();
-		ModelPartData top_part = modelPartData.addChild("top_part", ModelPartBuilder.create().uv(0, 1).cuboid(-4.0F, -4.01F, -4.0F, 8.0F, 4.0F, 8.0F, new Dilation(0.0F)), ModelTransform.pivot(0.0F, 24.0F, 0.0F));
-		ModelPartData lower_part = top_part.addChild("lower_part", ModelPartBuilder.create().uv(0, 13).cuboid(-8.0F, 0.0F, -8.0F, 16.0F, 1.0F, 16.0F, new Dilation(0.0F)), ModelTransform.pivot(0.0F, 0.0F, 0.0F));
+		ModelPartData beach_hat = modelPartData.addChild("beach_hat", ModelPartBuilder.create().uv(-22, 15).cuboid(-11.0F, 0.0F, -11.0F, 22.0F, 0.0F, 22.0F, new Dilation(0.0F))
+				.uv(0, 0).cuboid(-5.0F, -5.01F, -5.0F, 10.0F, 5.0F, 10.0F, new Dilation(0.0F))
+				.uv(0, 39).cuboid(-5.25F, -5.6F, -5.25F, 10.0F, 5.0F, 10.0F, new Dilation(0.0F))
+				.uv(42, 6).cuboid(1.1F, -0.25F, -11.0F, 2.0F, 0.0F, 7.0F, new Dilation(0.0F))
+				.uv(49, 14).cuboid(1.1F, -0.25F, -11.0F, 2.0F, 8.0F, 0.0F, new Dilation(0.0F)), ModelTransform.pivot(0.0F, 24.0F, 0.0F));
 		return TexturedModelData.of(modelData, 64, 64);
 	}
 	@Override
@@ -28,6 +31,6 @@ public class BeachHatModel<T extends Entity> extends EntityModel<T> {
 	}
 	@Override
 	public void render(MatrixStack matrices, VertexConsumer vertexConsumer, int light, int overlay, float red, float green, float blue, float alpha) {
-		top_part.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha);
+		beach_hat.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha);
 	}
 }

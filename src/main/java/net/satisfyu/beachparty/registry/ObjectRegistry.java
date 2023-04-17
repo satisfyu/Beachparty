@@ -1,5 +1,6 @@
 package net.satisfyu.beachparty.registry;
 
+import com.mojang.datafixers.util.Pair;
 import com.terraformersmc.terraform.sign.block.TerraformSignBlock;
 import com.terraformersmc.terraform.sign.block.TerraformWallSignBlock;
 import com.terraformersmc.terraform.wood.block.StrippableLogBlock;
@@ -9,6 +10,7 @@ import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.minecraft.block.*;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.effect.StatusEffect;
+import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.*;
 import net.minecraft.particle.ParticleTypes;
@@ -20,7 +22,7 @@ import net.satisfyu.beachparty.Beachparty;
 import net.satisfyu.beachparty.BeachpartyIdentifier;
 import net.satisfyu.beachparty.block.*;
 import net.satisfyu.beachparty.item.BeachHatItem;
-import net.satisfyu.beachparty.item.CocktailItem;
+import net.satisfyu.beachparty.item.DrinkBlockItem;
 import net.satisfyu.beachparty.item.SwimwearArmorItem;
 import net.satisfyu.beachparty.util.BeachpartyArmorMaterials;
 
@@ -75,12 +77,12 @@ public class ObjectRegistry {
     public static final Item SAND_BUCKET = register("sand_bucket", new Item(getSettings()));
     public static final Block COCONUT = register("coconut", new CoconutBlock(FabricBlockSettings.of(Material.BAMBOO)));
     public static final Item COCONUT_OPEN = register("coconut_open", new Item(getSettings()));
-    public static final Item COCONUT_COCKTAIL = register("coconut_cocktail", new CocktailItem(getSettings(), StatusEffects.INSTANT_HEALTH));
-    public static final Item SWEETBERRIES_COCKTAIL = register("sweetberries_cocktail", new CocktailItem(getSettings(), StatusEffects.ABSORPTION));
-    public static final Item COCOA_COCKTAIL = register("cocoa_cocktail", new CocktailItem(getSettings(), StatusEffects.REGENERATION));
-    public static final Item PUMPKIN_COCKTAIL = register("pumpkin_cocktail", new CocktailItem(getSettings(), StatusEffects.FIRE_RESISTANCE));
-    public static final Item HONEY_COCKTAIL = register("honey_cocktail", new CocktailItem(getSettings(), StatusEffects.HASTE));
-    public static final Item MELON_COCKTAIL = register("melon_cocktail", new CocktailItem(getSettings(), StatusEffects.LUCK));
+    public static final Block COCONUT_COCKTAIL = registerCocktail("coconut_cocktail", new CocktailBlock(getCocktailSettings()), StatusEffects.INSTANT_HEALTH);
+    public static final Block SWEETBERRIES_COCKTAIL = registerCocktail("sweetberries_cocktail", new CocktailBlock(getCocktailSettings()), StatusEffects.ABSORPTION);
+    public static final Block COCOA_COCKTAIL = registerCocktail("cocoa_cocktail", new CocktailBlock(getCocktailSettings()), StatusEffects.REGENERATION);
+    public static final Block PUMPKIN_COCKTAIL = registerCocktail("pumpkin_cocktail", new CocktailBlock(getCocktailSettings()), StatusEffects.FIRE_RESISTANCE);
+    public static final Block HONEY_COCKTAIL = registerCocktail("honey_cocktail", new CocktailBlock(getCocktailSettings()), StatusEffects.HASTE);
+    public static final Block MELON_COCKTAIL = registerCocktail("melon_cocktail", new CocktailBlock(getCocktailSettings()), StatusEffects.LUCK);
     public static final Item ICECREAM_COCONUT = register("icecream_coconut", new Item(getSettings().food(FoodComponents.COOKIE)));
     public static final Item ICECREAM_MELON = register("icecream_melon", new Item(getSettings().food(FoodComponents.COOKIE)));
     public static final Item ICECREAM_CACTUS = register("icecream_cactus", new Item(getSettings().food(FoodComponents.COOKIE)));
@@ -129,6 +131,26 @@ public class ObjectRegistry {
         consumer.accept(settings);
         return settings;
     }
+
+
+
+
+    private static <T extends Block> T registerCocktail(String path, T block, StatusEffect effect) {
+        return register(path, block, true, DrinkBlockItem::new, settings -> settings.food(wineFoodComponent(effect)));
+    }
+
+
+
+    private static FoodComponent wineFoodComponent(StatusEffect effect) {
+        FoodComponent.Builder component = new FoodComponent.Builder().hunger(1);
+        if(effect != null) component.statusEffect(new StatusEffectInstance(effect, 45 * 20), 1.0f);
+        return component.build();
+    }
+    private static AbstractBlock.Settings getCocktailSettings() {
+        return AbstractBlock.Settings.copy(Blocks.GLASS).nonOpaque().breakInstantly();
+    }
+
+
 
     private static Item.Settings getSettings() {
         return getSettings(settings -> {
