@@ -58,7 +58,7 @@ public class LoungeChairBlock extends Block {
          @Override
          public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand
          hand, BlockHitResult hit) {
-              return ChairUtil.onUse(world, player, hand, hit, 0.1);
+              return ChairUtil.onUse(world, player, hand, hit, -0.1);
          }
 
          @Override

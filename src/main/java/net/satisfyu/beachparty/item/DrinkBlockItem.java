@@ -2,13 +2,16 @@ package net.satisfyu.beachparty.item;
 
 import com.google.common.collect.Lists;
 import com.mojang.datafixers.util.Pair;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffectUtil;
-import net.minecraft.item.Item;
+import net.minecraft.item.BlockItem;
+import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
@@ -20,15 +23,21 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 import java.util.Map;
 
-public class CocktailItem extends Item {
-
-    public CocktailItem(Settings settings, StatusEffect absorption) {
-        super(settings);
+public class DrinkBlockItem extends BlockItem {
+    public DrinkBlockItem(Block block, Settings settings) {
+        super(block, settings);
     }
 
     @Override
     public UseAction getUseAction(ItemStack stack) {
         return UseAction.DRINK;
+    }
+
+    @Nullable
+    @Override
+    protected BlockState getPlacementState(ItemPlacementContext context) {
+        BlockState blockState = this.getBlock().getPlacementState(context);
+        return blockState != null && this.canPlace(context, blockState) ? blockState : null;
     }
 
     @Override
@@ -52,12 +61,6 @@ public class CocktailItem extends Item {
                         );
                         list3.add(new Pair<>(entry.getKey(), entityAttributeModifier2));
                     }
-                }
-
-                if (world != null) {
-                    mutableText = Text.translatable(
-                            "potion.withAmplifier",
-                            mutableText, Text.translatable("potion.potency."));
                 }
 
                 if (statusEffectInstance.getFirst().getDuration() > 20) {
@@ -102,5 +105,9 @@ public class CocktailItem extends Item {
                 }
             }
         }
+        
+        tooltip.add(Text.empty());
+        tooltip.add(Text.translatable("tooltip.beachparty.canbeplaced").formatted(Formatting.GRAY));
     }
+
 }

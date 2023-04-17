@@ -21,8 +21,14 @@
 		"client": [
 			"net.satisfyu.beachparty.client.BeachPartyClient"
 		],
+		"beachparty": [
+			"net.satisfyu.beachparty.registry.RenderRegistry"
+		],
 		"fabric-datagen": [
 			"net.satisfyu.beachparty.datagen.BeachpartyDataGeneration"
+		],
+		"beachparty": [
+			"net.satisfyu.beachparty.registry.RenderRegistry"
 		]
 	},
 	"mixins": [
