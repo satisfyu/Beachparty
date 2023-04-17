@@ -71,7 +71,7 @@ public class ObjectRegistry {
     public static final Block PALM_TALL_TORCH = register("palm_tall_torch", new TallTorchBlock(AbstractBlock.Settings.of(Material.DECORATION).noCollision().breakInstantly().luminance((state) -> 14).sounds(BlockSoundGroup.WOOD), ParticleTypes.FLAME));
     public static final Block RADIO = register("radio", new RadioBlock(FabricBlockSettings.of(Material.DECORATION))); // RadioBlock(FabricBlockSettings.copy(Blocks.JUKEBOX)));
     public static final Item SAND_BUCKET = register("sand_bucket", new SandBucketItem(getSettings()));
-    public static final Item EMPTY_SAND_BUCKET = register("empty_sand_bucket", new SandBucketItem(getSettings()));
+    public static final Item EMPTY_SAND_BUCKET = register("empty_sand_bucket", new SandBucketItem(getSettings().maxCount(1)));
     public static final Block SAND_CASTLE = register("sand_castle", new SandCastleBlock(FabricBlockSettings.of(Material.SOIL)));
     public static final Block COCONUT = register("coconut", new CoconutBlock(FabricBlockSettings.of(Material.BAMBOO)));
     public static final Item COCONUT_OPEN = register("coconut_open", new Item(getSettings()));
