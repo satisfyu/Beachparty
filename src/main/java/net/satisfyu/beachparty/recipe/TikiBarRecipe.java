@@ -27,7 +27,7 @@ public class TikiBarRecipe implements Recipe<Inventory> {
 
     @Override
     public boolean matches(Inventory inventory, World world) {
-        return BeachpartyUtil.matchesRecipe(inventory, inputs, 0, 6);
+        return BeachpartyUtil.matchesRecipe(inventory, inputs, 1, 4);
     }
 
     @Override
@@ -77,7 +77,7 @@ public class TikiBarRecipe implements Recipe<Inventory> {
             final var ingredients = BeachpartyUtil.deserializeIngredients(JsonHelper.getArray(json, "ingredients"));
             if (ingredients.isEmpty()) {
                 throw new JsonParseException("No ingredients for TikiBar Recipe");
-            } else if (ingredients.size() > 6) {
+            } else if (ingredients.size() > 4) {
                 throw new JsonParseException("Too many ingredients for TikiBar Recipe");
             } else {
                 return new TikiBarRecipe(id, ingredients, ShapedRecipe.outputFromJson(JsonHelper.getObject(json, "result")));

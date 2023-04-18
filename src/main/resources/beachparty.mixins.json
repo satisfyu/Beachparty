@@ -3,6 +3,8 @@
   "package": "net.satisfyu.beachparty.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
+    "AbstractBlockMixin",
+    "BlockMixin"
   ],
   "client": [
     "ArmorFeatureRendererMixin",

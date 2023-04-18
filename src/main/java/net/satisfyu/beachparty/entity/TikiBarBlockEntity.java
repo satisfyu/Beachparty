@@ -29,9 +29,9 @@ import org.jetbrains.annotations.Nullable;
 public class TikiBarBlockEntity extends BlockEntity implements Inventory, BlockEntityTicker<TikiBarBlockEntity>, NamedScreenHandlerFactory {
 
     private DefaultedList<ItemStack> inventory;
-    public static final int CAPACITY = 6;
+    public static final int CAPACITY = 5;
     public static final int COOKING_TIME_IN_TICKS = 1800; // 90s or 3 minutes
-    private static final int OUTPUT_SLOT = 1;
+    private static final int OUTPUT_SLOT = 0;
     private int fermentationTime = 0;
     private int totalFermentationTime;
     protected float experience;
@@ -143,6 +143,9 @@ public class TikiBarBlockEntity extends BlockEntity implements Inventory, BlockE
             setStack(OUTPUT_SLOT, output);
         }
         for (Ingredient entry : recipe.getIngredients()) {
+            if (entry.test(this.getStack(1))) {
+                removeStack(1, 1);
+            }
             if (entry.test(this.getStack(2))) {
                 removeStack(2, 1);
             }
@@ -151,9 +154,6 @@ public class TikiBarBlockEntity extends BlockEntity implements Inventory, BlockE
             }
             if (entry.test(this.getStack(4))) {
                 removeStack(4, 1);
-            }
-            if (entry.test(this.getStack(5))) {
-                removeStack(5, 1);
             }
         }
     }
@@ -192,7 +192,7 @@ public class TikiBarBlockEntity extends BlockEntity implements Inventory, BlockE
         if (stack.getCount() > this.getMaxCountPerStack()) {
             stack.setCount(this.getMaxCountPerStack());
         }
-        if (slot == 2 || slot == 3 || slot == 4|| slot == 5) {
+        if (slot == 1 || slot == 2 || slot == 3|| slot == 4) {
             if (!dirty) {
                 this.totalFermentationTime = 50;
                 this.fermentationTime = 0;

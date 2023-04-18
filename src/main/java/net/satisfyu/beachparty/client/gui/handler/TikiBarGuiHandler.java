@@ -24,12 +24,12 @@ public class TikiBarGuiHandler extends ScreenHandler  {
         super(ScreenHandlerTypesRegistry.TIKI_BAR_GUI_HANDLER, syncId);
 
         // Output
-        this.addSlot(new TikiBarOutputSlot(playerInventory.player, inventory, 1, 125,  35));
+        this.addSlot(new TikiBarOutputSlot(playerInventory.player, inventory, 0, 125,  35));
         // Inputs
-        this.addSlot(new Slot(inventory, 2, 18, 26));
-        this.addSlot(new Slot(inventory, 3, 36, 26));
-        this.addSlot(new Slot(inventory, 4, 18, 44));
-        this.addSlot(new Slot(inventory, 5, 36, 44));
+        this.addSlot(new Slot(inventory, 1, 18, 26));
+        this.addSlot(new Slot(inventory, 2, 36, 26));
+        this.addSlot(new Slot(inventory, 3, 18, 44));
+        this.addSlot(new Slot(inventory, 4, 36, 44));
         int i;
         for (i = 0; i < 3; ++i) {
             for (int j = 0; j < 9; ++j) {

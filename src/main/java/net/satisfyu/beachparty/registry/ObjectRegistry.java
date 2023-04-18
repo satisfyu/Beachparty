@@ -1,6 +1,5 @@
 package net.satisfyu.beachparty.registry;
 
-import com.mojang.datafixers.util.Pair;
 import com.terraformersmc.terraform.sign.block.TerraformSignBlock;
 import com.terraformersmc.terraform.sign.block.TerraformWallSignBlock;
 import com.terraformersmc.terraform.wood.block.StrippableLogBlock;
@@ -21,12 +20,7 @@ import net.minecraft.util.registry.Registry;
 import net.satisfyu.beachparty.Beachparty;
 import net.satisfyu.beachparty.BeachpartyIdentifier;
 import net.satisfyu.beachparty.block.*;
-import net.satisfyu.beachparty.item.BeachHatItem;
-import net.satisfyu.beachparty.item.CocktailItem;
-import net.satisfyu.beachparty.item.SandBucketItem;
-import net.satisfyu.beachparty.item.Swimsuit;
-import net.satisfyu.beachparty.item.DrinkBlockItem;
-import net.satisfyu.beachparty.item.SwimwearArmorItem;
+import net.satisfyu.beachparty.item.*;
 import net.satisfyu.beachparty.util.BeachpartyArmorMaterials;
 
 import java.util.*;
@@ -79,10 +73,11 @@ public class ObjectRegistry {
     public static final Item PALM_TORCH_ITEM = register("palm_torch_item", new WallStandingBlockItem(ObjectRegistry.PALM_TORCH, ObjectRegistry.PALM_WALL_TORCH, getSettings()));
     public static final Block PALM_TALL_TORCH = register("palm_tall_torch", new TallTorchBlock(AbstractBlock.Settings.of(Material.DECORATION).noCollision().breakInstantly().luminance((state) -> 14).sounds(BlockSoundGroup.WOOD), ParticleTypes.FLAME));
     public static final Block RADIO = register("radio", new RadioBlock(FabricBlockSettings.of(Material.DECORATION))); // RadioBlock(FabricBlockSettings.copy(Blocks.JUKEBOX)));
-    public static final Item SAND_BUCKET = register("sand_bucket", new SandBucketItem(getSettings()));
-    public static final Item EMPTY_SAND_BUCKET = register("empty_sand_bucket", new SandBucketItem(getSettings().maxCount(1)));
-    public static final Block SAND_CASTLE = register("sand_castle", new SandCastleBlock(FabricBlockSettings.of(Material.SOIL)));
-    public static final Block COCONUT = register("coconut", new CoconutBlock(FabricBlockSettings.of(Material.BAMBOO)));
+    public static final Item SAND_BUCKET = register("sand_bucket", new SandBucketItem(getSettings().maxCount(1)));
+    public static final Item EMPTY_SAND_BUCKET = register("empty_sand_bucket", new SandBucketItem(getSettings()));
+    public static final Block SANDCASTLE = register("sandcastle", new SandCastleBlock(FabricBlockSettings.of(Material.SOIL)), false);
+    public static final Block COCONUT_BLOCK = register("coconut_block", new CoconutBlock(FabricBlockSettings.of(Material.BAMBOO)));
+    public static final Item COCONUT = register("coconut", new CoconutItem(COCONUT_BLOCK, getSettings()));
     public static final Item COCONUT_OPEN = register("coconut_open", new Item(getSettings()));
     public static final Block COCONUT_COCKTAIL = registerCocktail("coconut_cocktail", new CocktailBlock(getCocktailSettings()), StatusEffects.INSTANT_HEALTH);
     public static final Block SWEETBERRIES_COCKTAIL = registerCocktail("sweetberries_cocktail", new CocktailBlock(getCocktailSettings()), StatusEffects.ABSORPTION);

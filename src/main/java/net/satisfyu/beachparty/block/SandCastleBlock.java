@@ -2,25 +2,23 @@ package net.satisfyu.beachparty.block;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.HorizontalFacingBlock;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.ShapeContext;
 import net.minecraft.entity.ai.pathing.NavigationType;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemPlacementContext;
+import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
-import net.minecraft.state.property.DirectionProperty;
 import net.minecraft.util.ActionResult;
-import net.minecraft.util.BlockMirror;
-import net.minecraft.util.BlockRotation;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.util.shape.VoxelShape;
+import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
@@ -28,32 +26,45 @@ import net.minecraft.world.WorldView;
 import net.satisfyu.beachparty.registry.ObjectRegistry;
 
 public class SandCastleBlock extends Block {
-    public static final DirectionProperty FACING;
-    public static final BooleanProperty TOP_TOWER;
+    private static final VoxelShape BASE_SHAPE = VoxelShapes.union(Block.createCuboidShape(1.0, 0.0, 1.0, 15.0, 1.0, 15.0), Block.createCuboidShape(2.0, 1.0, 2.0, 14.0, 6.0, 14.0));
+    public static final BooleanProperty TALL_TOWER;
+    public static final VoxelShape TALL_TOWER_SHAPE = Block.createCuboidShape(11.0, 0.0, 11.0, 15.0, 15.0, 15.0);
     public static final BooleanProperty RIGHT_TOWER;
-    public static final BooleanProperty BOTTOM_TOWER;
+    public static final VoxelShape RIGHT_TOWER_SHAPE = Block.createCuboidShape(1.0, 1.0, 11.0, 5.0, 12.0, 15.0);
+    public static final BooleanProperty TOP_TOWER;
+    public static final VoxelShape TOP_TOWER_SHAPE = Block.createCuboidShape(5.0, 6.0, 5.0, 11.0, 9.0, 11.0);
     public static final BooleanProperty LEFT_TOWER;
-    private static final VoxelShape SHAPE = Block.createCuboidShape(0.0, 0.0, 0.0, 16.0, 4.0, 16.0);
+    public static final VoxelShape LEFT_TOWER_SHAPE = Block.createCuboidShape(11.0, 1.0, 1.0, 15.0, 12.0, 5.0);
+
 
     public SandCastleBlock(Settings settings) {
         super(settings);
-        this.setDefaultState(this.stateManager.getDefaultState().with(TOP_TOWER, false).with(RIGHT_TOWER, false).with(BOTTOM_TOWER, false).with(LEFT_TOWER, false));
+        this.setDefaultState(this.stateManager.getDefaultState().with(TALL_TOWER, false).with(RIGHT_TOWER, false).with(TOP_TOWER, false).with(LEFT_TOWER, false));
     }
 
     @Override
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-        return SHAPE;
-    }
-
-    public BlockState getPlacementState(ItemPlacementContext ctx) {
-        return this.getDefaultState().with(FACING, ctx.getPlayerFacing().getOpposite());
+        VoxelShape shape = VoxelShapes.union(BASE_SHAPE);
+        if (state.get(TALL_TOWER)) {
+            shape = VoxelShapes.union(shape, TALL_TOWER_SHAPE);
+        }
+        if (state.get(RIGHT_TOWER)) {
+            shape = VoxelShapes.union(shape, RIGHT_TOWER_SHAPE);
+        }
+        if (state.get(LEFT_TOWER)) {
+            shape = VoxelShapes.union(shape, LEFT_TOWER_SHAPE);
+        }
+        if (state.get(TOP_TOWER)) {
+            shape = VoxelShapes.union(shape, TOP_TOWER_SHAPE);
+        }
+        return shape;
     }
 
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         ItemStack handStack = player.getStackInHand(hand);
         if (handStack.getItem() == ObjectRegistry.SAND_BUCKET && !hasAllTowers(state)) {
-            BooleanProperty tower = getTowerHitPos(state, hit);
+            BooleanProperty tower = getTowerHitPos(hit);
             if (!state.get(tower)) {
                 world.setBlockState(pos, state.with(tower, true));
                 exchangeStack(handStack, player, new ItemStack(ObjectRegistry.EMPTY_SAND_BUCKET));
@@ -66,7 +77,7 @@ public class SandCastleBlock extends Block {
                 exchangeStack(handStack, player, new ItemStack(ObjectRegistry.SAND_BUCKET));
                 return ActionResult.success(world.isClient);
             } else if (!hasNoTowers(state)) {
-                BooleanProperty tower = getTowerHitPos(state, hit);
+                BooleanProperty tower = getTowerHitPos(hit);
                 if (state.get(tower)) {
                     world.setBlockState(pos, state.with(tower, false));
                     exchangeStack(handStack, player, new ItemStack(ObjectRegistry.SAND_BUCKET));
@@ -86,85 +97,52 @@ public class SandCastleBlock extends Block {
             }
             return;
         }
-        int slot = player.getInventory().getSlotWithStack(handStack);
+        PlayerInventory inventory = player.getInventory();
+        int slot = inventory.getSlotWithStack(handStack);
         handStack.decrement(1);
-        if (!player.getInventory().insertStack(slot, returnStack)) {
-            player.dropItem(returnStack, false);
+        if(player.getInventory().getStack(slot).isEmpty()) {
+            if (!inventory.insertStack(slot, returnStack)) {
+                player.dropItem(returnStack, false);
+            }
+        } else {
+            if (!inventory.insertStack(returnStack)) {
+                player.dropItem(returnStack, false);
+            }
         }
+
     }
 
-    private BooleanProperty getTowerHitPos(BlockState state, BlockHitResult hitResult) {
+    private BooleanProperty getTowerHitPos(BlockHitResult hitResult) {
         double x = hitResult.getPos().getX();
         double z = hitResult.getPos().getZ();
 
         double relX = x - hitResult.getBlockPos().getX();
         double relZ = z - hitResult.getBlockPos().getZ();
 
-        switch (state.get(FACING)) {
-            case EAST -> {
-                if (relX < 0.5 && relZ >= 0.5) {
-                    return TOP_TOWER;
-                } else if (relX < 0.5 && relZ < 0.5) {
-                    return RIGHT_TOWER;
-                } else if (relX >= 0.5 && relZ >= 0.5) {
-                    return LEFT_TOWER;
-                } else {
-                    return BOTTOM_TOWER;
-                }
-            }
-            case SOUTH -> {
-                if (relX < 0.5 && relZ < 0.5) {
-                    return TOP_TOWER;
-                } else if (relX >= 0.5 && relZ < 0.5) {
-                    return RIGHT_TOWER;
-                } else if (relX < 0.5 && relZ >= 0.5) {
-                    return LEFT_TOWER;
-                } else {
-                    return BOTTOM_TOWER;
-                }
-            }
-            case WEST -> {
-                if (relX >= 0.5 && relZ < 0.5) {
-                    return TOP_TOWER;
-                } else if (relX >= 0.5 && relZ >= 0.5) {
-                    return RIGHT_TOWER;
-                } else if (relX < 0.5 && relZ < 0.5) {
-                    return LEFT_TOWER;
-                } else {
-                    return BOTTOM_TOWER;
-                }
-            }
-            default -> {
-                if (relX >= 0.5 && relZ >= 0.5) {
-                    return TOP_TOWER;
-                } else if (relX < 0.5 && relZ >= 0.5) {
-                    return RIGHT_TOWER;
-                } else if (relX >= 0.5 && relZ < 0.5) {
-                    return LEFT_TOWER;
-                } else {
-                    return BOTTOM_TOWER;
-                }
-            }
+        if (relX >= 0.5 && relZ >= 0.5) {
+            return TALL_TOWER;
+        } else if (relX < 0.5 && relZ >= 0.5) {
+            return RIGHT_TOWER;
+        } else if (relX >= 0.5 && relZ < 0.5) {
+            return LEFT_TOWER;
+        } else {
+            return TOP_TOWER;
         }
     }
 
     private boolean hasAllTowers(BlockState state) {
-        return state.get(TOP_TOWER) && state.get(RIGHT_TOWER) && state.get(BOTTOM_TOWER) && state.get(LEFT_TOWER);
+        return state.get(TALL_TOWER) && state.get(RIGHT_TOWER) && state.get(TOP_TOWER) && state.get(LEFT_TOWER);
     }
 
     private boolean hasNoTowers(BlockState state) {
-        return !state.get(TOP_TOWER) && !state.get(RIGHT_TOWER) && !state.get(BOTTOM_TOWER) && !state.get(LEFT_TOWER);
-    }
-
-    public static ItemStack getEmptiedStack(ItemStack stack, PlayerEntity player) {
-        return !player.getAbilities().creativeMode ? new ItemStack(ObjectRegistry.EMPTY_SAND_BUCKET) : stack;
+        return !state.get(TALL_TOWER) && !state.get(RIGHT_TOWER) && !state.get(TOP_TOWER) && !state.get(LEFT_TOWER);
     }
 
     @Override
-    public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
-        Direction direction = Direction.UP;
-        BlockPos blockPos = pos.down();
-        return world.getBlockState(blockPos).isSideSolidFullSquare(world, blockPos, direction);
+    public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
+        if (!state.canPlaceAt(world, pos)) {
+            world.breakBlock(pos, true);
+        }
     }
 
     @Override
@@ -176,36 +154,29 @@ public class SandCastleBlock extends Block {
     }
 
     @Override
-    public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
-        if (!state.canPlaceAt(world, pos)) {
+    public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
+        BlockPos blockPos = pos.down();
+        return world.getBlockState(blockPos).isSideSolidFullSquare(world, blockPos, Direction.UP);
+    }
 
-            world.breakBlock(pos, true);
-        }
+    @Override
+    public ItemStack getPickStack(BlockView world, BlockPos pos, BlockState state) {
+        return new ItemStack(ObjectRegistry.SAND_BUCKET);
     }
 
     public boolean canPathfindThrough(BlockState state, BlockView world, BlockPos pos, NavigationType type) {
         return false;
     }
 
-    public BlockState rotate(BlockState state, BlockRotation rotation) {
-        return state.with(FACING, rotation.rotate(state.get(FACING)));
-    }
-
-    public BlockState mirror(BlockState state, BlockMirror mirror) {
-        return state.rotate(mirror.getRotation(state.get(FACING)));
-    }
-
     @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
-        builder.add(FACING, TOP_TOWER, RIGHT_TOWER, BOTTOM_TOWER, LEFT_TOWER);
+        builder.add(TALL_TOWER, RIGHT_TOWER, TOP_TOWER, LEFT_TOWER);
     }
 
     static {
-        FACING = HorizontalFacingBlock.FACING;
-        TOP_TOWER = BooleanProperty.of("top");
+        TALL_TOWER = BooleanProperty.of("tall");
         RIGHT_TOWER = BooleanProperty.of("right");
-        BOTTOM_TOWER = BooleanProperty.of("bottom");
+        TOP_TOWER = BooleanProperty.of("top");
         LEFT_TOWER = BooleanProperty.of("left");
     }
-
 }

@@ -21,8 +21,6 @@ import net.minecraft.world.event.GameEvent;
 import net.satisfyu.beachparty.registry.ObjectRegistry;
 import org.jetbrains.annotations.Nullable;
 
-import static net.satisfyu.beachparty.block.SandCastleBlock.FACING;
-
 public class SandBucketItem extends Item {
 
     public SandBucketItem(Item.Settings settings) {
@@ -48,8 +46,8 @@ public class SandBucketItem extends Item {
                     ItemStack returnStack = ItemUsage.exchangeStack(itemStack, user, sandBucket);
                     return TypedActionResult.success(returnStack, world.isClient());
                 } else if (this == ObjectRegistry.SAND_BUCKET && user.canPlaceOn(offsetPos, direction, itemStack)){
-                    if (world.getBlockState(offsetPos).isAir() && ObjectRegistry.SAND_CASTLE.getDefaultState().canPlaceAt(world, offsetPos)){
-                        world.setBlockState(offsetPos, ObjectRegistry.SAND_CASTLE.getDefaultState().with(FACING, user.getHorizontalFacing().getOpposite()), 3);
+                    if (world.getBlockState(offsetPos).isAir() && ObjectRegistry.SANDCASTLE.getDefaultState().canPlaceAt(world, offsetPos)){
+                        world.setBlockState(offsetPos, ObjectRegistry.SANDCASTLE.getDefaultState(), 3);
                         return TypedActionResult.success(getEmptiedStack(itemStack, user), world.isClient());
                     }
                 }
