@@ -22,6 +22,7 @@ import net.satisfyu.beachparty.Beachparty;
 import net.satisfyu.beachparty.BeachpartyIdentifier;
 import net.satisfyu.beachparty.block.*;
 import net.satisfyu.beachparty.item.BeachHatItem;
+import net.satisfyu.beachparty.item.BetterCustomArmorModelItem;
 import net.satisfyu.beachparty.item.DrinkBlockItem;
 import net.satisfyu.beachparty.item.SwimwearArmorItem;
 import net.satisfyu.beachparty.util.BeachpartyArmorMaterials;
@@ -90,6 +91,9 @@ public class ObjectRegistry {
     public static final Item BEACH_HAT = register("beach_hat", new BeachHatItem(getSettings().rarity(Rarity.COMMON)));
     public static final Item TRUNKS = register("trunks", new SwimwearArmorItem(BeachpartyArmorMaterials.TRUNKS, EquipmentSlot.LEGS, getSettings().rarity(Rarity.COMMON)));
     public static final Item BIKINI = register("bikini", new SwimwearArmorItem(BeachpartyArmorMaterials.BIKINI, EquipmentSlot.LEGS, getSettings().rarity(Rarity.COMMON)));
+
+    public static final Item RUBBER_RING_PELICANAN = register("rubber_ring_pelican", new BetterCustomArmorModelItem(EquipmentSlot.CHEST, getSettings().rarity(Rarity.COMMON), new BeachpartyIdentifier("textures/entity/rubber_ring_pelican.png"), -0.7f));
+    public static final Item RUBBER_RING_AXOLOTL = register("rubber_ring_axolotl", new BetterCustomArmorModelItem(EquipmentSlot.CHEST, getSettings().rarity(Rarity.COMMON), new BeachpartyIdentifier("textures/entity/rubber_ring_axolotl.png"), -0.7f));
 
 
     private static PillarBlock registerLog(String path) {
