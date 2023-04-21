@@ -1,0 +1,38 @@
+{
+  "radio_click": {
+    "subtitle": "beachparty.sound.radio_click",
+    "sounds": [
+      "beachparty:radio_click"
+    ]
+  },
+  "radio_tune": {
+    "subtitle": "beachparty.sound.radio_tune",
+    "sounds": [
+      "beachparty:radio_tune"
+    ]
+  },
+  "radio_reggea": {
+    "subtitle": "beachparty.sound.radio_reggea",
+    "sounds": [
+      "beachparty:radio_reggea"
+    ]
+  },
+  "radio_hawaii": {
+    "subtitle": "beachparty.sound.radio_hawaii",
+    "sounds": [
+      "beachparty:radio_hawaii"
+    ]
+  },
+  "radio_tropical": {
+    "subtitle": "beachparty.sound.radio_tropical",
+    "sounds": [
+      "beachparty:radio_tropical"
+    ]
+  },
+  "radio_beachparty": {
+    "subtitle": "beachparty.sound.radio_beachparty",
+    "sounds": [
+      "beachparty:radio_beachparty"
+    ]
+  }
+}

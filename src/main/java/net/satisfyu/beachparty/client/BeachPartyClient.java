@@ -16,6 +16,7 @@ import net.minecraft.client.util.SpriteIdentifier;
 import net.satisfyu.beachparty.BeachpartyIdentifier;
 import net.satisfyu.beachparty.client.gui.TikiBarGui;
 import net.satisfyu.beachparty.entity.chair.ChairRenderer;
+import net.satisfyu.beachparty.networking.BeachpartyMessages;
 import net.satisfyu.beachparty.registry.ArmorRegistry;
 import net.satisfyu.beachparty.registry.EntityRegistry;
 import net.satisfyu.beachparty.registry.ObjectRegistry;
@@ -38,7 +39,6 @@ public class BeachPartyClient implements ClientModInitializer {
 
         ArmorRegistry.registerModels();
 
-
         TerraformBoatClientHelper.registerModelLayers(new BeachpartyIdentifier("palm"));
 
         SpriteIdentifierRegistry.INSTANCE.addIdentifier(new SpriteIdentifier(TexturedRenderLayers.SIGNS_ATLAS_TEXTURE, ObjectRegistry.PALM_SIGN.getTexture()));
@@ -47,6 +47,6 @@ public class BeachPartyClient implements ClientModInitializer {
         EntityRendererRegistry.register(EntityRegistry.CHAIR, ChairRenderer::new);
 
         EntityRendererRegistry.register(EntityRegistry.COCONUT, FlyingItemEntityRenderer::new);
-
+        BeachpartyMessages.registerC2SPackets();
     }
 }

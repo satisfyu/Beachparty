@@ -4,8 +4,8 @@ import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.satisfyu.beachparty.registry.*;
+import net.satisfyu.beachparty.sound.BeachpartySounds;
 import org.apache.logging.log4j.LogManager;
 
 public class Beachparty implements ModInitializer {
@@ -19,6 +19,7 @@ public class Beachparty implements ModInitializer {
         EntityRegistry.init();
         BoatRegistry.init();
         RecipeRegistry.init();
+        BeachpartySounds.init();
         ScreenHandlerTypesRegistry.init();
     }
 }
