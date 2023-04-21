@@ -1,30 +1,29 @@
 package net.satisfyu.beachparty.registry;
 
-import net.minecraft.block.Block;
+import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.minecraft.client.render.entity.model.EntityModel;
 import net.minecraft.client.render.entity.model.EntityModelLoader;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.Item;
-import net.satisfyu.beachparty.Beachparty;
 import net.satisfyu.beachparty.client.model.feature.BeachHatModel;
-import net.satisfyu.beachparty.util.BeachpartyApi;
+import net.satisfyu.beachparty.client.model.feature.RubberRingAxolotlModel;
+import net.satisfyu.beachparty.client.model.feature.RubberRingPelicanModel;
 
 import java.util.Map;
-import java.util.Set;
 
-public class RenderRegistry implements BeachpartyApi {
-    @Override
-    public void registerBlocks(Set<Block> blocks) {
+public class RenderRegistry{
 
+
+    public static void registerModels(){
+        EntityModelLayerRegistry.registerModelLayer(BeachHatModel.LAYER_LOCATION, BeachHatModel::getTexturedModelData);
+        EntityModelLayerRegistry.registerModelLayer(RubberRingPelicanModel.LAYER_LOCATION, RubberRingPelicanModel::getTexturedModelData);
+        EntityModelLayerRegistry.registerModelLayer(RubberRingAxolotlModel.LAYER_LOCATION, RubberRingAxolotlModel::getTexturedModelData);
     }
 
-    public static void init(){
-        Beachparty.LOGGER.debug("Registering Storage Block Renderers!");
-    }
 
-
-    @Override
-    public <T extends LivingEntity> void registerArmor(Map<Item, EntityModel<T>> models, EntityModelLoader modelLoader) {
+    public static  <T extends LivingEntity> void registerArmor(Map<Item, EntityModel<T>> models, EntityModelLoader modelLoader) {
         models.put(ObjectRegistry.BEACH_HAT, new BeachHatModel<>(modelLoader.getModelPart(BeachHatModel.LAYER_LOCATION)));
+        models.put(ObjectRegistry.RUBBER_RING_PELICANAN, new RubberRingPelicanModel<>(modelLoader.getModelPart(RubberRingPelicanModel.LAYER_LOCATION)));
+        models.put(ObjectRegistry.RUBBER_RING_AXOLOTL, new RubberRingAxolotlModel<>(modelLoader.getModelPart(RubberRingAxolotlModel.LAYER_LOCATION)));
     }
 }

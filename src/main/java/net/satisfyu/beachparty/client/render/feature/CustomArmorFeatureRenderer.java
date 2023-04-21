@@ -21,7 +21,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
 import net.satisfyu.beachparty.Beachparty;
 import net.satisfyu.beachparty.item.CustomModelArmorItem;
-import net.satisfyu.beachparty.util.BeachpartyApi;
+import net.satisfyu.beachparty.registry.RenderRegistry;
 
 import java.util.Map;
 
@@ -46,17 +46,7 @@ public class CustomArmorFeatureRenderer<T extends LivingEntity, M extends Entity
 		Item hatItem = getHatItem(entity, slot);
 		if(hatItem != null) {
 			if(MODELS.isEmpty()) {
-
-				FabricLoader.getInstance().getEntrypointContainers("beachparty", BeachpartyApi.class).forEach(entrypoint -> {
-					String modId = entrypoint.getProvider().getMetadata().getId();
-					try {
-						BeachpartyApi api = entrypoint.getEntrypoint();
-						api.registerArmor(MODELS, modelLoader);
-					} catch (Throwable e) {
-						Beachparty.LOGGER.error("Mod {} provides a broken implementation of BeachpartyApi, therefore couldn't register custom models", modId, e);
-					}
-				});
-
+				RenderRegistry.registerArmor(MODELS, modelLoader);
 			}
 			return MODELS.get(hatItem);
 		}

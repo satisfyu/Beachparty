@@ -17,9 +17,9 @@ import net.satisfyu.beachparty.BeachpartyIdentifier;
 import net.satisfyu.beachparty.client.gui.TikiBarGui;
 import net.satisfyu.beachparty.entity.chair.ChairRenderer;
 import net.satisfyu.beachparty.networking.BeachpartyMessages;
-import net.satisfyu.beachparty.registry.ArmorRegistry;
 import net.satisfyu.beachparty.registry.EntityRegistry;
 import net.satisfyu.beachparty.registry.ObjectRegistry;
+import net.satisfyu.beachparty.registry.RenderRegistry;
 import net.satisfyu.beachparty.registry.ScreenHandlerTypesRegistry;
 
 @Environment(EnvType.CLIENT)
@@ -37,7 +37,7 @@ public class BeachPartyClient implements ClientModInitializer {
 
         );
 
-        ArmorRegistry.registerModels();
+        RenderRegistry.registerModels();
 
         TerraformBoatClientHelper.registerModelLayers(new BeachpartyIdentifier("palm"));
 
