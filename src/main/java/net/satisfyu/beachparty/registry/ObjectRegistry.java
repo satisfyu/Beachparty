@@ -7,6 +7,7 @@ import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.minecraft.block.*;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
@@ -25,7 +26,6 @@ import net.satisfyu.beachparty.item.BeachHatItem;
 import net.satisfyu.beachparty.item.BetterCustomArmorModelItem;
 import net.satisfyu.beachparty.item.DrinkBlockItem;
 import net.satisfyu.beachparty.item.SwimwearArmorItem;
-import net.satisfyu.beachparty.util.BeachpartyArmorMaterials;
 
 import java.util.*;
 import java.util.function.BiFunction;
@@ -94,11 +94,17 @@ public class ObjectRegistry {
     public static final Item ICECREAM_CACTUS = register("icecream_cactus", new Item(getSettings().food(FoodComponents.COOKIE)));
     public static final Item ICECREAM_SWEETBERRIES = register("icecream_sweetberries", new Item(getSettings().food(FoodComponents.COOKIE)));
     public static final Item BEACH_HAT = register("beach_hat", new BeachHatItem(getSettings().rarity(Rarity.COMMON)));
-    public static final Item TRUNKS = register("trunks", new SwimwearArmorItem(BeachpartyArmorMaterials.TRUNKS, EquipmentSlot.LEGS, getSettings().rarity(Rarity.COMMON)));
-    public static final Item BIKINI = register("bikini", new SwimwearArmorItem(BeachpartyArmorMaterials.BIKINI, EquipmentSlot.LEGS, getSettings().rarity(Rarity.COMMON)));
+    public static final Item TRUNKS = register("trunks", new SwimwearArmorItem(MaterialsRegistry.TRUNKS, EquipmentSlot.LEGS, getSettings().rarity(Rarity.COMMON)));
+    public static final Item BIKINI = register("bikini", new SwimwearArmorItem(MaterialsRegistry.BIKINI, EquipmentSlot.LEGS, getSettings().rarity(Rarity.COMMON)));
 
-    public static final Item RUBBER_RING_PELICANAN = register("rubber_ring_pelican", new BetterCustomArmorModelItem(EquipmentSlot.CHEST, getSettings().rarity(Rarity.COMMON), new BeachpartyIdentifier("textures/entity/rubber_ring_pelican.png"), -0.7f));
+
+    public static final Item RUBBER_RING_BLUE = register("rubber_ring_blue", new BetterCustomArmorModelItem(EquipmentSlot.CHEST, getSettings().rarity(Rarity.COMMON), new BeachpartyIdentifier("textures/entity/rubber_ring_blue.png"), -0.7f));
+    public static final Item RUBBER_RING_PINK = register("rubber_ring_pink", new BetterCustomArmorModelItem(EquipmentSlot.CHEST, getSettings().rarity(Rarity.COMMON), new BeachpartyIdentifier("textures/entity/rubber_ring_pink.png"), -0.7f));
+    public static final Item RUBBER_RING_STRIPPED = register("rubber_ring_stripped", new BetterCustomArmorModelItem(EquipmentSlot.CHEST, getSettings().rarity(Rarity.COMMON), new BeachpartyIdentifier("textures/entity/rubber_ring_stripped.png"), -0.7f));
+    public static final Item RUBBER_RING_PELICAN = register("rubber_ring_pelican", new BetterCustomArmorModelItem(EquipmentSlot.CHEST, getSettings().rarity(Rarity.COMMON), new BeachpartyIdentifier("textures/entity/rubber_ring_pelican.png"), -0.7f));
     public static final Item RUBBER_RING_AXOLOTL = register("rubber_ring_axolotl", new BetterCustomArmorModelItem(EquipmentSlot.CHEST, getSettings().rarity(Rarity.COMMON), new BeachpartyIdentifier("textures/entity/rubber_ring_axolotl.png"), -0.7f));
+
+    public static final Item PELICAN_SPAWN_EGG_ITEM = registerSpawnEgg(EntityRegistry.PELICAN, 16777215, 16777215);
 
 
     private static PillarBlock registerLog(String path) {
@@ -189,6 +195,10 @@ public class ObjectRegistry {
 
     public static Map<Identifier, Item> getItems() {
         return Collections.unmodifiableMap(ITEMS);
+    }
+
+    private static Item registerSpawnEgg(EntityType entityType, int color1, int color2){
+        return register(Registry.ENTITY_TYPE.getId(entityType).toString().split(":")[1] + "_spawn_egg", new SpawnEggItem(entityType, color1, color2, new Item.Settings()));
     }
 
 

@@ -19,13 +19,11 @@ import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
-import net.satisfyu.beachparty.block.entity.RadioBlockEntity;
+import net.satisfyu.beachparty.entity.RadioBlockEntity;
 import net.satisfyu.beachparty.registry.EntityRegistry;
 import net.satisfyu.beachparty.sound.BeachpartySounds;
 import net.satisfyu.beachparty.util.RadioHelper;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.List;
 
 import static net.satisfyu.beachparty.util.RadioHelper.CHANNELS;
 

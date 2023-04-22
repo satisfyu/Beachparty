@@ -1,22 +1,35 @@
 package net.satisfyu.beachparty.registry;
 
+import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
+import net.fabricmc.fabric.api.biome.v1.BiomeSelectionContext;
+import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
+import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.*;
-import net.minecraft.entity.projectile.thrown.SnowballEntity;
+import net.minecraft.entity.passive.AnimalEntity;
+import net.minecraft.entity.passive.ChickenEntity;
+import net.minecraft.entity.passive.PolarBearEntity;
+import net.minecraft.entity.passive.SheepEntity;
+import net.minecraft.tag.BiomeTags;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
+import net.minecraft.world.Heightmap;
+import net.minecraft.world.biome.BiomeKeys;
 import net.satisfyu.beachparty.Beachparty;
 import net.satisfyu.beachparty.BeachpartyIdentifier;
-import net.satisfyu.beachparty.block.entity.RadioBlockEntity;
+import net.satisfyu.beachparty.entity.RadioBlockEntity;
 import net.satisfyu.beachparty.entity.CoconutEntity;
 import net.satisfyu.beachparty.entity.TikiBarBlockEntity;
 import net.satisfyu.beachparty.entity.chair.ChairEntity;
+import net.satisfyu.beachparty.entity.pelican.PelicanEntity;
+import net.satisfyu.beachparty.mixin.SpawnMobAccessor;
 
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Predicate;
 
 public class EntityRegistry {
 
@@ -28,6 +41,11 @@ public class EntityRegistry {
             Registry.ENTITY_TYPE,
             new Identifier(Beachparty.MOD_ID, "chair"),
             FabricEntityTypeBuilder.<ChairEntity>create(SpawnGroup.MISC, ChairEntity::new).dimensions(EntityDimensions.fixed(0.001F, 0.001F)).build()
+    );
+
+    public static final EntityType<PelicanEntity> PELICAN = Registry.register(Registry.ENTITY_TYPE,
+            new Identifier(Beachparty.MOD_ID, "pelican"),
+            FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, PelicanEntity::new).dimensions(EntityDimensions.fixed(0.9f, 1.3f)).build()
     );
 
     //public static final BlockEntityType<RadioBlockEntity> RADIO_BLOCK_ENTITY = create("radio", FabricBlockEntityTypeBuilder.create(RadioBlockEntity::new, ObjectRegistry.RADIO).build());
@@ -46,6 +64,14 @@ public class EntityRegistry {
         return type;
     }
 
+    public static void registerEntities(){
+        Beachparty.LOGGER.debug("Registering Mod Entities for " + Beachparty.MOD_ID);
+
+
+        registerPelican(PELICAN, BiomeSelectors.includeByKey(BiomeKeys.BEACH, BiomeKeys.RIVER));
+
+    }
+
     public static void init() {
         for (Map.Entry<Identifier, BlockEntityType<?>> entry : BLOCK_ENTITY_TYPES.entrySet()) {
             Registry.register(Registry.BLOCK_ENTITY_TYPE, entry.getKey(), entry.getValue());
@@ -54,4 +80,11 @@ public class EntityRegistry {
             Registry.register(Registry.ENTITY_TYPE, entry.getKey(), entry.getValue());
         }
     }
+
+    public static void registerPelican(EntityType entityType, Predicate<BiomeSelectionContext> biomes){
+        FabricDefaultAttributeRegistry.register(entityType, ChickenEntity.createChickenAttributes());
+        SpawnMobAccessor.callRegister(entityType, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING, AnimalEntity::isValidNaturalSpawn);
+        BiomeModifications.addSpawn(biomes, SpawnGroup.CREATURE, entityType, 10, 4, 4);
+    }
+
 }
