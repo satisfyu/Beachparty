@@ -108,7 +108,6 @@ public class SandCastleBlock extends Block {
                 player.dropItem(returnStack, false);
             }
         }
-
     }
 
     private BooleanProperty getTowerHitPos(BlockHitResult hitResult) {

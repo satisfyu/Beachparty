@@ -22,7 +22,7 @@ public class MouseScrollC2SPacket {
         BlockState blockState = serverWorld.getBlockState(blockPos);
 
         if (blockState.getBlock() instanceof RadioBlock radioBlock) {
-            if (!blockState.get(RadioBlock.ON) || blockState.get(RadioBlock.POWERED)) {
+            if (!blockState.get(RadioBlock.ON) || blockState.get(RadioBlock.SEARCHING)) {
                 return;
             }
             int scrollValue = buf.readInt();

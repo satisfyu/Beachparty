@@ -35,4 +35,5 @@ public class CoconutItem extends BlockItem {
 
         return TypedActionResult.success(itemStack, world.isClient());
     }
+    //TODO COCONUT essbar
 }

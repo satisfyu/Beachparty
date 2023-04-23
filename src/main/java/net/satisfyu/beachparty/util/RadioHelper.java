@@ -1,4 +1,4 @@
-package net.satisfyu.beachparty.util.radio;
+package net.satisfyu.beachparty.util;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -66,7 +66,7 @@ public class RadioHelper {
             soundInstance.add(new PositionedSoundInstance(
                     sound.getId(),
                     SoundCategory.RECORDS,
-                    0.5f,
+                    1.0f,
                     1.0f,
                     Random.create(),
                     true,

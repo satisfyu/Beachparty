@@ -3,7 +3,6 @@ package net.satisfyu.beachparty.item;
 import com.google.common.collect.Lists;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
@@ -11,7 +10,6 @@ import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffectUtil;
 import net.minecraft.item.BlockItem;
-import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
@@ -31,13 +29,6 @@ public class DrinkBlockItem extends BlockItem {
     @Override
     public UseAction getUseAction(ItemStack stack) {
         return UseAction.DRINK;
-    }
-
-    @Nullable
-    @Override
-    protected BlockState getPlacementState(ItemPlacementContext context) {
-        BlockState blockState = this.getBlock().getPlacementState(context);
-        return blockState != null && this.canPlace(context, blockState) ? blockState : null;
     }
 
     @Override
