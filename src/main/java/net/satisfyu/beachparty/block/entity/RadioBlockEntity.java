@@ -19,8 +19,6 @@ import org.apache.commons.compress.utils.Lists;
 import java.util.List;
 
 public class RadioBlockEntity extends BlockEntity implements BlockEntityTicker<RadioBlockEntity>  {
-
-    //public SoundEvent tuneSound = new SoundEvent(new BeachpartyIdentifier("tuning"));
     public SoundEvent tuneSound = SoundEvents.BLOCK_CHEST_CLOSE;
     private final List<SoundEvent> sounds = List.of(SoundEvents.BLOCK_BARREL_CLOSE, SoundEvents.BLOCK_ANVIL_PLACE);
     private final List<PositionedSoundInstance> soundInstances;
@@ -30,11 +28,21 @@ public class RadioBlockEntity extends BlockEntity implements BlockEntityTicker<R
     private boolean isPlaying = false;
     private int ticksElapsed = 0;
 
+    private int test = 1;
+
     public RadioBlockEntity(BlockPos pos, BlockState state) {
         super(EntityRegistry.RADIO_BLOCK_ENTITY, pos, state);
         this.soundInstances = generateInstances();
         this.maxChannel = soundInstances.size();
         this.channel = Random.create().nextBetween(0, maxChannel - 1);
+    }
+
+    public int getTest() {
+        return test;
+    }
+
+    public void setTest(int test) {
+        this.test = test;
     }
 
     private PositionedSoundInstance getToPlaySound(int channel) {

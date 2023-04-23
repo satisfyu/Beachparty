@@ -26,10 +26,6 @@ public class MouseMixin {
         if (window == MinecraftClient.getInstance().getWindow().getHandle()) {
             MinecraftClient client = MinecraftClient.getInstance();
 
-            if (client.player == null || !client.player.isSneaking()) {
-                return;
-            }
-
             BlockHitResult blockHitResult = (BlockHitResult) client.crosshairTarget;
             if (blockHitResult.getType() != HitResult.Type.BLOCK) {
                 return;
@@ -37,12 +33,10 @@ public class MouseMixin {
 
             BlockPos blockPos = blockHitResult.getBlockPos();
             BlockState blockState = client.world.getBlockState(blockPos);
-            if (blockState.getBlock() != ObjectRegistry.RADIO) {
+            if (blockState.getBlock() != ObjectRegistry.RADIO || !blockState.get(RadioBlock.ON)) {
                 return;
             }
-            if (!blockState.get(RadioBlock.ON)) {
-                return;
-            }
+
             int scrollValue = (int)calculateScrollValue(vertical, client.options);
             handleScrollEvent(blockPos, scrollValue);
             ci.cancel();
@@ -60,6 +54,6 @@ public class MouseMixin {
         PacketByteBuf buffer = PacketByteBufs.create();
         buffer.writeBlockPos(blockPos);
         buffer.writeInt(scrollValue);
-        ClientPlayNetworking.send(BeachpartyMessages.RADIO_ID, buffer);
+        ClientPlayNetworking.send(BeachpartyMessages.MOUSE_SCROLL_C2S, buffer);
     }
 }

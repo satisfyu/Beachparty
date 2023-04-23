@@ -33,8 +33,6 @@ public class BeachPartyClient implements ClientModInitializer {
                 ObjectRegistry.DRY_BUSH, ObjectRegistry.DRY_BUSH_TALL, ObjectRegistry.MELON_COCKTAIL, ObjectRegistry.COCONUT_COCKTAIL,
                 ObjectRegistry.HONEY_COCKTAIL, ObjectRegistry.SWEETBERRIES_COCKTAIL, ObjectRegistry.PUMPKIN_COCKTAIL,
                 ObjectRegistry.COCOA_COCKTAIL, ObjectRegistry.SANDCASTLE
-
-
         );
 
         RenderRegistry.registerModels();
@@ -48,5 +46,6 @@ public class BeachPartyClient implements ClientModInitializer {
 
         EntityRendererRegistry.register(EntityRegistry.COCONUT, FlyingItemEntityRenderer::new);
         BeachpartyMessages.registerC2SPackets();
+        BeachpartyMessages.registerS2CPackets();
     }
 }

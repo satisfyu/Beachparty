@@ -1,5 +1,7 @@
-package net.satisfyu.beachparty.util;
+package net.satisfyu.beachparty.util.radio;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.sound.PositionedSoundInstance;
 import net.minecraft.client.sound.SoundInstance;
@@ -12,9 +14,11 @@ import org.apache.commons.compress.utils.Lists;
 
 import java.util.*;
 
+@Environment(EnvType.CLIENT)
 public class RadioHelper {
     public static final int CHANNELS = BeachpartySounds.RADIO_SOUNDS.size();
-    private static Map<BlockPos, List<PositionedSoundInstance>> soundInstances = new HashMap<>();
+    public static final int DELAY = 2 * 20;
+    private static final Map<BlockPos, List<PositionedSoundInstance>> soundInstances = new HashMap<>();
 
     public static void setPlaying(BlockPos pos, int channel, boolean play) {
         setPlaying(pos, channel, play, 0);
@@ -27,8 +31,17 @@ public class RadioHelper {
             }
             playSound(pos, channel, delay);
         } else {
-            stopSound(pos, channel);
+            stopSounds(pos);
         }
+    }
+
+    public static void tune(BlockPos pos, int channel) {
+        MinecraftClient.getInstance().getSoundManager().play(new PositionedSoundInstance(BeachpartySounds.RADIO_TUNE, SoundCategory.RECORDS, 1.0f, 1.0f, Random.create(), pos));
+        stopSounds(pos);
+        if (!soundInstances.containsKey(pos)) {
+            addSounds(pos);
+        }
+        playSound(pos, channel, DELAY);
     }
 
     private static void playSound(BlockPos pos, int channel, int delay) {
@@ -39,7 +52,7 @@ public class RadioHelper {
 
     }
 
-    private static void stopSound(BlockPos pos, int channel) {
+    private static void stopSounds(BlockPos pos) {
         if (soundInstances.containsKey(pos)) {
             for (PositionedSoundInstance soundInstance : soundInstances.get(pos)) {
                 MinecraftClient.getInstance().getSoundManager().stop(soundInstance);
@@ -53,7 +66,7 @@ public class RadioHelper {
             soundInstance.add(new PositionedSoundInstance(
                     sound.getId(),
                     SoundCategory.RECORDS,
-                    1.0f,
+                    0.5f,
                     1.0f,
                     Random.create(),
                     true,
