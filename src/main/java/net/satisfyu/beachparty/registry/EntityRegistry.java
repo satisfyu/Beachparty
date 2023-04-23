@@ -19,6 +19,7 @@ import net.minecraft.world.Heightmap;
 import net.minecraft.world.biome.BiomeKeys;
 import net.satisfyu.beachparty.Beachparty;
 import net.satisfyu.beachparty.BeachpartyIdentifier;
+import net.satisfyu.beachparty.entity.MiniFridgeBlockEntity;
 import net.satisfyu.beachparty.entity.RadioBlockEntity;
 import net.satisfyu.beachparty.entity.CoconutEntity;
 import net.satisfyu.beachparty.entity.TikiBarBlockEntity;
@@ -50,6 +51,7 @@ public class EntityRegistry {
 
     public static final BlockEntityType<RadioBlockEntity> RADIO_BLOCK_ENTITY = create("radio", FabricBlockEntityTypeBuilder.create(RadioBlockEntity::new, ObjectRegistry.RADIO).build());
     public static final BlockEntityType<TikiBarBlockEntity> TIKI_BAR_BLOCK_ENTITY = create("tiki_bar", FabricBlockEntityTypeBuilder.create(TikiBarBlockEntity::new, ObjectRegistry.TIKI_BAR).build());
+    public static final BlockEntityType<MiniFridgeBlockEntity> MINI_FRIDGE_BLOCK_ENTITY = create("mini_fridge", FabricBlockEntityTypeBuilder.create(MiniFridgeBlockEntity::new, ObjectRegistry.MINI_FRIDGE).build());
     public static final EntityType<CoconutEntity> COCONUT = create("coconut", FabricEntityTypeBuilder.<CoconutEntity>create(SpawnGroup.MISC, CoconutEntity::new).dimensions(EntityDimensions.fixed(0.25f, 0.25f)).build());
 
     private static <T extends BlockEntityType<?>> T create(final String path, final T type) {

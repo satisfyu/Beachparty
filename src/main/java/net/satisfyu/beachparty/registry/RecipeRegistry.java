@@ -6,6 +6,7 @@ import net.minecraft.recipe.RecipeType;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.satisfyu.beachparty.BeachpartyIdentifier;
+import net.satisfyu.beachparty.recipe.MiniFridgeRecipe;
 import net.satisfyu.beachparty.recipe.TikiBarRecipe;
 
 import java.util.HashMap;
@@ -17,6 +18,8 @@ public class RecipeRegistry {
     private static final Map<Identifier, RecipeType<?>> RECIPE_TYPES = new HashMap<>();
     public static final RecipeType<TikiBarRecipe> TIKI_BAR_RECIPE_RECIPE_TYPE = create("tiki_bar_mixing");
     public static final RecipeSerializer<TikiBarRecipe> TIKI_BAR_RECIPE_RECIPE_SERIALIZER = create("tiki_bar_mixing", new TikiBarRecipe.Serializer());
+    public static final RecipeType<MiniFridgeRecipe> MINI_FRIDGE_RECIPE_RECIPE_TYPE = create("mini_fridge_mixing");
+    public static final RecipeSerializer<MiniFridgeRecipe> MINI_FRIDGE_RECIPE_RECIPE_SERIALIZER = create("mini_fridge_mixing", new MiniFridgeRecipe.Serializer());
 
 
     private static <T extends Recipe<?>> RecipeSerializer<T> create(String name, RecipeSerializer<T> serializer) {

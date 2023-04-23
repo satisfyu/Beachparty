@@ -223,5 +223,48 @@ public class MaterialsRegistry {
             return ArmorMaterials.LEATHER.getKnockbackResistance();
         }
     };
+
+    public static final ArmorMaterial SWIM_WINGS = new ArmorMaterial() {
+
+        @Override
+        public int getDurability(EquipmentSlot slot) {
+            return ArmorMaterials.LEATHER.getDurability(slot);
+        }
+
+        @Override
+        public int getProtectionAmount(EquipmentSlot slot) {
+            return slot == EquipmentSlot.HEAD ? 1 : 0;
+        }
+
+        @Override
+        public int getEnchantability() {
+            return ArmorMaterials.LEATHER.getEnchantability();
+        }
+
+        @Override
+        public SoundEvent getEquipSound() {
+            return ArmorMaterials.LEATHER.getEquipSound();
+        }
+
+        @Override
+        public Ingredient getRepairIngredient() {
+            return Ingredient.ofItems(Items.DRIED_KELP);
+        }
+
+        @Override
+        public String getName() {
+            return "swim_wings";
+        }
+
+        @Override
+        public float getToughness() {
+            return ArmorMaterials.LEATHER.getToughness();
+        }
+
+        @Override
+        public float getKnockbackResistance() {
+            return ArmorMaterials.LEATHER.getKnockbackResistance();
+        }
+    };
 }
 

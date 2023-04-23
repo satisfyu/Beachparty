@@ -13,7 +13,7 @@ import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
 
 public class CactusIceCreamItem extends Item {
-    public CactusIceCreamItem() {
+    public CactusIceCreamItem(Item.Settings settings) {
         super(new Item.Settings().group(ItemGroup.FOOD).food(
                 (new FoodComponent.Builder())
                         .hunger(2)
@@ -24,8 +24,8 @@ public class CactusIceCreamItem extends Item {
     }
 
     @Override
-    public TypedActionResult<ItemStack> use(World world, PlayerEntity player, Hand hand) {
-        player.damage(DamageSource.MAGIC, 2.0f);
-        return super.use(world, player, hand);
+    public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
+        user.damage(DamageSource.MAGIC, 2.0f);
+        return super.use(world, user, hand);
     }
 }
