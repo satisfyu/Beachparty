@@ -19,6 +19,7 @@ import net.minecraft.client.render.entity.model.SheepWoolEntityModel;
 import net.minecraft.client.util.SpriteIdentifier;
 import net.minecraft.util.Identifier;
 import net.satisfyu.beachparty.BeachpartyIdentifier;
+import net.satisfyu.beachparty.client.gui.MiniFridgeGui;
 import net.satisfyu.beachparty.client.gui.TikiBarGui;
 import net.satisfyu.beachparty.entity.chair.ChairRenderer;
 import net.satisfyu.beachparty.entity.pelican.PelicanModel;
@@ -59,7 +60,8 @@ public class BeachPartyClient implements ClientModInitializer {
         SpriteIdentifierRegistry.INSTANCE.addIdentifier(new SpriteIdentifier(TexturedRenderLayers.SIGNS_ATLAS_TEXTURE, ObjectRegistry.PALM_SIGN.getTexture()));
 
         HandledScreens.register(ScreenHandlerTypesRegistry.TIKI_BAR_GUI_HANDLER, TikiBarGui::new);
-        EntityRendererRegistry.register(EntityRegistry.CHAIR, ChairRenderer::new);
+        HandledScreens.register(ScreenHandlerTypesRegistry.MINI_FRIDGE_GUI_HANDLER, MiniFridgeGui::new);
+            EntityRendererRegistry.register(EntityRegistry.CHAIR, ChairRenderer::new);
         EntityRendererRegistry.register(EntityRegistry.COCONUT, FlyingItemEntityRenderer::new);
         BeachpartyMessages.registerC2SPackets();
         BeachpartyMessages.registerS2CPackets();

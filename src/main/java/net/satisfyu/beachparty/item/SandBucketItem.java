@@ -22,7 +22,6 @@ import net.satisfyu.beachparty.registry.ObjectRegistry;
 import org.jetbrains.annotations.Nullable;
 
 public class SandBucketItem extends Item {
-
     public SandBucketItem(Item.Settings settings) {
         super(settings);
     }
