@@ -12,7 +12,7 @@ public class BetterCustomArmorModelItem extends CustomModelArmorItem {
 
     public float offset;
     public BetterCustomArmorModelItem(EquipmentSlot slot, Settings settings, Identifier texture, float offset) {
-        super(MaterialsRegistry.BEACH_ARMOR, slot, settings);
+        super(MaterialsRegistry.RING, slot, settings);
         this.texture = texture;
         this.offset = offset;
     }

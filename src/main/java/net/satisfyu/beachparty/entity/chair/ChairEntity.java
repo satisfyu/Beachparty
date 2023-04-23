@@ -3,6 +3,9 @@ package net.satisfyu.beachparty.entity.chair;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.data.DataTracker;
+import net.minecraft.entity.data.TrackedData;
+import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.Packet;
@@ -12,13 +15,24 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
 public class ChairEntity extends Entity {
+    public static final TrackedData<Boolean> LAYING = DataTracker.registerData(ChairEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
+
     public ChairEntity(EntityType<?> type, World world) {
         super(type, world);
+        this.setLaying(false);
     }
 
     @Override
     protected void initDataTracker() {
+        this.dataTracker.startTracking(LAYING, false);
+    }
 
+    public void setLaying(boolean laying) {
+        this.dataTracker.set(LAYING, laying);
+    }
+
+    public boolean isLaying() {
+        return this.dataTracker.get(LAYING);
     }
 
     @Override
@@ -42,12 +56,12 @@ public class ChairEntity extends Entity {
 
     @Override
     protected void readCustomDataFromNbt(NbtCompound nbt) {
-
+        this.setLaying(nbt.getBoolean("laying"));
     }
 
     @Override
     protected void writeCustomDataToNbt(NbtCompound nbt) {
-
+        nbt.putBoolean("laying", this.isLaying());
     }
 
     @Override

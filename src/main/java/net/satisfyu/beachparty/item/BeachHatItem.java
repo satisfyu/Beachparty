@@ -10,7 +10,7 @@ public class BeachHatItem extends CustomModelArmorItem {
 
 
     public BeachHatItem(Item.Settings settings) {
-        super(MaterialsRegistry.BEACH_ARMOR, EquipmentSlot.HEAD, settings);
+        super(MaterialsRegistry.BEACH_HAT, EquipmentSlot.HEAD, settings);
     }
 
     @Override

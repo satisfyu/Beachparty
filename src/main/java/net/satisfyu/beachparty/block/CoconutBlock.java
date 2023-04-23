@@ -52,6 +52,18 @@ public class CoconutBlock extends Block{
                 }
                 return ActionResult.SUCCESS;
             }
+        } else if (stack.isEmpty() && !player.getOffHandStack().isEmpty()) {
+            if (!player.isSneaking()) {
+                return ActionResult.PASS;
+            }
+            if (state.get(STACK) >= 1) {
+                return ActionResult.PASS;
+            }
+            if (!world.isClient) {
+                world.setBlockState(pos, this.getDefaultState().with(STACK, 1));
+                player.getOffHandStack().decrement(1);
+            }
+            return ActionResult.SUCCESS;
         } else if (stack.isEmpty()) {
             if (state.get(STACK) > 1) {
                 world.setBlockState(pos, state.with(STACK, state.get(STACK) - 1), Block.NOTIFY_ALL);
