@@ -8,6 +8,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.particle.ParticleEffect;
+import net.minecraft.particle.ParticleTypes;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.EnumProperty;
 import net.minecraft.state.property.Properties;
@@ -80,10 +81,16 @@ public class TallTorchBlock extends TorchBlock {
         super.afterBreak(world, player, pos, Blocks.AIR.getDefaultState(), blockEntity, stack);
     }
 
-    @Override
     public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
-        //no particles
+        if (state.get(HALF) == DoubleBlockHalf.UPPER) {
+            double d = (double)pos.getX() + 0.5;
+            double e = (double)pos.getY() + 0.6;
+            double f = (double)pos.getZ() + 0.5;
+            world.addParticle(ParticleTypes.SMOKE, d, e, f, 0.0, 0.0, 0.0);
+            world.addParticle(this.particle, d, e, f, 0.0, 0.0, 0.0);
+        }
     }
+
 
     @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {

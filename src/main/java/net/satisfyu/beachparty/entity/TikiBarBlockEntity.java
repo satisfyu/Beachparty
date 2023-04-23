@@ -149,12 +149,6 @@ public class TikiBarBlockEntity extends BlockEntity implements Inventory, BlockE
             if (entry.test(this.getStack(2))) {
                 removeStack(2, 1);
             }
-            if (entry.test(this.getStack(3))) {
-                removeStack(3, 1);
-            }
-            if (entry.test(this.getStack(4))) {
-                removeStack(4, 1);
-            }
         }
     }
 
@@ -192,7 +186,7 @@ public class TikiBarBlockEntity extends BlockEntity implements Inventory, BlockE
         if (stack.getCount() > this.getMaxCountPerStack()) {
             stack.setCount(this.getMaxCountPerStack());
         }
-        if (slot == 1 || slot == 2 || slot == 3|| slot == 4) {
+        if (slot == 1 || slot == 2) {
             if (!dirty) {
                 this.totalFermentationTime = 50;
                 this.fermentationTime = 0;

@@ -32,6 +32,8 @@ import java.util.function.Supplier;
 
 public class BeachChairBlock extends HorizontalFacingBlock {
 	public static final EnumProperty<BedPart> PART = Properties.BED_PART;
+
+
 	private static final Supplier<VoxelShape> voxelShapeSupplier = () -> {
 		VoxelShape shape = VoxelShapes.empty();
 		shape = VoxelShapes.union(shape, VoxelShapes.cuboid(0.875, 0, 0, 1, 1, 1));
@@ -43,17 +45,16 @@ public class BeachChairBlock extends HorizontalFacingBlock {
 		return shape;
 	};
 
-	private static final VoxelShape VOXEL_SHAPE = voxelShapeSupplier.get();
-
 	public static final Map<Direction, VoxelShape> SHAPE = Util.make(new HashMap<>(), map -> {
-		for (Direction direction : Direction.Type.HORIZONTAL.stream().toList()) {
-			map.put(direction, BeachpartyUtil.rotateShape(Direction.WEST, direction, VOXEL_SHAPE));
+		for (Direction direction : Direction.Type.HORIZONTAL) {
+			map.put(direction, BeachpartyUtil.rotateShape(Direction.EAST, direction, voxelShapeSupplier.get()));
 		}
 	});
 
-	@Override
+
 	public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-		return SHAPE.get(state.get(FACING));
+		Direction direction = getOppositePartDirection(state).getOpposite();
+		return SHAPE.get(direction);
 	}
 
 	public static final DirectionProperty FACING = HorizontalFacingBlock.FACING;

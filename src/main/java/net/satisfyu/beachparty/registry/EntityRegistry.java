@@ -48,10 +48,8 @@ public class EntityRegistry {
             FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, PelicanEntity::new).dimensions(EntityDimensions.fixed(0.9f, 1.3f)).build()
     );
 
-    //public static final BlockEntityType<RadioBlockEntity> RADIO_BLOCK_ENTITY = create("radio", FabricBlockEntityTypeBuilder.create(RadioBlockEntity::new, ObjectRegistry.RADIO).build());
-    public static final BlockEntityType<TikiBarBlockEntity> TIKI_BAR_BLOCK_ENTITY = create("tiki_bar", FabricBlockEntityTypeBuilder.create(TikiBarBlockEntity::new, ObjectRegistry.TIKI_BAR).build());
     public static final BlockEntityType<RadioBlockEntity> RADIO_BLOCK_ENTITY = create("radio", FabricBlockEntityTypeBuilder.create(RadioBlockEntity::new, ObjectRegistry.RADIO).build());
-
+    public static final BlockEntityType<TikiBarBlockEntity> TIKI_BAR_BLOCK_ENTITY = create("tiki_bar", FabricBlockEntityTypeBuilder.create(TikiBarBlockEntity::new, ObjectRegistry.TIKI_BAR).build());
     public static final EntityType<CoconutEntity> COCONUT = create("coconut", FabricEntityTypeBuilder.<CoconutEntity>create(SpawnGroup.MISC, CoconutEntity::new).dimensions(EntityDimensions.fixed(0.25f, 0.25f)).build());
 
     private static <T extends BlockEntityType<?>> T create(final String path, final T type) {

@@ -2,6 +2,7 @@ package net.satisfyu.beachparty.entity;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.projectile.thrown.ThrownItemEntity;
@@ -10,6 +11,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.particle.ItemStackParticleEffect;
 import net.minecraft.particle.ParticleEffect;
 import net.minecraft.particle.ParticleTypes;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.hit.HitResult;
 import net.minecraft.world.World;
@@ -51,13 +53,14 @@ public class CoconutEntity extends ThrownItemEntity {
         int damage = 2;
         entity.damage(DamageSource.thrownProjectile(this, this.getOwner()), (float)damage);
     }
-
     protected void onCollision(HitResult hitResult) {
         super.onCollision(hitResult);
         if (!this.world.isClient) {
             this.world.sendEntityStatus(this, (byte)3);
+            this.playSound(SoundEvents.BLOCK_WOOD_FALL, 1.0F, 1.0F);
+            this.dropItem(ObjectRegistry.COCONUT_OPEN);
             this.discard();
         }
-
     }
-}
+ }
+

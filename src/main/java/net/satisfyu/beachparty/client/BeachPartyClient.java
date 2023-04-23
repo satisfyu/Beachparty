@@ -49,7 +49,7 @@ public class BeachPartyClient implements ClientModInitializer {
                 ObjectRegistry.PALM_TORCH, ObjectRegistry.PALM_WALL_TORCH, ObjectRegistry.PALM_TALL_TORCH,
                 ObjectRegistry.DRY_BUSH, ObjectRegistry.DRY_BUSH_TALL, ObjectRegistry.MELON_COCKTAIL, ObjectRegistry.COCONUT_COCKTAIL,
                 ObjectRegistry.HONEY_COCKTAIL, ObjectRegistry.SWEETBERRIES_COCKTAIL, ObjectRegistry.PUMPKIN_COCKTAIL,
-                ObjectRegistry.COCOA_COCKTAIL, ObjectRegistry.SANDCASTLE
+                ObjectRegistry.COCOA_COCKTAIL, ObjectRegistry.SANDCASTLE, ObjectRegistry.BEACH_TOWEL
 
         );
 
@@ -64,7 +64,6 @@ public class BeachPartyClient implements ClientModInitializer {
 
         HandledScreens.register(ScreenHandlerTypesRegistry.TIKI_BAR_GUI_HANDLER, TikiBarGui::new);
         EntityRendererRegistry.register(EntityRegistry.CHAIR, ChairRenderer::new);
-
         EntityRendererRegistry.register(EntityRegistry.COCONUT, FlyingItemEntityRenderer::new);
         BeachpartyMessages.registerC2SPackets();
     }
