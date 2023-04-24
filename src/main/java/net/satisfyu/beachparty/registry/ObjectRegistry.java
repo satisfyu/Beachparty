@@ -77,13 +77,14 @@ public class ObjectRegistry {
     public static final Block RADIO = register("radio", new RadioBlock(FabricBlockSettings.copy(Blocks.OAK_PLANKS).sounds(BlockSoundGroup.BAMBOO)));
     public static final Block MINI_FRIDGE = register("mini_fridge", new MiniFridgeBlock(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK).sounds(BlockSoundGroup.COPPER)));
     public static final Block SAND_BUCKET_BLOCK = register("sand_bucket_block", new SandBucketBlock(FabricBlockSettings.of(Material.SOIL)), false);//TODO was für Material?
+    public static final Item MESSAGE_IN_A_BOTTLE = register("message_in_a_bottle", new Item(getSettings()));
+    public static final Item OVERGROWN_DISC = register("overgrown_disc", new MusicDiscItem(getSettings(), SoundEventRegistry.RADIO_BEACHPARTY));
     public static final Block EMPTY_SAND_BUCKET_BLOCK = register("empty_sand_bucket_block", new SandBucketBlock(FabricBlockSettings.of(Material.SOIL)), false);
     public static final Item SAND_BUCKET = register("sand_bucket", new SandBucketItem(SAND_BUCKET_BLOCK, getSettings().maxCount(1)));
     public static final Item EMPTY_SAND_BUCKET = register("empty_sand_bucket", new SandBucketItem(EMPTY_SAND_BUCKET_BLOCK, getSettings()));
     public static final Block COCONUT_BLOCK = register("coconut_block", new CoconutBlock(FabricBlockSettings.of(Material.BAMBOO)), false);
     public static final Item COCONUT = register("coconut", new CoconutItem(COCONUT_BLOCK, getSettings()));
-    public static final Item COCONUT_OPEN = register("coconut_open", new Item(getSettings()));
-    public static final Item MESSAGE_IN_A_BOTTLE = register("message_in_a_bottle", new Item(getSettings()));
+    public static final Item COCONUT_OPEN = register("coconut_open", new Item(getSettings().food(FoodComponents.CARROT)));
     public static final Block COCONUT_COCKTAIL = registerCocktail("coconut_cocktail", new CocktailBlock(getCocktailSettings()), StatusEffects.INSTANT_HEALTH);
     public static final Block SWEETBERRIES_COCKTAIL = registerCocktail("sweetberries_cocktail", new CocktailBlock(getCocktailSettings()), StatusEffects.ABSORPTION);
     public static final Block COCOA_COCKTAIL = registerCocktail("cocoa_cocktail", new CocktailBlock(getCocktailSettings()), StatusEffects.REGENERATION);
@@ -106,7 +107,7 @@ public class ObjectRegistry {
     public static final Item RUBBER_RING_PELICAN = register("rubber_ring_pelican", new BetterCustomArmorModelItem(EquipmentSlot.CHEST, getSettings().rarity(Rarity.COMMON), new BeachpartyIdentifier("textures/entity/rubber_ring_pelican.png"), -0.7f));
     public static final Item RUBBER_RING_AXOLOTL = register("rubber_ring_axolotl", new BetterCustomArmorModelItem(EquipmentSlot.CHEST, getSettings().rarity(Rarity.COMMON), new BeachpartyIdentifier("textures/entity/rubber_ring_axolotl.png"), -0.7f));
     public static final Item POOL_NOODLE_BLUE = register("pool_noodle_blue", new SwordItem(ToolMaterials.WOOD, 1, -2.4F, (new Item.Settings())));
-    public static final Item PELICAN_SPAWN_EGG_ITEM = registerSpawnEgg(EntityRegistry.PELICAN, 16777215, 16777215);
+    public static final Item PELICAN_SPAWN_EGG_ITEM = registerSpawnEgg(getSettings(), EntityRegistry.PELICAN, 16777215, 16777215);
     public static final Block SANDCASTLE = register("sandcastle", new SandCastleBlock(FabricBlockSettings.of(Material.SOIL)), false);//TODO was für Material?
 
 

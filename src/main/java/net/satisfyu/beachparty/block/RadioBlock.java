@@ -6,9 +6,7 @@ import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.item.TooltipContext;
-import net.minecraft.client.sound.PositionedSoundInstance;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
@@ -36,7 +34,7 @@ import net.minecraft.world.World;
 import net.satisfyu.beachparty.networking.BeachpartyMessages;
 import net.satisfyu.beachparty.entity.RadioBlockEntity;
 import net.satisfyu.beachparty.registry.EntityRegistry;
-import net.satisfyu.beachparty.sound.BeachpartySounds;
+import net.satisfyu.beachparty.registry.SoundEventRegistry;
 import net.satisfyu.beachparty.util.BeachpartyUtil;
 import net.satisfyu.beachparty.util.RadioHelper;
 import org.jetbrains.annotations.Nullable;
@@ -109,8 +107,8 @@ public class RadioBlock extends BlockWithEntity {
     }
 
     private void turnON(BlockState state, World world, BlockPos pos, PlayerEntity player) {
-        world.playSound(player, pos, BeachpartySounds.RADIO_CLICK, SoundCategory.BLOCKS, 1.0f, 1.0f);
-        world.playSound(player, pos, BeachpartySounds.RADIO_TUNE, SoundCategory.RECORDS, 1.0f, 1.0f);
+        world.playSound(player, pos, SoundEventRegistry.RADIO_CLICK, SoundCategory.BLOCKS, 1.0f, 1.0f);
+        world.playSound(player, pos, SoundEventRegistry.RADIO_TUNE, SoundCategory.RECORDS, 1.0f, 1.0f);
         if (!world.isClient) {
             pressButton(state, world, pos, true);
             sendPacket(state, world, pos, true);
@@ -118,7 +116,7 @@ public class RadioBlock extends BlockWithEntity {
     }
 
     private void turnOFF(BlockState state, World world, BlockPos pos, PlayerEntity player) {
-        world.playSound(player, pos, BeachpartySounds.RADIO_CLICK, SoundCategory.BLOCKS, 1.0f, 1.0f);
+        world.playSound(player, pos, SoundEventRegistry.RADIO_CLICK, SoundCategory.BLOCKS, 1.0f, 1.0f);
         if (!world.isClient) {
             pressButton(state, world, pos, false);
             sendPacket(state, world, pos, false);
