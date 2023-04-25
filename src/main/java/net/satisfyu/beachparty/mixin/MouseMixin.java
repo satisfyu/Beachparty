@@ -25,21 +25,22 @@ public class MouseMixin {
     private void MouseScrollOnRadio(long window, double horizontal, double vertical, CallbackInfo ci) {
         if (window == MinecraftClient.getInstance().getWindow().getHandle()) {
             MinecraftClient client = MinecraftClient.getInstance();
+            if(client.crosshairTarget instanceof BlockHitResult blockHitResult){
 
-            BlockHitResult blockHitResult = (BlockHitResult) client.crosshairTarget;
-            if (blockHitResult.getType() != HitResult.Type.BLOCK) {
-                return;
+                if (blockHitResult.getType() != HitResult.Type.BLOCK) {
+                    return;
+                }
+
+                BlockPos blockPos = blockHitResult.getBlockPos();
+                BlockState blockState = client.world.getBlockState(blockPos);
+                if (blockState.getBlock() != ObjectRegistry.RADIO || !blockState.get(RadioBlock.ON)) {
+                    return;
+                }
+
+                int scrollValue = (int)calculateScrollValue(vertical, client.options);
+                handleScrollEvent(blockPos, scrollValue);
+                ci.cancel();
             }
-
-            BlockPos blockPos = blockHitResult.getBlockPos();
-            BlockState blockState = client.world.getBlockState(blockPos);
-            if (blockState.getBlock() != ObjectRegistry.RADIO || !blockState.get(RadioBlock.ON)) {
-                return;
-            }
-
-            int scrollValue = (int)calculateScrollValue(vertical, client.options);
-            handleScrollEvent(blockPos, scrollValue);
-            ci.cancel();
         }
     }
 

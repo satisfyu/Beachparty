@@ -25,6 +25,7 @@ public class Beachparty implements ModInitializer {
     public void onInitialize() {
         ObjectRegistry.init();
         EntityRegistry.init();
+        EntityRegistry.registerEntities();
         BoatRegistry.init();
         RecipeRegistry.init();
         SoundEventRegistry.init();

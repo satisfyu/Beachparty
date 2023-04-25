@@ -1,12 +1,13 @@
 package net.satisfyu.beachparty.entity.pelican;
 
+import com.google.common.collect.ImmutableList;
 import net.minecraft.client.model.*;
 import net.minecraft.client.render.VertexConsumer;
-import net.minecraft.client.render.entity.model.ChickenEntityModel;
+import net.minecraft.client.render.entity.model.AnimalModel;
 import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.entity.Entity;
+import net.minecraft.util.math.MathHelper;
 
-public class PelicanModel<T extends PelicanEntity> extends ChickenEntityModel<T> {
+public class PelicanModel<T extends PelicanEntity> extends AnimalModel<T> {
     private final ModelPart body;
     private final ModelPart head;
     private final ModelPart leg0;
@@ -14,7 +15,6 @@ public class PelicanModel<T extends PelicanEntity> extends ChickenEntityModel<T>
     private final ModelPart wing0;
     private final ModelPart wing1;
     public PelicanModel(ModelPart root) {
-        super(root);
         this.body = root.getChild("body");
         this.head = root.getChild("head");
         this.leg0 = root.getChild("leg0");
@@ -50,5 +50,24 @@ public class PelicanModel<T extends PelicanEntity> extends ChickenEntityModel<T>
         leg1.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha);
         wing0.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha);
         wing1.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha);
+    }
+
+    @Override
+    protected Iterable<ModelPart> getHeadParts() {
+        return ImmutableList.of(this.head);
+    }
+
+    @Override
+    protected Iterable<ModelPart> getBodyParts() {
+        return ImmutableList.of(this.body, this.leg0, this.leg1, this.wing0, this.wing1);
+    }
+
+    @Override
+    public void setAngles(T entity, float limbAngle, float limbDistance, float animationProgress, float headYaw, float headPitch) {
+        this.head.pitch = headPitch * ((float)Math.PI / 180);
+        this.head.yaw = headYaw * ((float)Math.PI / 180);
+
+        this.leg0.pitch = MathHelper.cos(limbAngle * 0.6662f) * 1.4f * limbDistance;
+        this.leg1.pitch = MathHelper.cos(limbAngle * 0.6662f + (float)Math.PI) * 1.4f * limbDistance;
     }
 }

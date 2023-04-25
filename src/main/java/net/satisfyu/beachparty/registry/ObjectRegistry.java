@@ -7,11 +7,13 @@ import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.minecraft.block.*;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
+import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.item.*;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.sound.BlockSoundGroup;
@@ -78,7 +80,7 @@ public class ObjectRegistry {
     public static final Block MINI_FRIDGE = register("mini_fridge", new MiniFridgeBlock(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK).sounds(BlockSoundGroup.COPPER)));
     public static final Block SAND_BUCKET_BLOCK = register("sand_bucket_block", new SandBucketBlock(FabricBlockSettings.of(Material.SOIL)), false);//TODO was für Material?
     public static final Item MESSAGE_IN_A_BOTTLE = register("message_in_a_bottle", new Item(getSettings()));
-    public static final Item OVERGROWN_DISC = register("overgrown_disc", new MusicDiscItem(getSettings(), SoundEventRegistry.RADIO_BEACHPARTY));
+    public static final Item OVERGROWN_DISC = register("overgrown_disc", new MusicDiscItem(1, SoundEventRegistry.RADIO_BEACHPARTY, getSettings(), 214));
     public static final Block EMPTY_SAND_BUCKET_BLOCK = register("empty_sand_bucket_block", new SandBucketBlock(FabricBlockSettings.of(Material.SOIL)), false);
     public static final Item SAND_BUCKET = register("sand_bucket", new SandBucketItem(SAND_BUCKET_BLOCK, getSettings().maxCount(1)));
     public static final Item EMPTY_SAND_BUCKET = register("empty_sand_bucket", new SandBucketItem(EMPTY_SAND_BUCKET_BLOCK, getSettings()));
@@ -107,7 +109,7 @@ public class ObjectRegistry {
     public static final Item RUBBER_RING_PELICAN = register("rubber_ring_pelican", new BetterCustomArmorModelItem(EquipmentSlot.CHEST, getSettings().rarity(Rarity.COMMON), new BeachpartyIdentifier("textures/entity/rubber_ring_pelican.png"), -0.7f));
     public static final Item RUBBER_RING_AXOLOTL = register("rubber_ring_axolotl", new BetterCustomArmorModelItem(EquipmentSlot.CHEST, getSettings().rarity(Rarity.COMMON), new BeachpartyIdentifier("textures/entity/rubber_ring_axolotl.png"), -0.7f));
     public static final Item POOL_NOODLE_BLUE = register("pool_noodle_blue", new SwordItem(ToolMaterials.WOOD, 1, -2.4F, (new Item.Settings())));
-    public static final Item PELICAN_SPAWN_EGG_ITEM = registerSpawnEgg(getSettings(), EntityRegistry.PELICAN, 16777215, 16777215);
+    public static final Item PELICAN_SPAWN_EGG_ITEM = registerSpawnEgg(EntityRegistry.PELICAN, 16777215, 16777215);
     public static final Block SANDCASTLE = register("sandcastle", new SandCastleBlock(FabricBlockSettings.of(Material.SOIL)), false);//TODO was für Material?
 
 
@@ -201,7 +203,7 @@ public class ObjectRegistry {
         return Collections.unmodifiableMap(ITEMS);
     }
 
-    private static Item registerSpawnEgg(EntityType entityType, int color1, int color2){
+    private static <T extends MobEntity> Item registerSpawnEgg(EntityType<T> entityType, int color1, int color2){
         return register(Registry.ENTITY_TYPE.getId(entityType).toString().split(":")[1] + "_spawn_egg", new SpawnEggItem(entityType, color1, color2, new Item.Settings()));
     }
 
