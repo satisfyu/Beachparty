@@ -9,7 +9,7 @@ import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.random.Random;
-import net.satisfyu.beachparty.sound.BeachpartySounds;
+import net.satisfyu.beachparty.registry.SoundEventRegistry;
 import org.apache.commons.compress.utils.Lists;
 
 import java.util.*;
@@ -34,7 +34,7 @@ public class RadioHelper {
     }
 
     public static void tune(BlockPos pos, int channel) {
-        MinecraftClient.getInstance().getSoundManager().play(new PositionedSoundInstance(BeachpartySounds.RADIO_TUNE, SoundCategory.RECORDS, 1.0f, 1.0f, Random.create(), pos));
+        MinecraftClient.getInstance().getSoundManager().play(new PositionedSoundInstance(SoundEventRegistry.RADIO_TUNE, SoundCategory.RECORDS, 1.0f, 1.0f, Random.create(), pos));
         stopSounds(pos);
         if (!soundInstances.containsKey(pos)) {
             addSounds(pos);
@@ -60,7 +60,7 @@ public class RadioHelper {
 
     private static void addSounds(BlockPos blockPos) {
         List<PositionedSoundInstance> soundInstance = Lists.newArrayList();
-        for (SoundEvent sound : BeachpartySounds.RADIO_SOUNDS) {
+        for (SoundEvent sound : SoundEventRegistry.RADIO_SOUNDS) {
             soundInstance.add(new PositionedSoundInstance(
                     sound.getId(),
                     SoundCategory.RECORDS,

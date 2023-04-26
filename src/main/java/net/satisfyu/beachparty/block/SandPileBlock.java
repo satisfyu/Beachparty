@@ -16,7 +16,7 @@ import net.minecraft.world.World;
 public class SandPileBlock extends SandBlock {
 
 
-    private static final VoxelShape SHAPE = Block.createCuboidShape(2.0, 0.0, 2.0, 14.0, 4.0, 14.0);
+    private static final VoxelShape SHAPE = Block.createCuboidShape(2.0, 0.0, 2.0, 14.0, 3.0, 14.0);
 
     public SandPileBlock(int color, Settings settings) {
         super(color, settings);
