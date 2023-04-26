@@ -1,4 +1,4 @@
-package net.satisfyu.beachparty.sound;
+package net.satisfyu.beachparty.registry;
 
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Identifier;
@@ -8,7 +8,7 @@ import net.satisfyu.beachparty.BeachpartyIdentifier;
 
 import java.util.List;
 
-public class BeachpartySounds {
+public class SoundEventRegistry {
     public static final SoundEvent RADIO_CLICK = registerSoundEvent("radio_click");
     public static final SoundEvent RADIO_TUNE = registerSoundEvent("radio_tune");
     public static final SoundEvent RADIO_REGGEA = registerSoundEvent("radio_reggea");
@@ -24,6 +24,6 @@ public class BeachpartySounds {
     }
 
     public static void init() {
-        Beachparty.LOGGER.debug("Register " + BeachpartySounds.class);
+        Beachparty.LOGGER.debug("Register " + SoundEventRegistry.class);
     }
 }

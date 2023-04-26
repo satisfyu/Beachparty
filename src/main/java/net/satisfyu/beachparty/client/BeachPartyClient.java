@@ -35,10 +35,10 @@ public class BeachPartyClient implements ClientModInitializer {
 
     public static final EntityModelLayer PELICAN_MODEL_LAYER = new EntityModelLayer(new Identifier(MOD_ID, "pelican"), "main");
 
-   /* private static void registerPelican(){
+   private static void registerPelican(){
         EntityRendererRegistry.register(EntityRegistry.PELICAN, PelicanRenderer::new);
         EntityModelLayerRegistry.registerModelLayer(PELICAN_MODEL_LAYER, PelicanModel::getTexturedModelData);
-    }*/
+    }
 
 
         @Override
@@ -59,8 +59,10 @@ public class BeachPartyClient implements ClientModInitializer {
 
         HandledScreens.register(ScreenHandlerTypesRegistry.TIKI_BAR_GUI_HANDLER, TikiBarGui::new);
         HandledScreens.register(ScreenHandlerTypesRegistry.MINI_FRIDGE_GUI_HANDLER, MiniFridgeGui::new);
-            EntityRendererRegistry.register(EntityRegistry.CHAIR, ChairRenderer::new);
+        EntityRendererRegistry.register(EntityRegistry.CHAIR, ChairRenderer::new);
         EntityRendererRegistry.register(EntityRegistry.COCONUT, FlyingItemEntityRenderer::new);
+        registerPelican();
+
         BeachpartyMessages.registerC2SPackets();
         BeachpartyMessages.registerS2CPackets();
     }

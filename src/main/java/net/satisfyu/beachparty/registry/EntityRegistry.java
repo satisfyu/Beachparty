@@ -63,7 +63,6 @@ public class EntityRegistry {
 
 
         registerPelican(PELICAN, BiomeSelectors.includeByKey(BiomeKeys.BEACH, BiomeKeys.RIVER));
-
     }
 
     public static void init() {
@@ -75,8 +74,8 @@ public class EntityRegistry {
         }
     }
 
-    public static void registerPelican(EntityType entityType, Predicate<BiomeSelectionContext> biomes){
-        FabricDefaultAttributeRegistry.register(entityType, ChickenEntity.createChickenAttributes());
+    public static  void registerPelican(EntityType entityType, Predicate<BiomeSelectionContext> biomes){
+        FabricDefaultAttributeRegistry.register(entityType, PelicanEntity.createChickenAttributes());
         SpawnMobAccessor.callRegister(entityType, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING, AnimalEntity::isValidNaturalSpawn);
         BiomeModifications.addSpawn(biomes, SpawnGroup.CREATURE, entityType, 10, 4, 4);
     }

@@ -7,11 +7,13 @@ import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.minecraft.block.*;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
+import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.item.*;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.sound.BlockSoundGroup;
@@ -78,13 +80,14 @@ public class ObjectRegistry {
     public static final Block RADIO = register("radio", new RadioBlock(FabricBlockSettings.copy(Blocks.OAK_PLANKS).sounds(BlockSoundGroup.BAMBOO)));
     public static final Block MINI_FRIDGE = register("mini_fridge", new MiniFridgeBlock(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK).sounds(BlockSoundGroup.COPPER)));
     public static final Block SAND_BUCKET_BLOCK = register("sand_bucket_block", new SandBucketBlock(FabricBlockSettings.of(Material.SOIL)), false);//TODO was für Material?
+    public static final Item MESSAGE_IN_A_BOTTLE = register("message_in_a_bottle", new Item(getSettings()));
+    public static final Item OVERGROWN_DISC = register("overgrown_disc", new MusicDiscItem(1, SoundEventRegistry.RADIO_BEACHPARTY, getSettings(), 214));
     public static final Block EMPTY_SAND_BUCKET_BLOCK = register("empty_sand_bucket_block", new SandBucketBlock(FabricBlockSettings.of(Material.SOIL)), false);
     public static final Item SAND_BUCKET = register("sand_bucket", new SandBucketItem(SAND_BUCKET_BLOCK, getSettings().maxCount(1)));
     public static final Item EMPTY_SAND_BUCKET = register("empty_sand_bucket", new SandBucketItem(EMPTY_SAND_BUCKET_BLOCK, getSettings()));
     public static final Block COCONUT_BLOCK = register("coconut_block", new CoconutBlock(FabricBlockSettings.of(Material.BAMBOO)), false);
     public static final Item COCONUT = register("coconut", new CoconutItem(COCONUT_BLOCK, getSettings()));
-    public static final Item COCONUT_OPEN = register("coconut_open", new Item(getSettings()));
-    public static final Item MESSAGE_IN_A_BOTTLE = register("message_in_a_bottle", new Item(getSettings()));
+    public static final Item COCONUT_OPEN = register("coconut_open", new Item(getSettings().food(FoodComponents.CARROT)));
     public static final Block COCONUT_COCKTAIL = registerCocktail("coconut_cocktail", new CocktailBlock(getCocktailSettings()), StatusEffects.INSTANT_HEALTH);
     public static final Block SWEETBERRIES_COCKTAIL = registerCocktail("sweetberries_cocktail", new CocktailBlock(getCocktailSettings()), StatusEffects.ABSORPTION);
     public static final Block COCOA_COCKTAIL = registerCocktail("cocoa_cocktail", new CocktailBlock(getCocktailSettings()), StatusEffects.REGENERATION);
@@ -201,7 +204,7 @@ public class ObjectRegistry {
         return Collections.unmodifiableMap(ITEMS);
     }
 
-    private static Item registerSpawnEgg(EntityType entityType, int color1, int color2){
+    private static <T extends MobEntity> Item registerSpawnEgg(EntityType<T> entityType, int color1, int color2){
         return register(Registry.ENTITY_TYPE.getId(entityType).toString().split(":")[1] + "_spawn_egg", new SpawnEggItem(entityType, color1, color2, new Item.Settings()));
     }
 
