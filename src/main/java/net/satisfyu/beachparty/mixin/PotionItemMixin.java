@@ -45,7 +45,7 @@ public class PotionItemMixin {
 
             world.playSound( null, blockPos, SoundEvents.ITEM_BOTTLE_EMPTY, SoundCategory.BLOCKS, 1.0F, 1.0F);
             world.emitGameEvent( null, GameEvent.FLUID_PLACE, blockPos);
-            world.setBlockState(blockPos, blockState.getBlock() == Blocks.GRAVEL ? Blocks.SAND.getDefaultState() : ObjectRegistry.BEACH_SANDWAVES.getDefaultState());
+            world.setBlockState(blockPos, blockState.getBlock() == Blocks.GRAVEL ? Blocks.SAND.getDefaultState() : ObjectRegistry.SANDWAVES.getDefaultState());
             cir.setReturnValue(ActionResult.success(world.isClient));
         }
     }
