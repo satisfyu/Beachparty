@@ -27,7 +27,7 @@ public class TikiBarRecipe implements Recipe<Inventory> {
 
     @Override
     public boolean matches(Inventory inventory, World world) {
-        return BeachpartyUtil.matchesRecipe(inventory, inputs, 0, 1);
+        return BeachpartyUtil.matchesRecipe(inventory, inputs, 1, 2);
     }
 
     @Override

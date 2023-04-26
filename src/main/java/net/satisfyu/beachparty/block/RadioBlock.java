@@ -83,6 +83,7 @@ public class RadioBlock extends Block {
             boolean newState = !state.get(ON);
             if (newState) {
                 turnON(state, world, pos, player);
+                spawnParticles(world, pos);
             } else {
                 turnOFF(state, world, pos, player);
             }
@@ -166,6 +167,23 @@ public class RadioBlock extends Block {
         if (state.get(SEARCHING)) {
             world.setBlockState(pos, state.with(SEARCHING, false), 3);
         }
+    }
+
+    public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
+        if (state.get(ON)) {
+            spawnParticles(world, pos);
+        }
+    }
+
+    private static void spawnParticles(World world, BlockPos pos) {
+        Random random = world.random;
+
+        double d = (double) pos.getX() + random.nextDouble();
+        double e = pos.getY() + 0.5 + random.nextDouble();
+        double f = (double) pos.getZ() + random.nextDouble();
+
+        world.addParticle(ParticleTypes.NOTE, d, e, f, 0.0, 0.0, 0.0);
+
     }
 
     @Override

@@ -15,7 +15,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ChairUtil {
-    private static final Map<Identifier, Map<BlockPos, Pair<ChairEntity,BlockPos>>> CHAIRS = new HashMap<>();
+    private static final Map<Identifier, Map<BlockPos, Pair<ChairEntity, BlockPos>>> CHAIRS = new HashMap<>();
 
      public static ActionResult onUse(World world, PlayerEntity player, Hand hand, BlockHitResult hit, double extraHeight) {
         if(world.isClient) return ActionResult.PASS;

@@ -7,7 +7,6 @@ import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.minecraft.block.*;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.effect.StatusEffect;
@@ -41,7 +40,7 @@ public class ObjectRegistry {
     public static final Block SAND_SEASTARS = register("sand_seastars", new SandBlock(14406560, AbstractBlock.Settings.of(Material.AGGREGATE, MapColor.PALE_YELLOW).strength(0.5F).sounds(BlockSoundGroup.SAND)));
     public static final Block SANDWAVES = register("sandwaves", new SandBlock(14406560, AbstractBlock.Settings.of(Material.AGGREGATE, MapColor.PALE_YELLOW).strength(0.5F).sounds(BlockSoundGroup.SAND)));
     public static final Block SAND_SLAB = register("sand_slab", new SandSlabBlock(getSlabSettings().sounds(BlockSoundGroup.SAND)));
-    public static final Block SAND_PILE = register("sand_pile", new SandPileBlock(14406560, FabricBlockSettings.copy(Blocks.SAND)));
+    public static final Block SAND_PILE = register("sand_pile", new SandPileBlock(14406560, FabricBlockSettings.copy(Blocks.SAND)), false);
     public static final Block DRY_BUSH = register("dry_bush", new DeadBushBlock(FabricBlockSettings.copyOf(Blocks.DANDELION)));
     public static final Block DRY_BUSH_TALL = register("dry_bush_tall", new DeadBushTallBlock(FabricBlockSettings.copyOf(Blocks.ROSE_BUSH)));
     public static final Block LOUNGE_CHAIR = register("lounge_chair", new LoungeChairBlock(FabricBlockSettings.of(Material.WOOD).strength(2.0f, 3.0f).sounds(BlockSoundGroup.BAMBOO)));
@@ -79,8 +78,8 @@ public class ObjectRegistry {
     public static final Block RADIO = register("radio", new RadioBlock(FabricBlockSettings.copy(Blocks.OAK_PLANKS).sounds(BlockSoundGroup.BAMBOO)));
     public static final Block MINI_FRIDGE = register("mini_fridge", new MiniFridgeBlock(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK).sounds(BlockSoundGroup.COPPER)));
     public static final Block SAND_BUCKET_BLOCK = register("sand_bucket_block", new SandBucketBlock(FabricBlockSettings.of(Material.SOIL)), false);//TODO was für Material?
-    public static final Item MESSAGE_IN_A_BOTTLE = register("message_in_a_bottle", new Item(getSettings()));
     public static final Item OVERGROWN_DISC = register("overgrown_disc", new MusicDiscItem(1, SoundEventRegistry.RADIO_BEACHPARTY, getSettings(), 214));
+    public static final Block MESSAGE_IN_A_BOTTLE = register("message_in_a_bottle", new ShapeBlock(FabricBlockSettings.copy(Blocks.GLASS), Block.createCuboidShape(4.0f, 0.0f, 4.0f, 12.0f, 6.0f, 12.0f)));
     public static final Block EMPTY_SAND_BUCKET_BLOCK = register("empty_sand_bucket_block", new SandBucketBlock(FabricBlockSettings.of(Material.SOIL)), false);
     public static final Item SAND_BUCKET = register("sand_bucket", new SandBucketItem(SAND_BUCKET_BLOCK, getSettings().maxCount(1)));
     public static final Item EMPTY_SAND_BUCKET = register("empty_sand_bucket", new SandBucketItem(EMPTY_SAND_BUCKET_BLOCK, getSettings()));
@@ -115,7 +114,7 @@ public class ObjectRegistry {
     public static final Item POOL_NOODLE_GREEN = register("pool_noodle_green", new SwordItem(ToolMaterials.WOOD, 1, -1.4F, getSettings()));
     public static final Item POOL_NOODLE_YELLOW = register("pool_noodle_yellow", new SwordItem(ToolMaterials.WOOD, 1, -1.4F, getSettings()));
     public static final Item PELICAN_SPAWN_EGG = register("pelican_spawn_egg", new SpawnEggItem(EntityRegistry.PELICAN, 16710877, 16116736, getSettings()));
-    public static final Block SANDCASTLE = register("sandcastle", new SandCastleBlock(FabricBlockSettings.of(Material.SOIL)), false);
+    public static final Block SANDCASTLE = register("sandcastle", new SandCastleBlock(FabricBlockSettings.copy(Blocks.SAND)), false); //TODO was für Material?
 
 
     private static PillarBlock registerLog(String path) {
