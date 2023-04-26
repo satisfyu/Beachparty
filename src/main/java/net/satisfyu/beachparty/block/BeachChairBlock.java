@@ -33,7 +33,6 @@ import java.util.function.Supplier;
 public class BeachChairBlock extends HorizontalFacingBlock {
 	public static final EnumProperty<BedPart> PART = Properties.BED_PART;
 
-
 	private static final Supplier<VoxelShape> voxelShapeSupplier = () -> {
 		VoxelShape shape = VoxelShapes.empty();
 		shape = VoxelShapes.union(shape, VoxelShapes.cuboid(0.875, 0, 0, 1, 1, 1));

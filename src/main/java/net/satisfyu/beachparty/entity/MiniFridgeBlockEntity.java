@@ -29,7 +29,7 @@ import org.jetbrains.annotations.Nullable;
 public class MiniFridgeBlockEntity extends BlockEntity implements Inventory, BlockEntityTicker<MiniFridgeBlockEntity>, NamedScreenHandlerFactory {
 
     private DefaultedList<ItemStack> inventory;
-    public static final int CAPACITY = 5;
+    public static final int CAPACITY = 3;
     public static final int COOKING_TIME_IN_TICKS = 1800; // 90s or 3 minutes
     private static final int OUTPUT_SLOT = 0;
     private int fermentationTime = 0;
@@ -120,18 +120,20 @@ public class MiniFridgeBlockEntity extends BlockEntity implements Inventory, Blo
             return false;
         } else if (areInputsEmpty()) {
             return false;
-            }
-            return this.getStack(OUTPUT_SLOT).isEmpty();
         }
+        ItemStack itemStack = this.getStack(OUTPUT_SLOT);
+        return itemStack.isEmpty() || itemStack == recipe.getOutput();
+    }
 
 
     private boolean areInputsEmpty() {
         int emptyStacks = 0;
-        for (int i = 2; i < 6; i++) {
+        for (int i = 1; i <= 2; i++) {
             if (this.getStack(i).isEmpty()) emptyStacks++;
         }
-        return emptyStacks == 4;
+        return emptyStacks == 2;
     }
+
     private void craft(MiniFridgeRecipe recipe) {
         if (!canCraft(recipe)) {
             return;

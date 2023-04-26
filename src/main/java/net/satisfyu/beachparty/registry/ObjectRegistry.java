@@ -40,6 +40,7 @@ public class ObjectRegistry {
     public static final Block BEACH_SAND_SEASTARS = register("beach_sand_seastars", new SandBlock(14406560, AbstractBlock.Settings.of(Material.AGGREGATE, MapColor.PALE_YELLOW).strength(0.5F).sounds(BlockSoundGroup.SAND)));
     public static final Block BEACH_SANDWAVES = register("beach_sandwaves", new SandBlock(14406560, AbstractBlock.Settings.of(Material.AGGREGATE, MapColor.PALE_YELLOW).strength(0.5F).sounds(BlockSoundGroup.SAND)));
     public static final Block BEACH_SAND_SLAB = register("beach_sand_slab", new SandSlabBlock(getSlabSettings().sounds(BlockSoundGroup.SAND)));
+    public static final Block SAND_PILE = register("sand_pile", new SandPileBlock(14406560, FabricBlockSettings.copy(Blocks.SAND)));
     public static final Block DRY_BUSH = register("dry_bush", new DeadBushBlock(FabricBlockSettings.copyOf(Blocks.DANDELION)));
     public static final Block DRY_BUSH_TALL = register("dry_bush_tall", new DeadBushTallBlock(FabricBlockSettings.copyOf(Blocks.ROSE_BUSH)));
     public static final Block LOUNGE_CHAIR = register("lounge_chair", new LoungeChairBlock(FabricBlockSettings.of(Material.WOOD).strength(2.0f, 3.0f).sounds(BlockSoundGroup.BAMBOO)));

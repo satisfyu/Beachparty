@@ -3,6 +3,7 @@ package net.satisfyu.beachparty.block;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.ShapeContext;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.ai.pathing.NavigationType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -86,6 +87,11 @@ public class SandCastleBlock extends Block {
             }
         }
         return ActionResult.PASS;
+    }
+
+    @Override
+    public void onSteppedOn(World world, BlockPos pos, BlockState state, Entity entity) {
+        world.setBlockState(pos, ObjectRegistry.SAND_PILE.getDefaultState(), 3);
     }
 
     private void exchangeStack(ItemStack handStack, PlayerEntity player, ItemStack possibleReturnStack) {

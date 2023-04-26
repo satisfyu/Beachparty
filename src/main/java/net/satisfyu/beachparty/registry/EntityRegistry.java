@@ -10,9 +10,6 @@ import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.*;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.ChickenEntity;
-import net.minecraft.entity.passive.PolarBearEntity;
-import net.minecraft.entity.passive.SheepEntity;
-import net.minecraft.tag.BiomeTags;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.Heightmap;
@@ -20,7 +17,6 @@ import net.minecraft.world.biome.BiomeKeys;
 import net.satisfyu.beachparty.Beachparty;
 import net.satisfyu.beachparty.BeachpartyIdentifier;
 import net.satisfyu.beachparty.entity.MiniFridgeBlockEntity;
-import net.satisfyu.beachparty.entity.RadioBlockEntity;
 import net.satisfyu.beachparty.entity.CoconutEntity;
 import net.satisfyu.beachparty.entity.TikiBarBlockEntity;
 import net.satisfyu.beachparty.entity.chair.ChairEntity;
@@ -48,8 +44,6 @@ public class EntityRegistry {
             new Identifier(Beachparty.MOD_ID, "pelican"),
             FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, PelicanEntity::new).dimensions(EntityDimensions.fixed(0.9f, 1.3f)).build()
     );
-
-    public static final BlockEntityType<RadioBlockEntity> RADIO_BLOCK_ENTITY = create("radio", FabricBlockEntityTypeBuilder.create(RadioBlockEntity::new, ObjectRegistry.RADIO).build());
     public static final BlockEntityType<TikiBarBlockEntity> TIKI_BAR_BLOCK_ENTITY = create("tiki_bar", FabricBlockEntityTypeBuilder.create(TikiBarBlockEntity::new, ObjectRegistry.TIKI_BAR).build());
     public static final BlockEntityType<MiniFridgeBlockEntity> MINI_FRIDGE_BLOCK_ENTITY = create("mini_fridge", FabricBlockEntityTypeBuilder.create(MiniFridgeBlockEntity::new, ObjectRegistry.MINI_FRIDGE).build());
     public static final EntityType<CoconutEntity> COCONUT = create("coconut", FabricEntityTypeBuilder.<CoconutEntity>create(SpawnGroup.MISC, CoconutEntity::new).dimensions(EntityDimensions.fixed(0.25f, 0.25f)).build());

@@ -29,7 +29,7 @@ import org.jetbrains.annotations.Nullable;
 public class TikiBarBlockEntity extends BlockEntity implements Inventory, BlockEntityTicker<TikiBarBlockEntity>, NamedScreenHandlerFactory {
 
     private DefaultedList<ItemStack> inventory;
-    public static final int CAPACITY = 5;
+    public static final int CAPACITY = 3;
     public static final int COOKING_TIME_IN_TICKS = 1800; // 90s or 3 minutes
     private static final int OUTPUT_SLOT = 0;
     private int fermentationTime = 0;
@@ -71,7 +71,6 @@ public class TikiBarBlockEntity extends BlockEntity implements Inventory, BlockE
         ExperienceOrbEntity.spawn(world, pos, (int) experience);
     }
 
-
     @Override
     public void readNbt(NbtCompound nbt) {
         super.readNbt(nbt);
@@ -79,9 +78,7 @@ public class TikiBarBlockEntity extends BlockEntity implements Inventory, BlockE
         Inventories.readNbt(nbt, this.inventory);
         this.fermentationTime = nbt.getShort("FermentationTime");
         this.experience = nbt.getFloat("Experience");
-
     }
-
 
     @Override
     protected void writeNbt(NbtCompound nbt) {
@@ -120,18 +117,19 @@ public class TikiBarBlockEntity extends BlockEntity implements Inventory, BlockE
             return false;
         } else if (areInputsEmpty()) {
             return false;
-            }
-            return this.getStack(OUTPUT_SLOT).isEmpty();
         }
+        return this.getStack(OUTPUT_SLOT).isEmpty()  || this.getStack(OUTPUT_SLOT) == recipe.getOutput();
+    }
 
 
     private boolean areInputsEmpty() {
         int emptyStacks = 0;
-        for (int i = 2; i < 6; i++) {
+        for (int i = 1; i <= 2; i++) {
             if (this.getStack(i).isEmpty()) emptyStacks++;
         }
-        return emptyStacks == 4;
+        return emptyStacks == 2;
     }
+
     private void craft(TikiBarRecipe recipe) {
         if (!canCraft(recipe)) {
             return;
@@ -151,7 +149,6 @@ public class TikiBarBlockEntity extends BlockEntity implements Inventory, BlockE
             }
         }
     }
-
 
     @Override
     public int size() {

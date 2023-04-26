@@ -3,12 +3,7 @@ package net.satisfyu.beachparty.block;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.block.*;
-import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.block.entity.BlockEntityTicker;
-import net.minecraft.block.entity.BlockEntityType;
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.item.TooltipContext;
-import net.minecraft.client.sound.PositionedSoundInstance;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
@@ -34,11 +29,8 @@ import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.satisfyu.beachparty.networking.BeachpartyMessages;
-import net.satisfyu.beachparty.entity.RadioBlockEntity;
-import net.satisfyu.beachparty.registry.EntityRegistry;
 import net.satisfyu.beachparty.sound.BeachpartySounds;
 import net.satisfyu.beachparty.util.BeachpartyUtil;
-import net.satisfyu.beachparty.util.RadioHelper;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
@@ -46,11 +38,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Supplier;
 
-public class RadioBlock extends BlockWithEntity {
+public class RadioBlock extends Block {
     public static final BooleanProperty ON;
     public static final IntProperty CHANNEL;
     public static final DirectionProperty FACING = HorizontalFacingBlock.FACING;
     public static final BooleanProperty SEARCHING;
+    public static final int CHANNELS = BeachpartySounds.RADIO_SOUNDS.size();
+    public static final int DELAY = 2 * 20;
 
     private static final Supplier<VoxelShape> voxelShapeSupplier = () -> VoxelShapes.cuboid(0.125, 0, 0.3125, 0.875, 0.5, 0.6875);
 
@@ -72,7 +66,7 @@ public class RadioBlock extends BlockWithEntity {
 
     @Override
     public BlockState getPlacementState(ItemPlacementContext context) {
-        int channel = Random.create().nextBetween(0, RadioHelper.CHANNELS - 1);
+        int channel = Random.create().nextBetween(0, CHANNELS - 1);
         Direction facing = Direction.NORTH;
         if (context.getPlayerFacing().getAxis() != Direction.Axis.Y) {
             facing = context.getPlayerFacing().getOpposite();
@@ -126,19 +120,19 @@ public class RadioBlock extends BlockWithEntity {
     }
 
     public int tune(World world, BlockState blockState, BlockPos blockPos, int scrollValue) {
-        if (scrollValue % RadioHelper.CHANNELS == 0) {
+        if (scrollValue % CHANNELS == 0) {
             return blockState.get(CHANNEL);
         }
         int currentChannel = blockState.get(CHANNEL);
-        int newChannel = scrollValue < 0 ? (RadioHelper.CHANNELS - (Math.abs(currentChannel + scrollValue) % RadioHelper.CHANNELS)) % RadioHelper.CHANNELS : (currentChannel + scrollValue) % RadioHelper.CHANNELS;
+        int newChannel = scrollValue < 0 ? (CHANNELS - (Math.abs(currentChannel + scrollValue) % CHANNELS)) % CHANNELS : (currentChannel + scrollValue) % CHANNELS;
         world.setBlockState(blockPos, blockState.with(CHANNEL, newChannel).with(SEARCHING, true), 3);
-        world.createAndScheduleBlockTick(blockPos, this, RadioHelper.DELAY);
+        world.createAndScheduleBlockTick(blockPos, this, DELAY);
         return newChannel;
     }
 
     private void pressButton(BlockState state, World world, BlockPos pos, boolean on) {
             world.setBlockState(pos, state.with(ON, on).with(SEARCHING, true), 3);
-            world.createAndScheduleBlockTick(pos, this, RadioHelper.DELAY);
+            world.createAndScheduleBlockTick(pos, this, DELAY);
     }
 
     private void sendPacket(BlockState state, World world, BlockPos pos, boolean on) {
@@ -151,18 +145,6 @@ public class RadioBlock extends BlockWithEntity {
         }
     }
 
-    @Nullable
-    @Override
-    public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
-        return new RadioBlockEntity(pos, state);
-    }
-
-    @Nullable
-    @Override
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
-        return checkType(type, EntityRegistry.RADIO_BLOCK_ENTITY, (world1, pos, state1, be) -> be.tick(world1, pos, state1, be));
-    }
-
     @Override
     public BlockRenderType getRenderType(BlockState state) {
         return BlockRenderType.MODEL;
@@ -171,9 +153,12 @@ public class RadioBlock extends BlockWithEntity {
     @Override
     public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
         if (!state.isOf(newState.getBlock())) {
-            RadioHelper.setPlaying(pos, state.get(CHANNEL), false);
+            if(!world.isClient) {
+                sendPacket(state, world, pos, false);
+            }
             super.onStateReplaced(state, world, pos, newState, moved);
         }
+
     }
 
     @Override
@@ -195,7 +180,7 @@ public class RadioBlock extends BlockWithEntity {
 
     static {
         ON = BooleanProperty.of("on");
-        CHANNEL = IntProperty.of("channel", 0, RadioHelper.CHANNELS - 1);
+        CHANNEL = IntProperty.of("channel", 0, CHANNELS - 1);
         SEARCHING = BooleanProperty.of("searching");
     }
 }

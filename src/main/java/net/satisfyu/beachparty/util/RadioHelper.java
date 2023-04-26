@@ -16,8 +16,6 @@ import java.util.*;
 
 @Environment(EnvType.CLIENT)
 public class RadioHelper {
-    public static final int CHANNELS = BeachpartySounds.RADIO_SOUNDS.size();
-    public static final int DELAY = 2 * 20;
     private static final Map<BlockPos, List<PositionedSoundInstance>> soundInstances = new HashMap<>();
 
     public static void setPlaying(BlockPos pos, int channel, boolean play) {
@@ -41,7 +39,7 @@ public class RadioHelper {
         if (!soundInstances.containsKey(pos)) {
             addSounds(pos);
         }
-        playSound(pos, channel, DELAY);
+        playSound(pos, channel, 2 * 20);
     }
 
     private static void playSound(BlockPos pos, int channel, int delay) {
