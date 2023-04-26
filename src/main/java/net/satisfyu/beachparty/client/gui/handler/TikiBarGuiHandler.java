@@ -8,6 +8,7 @@ import net.minecraft.recipe.Recipe;
 import net.minecraft.screen.ArrayPropertyDelegate;
 import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.slot.Slot;
+import net.satisfyu.beachparty.client.gui.slot.IceSlot;
 import net.satisfyu.beachparty.client.gui.slot.TikiBarOutputSlot;
 import net.satisfyu.beachparty.client.recipebook.IRecipeBookGroup;
 import net.satisfyu.beachparty.client.recipebook.custom.TikiBarRecipeBookGroup;

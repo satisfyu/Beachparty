@@ -34,5 +34,11 @@
     "sounds": [
       "beachparty:radio_beachparty"
     ]
+  },
+  "ambient_beach": {
+    "subtitle": "beachparty.sound.ambient_beach",
+    "sounds": [
+      "beachparty:ambient_beach"
+    ]
   }
 }

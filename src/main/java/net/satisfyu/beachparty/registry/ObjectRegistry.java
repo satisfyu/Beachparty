@@ -37,11 +37,10 @@ public class ObjectRegistry {
     private static final Map<Identifier, Item> ITEMS = new LinkedHashMap<>();
     private static final Map<Identifier, Block> BLOCKS = new LinkedHashMap<>();
 
-    public static final Block BEACH_SAND = register("beach_sand", new SandBlock(14406560, AbstractBlock.Settings.of(Material.AGGREGATE, MapColor.PALE_YELLOW).strength(0.5F).sounds(BlockSoundGroup.SAND)));
-    public static final Block BEACH_SAND_DIRTY = register("beach_sand_dirty", new SandBlock(14406560, AbstractBlock.Settings.of(Material.AGGREGATE, MapColor.PALE_YELLOW).strength(0.5F).sounds(BlockSoundGroup.SAND)));
-    public static final Block BEACH_SAND_SEASTARS = register("beach_sand_seastars", new SandBlock(14406560, AbstractBlock.Settings.of(Material.AGGREGATE, MapColor.PALE_YELLOW).strength(0.5F).sounds(BlockSoundGroup.SAND)));
-    public static final Block BEACH_SANDWAVES = register("beach_sandwaves", new SandBlock(14406560, AbstractBlock.Settings.of(Material.AGGREGATE, MapColor.PALE_YELLOW).strength(0.5F).sounds(BlockSoundGroup.SAND)));
-    public static final Block BEACH_SAND_SLAB = register("beach_sand_slab", new SandSlabBlock(getSlabSettings().sounds(BlockSoundGroup.SAND)));
+    public static final Block SAND_DIRTY = register("sand_dirty", new SandBlock(14406560, AbstractBlock.Settings.of(Material.AGGREGATE, MapColor.PALE_YELLOW).strength(0.5F).sounds(BlockSoundGroup.SAND)));
+    public static final Block SAND_SEASTARS = register("sand_seastars", new SandBlock(14406560, AbstractBlock.Settings.of(Material.AGGREGATE, MapColor.PALE_YELLOW).strength(0.5F).sounds(BlockSoundGroup.SAND)));
+    public static final Block SANDWAVES = register("sandwaves", new SandBlock(14406560, AbstractBlock.Settings.of(Material.AGGREGATE, MapColor.PALE_YELLOW).strength(0.5F).sounds(BlockSoundGroup.SAND)));
+    public static final Block SAND_SLAB = register("sand_slab", new SandSlabBlock(getSlabSettings().sounds(BlockSoundGroup.SAND)));
     public static final Block SAND_PILE = register("sand_pile", new SandPileBlock(14406560, FabricBlockSettings.copy(Blocks.SAND)));
     public static final Block DRY_BUSH = register("dry_bush", new DeadBushBlock(FabricBlockSettings.copyOf(Blocks.DANDELION)));
     public static final Block DRY_BUSH_TALL = register("dry_bush_tall", new DeadBushTallBlock(FabricBlockSettings.copyOf(Blocks.ROSE_BUSH)));
@@ -107,11 +106,14 @@ public class ObjectRegistry {
     public static final Item RUBBER_RING_BLUE = register("rubber_ring_blue", new BetterCustomArmorModelItem(EquipmentSlot.CHEST, getSettings().rarity(Rarity.COMMON), new BeachpartyIdentifier("textures/entity/rubber_ring_blue.png"), -0.7f));
     public static final Item RUBBER_RING_PINK = register("rubber_ring_pink", new BetterCustomArmorModelItem(EquipmentSlot.CHEST, getSettings().rarity(Rarity.COMMON), new BeachpartyIdentifier("textures/entity/rubber_ring_pink.png"), -0.7f));
     public static final Item RUBBER_RING_STRIPPED = register("rubber_ring_stripped", new BetterCustomArmorModelItem(EquipmentSlot.CHEST, getSettings().rarity(Rarity.COMMON), new BeachpartyIdentifier("textures/entity/rubber_ring_stripped.png"), -0.7f));
-    public static final Item RUBBER_RING_PELICAN = register("rubber_ring_pelican", new BetterCustomArmorModelItem(EquipmentSlot.CHEST, getSettings().rarity(Rarity.COMMON), new BeachpartyIdentifier("textures/entity/rubber_ring_pelican.png"), -0.7f));
-    public static final Item RUBBER_RING_AXOLOTL = register("rubber_ring_axolotl", new BetterCustomArmorModelItem(EquipmentSlot.CHEST, getSettings().rarity(Rarity.COMMON), new BeachpartyIdentifier("textures/entity/rubber_ring_axolotl.png"), -0.7f));
+    public static final Item RUBBER_RING_PELICAN = register("rubber_ring_pelican", new BetterCustomArmorModelItem(EquipmentSlot.CHEST, getSettings().rarity(Rarity.RARE), new BeachpartyIdentifier("textures/entity/rubber_ring_pelican.png"), -0.7f));
+    public static final Item RUBBER_RING_AXOLOTL = register("rubber_ring_axolotl", new BetterCustomArmorModelItem(EquipmentSlot.CHEST, getSettings().rarity(Rarity.RARE), new BeachpartyIdentifier("textures/entity/rubber_ring_axolotl.png"), -0.7f));
     public static final Item POOL_NOODLE_BLUE = register("pool_noodle_blue", new SwordItem(ToolMaterials.WOOD, 1, -2.4F, (new Item.Settings())));
-    public static final Item PELICAN_SPAWN_EGG_ITEM = registerSpawnEgg(EntityRegistry.PELICAN, 16777215, 16777215);
-    public static final Block SANDCASTLE = register("sandcastle", new SandCastleBlock(FabricBlockSettings.of(Material.SOIL)), false);//TODO was für Material?
+    public static final Item POOL_NOODLE_RED = register("pool_noodle_blue", new SwordItem(ToolMaterials.WOOD, 1, -2.4F, (new Item.Settings())));
+    public static final Item POOL_NOODLE_GREEN = register("pool_noodle_blue", new SwordItem(ToolMaterials.WOOD, 1, -2.4F, (new Item.Settings())));
+    public static final Item POOL_NOODLE_YELLOW = register("pool_noodle_blue", new SwordItem(ToolMaterials.WOOD, 1, -2.4F, (new Item.Settings())));
+    public static final Item PELICAN_SPAWN_EGG = register("pelican_spawn_egg", new SpawnEggItem(EntityRegistry.PELICAN, 16710877, 16116736, getSettings()));
+    public static final Block SANDCASTLE = register("sandcastle", new SandCastleBlock(FabricBlockSettings.of(Material.SOIL)), false);
 
 
     private static PillarBlock registerLog(String path) {

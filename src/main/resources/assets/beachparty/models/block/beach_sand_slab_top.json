@@ -2,8 +2,8 @@
   "parent": "minecraft:block/slab_top",
     "textures": {
     "particle": "block/sand",
-    "bottom": "beachparty:block/sand",
-    "top": "beachparty:block/sand",
-    "side": "beachparty:block/sand"
+    "bottom": "block/sand",
+    "top": "block/sand",
+    "side": "block/sand"
   }
 }

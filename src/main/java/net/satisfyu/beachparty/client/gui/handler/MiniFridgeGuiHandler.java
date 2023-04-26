@@ -8,6 +8,7 @@ import net.minecraft.recipe.Recipe;
 import net.minecraft.screen.ArrayPropertyDelegate;
 import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.slot.Slot;
+import net.satisfyu.beachparty.client.gui.slot.IceSlot;
 import net.satisfyu.beachparty.client.gui.slot.TikiBarOutputSlot;
 import net.satisfyu.beachparty.client.recipebook.IRecipeBookGroup;
 import net.satisfyu.beachparty.client.recipebook.custom.MiniFridgeRecipeBookGroup;
@@ -37,8 +38,8 @@ public class MiniFridgeGuiHandler extends AbstractRecipeBookGUIScreenHandler  {
         // Output
         this.addSlot(new TikiBarOutputSlot(playerInventory.player, inventory, 0, 128,  35));
         // Inputs
-        this.addSlot(new Slot(inventory, 1, 55, 26));
-        this.addSlot(new Slot(inventory, 2, 55, 44));
+        this.addSlot(new Slot(inventory, 1, 46, 27));
+        this.addSlot(new IceSlot(inventory, 2, 59, 43));
     }
 
     private void buildPlayerContainer(Inventory playerInventory) {

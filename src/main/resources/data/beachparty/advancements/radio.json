@@ -6,13 +6,13 @@
     ]
   },
   "criteria": {
-    "has_palm_planks": {
+    "has_redstone": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
             "items": [
-              "minecraft:jukebox"
+              "minecraft:redstone"
             ]
           }
         ]
@@ -27,7 +27,7 @@
   },
   "requirements": [
     [
-      "has_jukebox",
+      "has_redstone",
       "has_the_recipe"
     ]
   ]

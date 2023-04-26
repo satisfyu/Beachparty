@@ -6,12 +6,14 @@
     ]
   },
   "criteria": {
-    "has_palm_logs": {
+    "has_palm_log": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "tag": "beachparty:palm_logs"
+            "items": [
+              "beachparty:palm_log"
+            ]
           }
         ]
       }
@@ -25,7 +27,7 @@
   },
   "requirements": [
     [
-      "has_palm_logs",
+      "has_palm_log",
       "has_the_recipe"
     ]
   ]

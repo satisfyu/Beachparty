@@ -1,9 +1,9 @@
 {
   "type": "minecraft:random_patch",
   "config": {
-    "tries": 24,
-    "xz_spread": 14,
-    "y_spread": 2,
+    "tries": 4,
+    "xz_spread": 7,
+    "y_spread": 3,
     "feature": {
       "feature": {
         "type": "minecraft:simple_block",
@@ -29,6 +29,13 @@
             "blocks": [
               "minecraft:sand"
             ]
+          }
+        },
+        {
+          "type": "minecraft:block_predicate_filter",
+          "predicate": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "minecraft:air"
           }
         }
       ]

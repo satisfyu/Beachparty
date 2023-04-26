@@ -1,45 +1,22 @@
 {
-  "type": "minecraft:random_selector",
+  "type": "minecraft:disk",
   "config": {
-    "features": [],
-    "default": {
-      "feature": {
-        "type": "minecraft:disk",
-        "config": {
-          "half_height": 4,
-          "radius": {
-            "type": "minecraft:uniform",
-            "value": {
-              "min_inclusive": 2,
-              "max_inclusive": 4
-            }
-          },
-          "state_provider": {
-            "fallback": {
-              "type": "minecraft:simple_state_provider",
-              "state": {
-                "Name": "beachparty:beach_sandwaves"
-              }
-            },
-            "rules": []
-          },
-          "target": {
-            "type": "minecraft:matching_blocks",
-            "blocks": [
-              "minecraft:sand"
-            ]
-          }
+    "state_provider": {
+      "fallback": {
+        "type": "minecraft:simple_state_provider",
+        "state": {
+          "Name": "beachparty:sandwaves"
         }
       },
-      "placement": [
-        {
-          "type": "minecraft:block_predicate_filter",
-          "predicate": {
-            "type": "minecraft:matching_fluids",
-            "fluids": "minecraft:water"
-          }
-        }
+      "rules": []
+    },
+    "target": {
+      "type": "minecraft:matching_blocks",
+      "blocks": [
+        "minecraft:sand"
       ]
-    }
+    },
+    "radius": 4,
+    "half_height": 2
   }
 }

@@ -6,13 +6,13 @@
     ]
   },
   "criteria": {
-    "has_stick": {
+    "has_palm_planks": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
             "items": [
-              "minecraft:stick"
+              "beachparty:palm_planks"
             ]
           }
         ]
@@ -27,7 +27,7 @@
   },
   "requirements": [
     [
-      "has_stick",
+      "has_palm_planks",
       "has_the_recipe"
     ]
   ]

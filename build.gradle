@@ -18,6 +18,13 @@ repositories {
     }
 }
 
+task copyFiles(type: Copy) {
+    from 'src/main/resources'
+    into 'build/resources/main'
+    duplicatesStrategy = 'exclude'
+}
+
+
 loom {
     runs {
         // This adds a new gradle task that runs the datagen API: "gradlew runDatagen"

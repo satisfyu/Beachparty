@@ -12,8 +12,8 @@
         "mood_sound": {
             "block_search_extent": 8,
             "offset": 2.0,
-            "sound": "minecraft:ambient.cave",
-            "tick_delay": 6000
+            "sound": "beachparty:ambient_beach",
+            "tick_delay": 600
         },
         "sky_color": 7907327,
         "water_color": 3570859,
@@ -64,7 +64,8 @@
             "minecraft:disk_clay",
             "minecraft:disk_gravel",
             "beachparty:seastars",
-            "beachparty:sandwaves"
+            "beachparty:sandwaves",
+            "beachparty:sand_slab"
         ],
         [],
         [
@@ -75,6 +76,8 @@
             "minecraft:glow_lichen",
             "minecraft:flower_default",
             "beachparty:dry_bush",
+            "beachparty:dry_tall_bush",
+            "beachparty:dirty_sand",
             "minecraft:patch_grass_badlands",
             "minecraft:brown_mushroom_normal",
             "minecraft:red_mushroom_normal",

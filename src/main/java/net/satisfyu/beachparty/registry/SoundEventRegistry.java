@@ -15,6 +15,7 @@ public class SoundEventRegistry {
     public static final SoundEvent RADIO_HAWAII = registerSoundEvent("radio_hawaii");
     public static final SoundEvent RADIO_TROPICAL = registerSoundEvent("radio_tropical");
     public static final SoundEvent RADIO_BEACHPARTY = registerSoundEvent("radio_beachparty");
+    public static final SoundEvent AMBIENT_BEACH = registerSoundEvent("ambient_beach");
 
     public static final List<SoundEvent> RADIO_SOUNDS = List.of(RADIO_REGGEA, RADIO_HAWAII, RADIO_TROPICAL, RADIO_BEACHPARTY);
 
