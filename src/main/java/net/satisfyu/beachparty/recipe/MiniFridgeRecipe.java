@@ -27,7 +27,7 @@ public class MiniFridgeRecipe implements Recipe<Inventory> {
 
     @Override
     public boolean matches(Inventory inventory, World world) {
-        return BeachpartyUtil.matchesRecipe(inventory, inputs, 1, 4);
+        return BeachpartyUtil.matchesRecipe(inventory, inputs, 1, 2);
     }
 
     @Override

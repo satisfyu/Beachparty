@@ -97,6 +97,8 @@ public class ObjectRegistry {
     public static final Item ICECREAM_MELON = register("icecream_melon", new Item(getSettings().food(FoodComponents.COOKIE)));
     public static final Item ICECREAM_CACTUS = register("icecream_cactus", new Item(getSettings().food(FoodComponents.COOKIE)));
     public static final Item ICECREAM_SWEETBERRIES = register("icecream_sweetberries", new Item(getSettings().food(FoodComponents.COOKIE)));
+    public static final Item ICECREAM_CARROT = register("icecream_carrot", new Item(getSettings().food(FoodComponents.COOKIE)));
+    public static final Item ICECREAM_CHOCOLATE = register("icecream_chocolate", new Item(getSettings().food(FoodComponents.COOKIE)));
     public static final Block BEACH_TOWEL = register("beach_towel", new BeachTowelBlock(FabricBlockSettings.copy(Blocks.WHITE_WOOL).sounds(BlockSoundGroup.WOOL)));
     public static final Item BEACH_HAT = register("beach_hat", new BeachHatItem(getSettings().rarity(Rarity.COMMON)));
     public static final Item SUNGLASSES = register("sunglasses", new SwimwearArmorItem(MaterialsRegistry.SUNGLASSES, EquipmentSlot.HEAD, getSettings()));
@@ -108,10 +110,10 @@ public class ObjectRegistry {
     public static final Item RUBBER_RING_STRIPPED = register("rubber_ring_stripped", new BetterCustomArmorModelItem(EquipmentSlot.CHEST, getSettings().rarity(Rarity.COMMON), new BeachpartyIdentifier("textures/entity/rubber_ring_stripped.png"), -0.7f));
     public static final Item RUBBER_RING_PELICAN = register("rubber_ring_pelican", new BetterCustomArmorModelItem(EquipmentSlot.CHEST, getSettings().rarity(Rarity.RARE), new BeachpartyIdentifier("textures/entity/rubber_ring_pelican.png"), -0.7f));
     public static final Item RUBBER_RING_AXOLOTL = register("rubber_ring_axolotl", new BetterCustomArmorModelItem(EquipmentSlot.CHEST, getSettings().rarity(Rarity.RARE), new BeachpartyIdentifier("textures/entity/rubber_ring_axolotl.png"), -0.7f));
-    public static final Item POOL_NOODLE_BLUE = register("pool_noodle_blue", new SwordItem(ToolMaterials.WOOD, 1, -2.4F, (new Item.Settings())));
-    public static final Item POOL_NOODLE_RED = register("pool_noodle_blue", new SwordItem(ToolMaterials.WOOD, 1, -2.4F, (new Item.Settings())));
-    public static final Item POOL_NOODLE_GREEN = register("pool_noodle_blue", new SwordItem(ToolMaterials.WOOD, 1, -2.4F, (new Item.Settings())));
-    public static final Item POOL_NOODLE_YELLOW = register("pool_noodle_blue", new SwordItem(ToolMaterials.WOOD, 1, -2.4F, (new Item.Settings())));
+    public static final Item POOL_NOODLE_BLUE = register("pool_noodle_blue", new SwordItem(ToolMaterials.WOOD, 1, -1.4F, getSettings()));
+    public static final Item POOL_NOODLE_RED = register("pool_noodle_red", new SwordItem(ToolMaterials.WOOD, 1, -1.4F, getSettings()));
+    public static final Item POOL_NOODLE_GREEN = register("pool_noodle_green", new SwordItem(ToolMaterials.WOOD, 1, -1.4F, getSettings()));
+    public static final Item POOL_NOODLE_YELLOW = register("pool_noodle_yellow", new SwordItem(ToolMaterials.WOOD, 1, -1.4F, getSettings()));
     public static final Item PELICAN_SPAWN_EGG = register("pelican_spawn_egg", new SpawnEggItem(EntityRegistry.PELICAN, 16710877, 16116736, getSettings()));
     public static final Block SANDCASTLE = register("sandcastle", new SandCastleBlock(FabricBlockSettings.of(Material.SOIL)), false);
 
