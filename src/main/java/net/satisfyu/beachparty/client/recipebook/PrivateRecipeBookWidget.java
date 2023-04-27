@@ -194,7 +194,7 @@ public abstract class  PrivateRecipeBookWidget extends DrawableHelper implements
         if (this.searchField == null) return;
 
         List<? extends Recipe<Inventory>> recipes = getResultsForGroup(currentTab.getGroup(), client.world.getRecipeManager().listAllOfType(getRecipeType()));
-
+        System.out.println(recipes);
         String string = this.searchField.getText();
 
         if (!string.isEmpty()) {

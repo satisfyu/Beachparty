@@ -93,6 +93,14 @@
   "tooltip.beachparty.radioswitch": "Mousewheel-Up/Down to switch Radio Stations",
   "tooltip.beachparty.message": "Right-Click to Open",
   "tooltip.beachparty.swimwearline1": "When Wearing:",
-  "tooltip.beachparty.swimwearline2": "+17% Swim Speed"
+  "tooltip.beachparty.swimwearline2": "+17% Swim Speed",
+
+  "tooltip.beachparty.swimwear_set" : "Swimwear Set",
+  "tooltip.beachparty.swimwearhelmet" : "Swimwear Helmet",
+  "tooltip.beachparty.swimwearbreastplate" : "Swimwear Breastplate",
+  "tooltip.beachparty.swimwearleggings" : "Swimwear Leggings",
+  "tooltip.beachparty.swimwearboots" : "Swimwear Boots",
+  "tooltip.beachparty.swimwear_seteffect" : "SwimwearSet Effect",
+  "tooltip.beachparty.swimwear_effect" : "Dolphins Grace /n Water Breathing"
 
 }

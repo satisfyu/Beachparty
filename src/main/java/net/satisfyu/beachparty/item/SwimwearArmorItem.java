@@ -1,6 +1,7 @@
 package net.satisfyu.beachparty.item;
 
 import com.google.common.collect.ImmutableMap;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EquipmentSlot;
@@ -48,13 +49,7 @@ public class SwimwearArmorItem extends ArmorItem {
 	}
 
 	private boolean hasSwimwearSet(PlayerEntity player) {
-		ItemStack boots = player.getInventory().getArmorStack(0);
-		ItemStack leggings = player.getInventory().getArmorStack(1);
-		ItemStack breastplate = player.getInventory().getArmorStack(2);
-		ItemStack helmet = player.getInventory().getArmorStack(3);
-
-		return (!helmet.isEmpty() && !breastplate.isEmpty() && !leggings.isEmpty()) &&
-				hasCorrectSwimSet(player);
+		return hasSwimearBoots(player) && hasSwimearLeggings(player) && hasSwimwearBreastplate(player) && hasSwimearHelmet(player);
 	}
 
 	private void hasSwimwear(PlayerEntity player) {
@@ -69,7 +64,7 @@ public class SwimwearArmorItem extends ArmorItem {
 	}
 
 	private boolean hasCorrectSwimWear(ArmorMaterial material, PlayerEntity player) {
-		if (material.equals(MaterialsRegistry.BIKINI) || material.equals(MaterialsRegistry.TRUNKS) || material.equals(MaterialsRegistry.RING)) {
+		if (material.equals(MaterialsRegistry.BIKINI) || material.equals(MaterialsRegistry.TRUNKS)) {
 			int slot = 1;
 			if(!player.getInventory().getArmorStack(slot).isEmpty()) {
 				ArmorItem armor = (ArmorItem) player.getInventory().getArmorStack(slot).getItem();
@@ -77,7 +72,7 @@ public class SwimwearArmorItem extends ArmorItem {
 			}
 			return false;
 		}
-		if (material.equals(MaterialsRegistry.SWIM_WINGS)) {
+		if (material.equals(MaterialsRegistry.SWIM_WINGS) || material.equals(MaterialsRegistry.RING)) {
 			int slot = 2;
 			if(!player.getInventory().getArmorStack(slot).isEmpty()) {
 				ArmorItem armor = (ArmorItem) player.getInventory().getArmorStack(slot).getItem();
@@ -86,17 +81,6 @@ public class SwimwearArmorItem extends ArmorItem {
 			return false;
 		}
 		return false;
-	}
-
-	private boolean hasCorrectSwimSet(PlayerEntity player) {
-		//ArmorItem boots = ((ArmorItem)player.getInventory().getArmorStack(0).getItem());
-		ArmorItem leggings = ((ArmorItem)player.getInventory().getArmorStack(1).getItem());
-		ArmorItem breastplate = ((ArmorItem)player.getInventory().getArmorStack(2).getItem());
-		ArmorItem helmet = ((ArmorItem)player.getInventory().getArmorStack(3).getItem());
-
-		return (leggings.getMaterial() == MaterialsRegistry.TRUNKS || leggings.getMaterial() == MaterialsRegistry.TRUNKS) &&
-				(breastplate.getMaterial() == MaterialsRegistry.RING || breastplate.getMaterial() == MaterialsRegistry.SWIM_WINGS) &&
-				(helmet.getMaterial() == MaterialsRegistry.SUNGLASSES || helmet.getMaterial() == MaterialsRegistry.BEACH_HAT);
 	}
 
 	private void addStatusEffectForMaterial(PlayerEntity player, StatusEffectInstance mapStatusEffect) {
@@ -108,11 +92,55 @@ public class SwimwearArmorItem extends ArmorItem {
 		}
 	}
 
+	private boolean hasSwimearBoots(PlayerEntity player) {
+		return true;
+	}
+	private boolean isSwimwearBoots(ArmorItem armorItem) {
+		return true;
+	}
+
+	private boolean hasSwimearLeggings(PlayerEntity player) {
+		return !player.getInventory().getArmorStack(1).isEmpty() && isSwimwearLeggings((ArmorItem)player.getInventory().getArmorStack(1).getItem());
+	}
+	private boolean isSwimwearLeggings(ArmorItem armorItem) {
+		return armorItem.getMaterial() == MaterialsRegistry.TRUNKS || armorItem.getMaterial() == MaterialsRegistry.BIKINI;
+	}
+
+	private boolean hasSwimwearBreastplate(PlayerEntity player) {
+		return !player.getInventory().getArmorStack(2).isEmpty() && isSwimwearBreastplate((ArmorItem)player.getInventory().getArmorStack(2).getItem());
+	}
+	private boolean isSwimwearBreastplate(ArmorItem armorItem) {
+		return armorItem.getMaterial() == MaterialsRegistry.RING || armorItem.getMaterial() == MaterialsRegistry.SWIM_WINGS;
+	}
+
+	private boolean hasSwimearHelmet(PlayerEntity player) {
+		return !player.getInventory().getArmorStack(3).isEmpty() && isSwimwearHelmet((ArmorItem)player.getInventory().getArmorStack(3).getItem());
+	}
+	private boolean isSwimwearHelmet(ArmorItem armorItem) {
+		return armorItem.getMaterial() == MaterialsRegistry.BEACH_HAT || armorItem.getMaterial() == MaterialsRegistry.SUNGLASSES;
+	}
+
 	@Override
 	public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext context) {
 		super.appendTooltip(stack, world, tooltip, context);
 		tooltip.add(Text.translatable(  "tooltip.beachparty.swimwearline1").formatted(Formatting.DARK_PURPLE));
 		tooltip.add(Text.translatable(  "tooltip.beachparty.swimwearline2").formatted(Formatting.BLUE));
 
+		PlayerEntity player = MinecraftClient.getInstance().player;
+
+		boolean helmet = hasSwimearHelmet(player);
+		boolean breastplate = hasSwimwearBreastplate(player);
+		boolean leggings = hasSwimearLeggings(player);
+		boolean boots = hasSwimearBoots(player);
+
+		tooltip.add(Text.of("")); //TODO
+		tooltip.add(Text.of(Formatting.DARK_GREEN.toString() + Text.translatable("tooltip.beachparty.swimwear_set")));
+		tooltip.add(Text.of((helmet ? Formatting.GREEN.toString() : Formatting.GRAY.toString()) + "- [" + (Text.translatable("tooltip.beachparty.swimwearhelmet")) + "]"));
+		tooltip.add(Text.of((breastplate ? Formatting.GREEN.toString() : Formatting.GRAY.toString()) + "- [" + Text.translatable("tooltip.beachparty.swimwearbreastplate") + "]"));
+		tooltip.add(Text.of((leggings ? Formatting.GREEN.toString() : Formatting.GRAY.toString()) + "- [" + Text.translatable("tooltip.beachparty.swimwearleggings") + "]"));
+		tooltip.add(Text.of((boots ? Formatting.GREEN.toString() : Formatting.GRAY.toString()) + "- [" + Text.translatable("tooltip.beachparty.swimwearboots") + "]"));
+		tooltip.add(Text.of(""));
+		tooltip.add(Text.of(Formatting.GRAY.toString() + Text.translatable("tooltip.beachparty.swimwear_seteffect")));
+		tooltip.add(Text.of(((helmet && breastplate && leggings && boots) ? Formatting.DARK_GREEN.toString() : Formatting.GRAY.toString()) + Text.translatable("tooltip.beachparty.swimwear_effect")));
 	}
 }

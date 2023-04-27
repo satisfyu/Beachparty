@@ -13,7 +13,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class RecipeRegistry {
-
     private static final Map<Identifier, RecipeSerializer<?>> RECIPE_SERIALIZERS = new HashMap<>();
     private static final Map<Identifier, RecipeType<?>> RECIPE_TYPES = new HashMap<>();
     public static final RecipeType<TikiBarRecipe> TIKI_BAR_RECIPE_RECIPE_TYPE = create("tiki_bar_mixing");

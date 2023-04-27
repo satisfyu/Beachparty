@@ -8,7 +8,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.recipe.Recipe;
 import net.satisfyu.beachparty.client.recipebook.IRecipeBookGroup;
-import net.satisfyu.beachparty.recipe.TikiBarRecipe;
+import net.satisfyu.beachparty.recipe.MiniFridgeRecipe;
 
 import java.util.List;
 
@@ -27,18 +27,18 @@ public enum MiniFridgeRecipeBookGroup implements IRecipeBookGroup {
     }
 
     public boolean fitRecipe(Recipe<?> recipe) {
-        if (recipe instanceof TikiBarRecipe tikiBarRecipe) {
+        if (recipe instanceof MiniFridgeRecipe miniFridgeRecipe) {
             switch (this) {
                 case SEARCH -> {
                     return true;
                 }
                 case FRIDGE -> {
-                    if (tikiBarRecipe.getIngredients().stream().anyMatch((ingredient) -> ingredient.test(Blocks.ICE.asItem().getDefaultStack()))) {
+                    if (miniFridgeRecipe.getIngredients().stream().anyMatch((ingredient) -> ingredient.test(Blocks.ICE.asItem().getDefaultStack()))) {
                         return true;
                     }
                 }
                 case MISC -> {
-                    if (tikiBarRecipe.getIngredients().stream().noneMatch((ingredient) -> ingredient.test(Blocks.ICE.asItem().getDefaultStack()))) {
+                    if (miniFridgeRecipe.getIngredients().stream().noneMatch((ingredient) -> ingredient.test(Blocks.ICE.asItem().getDefaultStack()))) {
                         return true;
                     }
                 }

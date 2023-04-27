@@ -77,7 +77,7 @@ public class MiniFridgeRecipe implements Recipe<Inventory> {
             final var ingredients = BeachpartyUtil.deserializeIngredients(JsonHelper.getArray(json, "ingredients"));
             if (ingredients.isEmpty()) {
                 throw new JsonParseException("No ingredients for Mini Fridge Recipe");
-            } else if (ingredients.size() > 4) {
+            } else if (ingredients.size() > 2) {
                 throw new JsonParseException("Too many ingredients for Mini Fridge Recipe");
             } else {
                 return new MiniFridgeRecipe(id, ingredients, ShapedRecipe.outputFromJson(JsonHelper.getObject(json, "result")));
