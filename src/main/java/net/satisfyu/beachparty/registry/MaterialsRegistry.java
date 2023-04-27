@@ -18,7 +18,7 @@ public class MaterialsRegistry {
 
         @Override
         public int getProtectionAmount(EquipmentSlot slot) {
-            return slot == EquipmentSlot.LEGS ? 1 : 0;
+            return 1;
         }
 
         @Override
@@ -61,9 +61,8 @@ public class MaterialsRegistry {
 
         @Override
         public int getProtectionAmount(EquipmentSlot slot) {
-            return slot == EquipmentSlot.LEGS ? 1 : 0;
+            return 1;
         }
-
         @Override
         public int getEnchantability() {
             return ArmorMaterials.LEATHER.getEnchantability();
@@ -104,7 +103,7 @@ public class MaterialsRegistry {
 
         @Override
         public int getProtectionAmount(EquipmentSlot slot) {
-            return slot == EquipmentSlot.LEGS ? 1 : 0;
+            return 1;
         }
 
         @Override
@@ -147,9 +146,8 @@ public class MaterialsRegistry {
 
         @Override
         public int getProtectionAmount(EquipmentSlot slot) {
-            return slot == EquipmentSlot.HEAD ? 1 : 0;
+            return 1;
         }
-
         @Override
         public int getEnchantability() {
             return ArmorMaterials.LEATHER.getEnchantability();
@@ -190,9 +188,8 @@ public class MaterialsRegistry {
 
         @Override
         public int getProtectionAmount(EquipmentSlot slot) {
-            return slot == EquipmentSlot.HEAD ? 1 : 0;
+            return 1;
         }
-
         @Override
         public int getEnchantability() {
             return ArmorMaterials.LEATHER.getEnchantability();
@@ -233,9 +230,8 @@ public class MaterialsRegistry {
 
         @Override
         public int getProtectionAmount(EquipmentSlot slot) {
-            return slot == EquipmentSlot.HEAD ? 1 : 0;
+            return 1;
         }
-
         @Override
         public int getEnchantability() {
             return ArmorMaterials.LEATHER.getEnchantability();

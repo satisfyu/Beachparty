@@ -40,5 +40,25 @@
     "sounds": [
       "beachparty:ambient_beach"
     ]
+  },
+  "pelican_death": {
+    "subtitle": "beachparty.sound.pelican_death",
+    "sounds": [
+      "beachparty:pelican_death"
+    ]
+  },
+  "pelican_idle": {
+    "subtitle": "beachparty.sound.pelican_idle",
+    "sounds": [
+      "beachparty:pelican_idle_1",
+      "beachparty:pelican_idle_2"
+    ]
+  },
+  "pelican_hurt": {
+    "subtitle": "beachparty.sound.pelican_hurt",
+    "sounds": [
+      "beachparty:pelican_hurt_1",
+      "beachparty:pelican_hurt_2"
+    ]
   }
 }

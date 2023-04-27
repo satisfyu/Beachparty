@@ -96,6 +96,8 @@ public class ObjectRegistry {
     public static final Item ICECREAM_CACTUS = register("icecream_cactus", new Item(getSettings().food(FoodComponents.COOKIE)));
     public static final Item ICECREAM_SWEETBERRIES = register("icecream_sweetberries", new Item(getSettings().food(FoodComponents.COOKIE)));
     public static final Item ICECREAM_CHOCOLATE = register("icecream_chocolate", new Item(getSettings().food(FoodComponents.COOKIE)));
+    public static final Item RAW_PELICAN = register("raw_pelican", new Item(getSettings().food(FoodComponents.BEEF)));
+    public static final Item COOKED_PELICAN = register("cooked_pelican", new Item(getSettings().food(FoodComponents.COOKED_BEEF)));
     public static final Block BEACH_TOWEL = register("beach_towel", new BeachTowelBlock(FabricBlockSettings.copy(Blocks.WHITE_WOOL).sounds(BlockSoundGroup.WOOL)));
     public static final Item BEACH_HAT = register("beach_hat", new BeachHatItem(getSettings().rarity(Rarity.COMMON)));
     public static final Item SUNGLASSES = register("sunglasses", new SwimwearArmorItem(MaterialsRegistry.SUNGLASSES, EquipmentSlot.HEAD, getSettings()));
@@ -240,9 +242,31 @@ public class ObjectRegistry {
         flammableRegistry.add(DRIED_WHEAT_STAIRS, 2, 25);
         flammableRegistry.add(PALM_BEAM, 5, 20);
 
-
         FuelRegistry fuelRegistry = FuelRegistry.INSTANCE;
         fuelRegistry.add(PALM_FENCE, 300);
         fuelRegistry.add(PALM_FENCE_GATE, 300);
+        fuelRegistry.add(PALM_PLANKS, 300);
+        fuelRegistry.add(PALM_LOG, 300);
+        fuelRegistry.add(PALM_WOOD, 300);
+        fuelRegistry.add(STRIPPED_PALM_LOG, 300);
+        fuelRegistry.add(STRIPPED_PALM_WOOD, 300);
+
+        registerCompostableItem(ObjectRegistry.DRY_BUSH, 0.4F);
+        registerCompostableItem(ObjectRegistry.DRY_BUSH_TALL, 0.4F);
+        registerCompostableItem(ObjectRegistry.PALM_LEAVES, 0.6F);
+        registerCompostableItem(ObjectRegistry.PALM_SAPLING, 0.4F);
+        registerCompostableItem(ObjectRegistry.BEACH_GRASS, 0.4F);
+        registerCompostableItem(ObjectRegistry.COCONUT, 0.3F);
+        registerCompostableItem(ObjectRegistry.COCONUT_OPEN, 0.3F);
+
+
+
+    }
+
+    public static void registerCompostableItem(ItemConvertible item, float chance) {
+        if (item.asItem() != Items.AIR) {
+            ComposterBlock.ITEM_TO_LEVEL_INCREASE_CHANCE.put(item.asItem(), chance);
+        }
     }
 }
+

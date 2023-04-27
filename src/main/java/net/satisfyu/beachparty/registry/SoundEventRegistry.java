@@ -16,6 +16,10 @@ public class SoundEventRegistry {
     public static final SoundEvent RADIO_TROPICAL = registerSoundEvent("radio_tropical");
     public static final SoundEvent RADIO_BEACHPARTY = registerSoundEvent("radio_beachparty");
     public static final SoundEvent AMBIENT_BEACH = registerSoundEvent("ambient_beach");
+    public static final SoundEvent PELICAN_HURT = registerSoundEvent("pelican_hurt");
+    public static final SoundEvent PELICAN_IDLE = registerSoundEvent("pelican_idle");
+    public static final SoundEvent PELICAN_DEATH = registerSoundEvent("pelican_death");
+
 
     public static final List<SoundEvent> RADIO_SOUNDS = List.of(RADIO_REGGEA, RADIO_HAWAII, RADIO_TROPICAL, RADIO_BEACHPARTY);
 

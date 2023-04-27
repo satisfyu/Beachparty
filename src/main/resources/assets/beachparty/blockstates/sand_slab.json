@@ -4,7 +4,7 @@
             "model": "beachparty:block/beach_sand_slab"
         },
         "type=double": {
-            "model": "minecraft:sand"
+            "model": "beachparty:block/beach_sand"
         },
         "type=top": {
             "model": "beachparty:block/beach_sand_slab_top"

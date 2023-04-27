@@ -80,6 +80,8 @@
   "item.beachparty.sunglasses": "Sunglasses",
   "item.beachparty.swim_wings": "Swim Wings",
   "item.beachparty.trunks": "Swimming Trunks",
+  "item.beachparty.raw_pelican": "Raw Pelican",
+  "item.beachparty.cooked_pelican": "Cooked Pelican",
   "itemGroup.beachparty.creative_tab": "Beachparty",
   "tooltip.beachparty.bucket.canbeplaced": "Shift-Right-Click to Place",
   "tooltip.beachparty.bucket.use": "Used to build Sand Castles",
@@ -89,5 +91,8 @@
   "tooltip.beachparty.tiki": "Used for mixing Cocktails and Drinks",
   "tooltip.beachparty.radioturnon": "Right-Click to turn it on/off",
   "tooltip.beachparty.radioswitch": "Mousewheel-Up/Down to switch Radio Stations",
-  "tooltip.beachparty.message": "Right-Click to Open"
+  "tooltip.beachparty.message": "Right-Click to Open",
+  "tooltip.beachparty.swimwearline1": "When Wearing:",
+  "tooltip.beachparty.swimwearline2": "+17% Swim Speed"
+
 }

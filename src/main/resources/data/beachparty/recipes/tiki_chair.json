@@ -7,17 +7,17 @@
     ],
     "key": {
         "#": {
-            "item": "minecraft:white_wool"
+            "tag": "minecraft:wool"
         },
         "/": {
             "item": "minecraft:stick"
         },
         "O": {
-            "item": "minecraft:oak_planks"
+            "item": "beachparty:palm_planks"
         }
     },
     "result": {
-        "item": "minecraft:oak_planks",
-        "count": 1
+        "item": "beachparty:tiki_chair",
+        "count": 2
     }
 }

@@ -15,11 +15,10 @@
     },
     "pattern": [
         "X",
-        "#",
         "#"
     ],
     "result": {
         "count": 4,
-        "item": "beachparty:palm_tall_torch"
+        "item": "beachparty:palm_torch_item"
     }
 }

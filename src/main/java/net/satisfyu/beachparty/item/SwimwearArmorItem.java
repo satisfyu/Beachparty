@@ -1,6 +1,7 @@
 package net.satisfyu.beachparty.item;
 
 import com.google.common.collect.ImmutableMap;
+import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.effect.StatusEffectInstance;
@@ -9,9 +10,12 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ArmorMaterial;
 import net.minecraft.item.ItemStack;
+import net.minecraft.text.Text;
+import net.minecraft.util.Formatting;
 import net.minecraft.world.World;
 import net.satisfyu.beachparty.registry.MaterialsRegistry;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
@@ -104,5 +108,11 @@ public class SwimwearArmorItem extends ArmorItem {
 		}
 	}
 
+	@Override
+	public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext context) {
+		super.appendTooltip(stack, world, tooltip, context);
+		tooltip.add(Text.translatable(  "tooltip.beachparty.swimwearline1").formatted(Formatting.DARK_PURPLE));
+		tooltip.add(Text.translatable(  "tooltip.beachparty.swimwearline2").formatted(Formatting.BLUE));
 
+	}
 }

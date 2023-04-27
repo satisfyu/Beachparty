@@ -10,14 +10,14 @@
             "item": "minecraft:stick"
         },
         "W": {
-            "item": "minecraft:white_wool"
+            "tag": "minecraft:wool"
         },
         "O": {
-            "item": "minecraft:oak_planks"
+            "item": "beachparty:palm_planks"
         }
     },
     "result": {
-        "item": "minecraft:oak_planks",
-        "count": 1
+        "item": "beachparty:beach_chair",
+        "count": 2
     }
 }

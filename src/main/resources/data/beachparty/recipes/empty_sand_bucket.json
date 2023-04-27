@@ -13,7 +13,7 @@
         }
     },
     "result": {
-        "item": "minecraft:oak_planks",
+        "item": "beachparty:empty_sand_bucket",
         "count": 1
     }
 }

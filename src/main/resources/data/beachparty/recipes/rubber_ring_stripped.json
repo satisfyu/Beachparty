@@ -1,20 +1,18 @@
 {
     "type": "minecraft:crafting_shaped",
     "pattern": [
-        "###",
-        "#P#",
-        "###"
+        "#P"
     ],
     "key": {
         "#": {
-            "item": "minecraft:dried_kelp"
+            "item": "beachparty:rubber_ring_pink"
         },
         "P": {
-            "item": "minecraft:pink_dye"
+            "item": "beachparty:rubber_ring_blue"
         }
     },
     "result": {
-        "item": "minecraft:oak_planks",
+        "item": "beachparty:rubber_ring_stripped",
         "count": 1
     }
 }

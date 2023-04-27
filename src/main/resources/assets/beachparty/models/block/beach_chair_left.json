@@ -19,7 +19,8 @@
 		"19": "beachparty:block/beach_chair_front_02",
 		"20": "beachparty:block/beach_chair_front_03",
 		"21": "beachparty:block/beach_chair_side_06",
-		"22": "beachparty:block/beach_chair_bottom_04"
+		"22": "beachparty:block/beach_chair_bottom_04",
+		"particle": "beachparty:block/beach_chair_side_05"
 	},
 	"elements": [
 		{
