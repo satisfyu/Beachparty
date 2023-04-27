@@ -34,9 +34,27 @@ public class MiniFridgeGuiHandler extends AbstractRecipeBookGUIScreenHandler  {
         addProperties(this.delegate);
     }
 
+    public int getShakeXProgress() {
+        int progress = this.propertyDelegate.get(0);
+        int totalProgress = this.propertyDelegate.get(1);
+        if (totalProgress == 0 || progress == 0) {
+            return 0;
+        }
+        return progress * 22 / totalProgress + 1;
+    }
+
+    public int getShakeYProgress() {
+        final int progress = this.propertyDelegate.get(0);
+        final int totalProgress = this.propertyDelegate.get(1);
+        if (totalProgress == 0 || progress == 0) {
+            return 0;
+        }
+        return progress * 19 / totalProgress + 1;
+    }
+
     private void buildBlockEntityContainer(PlayerInventory playerInventory, Inventory inventory) {
         // Output
-        this.addSlot(new TikiBarOutputSlot(playerInventory.player, inventory, 0, 128,  35));
+        this.addSlot(new TikiBarOutputSlot(playerInventory.player, inventory, 0, 128,  42));
         // Inputs
         this.addSlot(new Slot(inventory, 1, 46, 27));
         this.addSlot(new IceSlot(inventory, 2, 59, 43));

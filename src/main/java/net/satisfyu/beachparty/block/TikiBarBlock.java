@@ -4,12 +4,15 @@ import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
+import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemPlacementContext;
+import net.minecraft.item.ItemStack;
 import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.DirectionProperty;
 import net.minecraft.state.property.Properties;
+import net.minecraft.text.Text;
 import net.minecraft.util.*;
 import net.minecraft.util.function.BooleanBiFunction;
 import net.minecraft.util.hit.BlockHitResult;
@@ -21,9 +24,11 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.satisfyu.beachparty.entity.TikiBarBlockEntity;
 import net.satisfyu.beachparty.util.BeachpartyUtil;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.function.Supplier;
 
@@ -121,5 +126,10 @@ public class TikiBarBlock extends BlockWithEntity implements BlockEntityProvider
                 ((BlockEntityTicker) blockEntity).tick(theWorld, pos, theState, blockEntity);
             }
         };
+    }
+
+    @Override
+    public void appendTooltip(ItemStack itemStack, BlockView world, List<Text> tooltip, TooltipContext tooltipContext) {
+        tooltip.add(Text.translatable("tooltip.beachparty.tiki").formatted(Formatting.ITALIC, Formatting.GRAY));
     }
 }

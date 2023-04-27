@@ -2,6 +2,7 @@ package net.satisfyu.beachparty.block;
 
 import net.minecraft.block.*;
 import net.minecraft.block.enums.BedPart;
+import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemPlacementContext;
@@ -10,7 +11,9 @@ import net.minecraft.state.StateManager;
 import net.minecraft.state.property.DirectionProperty;
 import net.minecraft.state.property.EnumProperty;
 import net.minecraft.state.property.Properties;
+import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
+import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Util;
 import net.minecraft.util.hit.BlockHitResult;
@@ -27,6 +30,7 @@ import net.satisfyu.beachparty.util.BeachpartyUtil;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.function.Supplier;
 
@@ -128,5 +132,9 @@ public class BeachTowelBlock extends HorizontalFacingBlock {
 					world.syncWorldEvent(player, WorldEvents.BLOCK_BROKEN, blockPos, Block.getRawIdFromState(blockState));
 			}
 		}
+	}
+	@Override
+	public void appendTooltip(ItemStack itemStack, BlockView world, List<Text> tooltip, TooltipContext tooltipContext) {
+		tooltip.add(Text.translatable("tooltip.beachparty.canbeplaced").formatted(Formatting.ITALIC, Formatting.GRAY));
 	}
 }

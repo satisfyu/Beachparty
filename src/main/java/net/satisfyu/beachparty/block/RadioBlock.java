@@ -18,6 +18,7 @@ import net.minecraft.state.property.DirectionProperty;
 import net.minecraft.state.property.IntProperty;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
+import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Util;
 import net.minecraft.util.hit.BlockHitResult;
@@ -192,8 +193,10 @@ public class RadioBlock extends Block {
     }
 
     @Override
-    public void appendTooltip(ItemStack stack, @Nullable BlockView world, List<Text> tooltip, TooltipContext options) {
-        super.appendTooltip(stack, world, tooltip, options);
+    public void appendTooltip(ItemStack itemStack, BlockView world, List<Text> tooltip, TooltipContext tooltipContext) {
+        tooltip.add(Text.translatable("tooltip.beachparty.canbeplaced").formatted(Formatting.ITALIC, Formatting.GRAY));
+        tooltip.add(Text.translatable("tooltip.beachparty.radioturnon").formatted(Formatting.WHITE));
+        tooltip.add(Text.translatable("tooltip.beachparty.radioswitch").formatted(Formatting.WHITE));
     }
 
     static {
@@ -201,4 +204,5 @@ public class RadioBlock extends Block {
         CHANNEL = IntProperty.of("channel", 0, CHANNELS - 1);
         SEARCHING = BooleanProperty.of("searching");
     }
+
 }

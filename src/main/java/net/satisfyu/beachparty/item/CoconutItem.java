@@ -1,16 +1,23 @@
 package net.satisfyu.beachparty.item;
 
 import net.minecraft.block.Block;
+import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.stat.Stats;
+import net.minecraft.text.Text;
+import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
 import net.satisfyu.beachparty.entity.CoconutEntity;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
 
 public class CoconutItem extends BlockItem {
     public CoconutItem(Block block, Settings settings) {
@@ -35,5 +42,9 @@ public class CoconutItem extends BlockItem {
 
         return TypedActionResult.success(itemStack, world.isClient());
     }
-    //TODO COCONUT essbar
+
+    @Override
+    public void appendTooltip(ItemStack stack, @Nullable World world, @NotNull List<Text> tooltip, TooltipContext context) {
+        tooltip.add(Text.translatable(  "tooltip.beachparty.coconut").formatted(Formatting.ITALIC, Formatting.GRAY));
+    }
 }

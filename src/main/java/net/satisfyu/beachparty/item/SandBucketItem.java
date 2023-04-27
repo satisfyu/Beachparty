@@ -1,6 +1,7 @@
 package net.satisfyu.beachparty.item;
 
 import net.minecraft.block.Block;
+import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.*;
@@ -8,7 +9,9 @@ import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.tag.BlockTags;
+import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
+import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.hit.BlockHitResult;
@@ -20,7 +23,10 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.event.GameEvent;
 import net.satisfyu.beachparty.registry.ObjectRegistry;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
 
 public class SandBucketItem extends BlockItem {
     public SandBucketItem(Block block, Settings settings) {
@@ -101,5 +107,11 @@ public class SandBucketItem extends BlockItem {
         SoundEvent soundEvent = SoundEvents.ITEM_BUCKET_EMPTY;
         world.playSound(player, pos, soundEvent, SoundCategory.BLOCKS, 1.0F, 1.0F);
         world.emitGameEvent(player, GameEvent.BLOCK_PLACE, pos);
+    }
+    @Override
+    public void appendTooltip(ItemStack stack, @Nullable World world, @NotNull List<Text> tooltip, TooltipContext context) {
+        tooltip.add(Text.translatable(  "tooltip.beachparty.bucket.use").formatted(Formatting.WHITE));
+        tooltip.add(Text.translatable(  "tooltip.beachparty.bucket.canbeplaced").formatted(Formatting.ITALIC, Formatting.GRAY));
+
     }
 }

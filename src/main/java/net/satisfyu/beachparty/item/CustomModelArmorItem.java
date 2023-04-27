@@ -13,4 +13,6 @@ public abstract class CustomModelArmorItem extends ArmorItem {
     public abstract Identifier getTexture();
 
     public abstract Float getOffset();
+
+
 }

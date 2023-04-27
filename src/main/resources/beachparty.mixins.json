@@ -12,7 +12,8 @@
     "ArmorFeatureRendererMixin",
     "ArmorStandRendererMixin",
     "MouseMixin",
-    "PlayerEntityRendererMixin"
+    "PlayerEntityRendererMixin",
+    "HereBeNoDragonsMixin"
   ],
   "injectors": {
     "defaultRequire": 1

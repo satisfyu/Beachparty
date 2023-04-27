@@ -13,6 +13,14 @@ public class TikiBarGui extends AbstractRecipeBookGUIScreen<TikiBarGuiHandler> {
         super(handler, inventory, title, new TikiBarRecipeBook(), new BeachpartyIdentifier("textures/gui/tiki_bar_gui.png"));
     }
 
+    @Override
+    protected void init() {
+        this.titleX += 2;
+        this.titleY += -3;
+        super.init();
+    }
+
+
     protected void renderProgressArrow(MatrixStack matrices) {
         final int progressX = this.handler.getShakeXProgress();
         this.drawTexture(matrices, x + 94, y + 45, 177, 26, progressX, 10);

@@ -98,7 +98,7 @@ public class DrinkBlockItem extends BlockItem {
         }
         
         tooltip.add(Text.empty());
-        tooltip.add(Text.translatable("tooltip.beachparty.canbeplaced").formatted(Formatting.GRAY));
+        tooltip.add(Text.translatable("tooltip.beachparty.canbeplaced").formatted(Formatting.ITALIC, Formatting.GRAY));
     }
 
 }
