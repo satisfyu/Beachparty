@@ -2,20 +2,22 @@ package net.satisfyu.beachparty.block;
 
 import net.minecraft.block.*;
 import net.minecraft.block.enums.SlabType;
+import net.minecraft.entity.FallingBlockEntity;
 import net.minecraft.entity.ai.pathing.NavigationType;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.EnumProperty;
 import net.minecraft.state.property.Properties;
-import net.minecraft.state.property.Property;
 import net.minecraft.tag.FluidTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
@@ -30,7 +32,7 @@ public class SandSlabBlock extends FallingBlock implements Waterloggable {
 
     public SandSlabBlock(AbstractBlock.Settings settings) {
         super(settings);
-        this.setDefaultState((BlockState)((BlockState)this.getDefaultState().with(TYPE, SlabType.BOTTOM)).with(WATERLOGGED, false));
+        this.setDefaultState(this.getDefaultState().with(TYPE, SlabType.BOTTOM).with(WATERLOGGED, false));
     }
 
     public boolean hasSidedTransparency(BlockState state) {
@@ -38,11 +40,11 @@ public class SandSlabBlock extends FallingBlock implements Waterloggable {
     }
 
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
-        builder.add(new Property[]{TYPE, WATERLOGGED});
+        builder.add(TYPE, WATERLOGGED);
     }
 
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-        SlabType slabType = (SlabType)state.get(TYPE);
+        SlabType slabType = state.get(TYPE);
         switch (slabType) {
             case DOUBLE:
                 return VoxelShapes.fullCube();
@@ -61,15 +63,13 @@ public class SandSlabBlock extends FallingBlock implements Waterloggable {
             return blockState.with(TYPE, SlabType.DOUBLE).with(WATERLOGGED, false);
         } else {
             FluidState fluidState = ctx.getWorld().getFluidState(blockPos);
-            BlockState blockState2 = this.getDefaultState().with(TYPE, SlabType.BOTTOM).with(WATERLOGGED, fluidState.getFluid() == Fluids.WATER);
-            Direction direction = ctx.getSide();
-            return direction != Direction.DOWN && (direction == Direction.UP || !(ctx.getHitPos().y - (double)blockPos.getY() > 0.5)) ? blockState2 : (BlockState)blockState2.with(TYPE, SlabType.TOP);
+            return this.getDefaultState().with(TYPE, SlabType.BOTTOM).with(WATERLOGGED, fluidState.getFluid() == Fluids.WATER);
         }
     }
 
     public boolean canReplace(BlockState state, ItemPlacementContext context) {
         ItemStack itemStack = context.getStack();
-        SlabType slabType = (SlabType)state.get(TYPE);
+        SlabType slabType = state.get(TYPE);
         if (slabType != SlabType.DOUBLE && itemStack.isOf(this.asItem())) {
             if (context.canReplaceExisting()) {
                 boolean bl = context.getHitPos().y - (double)context.getBlockPos().getY() > 0.5;
@@ -88,36 +88,37 @@ public class SandSlabBlock extends FallingBlock implements Waterloggable {
     }
 
     public FluidState getFluidState(BlockState state) {
-        return (Boolean)state.get(WATERLOGGED) ? Fluids.WATER.getStill(false) : super.getFluidState(state);
+        return state.get(WATERLOGGED) ? Fluids.WATER.getStill(false) : super.getFluidState(state);
     }
 
     public boolean tryFillWithFluid(WorldAccess world, BlockPos pos, BlockState state, FluidState fluidState) {
-        return state.get(TYPE) != SlabType.DOUBLE ? Waterloggable.super.tryFillWithFluid(world, pos, state, fluidState) : false;
+        return state.get(TYPE) != SlabType.DOUBLE && Waterloggable.super.tryFillWithFluid(world, pos, state, fluidState);
     }
 
     public boolean canFillWithFluid(BlockView world, BlockPos pos, BlockState state, Fluid fluid) {
-        return state.get(TYPE) != SlabType.DOUBLE ? Waterloggable.super.canFillWithFluid(world, pos, state, fluid) : false;
+        return state.get(TYPE) != SlabType.DOUBLE && Waterloggable.super.canFillWithFluid(world, pos, state, fluid);
     }
 
     public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
-        if ((Boolean)state.get(WATERLOGGED)) {
+        if (state.get(WATERLOGGED)) {
             world.createAndScheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
         }
 
         return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
     }
 
-    public boolean canPathfindThrough(BlockState state, BlockView world, BlockPos pos, NavigationType type) {
-        switch (type) {
-            case LAND:
-                return false;
-            case WATER:
-                return world.getFluidState(pos).isIn(FluidTags.WATER);
-            case AIR:
-                return false;
-            default:
-                return false;
+    public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
+        if (canFallThrough(world.getBlockState(pos.down())) && pos.getY() >= world.getBottomY()) {
+            FallingBlockEntity fallingBlockEntity = FallingBlockEntity.spawnFromBlock(world, pos, state.get(TYPE) == SlabType.TOP ? state.with(TYPE, SlabType.BOTTOM) : state);
+            this.configureFallingBlockEntity(fallingBlockEntity);
         }
+    }
+
+    public boolean canPathfindThrough(BlockState state, BlockView world, BlockPos pos, NavigationType type) {
+        return switch (type) {
+            case LAND, AIR -> false;
+            case WATER -> world.getFluidState(pos).isIn(FluidTags.WATER);
+        };
     }
 
     static {

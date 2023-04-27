@@ -35,6 +35,12 @@
       "beachparty:radio_beachparty"
     ]
   },
+  "pool_noodle": {
+    "subtitle": "beachparty.sound.pool_noodle",
+    "sounds": [
+      "beachparty:pool_noodle"
+    ]
+  },
   "ambient_beach": {
     "subtitle": "beachparty.sound.ambient_beach",
     "sounds": [

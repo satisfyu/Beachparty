@@ -80,7 +80,7 @@ public class ObjectRegistry {
     public static final Item OVERGROWN_DISC = register("overgrown_disc", new MusicDiscItem(1, SoundEventRegistry.RADIO_BEACHPARTY, getSettings(), 214));
     public static final Block MESSAGE_IN_A_BOTTLE = register("message_in_a_bottle", new ShapeBlock(FabricBlockSettings.copy(Blocks.GLASS), Block.createCuboidShape(4.0f, 0.0f, 4.0f, 12.0f, 6.0f, 12.0f)));
     public static final Block EMPTY_SAND_BUCKET_BLOCK = register("empty_sand_bucket_block", new SandBucketBlock(FabricBlockSettings.of(Material.SOIL)), false);
-    public static final Item SAND_BUCKET = register("sand_bucket", new SandBucketItem(SAND_BUCKET_BLOCK, getSettings().maxCount(1)));
+    public static final Item SAND_BUCKET = register("sand_bucket", new SandBucketItem(SAND_BUCKET_BLOCK, getSettingsWithoutTab().maxCount(1)));
     public static final Item EMPTY_SAND_BUCKET = register("empty_sand_bucket", new SandBucketItem(EMPTY_SAND_BUCKET_BLOCK, getSettings()));
     public static final Block COCONUT_BLOCK = register("coconut_block", new CoconutBlock(FabricBlockSettings.of(Material.BAMBOO)), false);
     public static final Item COCONUT = register("coconut", new CoconutItem(COCONUT_BLOCK, getSettings()));
@@ -109,7 +109,7 @@ public class ObjectRegistry {
     public static final Item RUBBER_RING_STRIPPED = register("rubber_ring_stripped", new BetterCustomArmorModelItem(EquipmentSlot.CHEST, getSettings().rarity(Rarity.COMMON), new BeachpartyIdentifier("textures/entity/rubber_ring_stripped.png"), -0.7f));
     public static final Item RUBBER_RING_PELICAN = register("rubber_ring_pelican", new BetterCustomArmorModelItem(EquipmentSlot.CHEST, getSettings().rarity(Rarity.RARE), new BeachpartyIdentifier("textures/entity/rubber_ring_pelican.png"), -0.7f));
     public static final Item RUBBER_RING_AXOLOTL = register("rubber_ring_axolotl", new BetterCustomArmorModelItem(EquipmentSlot.CHEST, getSettings().rarity(Rarity.RARE), new BeachpartyIdentifier("textures/entity/rubber_ring_axolotl.png"), -0.7f));
-    public static final Item POOL_NOODLE_BLUE = register("pool_noodle_blue", new SwordItem(ToolMaterials.WOOD, 1, -1.4F, getSettings()));
+    public static final Item POOL_NOODLE_BLUE = register("pool_noodle_blue", new PoolnoodleItem(ToolMaterials.WOOD, 1, -1.4F, getSettings()));
     public static final Item POOL_NOODLE_RED = register("pool_noodle_red", new SwordItem(ToolMaterials.WOOD, 1, -1.4F, getSettings()));
     public static final Item POOL_NOODLE_GREEN = register("pool_noodle_green", new SwordItem(ToolMaterials.WOOD, 1, -1.4F, getSettings()));
     public static final Item POOL_NOODLE_YELLOW = register("pool_noodle_yellow", new SwordItem(ToolMaterials.WOOD, 1, -1.4F, getSettings()));
@@ -161,6 +161,12 @@ public class ObjectRegistry {
         return settings;
     }
 
+    private static Item.Settings getSettingsWithoutTab(Consumer<Item.Settings> consumer) {
+        Item.Settings settings = new Item.Settings();
+        consumer.accept(settings);
+        return settings;
+    }
+
 
     private static <T extends Block> T registerCocktail(String path, T block, StatusEffect effect) {
         return register(path, block, true, DrinkBlockItem::new, settings -> settings.food(wineFoodComponent(effect)));
@@ -177,10 +183,13 @@ public class ObjectRegistry {
         return AbstractBlock.Settings.copy(Blocks.GLASS).nonOpaque().breakInstantly();
     }
 
-
-
     private static Item.Settings getSettings() {
         return getSettings(settings -> {
+        });
+    }
+
+    private static Item.Settings getSettingsWithoutTab() {
+        return getSettingsWithoutTab(settings -> {
         });
     }
 

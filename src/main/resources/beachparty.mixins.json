@@ -11,9 +11,9 @@
   "client": [
     "ArmorFeatureRendererMixin",
     "ArmorStandRendererMixin",
+    "HereBeNoDragonsMixin",
     "MouseMixin",
-    "PlayerEntityRendererMixin",
-    "HereBeNoDragonsMixin"
+    "PlayerEntityRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1
