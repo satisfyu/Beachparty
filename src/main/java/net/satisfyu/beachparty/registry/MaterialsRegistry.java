@@ -262,5 +262,47 @@ public class MaterialsRegistry {
             return ArmorMaterials.LEATHER.getKnockbackResistance();
         }
     };
+
+    public static final ArmorMaterial CROCS = new ArmorMaterial() {
+
+        @Override
+        public int getDurability(EquipmentSlot slot) {
+            return ArmorMaterials.LEATHER.getDurability(slot);
+        }
+
+        @Override
+        public int getProtectionAmount(EquipmentSlot slot) {
+            return 1;
+        }
+        @Override
+        public int getEnchantability() {
+            return ArmorMaterials.LEATHER.getEnchantability();
+        }
+
+        @Override
+        public SoundEvent getEquipSound() {
+            return ArmorMaterials.LEATHER.getEquipSound();
+        }
+
+        @Override
+        public Ingredient getRepairIngredient() {
+            return Ingredient.ofItems(Items.DRIED_KELP);
+        }
+
+        @Override
+        public String getName() {
+            return "crocs";
+        }
+
+        @Override
+        public float getToughness() {
+            return ArmorMaterials.LEATHER.getToughness();
+        }
+
+        @Override
+        public float getKnockbackResistance() {
+            return ArmorMaterials.LEATHER.getKnockbackResistance();
+        }
+    };
 }
 

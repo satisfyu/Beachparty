@@ -54,7 +54,7 @@ public class BeachPartyClient implements ClientModInitializer {
                 ObjectRegistry.DRY_BUSH, ObjectRegistry.DRY_BUSH_TALL, ObjectRegistry.MELON_COCKTAIL, ObjectRegistry.COCONUT_COCKTAIL,
                 ObjectRegistry.HONEY_COCKTAIL, ObjectRegistry.SWEETBERRIES_COCKTAIL, ObjectRegistry.PUMPKIN_COCKTAIL,
                 ObjectRegistry.COCOA_COCKTAIL, ObjectRegistry.SANDCASTLE, ObjectRegistry.BEACH_GRASS, ObjectRegistry.MESSAGE_IN_A_BOTTLE,
-                ObjectRegistry.BEACH_TOWEL
+                ObjectRegistry.BEACH_TOWEL, ObjectRegistry.DECK_CHAIR
         );
 
         RenderRegistry.registerModels();

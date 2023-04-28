@@ -9,7 +9,7 @@ import java.util.List;
 
 public class BeachpartyAdvancementRecipeGenerator {
 
-    public static String FOLDER = "/Users/marco/Desktop/Neuer Ordner/";
+    public static String FOLDER = "/Users/marco/git/Beachparty/src/main/resources/data/beachparty";
 
     public static void main(String[] args) {
         List<String> putRecipesHere = List.of(
@@ -17,6 +17,7 @@ public class BeachpartyAdvancementRecipeGenerator {
                 "palm_planks/lounge_chair",
                 "palm_planks/chair",
                 "palm_planks/table",
+                "palm_planks/cabinet",
                 "palm_planks/beach_chair",
                 "palm_planks/tiki_chair",
                 "palm_planks/palm_slab",
@@ -41,6 +42,7 @@ public class BeachpartyAdvancementRecipeGenerator {
                 "minecraft:glass_pane/sunglasses",
                 "minecraft:string/bikini",
                 "minecraft:string:trunks",
+                "minecraft:dried_kelp:crocs",
                 "minecraft:dried_kelp:swim_wings",
                 "minecraft:dried_kelp:rubber_ring_blue",
                 "minecraft:dried_kelp:rubber_ring_pink",
@@ -49,7 +51,8 @@ public class BeachpartyAdvancementRecipeGenerator {
                 "minecraft:dried_kelp:pool_noodle_pink",
                 "minecraft:dried_kelp:pool_noodle_green",
                 "minecraft:dried_kelp:pool_noodle_red",
-                "raw_pelican:cooked_pelican"
+                "raw_pelican:cooked_pelican",
+                "raw_mussel_meat:cooked_mussel_meat"
 
 
 
