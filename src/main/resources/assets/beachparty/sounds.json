@@ -66,5 +66,17 @@
       "beachparty:pelican_hurt_1",
       "beachparty:pelican_hurt_2"
     ]
+  },
+  "cabinet_open": {
+    "subtitle": "beachparty.sound.cabinet_open",
+    "sounds": [
+      "beachparty:cabinet_open"
+    ]
+  },
+  "cabinet_close": {
+    "subtitle": "beachparty.sound.cabinet_close",
+    "sounds": [
+      "beachparty:cabinet_close"
+    ]
   }
 }

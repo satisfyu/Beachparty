@@ -53,6 +53,7 @@ public class BeachpartyLoottableGenerator extends FabricBlockLootTableProvider {
         this.addDrop(ObjectRegistry.PALM_WALL_TORCH);
         this.addDrop(ObjectRegistry.PALM_TALL_TORCH);
         this.addDrop(ObjectRegistry.RADIO);
+        this.addDrop(ObjectRegistry.CABINET);
         this.addDrop(ObjectRegistry.MINI_FRIDGE);
         this.addDrop(ObjectRegistry.SAND_BUCKET_BLOCK);
         this.addDrop(ObjectRegistry.EMPTY_SAND_BUCKET_BLOCK);

@@ -10,6 +10,7 @@ import net.minecraft.loot.LootPool;
 import net.minecraft.loot.LootTables;
 import net.minecraft.loot.entry.LootTableEntry;
 import net.minecraft.util.Identifier;
+import net.satisfyu.beachparty.entity.villager.Villagers;
 import net.satisfyu.beachparty.registry.*;
 import net.satisfyu.beachparty.registry.SoundEventRegistry;
 import org.apache.logging.log4j.LogManager;
@@ -30,6 +31,7 @@ public class Beachparty implements ModInitializer {
         RecipeRegistry.init();
         SoundEventRegistry.init();
         ScreenHandlerTypesRegistry.init();
+        Villagers.init();
 
 
         registerCompostables();

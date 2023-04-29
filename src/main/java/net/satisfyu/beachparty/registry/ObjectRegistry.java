@@ -3,6 +3,7 @@ package net.satisfyu.beachparty.registry;
 import com.terraformersmc.terraform.sign.block.TerraformSignBlock;
 import com.terraformersmc.terraform.sign.block.TerraformWallSignBlock;
 import com.terraformersmc.terraform.wood.block.StrippableLogBlock;
+import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
@@ -68,8 +69,10 @@ public class ObjectRegistry {
     public static final Block CHAIR = register("chair", new ChairBlock(FabricBlockSettings.of(Material.WOOD).strength(2.0f, 3.0f).sounds(BlockSoundGroup.BAMBOO)));
     public static final Block TABLE = register("table", new TableBlock(FabricBlockSettings.copy(Blocks.OAK_PLANKS).sounds(BlockSoundGroup.BAMBOO)));
     public static final Block BEACH_CHAIR = register("beach_chair", new BeachChairBlock(FabricBlockSettings.copy(Blocks.OAK_PLANKS).sounds(BlockSoundGroup.BAMBOO)));
+    public static final Block DECK_CHAIR = register("deck_chair", new BeachChairBlock(FabricBlockSettings.copy(Blocks.OAK_PLANKS).sounds(BlockSoundGroup.BAMBOO)));
     public static final Block TIKI_CHAIR = register("tiki_chair", new TikiChairBlock(FabricBlockSettings.copy(Blocks.OAK_PLANKS).sounds(BlockSoundGroup.BAMBOO)));
     public static final Block TIKI_BAR = register("tiki_bar", new TikiBarBlock(FabricBlockSettings.copy(Blocks.OAK_PLANKS).sounds(BlockSoundGroup.BAMBOO)));
+    public static final Block CABINET = register("cabinet", new CabinetBlock(FabricBlockSettings.of(Material.WOOD).strength(2.0F, 3.0F).sounds(BlockSoundGroup.BAMBOO), SoundEventRegistry.CABINET_OPEN, SoundEventRegistry.CABINET_CLOSE));
     private static final BeachpartyIdentifier PALM_SIGN_TEXTURE = new BeachpartyIdentifier("entity/signs/palm");
     public static final TerraformSignBlock PALM_SIGN = register("palm_sign", new TerraformSignBlock(PALM_SIGN_TEXTURE, AbstractBlock.Settings.copy(Blocks.OAK_SIGN)), false);
     public static final Block PALM_WALL_SIGN = register("palm_wall_sign", new TerraformWallSignBlock(PALM_SIGN_TEXTURE, AbstractBlock.Settings.copy(Blocks.OAK_WALL_SIGN)), false);
@@ -78,7 +81,9 @@ public class ObjectRegistry {
     public static final Block RADIO = register("radio", new RadioBlock(FabricBlockSettings.copy(Blocks.OAK_PLANKS).sounds(BlockSoundGroup.BAMBOO)));
     public static final Block SAND_BUCKET_BLOCK = register("sand_bucket_block", new SandBucketBlock(FabricBlockSettings.of(Material.SOIL)), false);//TODO was für Material?
     public static final Item OVERGROWN_DISC = register("overgrown_disc", new MusicDiscItem(1, SoundEventRegistry.RADIO_BEACHPARTY, getSettings(), 214));
-    public static final Block MESSAGE_IN_A_BOTTLE = register("message_in_a_bottle", new ShapeBlock(FabricBlockSettings.copy(Blocks.GLASS), Block.createCuboidShape(4.0f, 0.0f, 4.0f, 12.0f, 6.0f, 12.0f)));
+    public static final Block MESSAGE_IN_A_BOTTLE = registerBlockWithoutItem("message_in_a_bottle", new MessageInABottleBlock(FabricBlockSettings.copy(Blocks.GLASS), Block.createCuboidShape(4.0f, 0.0f, 4.0f, 12.0f, 6.0f, 12.0f)));
+    public static final Item MESSAGE_IN_A_BOTTLE_ITEM = register("message_in_a_bottle", new MessageInABottleItem(ObjectRegistry.MESSAGE_IN_A_BOTTLE, getSettings()));
+    public static final Item SEASHELL = register("seashell", new SeashellItem(getSettings()));
     public static final Block EMPTY_SAND_BUCKET_BLOCK = register("empty_sand_bucket_block", new SandBucketBlock(FabricBlockSettings.of(Material.SOIL)), false);
     public static final Item SAND_BUCKET = register("sand_bucket", new SandBucketItem(SAND_BUCKET_BLOCK, getSettingsWithoutTab().maxCount(1)));
     public static final Item EMPTY_SAND_BUCKET = register("empty_sand_bucket", new SandBucketItem(EMPTY_SAND_BUCKET_BLOCK, getSettings()));
@@ -91,18 +96,21 @@ public class ObjectRegistry {
     public static final Block PUMPKIN_COCKTAIL = registerCocktail("pumpkin_cocktail", new CocktailBlock(getCocktailSettings()), StatusEffects.FIRE_RESISTANCE);
     public static final Block HONEY_COCKTAIL = registerCocktail("honey_cocktail", new CocktailBlock(getCocktailSettings()), StatusEffects.HASTE);
     public static final Block MELON_COCKTAIL = registerCocktail("melon_cocktail", new CocktailBlock(getCocktailSettings()), StatusEffects.LUCK);
-    public static final Item ICECREAM_COCONUT = register("icecream_coconut", new Item(getSettings().food(FoodComponents.COOKIE)));
-    public static final Item ICECREAM_MELON = register("icecream_melon", new Item(getSettings().food(FoodComponents.COOKIE)));
-    public static final Item ICECREAM_CACTUS = register("icecream_cactus", new Item(getSettings().food(FoodComponents.COOKIE)));
-    public static final Item ICECREAM_SWEETBERRIES = register("icecream_sweetberries", new Item(getSettings().food(FoodComponents.COOKIE)));
-    public static final Item ICECREAM_CHOCOLATE = register("icecream_chocolate", new Item(getSettings().food(FoodComponents.COOKIE)));
+    public static final Item ICECREAM_COCONUT = register("icecream_coconut", new IcecreamItem(getSettings().food(FoodComponents.BAKED_POTATO)));
+    public static final Item ICECREAM_MELON = register("icecream_melon", new IcecreamItem(getSettings().food(FoodComponents.BAKED_POTATO)));
+    public static final Item ICECREAM_CACTUS = register("icecream_cactus", new IcecreamItem(getSettings().food(FoodComponents.BAKED_POTATO)));
+    public static final Item ICECREAM_SWEETBERRIES = register("icecream_sweetberries", new IcecreamItem(getSettings().food(FoodComponents.BAKED_POTATO)));
+    public static final Item ICECREAM_CHOCOLATE = register("icecream_chocolate", new IcecreamItem(getSettings().food(FoodComponents.BAKED_POTATO)));
     public static final Item RAW_PELICAN = register("raw_pelican", new Item(getSettings().food(FoodComponents.BEEF)));
     public static final Item COOKED_PELICAN = register("cooked_pelican", new Item(getSettings().food(FoodComponents.COOKED_BEEF)));
+    public static final Item RAW_MUSSEL_MEAT = register("raw_mussel_meat", new Item(getSettings().food(FoodComponents.BEEF)));
+    public static final Item COOKED_MUSSEL_MEAT = register("cooked_mussel_meat", new Item(getSettings().food(FoodComponents.COOKED_BEEF)));
     public static final Block BEACH_TOWEL = register("beach_towel", new BeachTowelBlock(FabricBlockSettings.copy(Blocks.WHITE_WOOL).sounds(BlockSoundGroup.WOOL)));
     public static final Item BEACH_HAT = register("beach_hat", new BeachHatItem(getSettings().rarity(Rarity.COMMON)));
     public static final Item SUNGLASSES = register("sunglasses", new SwimwearArmorItem(MaterialsRegistry.SUNGLASSES, EquipmentSlot.HEAD, getSettings()));
     public static final Item TRUNKS = register("trunks", new SwimwearArmorItem(MaterialsRegistry.TRUNKS, EquipmentSlot.LEGS, getSettings().rarity(Rarity.COMMON)));
     public static final Item BIKINI = register("bikini", new SwimwearArmorItem(MaterialsRegistry.BIKINI, EquipmentSlot.LEGS, getSettings().rarity(Rarity.COMMON)));
+    public static final Item CROCS = register("crocs", new SwimwearArmorItem(MaterialsRegistry.CROCS, EquipmentSlot.FEET, getSettings().rarity(Rarity.UNCOMMON)));
     public static final Item SWIM_WINGS = register("swim_wings", new SwimwearArmorItem(MaterialsRegistry.SWIM_WINGS, EquipmentSlot.CHEST, getSettings()));
     public static final Item RUBBER_RING_BLUE = register("rubber_ring_blue", new BetterCustomArmorModelItem(EquipmentSlot.CHEST, getSettings().rarity(Rarity.COMMON), new BeachpartyIdentifier("textures/entity/rubber_ring_blue.png"), -0.7f));
     public static final Item RUBBER_RING_PINK = register("rubber_ring_pink", new BetterCustomArmorModelItem(EquipmentSlot.CHEST, getSettings().rarity(Rarity.COMMON), new BeachpartyIdentifier("textures/entity/rubber_ring_pink.png"), -0.7f));
@@ -169,13 +177,13 @@ public class ObjectRegistry {
 
 
     private static <T extends Block> T registerCocktail(String path, T block, StatusEffect effect) {
-        return register(path, block, true, DrinkBlockItem::new, settings -> settings.food(wineFoodComponent(effect)));
+        return register(path, block, true, DrinkBlockItem::new, settings -> settings.food(CocktailFoodComponent(effect)));
     }
 
 
 
-    private static FoodComponent wineFoodComponent(StatusEffect effect) {
-        FoodComponent.Builder component = new FoodComponent.Builder().hunger(1);
+    private static FoodComponent CocktailFoodComponent(StatusEffect effect) {
+        FoodComponent.Builder component = new FoodComponent.Builder().hunger(2).saturationModifier(1);
         if(effect != null) component.statusEffect(new StatusEffectInstance(effect, 45 * 20), 1.0f);
         return component.build();
     }
@@ -208,6 +216,10 @@ public class ObjectRegistry {
         }
         list.addAll(ITEMS.values());
         return list;
+    }
+
+    private static Block registerBlockWithoutItem(String name, Block block) {
+        return Registry.register(Registry.BLOCK, new Identifier(Beachparty.MOD_ID, name), block);
     }
 
     public static Map<Identifier, Block> getBlocks() {
