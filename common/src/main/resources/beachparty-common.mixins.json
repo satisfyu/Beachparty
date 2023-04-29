@@ -1,0 +1,23 @@
+{
+  "required": true,
+  "package": "satisfyu.beachparty.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "minVersion": "0.8",
+  "client": [
+    "ArmorFeatureRendererMixin",
+    "ArmorStandRendererMixin",
+    "MixinTitleScreen",
+    "MouseMixin",
+    "PlayerEntityRendererMixin"
+  ],
+  "mixins": [
+    "AbstractBlockMixin",
+    "BlockMixin",
+    "HereBeNoDragonsMixin",
+    "PotionItemMixin",
+    "SpawnMobAccessor"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
