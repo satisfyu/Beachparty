@@ -55,7 +55,7 @@ public class SeashellItem extends Item {
         ItemEntity entity = new ItemEntity(world, user.getX(), user.getY(), user.getZ(), itemStack);
         world.addFreshEntity(entity);
 
-        ItemStack musselMeatStack = new ItemStack(ObjectRegistry.RAW_MUSSEL_MEAT, 1);
+        ItemStack musselMeatStack = new ItemStack(ObjectRegistry.RAW_MUSSEL_MEAT.get(), 1);
         ItemEntity musselMeatEntity = new ItemEntity(world, user.getX(), user.getY(), user.getZ(), musselMeatStack);
         world.addFreshEntity(musselMeatEntity);
 

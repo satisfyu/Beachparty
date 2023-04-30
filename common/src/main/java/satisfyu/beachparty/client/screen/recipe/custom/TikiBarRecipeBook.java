@@ -67,7 +67,7 @@ public class TikiBarRecipeBook extends PrivateRecipeBookWidget {
 
     @Override
     protected RecipeType<? extends Recipe<Container>> getRecipeType() {
-        return RecipeRegistry.TIKI_BAR_RECIPE_RECIPE_TYPE;
+        return RecipeRegistry.TIKI_BAR_RECIPE_TYPE.get();
     }
 
     @Override

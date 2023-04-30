@@ -67,20 +67,20 @@ public class SandCastleBlock extends Block {
             BooleanProperty tower = getTowerHitPos(hit);
             if (!state.getValue(tower)) {
                 world.setBlockAndUpdate(pos, state.setValue(tower, true));
-                exchangeStack(handStack, player, new ItemStack(ObjectRegistry.EMPTY_SAND_BUCKET));
+                exchangeStack(handStack, player, new ItemStack(ObjectRegistry.EMPTY_SAND_BUCKET.get()));
                 return InteractionResult.sidedSuccess(world.isClientSide);
             }
         }
         else if (handStack.getItem() == ObjectRegistry.EMPTY_SAND_BUCKET) {
             if (hasNoTowers(state)) {
                 world.destroyBlock(pos, false);
-                exchangeStack(handStack, player, new ItemStack(ObjectRegistry.SAND_BUCKET));
+                exchangeStack(handStack, player, new ItemStack(ObjectRegistry.SAND_BUCKET.get()));
                 return InteractionResult.sidedSuccess(world.isClientSide);
             } else if (!hasNoTowers(state)) {
                 BooleanProperty tower = getTowerHitPos(hit);
                 if (state.getValue(tower)) {
                     world.setBlockAndUpdate(pos, state.setValue(tower, false));
-                    exchangeStack(handStack, player, new ItemStack(ObjectRegistry.SAND_BUCKET));
+                    exchangeStack(handStack, player, new ItemStack(ObjectRegistry.SAND_BUCKET.get()));
                     return InteractionResult.sidedSuccess(world.isClientSide);
                 }
 
@@ -91,7 +91,7 @@ public class SandCastleBlock extends Block {
 
     @Override
     public void stepOn(Level world, BlockPos pos, BlockState state, Entity entity) {
-        world.setBlock(pos, ObjectRegistry.SAND_PILE.defaultBlockState(), 3);
+        world.setBlock(pos, ObjectRegistry.SAND_PILE.get().defaultBlockState(), 3);
     }
 
     private void exchangeStack(ItemStack handStack, Player player, ItemStack possibleReturnStack) {
@@ -165,7 +165,7 @@ public class SandCastleBlock extends Block {
 
     @Override
     public ItemStack getCloneItemStack(BlockGetter world, BlockPos pos, BlockState state) {
-        return new ItemStack(ObjectRegistry.SAND_BUCKET);
+        return new ItemStack(ObjectRegistry.SAND_BUCKET.get());
     }
 
     public boolean isPathfindable(BlockState state, BlockGetter world, BlockPos pos, PathComputationType type) {

@@ -1,16 +1,16 @@
 {
   "schema_version": 1,
   "mixin": [
-    "examplemod.mixins.json",
-    "examplemod-common.mixins.json"
+    "beachparty.mixins.json",
+    "beachparty-common.mixins.json"
   ],
   "quilt_loader": {
     "group": "${group}",
-    "id": "examplemod",
+    "id": "beachparty",
     "version": "${version}",
-    "name": "Example Mod",
-    "description": "This is an example description! Tell everyone what your mod is about!",
-    "authors": ["Me!"],
+    "name": "Beachparty",
+    "description": "Take a break - build sandcastles, drink cocktails and enjoy your life.",
+    "authors": ["Satisfyu", "BaumeisterJo", "Cristelknight"],
     "contact": {
       "sources": "https://github.com/architectury/architectury-templates"
     },
@@ -20,7 +20,10 @@
     "environment": "*",
     "entrypoints": {
       "init": [
-        "net.examplemod.quilt.ExampleModQuilt"
+        "satisfyu.beachparty.quilt.BeachpartyQuilt"
+      ],
+      "client": [
+        "satisfyu.beachparty.fabriclike.client.BeachpartyFabricLikeClient"
       ]
     },
     "depends": [

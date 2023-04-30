@@ -4,7 +4,6 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.recipe.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.world.Container;
@@ -57,12 +56,12 @@ public class TikiBarRecipe implements Recipe<Container> {
 
     @Override
     public RecipeSerializer<?> getSerializer() {
-        return RecipeRegistry.TIKI_BAR_RECIPE_RECIPE_SERIALIZER;
+        return RecipeRegistry.TIKI_BAR_RECIPE_SERIALIZER.get();
     }
 
     @Override
     public RecipeType<?> getType() {
-        return RecipeRegistry.TIKI_BAR_RECIPE_RECIPE_TYPE;
+        return RecipeRegistry.TIKI_BAR_RECIPE_TYPE.get();
     }
 
     @Override
@@ -97,11 +96,12 @@ public class TikiBarRecipe implements Recipe<Container> {
         }
 
         @Override
-        public void write(FriendlyByteBuf buf, TikiBarRecipe recipe) {
+        public void toNetwork(FriendlyByteBuf buf, TikiBarRecipe recipe) {
             buf.writeVarInt(recipe.inputs.size());
             recipe.inputs.forEach(entry -> entry.toNetwork(buf));
             buf.writeItem(recipe.getResultItem());
         }
+
     }
 
 }

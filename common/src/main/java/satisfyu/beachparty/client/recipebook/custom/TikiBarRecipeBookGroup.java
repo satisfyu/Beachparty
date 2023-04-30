@@ -16,8 +16,8 @@ import java.util.List;
 @Environment(EnvType.CLIENT)
 public enum TikiBarRecipeBookGroup implements IRecipeBookGroup {
     SEARCH(new ItemStack(Items.COMPASS)),
-    COCKTAIL(new ItemStack(ObjectRegistry.COCONUT_COCKTAIL)),
-    MISC(new ItemStack(ObjectRegistry.COCONUT));
+    COCKTAIL(new ItemStack(ObjectRegistry.COCONUT_COCKTAIL.get())),
+    MISC(new ItemStack(ObjectRegistry.COCONUT.get()));
 
     public static final List<IRecipeBookGroup> TIKI_GROUPS = ImmutableList.of(SEARCH, COCKTAIL, MISC);
 

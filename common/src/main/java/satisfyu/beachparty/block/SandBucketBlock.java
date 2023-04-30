@@ -44,7 +44,7 @@ public class SandBucketBlock extends FacingBlock {
         ItemStack itemStack = player.getItemInHand(hand);
         if (state.getBlock() == ObjectRegistry.EMPTY_SAND_BUCKET_BLOCK && itemStack.getItem() == Items.SAND) {
             itemStack.shrink(1);
-            world.setBlockAndUpdate(pos, ObjectRegistry.SAND_BUCKET_BLOCK.defaultBlockState().setValue(FACING, state.getValue(FACING)));
+            world.setBlockAndUpdate(pos, ObjectRegistry.SAND_BUCKET_BLOCK.get().defaultBlockState().setValue(FACING, state.getValue(FACING)));
             return InteractionResult.SUCCESS;
         }
         return super.use(state, world, pos, player, hand, hit);

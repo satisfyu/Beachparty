@@ -22,7 +22,7 @@ public class TikiBarGuiHandler extends AbstractRecipeBookGUIScreenHandler {
         this(syncId, playerInventory, new SimpleContainer(3), new SimpleContainerData(2));
     }
     public TikiBarGuiHandler(int syncId, Inventory playerInventory, Container inventory, ContainerData propertyDelegate) {
-        super(ScreenHandlerTypesRegistry.TIKI_BAR_GUI_HANDLER, syncId, 2, playerInventory, inventory, propertyDelegate);
+        super(ScreenHandlerTypesRegistry.TIKI_BAR_GUI_HANDLER.get(), syncId, 2, playerInventory, inventory, propertyDelegate);
 
         buildBlockEntityContainer(playerInventory, inventory);
         buildPlayerContainer(playerInventory);

@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableList;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.model.*;
+import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.CubeDeformation;
@@ -11,9 +12,15 @@ import net.minecraft.client.model.geom.builders.CubeListBuilder;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 
+import static satisfyu.beachparty.Beachparty.MOD_ID;
+
 public class PelicanModel<T extends PelicanEntity> extends AgeableListModel<T> {
+
+    public static final ModelLayerLocation PELICAN_MODEL_LAYER = new ModelLayerLocation(new ResourceLocation(MOD_ID, "pelican"), "main");
+
     private final ModelPart body;
     private final ModelPart head;
     private final ModelPart leg0;
@@ -69,7 +76,7 @@ public class PelicanModel<T extends PelicanEntity> extends AgeableListModel<T> {
     }
 
     @Override
-    public void setAngles(T entity, float limbAngle, float limbDistance, float animationProgress, float headYaw, float headPitch) {
+    public void setupAnim(T entity, float limbAngle, float limbDistance, float animationProgress, float headYaw, float headPitch) {
         this.head.xRot = headPitch * ((float)Math.PI / 180);
         this.head.yRot = headYaw * ((float)Math.PI / 180);
 

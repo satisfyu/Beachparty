@@ -24,7 +24,7 @@ public class ChairUtil {
         if(hit.getDirection() == Direction.DOWN) return InteractionResult.PASS;
         BlockPos hitPos = hit.getBlockPos();
         if(!ChairUtil.isOccupied(world, hitPos) && player.getItemInHand(hand).isEmpty()) {
-            ChairEntity chair = EntityRegistry.CHAIR.create(world);
+            ChairEntity chair = EntityRegistry.CHAIR.get().create(world);
             chair.moveTo(hitPos.getX() + 0.5D, hitPos.getY() + 0.25D + extraHeight, hitPos.getZ() + 0.5D, 0, 0);
             if(ChairUtil.addChairEntity(world, hitPos, chair, player.blockPosition())) {
                 world.addFreshEntity(chair);

@@ -14,7 +14,6 @@ public class BeachpartyMessages {
 
     public static void registerC2SPackets() {
         NetworkManager.registerReceiver(NetworkManager.Side.C2S, MOUSE_SCROLL_C2S, new MouseScrollC2SPacket());
-
     }
 
     public static void registerS2CPackets() {

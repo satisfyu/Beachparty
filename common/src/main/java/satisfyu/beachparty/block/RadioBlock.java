@@ -1,10 +1,8 @@
 package satisfyu.beachparty.block;
 
-import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
-import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+import dev.architectury.networking.NetworkManager;
 import net.minecraft.ChatFormatting;
 import net.minecraft.Util;
-import net.minecraft.block.*;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
@@ -109,8 +107,8 @@ public class RadioBlock extends Block {
     }
 
     private void turnON(BlockState state, Level world, BlockPos pos, Player player) {
-        world.playSound(player, pos, SoundEventRegistry.RADIO_CLICK, SoundSource.BLOCKS, 1.0f, 1.0f);
-        world.playSound(player, pos, SoundEventRegistry.RADIO_TUNE, SoundSource.RECORDS, 1.0f, 1.0f);
+        world.playSound(player, pos, SoundEventRegistry.RADIO_CLICK.get(), SoundSource.BLOCKS, 1.0f, 1.0f);
+        world.playSound(player, pos, SoundEventRegistry.RADIO_TUNE.get(), SoundSource.RECORDS, 1.0f, 1.0f);
         if (!world.isClientSide) {
             pressButton(state, world, pos, true);
             sendPacket(state, world, pos, true);
@@ -118,7 +116,7 @@ public class RadioBlock extends Block {
     }
 
     private void turnOFF(BlockState state, Level world, BlockPos pos, Player player) {
-        world.playSound(player, pos, SoundEventRegistry.RADIO_CLICK, SoundSource.BLOCKS, 1.0f, 1.0f);
+        world.playSound(player, pos, SoundEventRegistry.RADIO_CLICK.get(), SoundSource.BLOCKS, 1.0f, 1.0f);
         if (!world.isClientSide) {
             pressButton(state, world, pos, false);
             sendPacket(state, world, pos, false);
@@ -142,12 +140,12 @@ public class RadioBlock extends Block {
     }
 
     private void sendPacket(BlockState state, Level world, BlockPos pos, boolean on) {
-        FriendlyByteBuf buffer = PacketByteBufs.create();
+        FriendlyByteBuf buffer = BeachpartyUtil.createPacketBuf();
         buffer.writeBlockPos(pos);
         buffer.writeInt(state.getValue(CHANNEL));
         buffer.writeBoolean(on);
         for (Player player : world.players()) {
-            ServerPlayNetworking.send((ServerPlayer) player, BeachpartyMessages.TURN_RADIO_S2C, buffer);
+            NetworkManager.sendToPlayer((ServerPlayer) player, BeachpartyMessages.TURN_RADIO_S2C, buffer);
         }
     }
 

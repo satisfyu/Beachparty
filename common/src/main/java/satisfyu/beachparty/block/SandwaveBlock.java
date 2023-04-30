@@ -16,7 +16,7 @@ public class SandwaveBlock extends SandBlock {
     @Override
     public void randomTick(BlockState state, ServerLevel world, BlockPos pos, RandomSource random) {
         if (random.nextFloat() < 0.000001 && validLocation(world, pos) && world.getBlockState(pos.above()).isAir()) {
-            world.setBlockAndUpdate(pos.above(), ObjectRegistry.MESSAGE_IN_A_BOTTLE.defaultBlockState());
+            world.setBlockAndUpdate(pos.above(), ObjectRegistry.MESSAGE_IN_A_BOTTLE.get().defaultBlockState());
         }
         super.randomTick(state, world, pos, random);
     }

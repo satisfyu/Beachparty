@@ -67,7 +67,7 @@ public class MiniFridgeRecipeBook extends PrivateRecipeBookWidget {
 
     @Override
     protected RecipeType<? extends Recipe<Container>> getRecipeType() {
-        return RecipeRegistry.MINI_FRIDGE_RECIPE_RECIPE_TYPE;
+        return RecipeRegistry.MINI_FRIDGE_RECIPE_TYPE.get();
     }
 
     @Override

@@ -18,6 +18,7 @@ import net.minecraft.world.level.block.entity.RandomizableContainerBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import satisfyu.beachparty.block.CabinetBlock;
+import satisfyu.beachparty.registry.BlockEntityRegistry;
 import satisfyu.beachparty.registry.EntityRegistry;
 
 public class CabinetBlockEntity extends RandomizableContainerBlockEntity {
@@ -25,7 +26,7 @@ public class CabinetBlockEntity extends RandomizableContainerBlockEntity {
     private ContainerOpenersCounter stateManager;
 
     public CabinetBlockEntity(BlockPos pos, BlockState state) {
-        super(EntityRegistry.CABINET_BLOCK_ENTITY, pos, state);
+        super(BlockEntityRegistry.CABINET_BLOCK_ENTITY.get(), pos, state);
         this.inventory = NonNullList.withSize(18, ItemStack.EMPTY);
         this.stateManager = new ContainerOpenersCounter() {
 

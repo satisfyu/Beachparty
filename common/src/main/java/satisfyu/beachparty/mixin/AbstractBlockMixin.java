@@ -19,7 +19,7 @@ public class AbstractBlockMixin {
     private void injected(BlockState state, ServerLevel world, BlockPos pos, RandomSource random, CallbackInfo ci) {
         if (state.getBlock() == Blocks.HAY_BLOCK) {
             if (world.getBiome(pos).is(BeachpartyTags.WARM_BIOME)) {
-                world.setBlockAndUpdate(pos, ObjectRegistry.DRIED_WHEAT_BLOCK.defaultBlockState());
+                world.setBlockAndUpdate(pos, ObjectRegistry.DRIED_WHEAT_BLOCK.get().defaultBlockState());
             }
         }
     }

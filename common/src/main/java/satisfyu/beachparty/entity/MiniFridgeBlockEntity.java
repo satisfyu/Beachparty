@@ -20,11 +20,11 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
+import org.jetbrains.annotations.Nullable;
 import satisfyu.beachparty.client.gui.handler.MiniFridgeGuiHandler;
 import satisfyu.beachparty.recipe.MiniFridgeRecipe;
-import satisfyu.beachparty.registry.EntityRegistry;
+import satisfyu.beachparty.registry.BlockEntityRegistry;
 import satisfyu.beachparty.registry.RecipeRegistry;
-import org.jetbrains.annotations.Nullable;
 
 public class MiniFridgeBlockEntity extends BlockEntity implements Container, BlockEntityTicker<MiniFridgeBlockEntity>, MenuProvider {
 
@@ -63,7 +63,7 @@ public class MiniFridgeBlockEntity extends BlockEntity implements Container, Blo
     };
 
     public MiniFridgeBlockEntity(BlockPos pos, BlockState state) {
-        super(EntityRegistry.MINI_FRIDGE_BLOCK_ENTITY, pos, state);
+        super(BlockEntityRegistry.MINI_FRIDGE_BLOCK_ENTITY.get(), pos, state);
         this.inventory = NonNullList.withSize(CAPACITY, ItemStack.EMPTY);
     }
 
@@ -96,7 +96,7 @@ public class MiniFridgeBlockEntity extends BlockEntity implements Container, Blo
         if (world.isClientSide) return;
         boolean dirty = false;
         final var recipeType = world.getRecipeManager()
-                .getRecipeFor(RecipeRegistry.MINI_FRIDGE_RECIPE_RECIPE_TYPE, blockEntity, world)
+                .getRecipeFor(RecipeRegistry.MINI_FRIDGE_RECIPE_TYPE.get(), blockEntity, world)
                 .orElse(null);
         if (canCraft(recipeType)) {
             this.fermentationTime++;

@@ -6,16 +6,20 @@
   "client": [
     "ArmorFeatureRendererMixin",
     "ArmorStandRendererMixin",
-    "MixinTitleScreen",
     "MouseMixin",
-    "PlayerEntityRendererMixin"
+    "PlayerEntityRendererMixin",
+    "sign.MixinSignBlockEntityRenderer",
+    "sign.MixinSignEditScreen"
   ],
   "mixins": [
     "AbstractBlockMixin",
     "BlockMixin",
     "HereBeNoDragonsMixin",
     "PotionItemMixin",
-    "SpawnMobAccessor"
+    "SpawnMobAccessor",
+    "boat.MixinBoatEntity",
+    "boat.MixinShulkerEntity",
+    "sign.MixinBlockEntityType"
   ],
   "injectors": {
     "defaultRequire": 1

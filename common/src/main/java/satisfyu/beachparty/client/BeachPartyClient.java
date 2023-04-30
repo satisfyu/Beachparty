@@ -1,21 +1,25 @@
 package satisfyu.beachparty.client;
 
 
-import com.terraformersmc.terraform.boat.api.client.TerraformBoatClientHelper;
-import com.terraformersmc.terraform.sign.SpriteIdentifierRegistry;
+import dev.architectury.platform.Platform;
+import dev.architectury.registry.client.level.entity.EntityModelLayerRegistry;
+import dev.architectury.registry.client.level.entity.EntityRendererRegistry;
+import dev.architectury.registry.client.rendering.RenderTypeRegistry;
+import dev.architectury.registry.menu.MenuRegistry;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
-import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
-import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
-import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.model.geom.ModelLayerLocation;
+import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.Sheets;
+import net.minecraft.client.renderer.entity.EntityRendererProvider;
+import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.client.resources.model.Material;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
 import satisfyu.beachparty.BeachpartyIdentifier;
 import satisfyu.beachparty.client.gui.MiniFridgeGui;
 import satisfyu.beachparty.client.gui.TikiBarGui;
@@ -25,50 +29,71 @@ import satisfyu.beachparty.entity.pelican.PelicanRenderer;
 import satisfyu.beachparty.networking.BeachpartyMessages;
 import satisfyu.beachparty.registry.EntityRegistry;
 import satisfyu.beachparty.registry.ObjectRegistry;
-import satisfyu.beachparty.registry.RenderRegistry;
+import satisfyu.beachparty.registry.CustomArmorRegistry;
 import satisfyu.beachparty.registry.ScreenHandlerTypesRegistry;
+import satisfyu.beachparty.util.boat.api.client.TerraformBoatClientHelper;
+import satisfyu.beachparty.util.boat.impl.client.TerraformBoatClientInitializer;
+import satisfyu.beachparty.util.sign.SpriteIdentifierRegistry;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.function.Supplier;
 
 import static satisfyu.beachparty.Beachparty.MOD_ID;
 
 @Environment(EnvType.CLIENT)
-public class BeachPartyClient implements ClientModInitializer {
+public class BeachPartyClient {
 
     public static boolean rememberedRecipeBookOpen = false;
     public static boolean rememberedCraftableToggle = true;
 
-    public static final ModelLayerLocation PELICAN_MODEL_LAYER = new ModelLayerLocation(new ResourceLocation(MOD_ID, "pelican"), "main");
 
-   private static void registerPelican(){
-        EntityRendererRegistry.register(EntityRegistry.PELICAN, PelicanRenderer::new);
-        EntityModelLayerRegistry.registerModelLayer(PELICAN_MODEL_LAYER, PelicanModel::getTexturedModelData);
+    public static void initClient() {
+
+
+            RenderTypeRegistry.register(RenderType.cutout(), ObjectRegistry.TABLE.get(), ObjectRegistry.CHAIR.get(),
+                    ObjectRegistry.TIKI_CHAIR.get(), ObjectRegistry.PALM_TRAPDOOR.get(), ObjectRegistry.PALM_DOOR.get(),
+                    ObjectRegistry.PALM_TORCH.get(), ObjectRegistry.PALM_WALL_TORCH.get(), ObjectRegistry.PALM_TALL_TORCH.get(),
+                    ObjectRegistry.DRY_BUSH.get(), ObjectRegistry.DRY_BUSH_TALL.get(), ObjectRegistry.MELON_COCKTAIL.get(), ObjectRegistry.COCONUT_COCKTAIL.get(),
+                    ObjectRegistry.HONEY_COCKTAIL.get(), ObjectRegistry.SWEETBERRIES_COCKTAIL.get(), ObjectRegistry.PUMPKIN_COCKTAIL.get(),
+                    ObjectRegistry.COCOA_COCKTAIL.get(), ObjectRegistry.SANDCASTLE.get(), ObjectRegistry.BEACH_GRASS.get(), ObjectRegistry.MESSAGE_IN_A_BOTTLE.get(),
+                    ObjectRegistry.BEACH_TOWEL.get(), ObjectRegistry.DECK_CHAIR.get()
+            );
+
+
+
+            SpriteIdentifierRegistry.INSTANCE.addIdentifier(new Material(Sheets.SIGN_SHEET, ObjectRegistry.PALM_SIGN.get().getTexture()));
+
+            MenuRegistry.registerScreenFactory(ScreenHandlerTypesRegistry.TIKI_BAR_GUI_HANDLER.get(), TikiBarGui::new);
+            MenuRegistry.registerScreenFactory(ScreenHandlerTypesRegistry.MINI_FRIDGE_GUI_HANDLER.get(), MiniFridgeGui::new);
+
+
+            BeachpartyMessages.registerC2SPackets();
+            BeachpartyMessages.registerS2CPackets();
     }
 
 
-        @Override
-    public void onInitializeClient() {
-        BlockRenderLayerMap.INSTANCE.putBlocks(RenderType.cutout(), ObjectRegistry.TABLE, ObjectRegistry.CHAIR,
-                ObjectRegistry.TIKI_CHAIR, ObjectRegistry.PALM_TRAPDOOR, ObjectRegistry.PALM_DOOR,
-                ObjectRegistry.PALM_TORCH, ObjectRegistry.PALM_WALL_TORCH, ObjectRegistry.PALM_TALL_TORCH,
-                ObjectRegistry.DRY_BUSH, ObjectRegistry.DRY_BUSH_TALL, ObjectRegistry.MELON_COCKTAIL, ObjectRegistry.COCONUT_COCKTAIL,
-                ObjectRegistry.HONEY_COCKTAIL, ObjectRegistry.SWEETBERRIES_COCKTAIL, ObjectRegistry.PUMPKIN_COCKTAIL,
-                ObjectRegistry.COCOA_COCKTAIL, ObjectRegistry.SANDCASTLE, ObjectRegistry.BEACH_GRASS, ObjectRegistry.MESSAGE_IN_A_BOTTLE,
-                ObjectRegistry.BEACH_TOWEL, ObjectRegistry.DECK_CHAIR
-        );
 
-        RenderRegistry.registerModels();
+    public static void getEntityModelLayers(Map<ModelLayerLocation, Supplier<LayerDefinition>> map){
+        map.put(PelicanModel.PELICAN_MODEL_LAYER, PelicanModel::getTexturedModelData);
 
-        TerraformBoatClientHelper.registerModelLayers(new BeachpartyIdentifier("palm"));
-
-        SpriteIdentifierRegistry.INSTANCE.addIdentifier(new Material(Sheets.SIGN_SHEET, ObjectRegistry.PALM_SIGN.getTexture()));
-
-        MenuScreens.register(ScreenHandlerTypesRegistry.TIKI_BAR_GUI_HANDLER, TikiBarGui::new);
-        MenuScreens.register(ScreenHandlerTypesRegistry.MINI_FRIDGE_GUI_HANDLER, MiniFridgeGui::new);
-
-        EntityRendererRegistry.register(EntityRegistry.CHAIR, ChairRenderer::new);
-        EntityRendererRegistry.register(EntityRegistry.COCONUT, ThrownItemRenderer::new);
-        registerPelican();
-
-        BeachpartyMessages.registerC2SPackets();
-        BeachpartyMessages.registerS2CPackets();
+        //"API"
+        CustomArmorRegistry.registerCustomArmorLayers(map);
+        TerraformBoatClientHelper.registerModelLayers(map, new BeachpartyIdentifier("palm"));
     }
+
+    public static void getEntityEntityRenderers(Map<Supplier<EntityType<?>>, EntityRendererProvider<?>> map){
+        registerEntityRenderer(map, EntityRegistry.PELICAN, PelicanRenderer::new);
+        registerEntityRenderer(map, EntityRegistry.CHAIR, ChairRenderer::new);
+        registerEntityRenderer(map, EntityRegistry.COCONUT, ThrownItemRenderer::new);
+
+        //"API"
+        TerraformBoatClientInitializer.init(map);
+    }
+
+    public static <T extends Entity> void registerEntityRenderer(Map<Supplier<EntityType<?>>, EntityRendererProvider<?>> map, Supplier<? extends EntityType<? extends T>> type, EntityRendererProvider<T> factory) {
+        map.put((Supplier<EntityType<?>>) (Supplier<? extends EntityType<?>>) type, factory);
+    }
+
 }

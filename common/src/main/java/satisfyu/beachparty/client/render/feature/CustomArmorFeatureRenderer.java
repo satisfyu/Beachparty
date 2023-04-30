@@ -19,7 +19,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import satisfyu.beachparty.item.CustomModelArmorItem;
-import satisfyu.beachparty.registry.RenderRegistry;
+import satisfyu.beachparty.registry.CustomArmorRegistry;
 
 import java.util.Map;
 
@@ -44,7 +44,7 @@ public class CustomArmorFeatureRenderer<T extends LivingEntity, M extends Entity
 		Item hatItem = getHatItem(entity, slot);
 		if(hatItem != null) {
 			if(MODELS.isEmpty()) {
-				RenderRegistry.registerArmor(MODELS, modelLoader);
+				CustomArmorRegistry.registerArmor(MODELS, modelLoader);
 			}
 			return MODELS.get(hatItem);
 		}

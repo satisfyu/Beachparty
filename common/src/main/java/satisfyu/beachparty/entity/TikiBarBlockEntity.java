@@ -22,6 +22,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import satisfyu.beachparty.client.gui.handler.TikiBarGuiHandler;
 import satisfyu.beachparty.recipe.TikiBarRecipe;
+import satisfyu.beachparty.registry.BlockEntityRegistry;
 import satisfyu.beachparty.registry.EntityRegistry;
 import satisfyu.beachparty.registry.RecipeRegistry;
 import org.jetbrains.annotations.Nullable;
@@ -63,7 +64,7 @@ public class TikiBarBlockEntity extends BlockEntity implements Container, BlockE
     };
 
     public TikiBarBlockEntity(BlockPos pos, BlockState state) {
-        super(EntityRegistry.TIKI_BAR_BLOCK_ENTITY, pos, state);
+        super(BlockEntityRegistry.TIKI_BAR_BLOCK_ENTITY.get(), pos, state);
         this.inventory = NonNullList.withSize(CAPACITY, ItemStack.EMPTY);
     }
 
@@ -93,7 +94,7 @@ public class TikiBarBlockEntity extends BlockEntity implements Container, BlockE
         if (world.isClientSide) return;
         boolean dirty = false;
         final var recipeType = world.getRecipeManager()
-                .getRecipeFor(RecipeRegistry.TIKI_BAR_RECIPE_RECIPE_TYPE, blockEntity, world)
+                .getRecipeFor(RecipeRegistry.TIKI_BAR_RECIPE_TYPE.get(), blockEntity, world)
                 .orElse(null);
         if (canCraft(recipeType)) {
             this.fermentationTime++;

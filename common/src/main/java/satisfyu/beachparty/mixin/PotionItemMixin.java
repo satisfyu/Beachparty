@@ -49,7 +49,7 @@ public class PotionItemMixin {
 
             world.playSound( null, blockPos, SoundEvents.BOTTLE_EMPTY, SoundSource.BLOCKS, 1.0F, 1.0F);
             world.gameEvent( null, GameEvent.FLUID_PLACE, blockPos);
-            world.setBlockAndUpdate(blockPos, blockState.getBlock() == Blocks.GRAVEL ? Blocks.SAND.defaultBlockState() : ObjectRegistry.SANDWAVES.defaultBlockState());
+            world.setBlockAndUpdate(blockPos, blockState.getBlock() == Blocks.GRAVEL ? Blocks.SAND.defaultBlockState() : ObjectRegistry.SANDWAVES.get().defaultBlockState());
             cir.setReturnValue(InteractionResult.sidedSuccess(world.isClientSide));
         }
     }

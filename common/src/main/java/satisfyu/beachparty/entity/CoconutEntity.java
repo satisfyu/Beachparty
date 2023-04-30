@@ -18,16 +18,18 @@ import satisfyu.beachparty.registry.EntityRegistry;
 import satisfyu.beachparty.registry.ObjectRegistry;
 
 public class CoconutEntity extends ThrowableItemProjectile {
+
+    public CoconutEntity(Level world, LivingEntity owner) {
+        super(EntityRegistry.COCONUT.get(), owner, world);
+    }
+
     public CoconutEntity(EntityType<? extends CoconutEntity> entityType, Level world) {
         super(entityType, world);
     }
 
-    public CoconutEntity(Level world, LivingEntity owner) {
-        super(EntityRegistry.COCONUT, owner, world);
-    }
 
     protected Item getDefaultItem() {
-        return ObjectRegistry.COCONUT;
+        return ObjectRegistry.COCONUT.get();
     }
 
     private ParticleOptions getParticleParameters() {
@@ -57,7 +59,7 @@ public class CoconutEntity extends ThrowableItemProjectile {
         if (!this.level.isClientSide) {
             this.level.broadcastEntityEvent(this, (byte)3);
             this.playSound(SoundEvents.WOOD_FALL, 1.0F, 1.0F);
-            this.spawnAtLocation(ObjectRegistry.COCONUT_OPEN);
+            this.spawnAtLocation(ObjectRegistry.COCONUT_OPEN.get());
             this.discard();
         }
     }

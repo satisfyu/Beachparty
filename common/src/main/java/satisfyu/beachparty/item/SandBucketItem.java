@@ -3,7 +3,6 @@ package satisfyu.beachparty.item;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.item.*;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
@@ -37,6 +36,7 @@ public class SandBucketItem extends BlockItem {
         super(block, settings);
     }
 
+    @Override
     public InteractionResult useOn(UseOnContext context) {
         if (context.getPlayer().isShiftKeyDown()) {
             InteractionResult actionResult = this.place(new BlockPlaceContext(context));
@@ -63,14 +63,14 @@ public class SandBucketItem extends BlockItem {
             Direction direction = blockHitResult.getDirection();
             BlockPos offsetPos = blockPos.relative(direction);
             if (world.mayInteract(user, blockPos)) {
-                if (this == ObjectRegistry.EMPTY_SAND_BUCKET && world.getBlockState(blockPos).is(BlockTags.SAND)) {
+                if (this == ObjectRegistry.EMPTY_SAND_BUCKET.get() && world.getBlockState(blockPos).is(BlockTags.SAND)) {
                     world.destroyBlock(blockPos, false);
-                    ItemStack sandBucket = new ItemStack(ObjectRegistry.SAND_BUCKET);
+                    ItemStack sandBucket = new ItemStack(ObjectRegistry.SAND_BUCKET.get());
                     ItemStack returnStack = exchangeStack(itemStack, user, sandBucket);
                     return InteractionResultHolder.sidedSuccess(returnStack, world.isClientSide());
-                } else if (this == ObjectRegistry.SAND_BUCKET && user.mayUseItemAt(offsetPos, direction, itemStack)){
-                    if (world.getBlockState(offsetPos).isAir() && ObjectRegistry.SANDCASTLE.defaultBlockState().canSurvive(world, offsetPos)){
-                        world.setBlock(offsetPos, ObjectRegistry.SANDCASTLE.defaultBlockState(), 3);
+                } else if (this == ObjectRegistry.SAND_BUCKET.get() && user.mayUseItemAt(offsetPos, direction, itemStack)){
+                    if (world.getBlockState(offsetPos).isAir() && ObjectRegistry.SANDCASTLE.get().defaultBlockState().canSurvive(world, offsetPos)){
+                        world.setBlock(offsetPos, ObjectRegistry.SANDCASTLE.get().defaultBlockState(), 3);
                         ItemStack returnStack = exchangeStack(itemStack, user, getEmptiedStack(itemStack, user));
                         return InteractionResultHolder.sidedSuccess(returnStack, world.isClientSide());
                     }
@@ -104,7 +104,7 @@ public class SandBucketItem extends BlockItem {
     }
 
     public static ItemStack getEmptiedStack(ItemStack stack, Player player) {
-        return !player.getAbilities().instabuild ? new ItemStack(ObjectRegistry.EMPTY_SAND_BUCKET) : stack;
+        return !player.getAbilities().instabuild ? new ItemStack(ObjectRegistry.EMPTY_SAND_BUCKET.get()) : stack;
     }
 
     protected void playEmptyingSound(@Nullable Player player, LevelAccessor world, BlockPos pos) {

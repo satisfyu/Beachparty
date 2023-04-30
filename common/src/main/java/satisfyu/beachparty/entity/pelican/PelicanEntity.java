@@ -27,19 +27,19 @@ public class PelicanEntity extends Chicken {
     @Override
     protected SoundEvent getAmbientSound() {
         super.getAmbientSound();
-        return SoundEventRegistry.PELICAN_IDLE;
+        return SoundEventRegistry.PELICAN_IDLE.get();
     }
 
     @Override
     protected SoundEvent getDeathSound() {
         super.getDeathSound();
-        return SoundEventRegistry.PELICAN_DEATH;
+        return SoundEventRegistry.PELICAN_DEATH.get();
     }
 
     @Override
     protected SoundEvent getHurtSound(DamageSource source) {
         super.getHurtSound(source);
-        return SoundEventRegistry.PELICAN_HURT;
+        return SoundEventRegistry.PELICAN_HURT.get();
     }
 
     public static AttributeSupplier.Builder createAttributes() {
@@ -48,7 +48,7 @@ public class PelicanEntity extends Chicken {
 
     @Override
     public PelicanEntity getBreedOffspring(ServerLevel serverWorld, AgeableMob passiveEntity) {
-        return (PelicanEntity) EntityRegistry.PELICAN.create(serverWorld);
+        return EntityRegistry.PELICAN.get().create(serverWorld);
     }
 
     public boolean isFood(ItemStack stack) {
@@ -56,6 +56,6 @@ public class PelicanEntity extends Chicken {
     }
 
     static {
-        BREEDING_INGREDIENT = Ingredient.of(new ItemLike[]{Items.COD, Items.SALMON, Items.PUFFERFISH, Items.COOKED_COD, Items.COOKED_SALMON});
+        BREEDING_INGREDIENT = Ingredient.of(Items.COD, Items.SALMON, Items.PUFFERFISH, Items.COOKED_COD, Items.COOKED_SALMON);
     }
 }

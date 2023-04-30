@@ -1,5 +1,6 @@
 package satisfyu.beachparty.util;
 
+import dev.architectury.registry.registries.RegistrySupplier;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.Minecraft;
@@ -34,7 +35,7 @@ public class RadioHelper {
     }
 
     public static void tune(BlockPos pos, int channel) {
-        Minecraft.getInstance().getSoundManager().play(new SimpleSoundInstance(SoundEventRegistry.RADIO_TUNE, SoundSource.RECORDS, 1.0f, 1.0f, RandomSource.create(), pos));
+        Minecraft.getInstance().getSoundManager().play(new SimpleSoundInstance(SoundEventRegistry.RADIO_TUNE.get(), SoundSource.RECORDS, 1.0f, 1.0f, RandomSource.create(), pos));
         stopSounds(pos);
         if (!soundInstances.containsKey(pos)) {
             addSounds(pos);
@@ -60,9 +61,9 @@ public class RadioHelper {
 
     private static void addSounds(BlockPos blockPos) {
         List<SimpleSoundInstance> soundInstance = Lists.newArrayList();
-        for (SoundEvent sound : SoundEventRegistry.RADIO_SOUNDS) {
+        for (RegistrySupplier<SoundEvent> sound : SoundEventRegistry.RADIO_SOUNDS) {
             soundInstance.add(new SimpleSoundInstance(
-                    sound.getLocation(),
+                    sound.get().getLocation(),
                     SoundSource.RECORDS,
                     1.0f,
                     1.0f,
