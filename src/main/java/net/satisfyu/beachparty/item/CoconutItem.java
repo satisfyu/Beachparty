@@ -45,6 +45,8 @@ public class CoconutItem extends BlockItem {
 
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, @NotNull List<Text> tooltip, TooltipContext context) {
-        tooltip.add(Text.translatable(  "tooltip.beachparty.coconut").formatted(Formatting.ITALIC, Formatting.GRAY));
+        tooltip.add(Text.translatable(  "tooltip.beachparty.coconut").formatted(Formatting.WHITE));
+        tooltip.add(Text.translatable(  "tooltip.beachparty.canbeplaced").formatted(Formatting.ITALIC, Formatting.GRAY));
+
     }
 }
