@@ -27,6 +27,8 @@ public class BeachpartyAdvancementRecipeGenerator {
                 "palm_planks/palm_fence",
                 "palm_planks/palm_fence_gate",
                 "palm_planks/palm_button",
+                "palm_planks/deck_chair",
+                "palm_planks/hammock",
                 "palm_planks/palm_pressure_plate",
                 "palm_planks/palm_sign",
                 "minecraft:bamboo/palm_torch",

@@ -64,5 +64,7 @@ public class BeachpartyLoottableGenerator extends FabricBlockLootTableProvider {
         this.addDrop(ObjectRegistry.SAND_SEASTARS, b -> oreDrops(b, Item.fromBlock(Blocks.SAND)));
         this.addDrop(ObjectRegistry.DRY_BUSH, b -> oreDrops(b, Items.STICK));
         this.addDrop(ObjectRegistry.DRY_BUSH_TALL, b -> dropsWithProperty(b, TallPlantBlock.HALF, DoubleBlockHalf.LOWER));
+        this.addDrop(ObjectRegistry.HAMMOCK, b -> dropsWithProperty(b, BedBlock.PART, BedPart.HEAD));
+        this.addDrop(ObjectRegistry.DECK_CHAIR, b -> dropsWithProperty(b, BedBlock.PART, BedPart.HEAD));
     }
 }
