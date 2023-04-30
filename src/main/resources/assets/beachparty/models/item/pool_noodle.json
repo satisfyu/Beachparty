@@ -1,7 +1,7 @@
 {
   "parent": "item/handheld",
   "textures": {
-    "layer0": "beachparty:item/pool_noodle_yellow"
+    "layer0": "beachparty:item/pool_noodle"
   },
   "display": {
         "thirdperson_righthand": {

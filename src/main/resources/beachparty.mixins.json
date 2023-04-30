@@ -5,6 +5,7 @@
   "mixins": [
     "AbstractBlockMixin",
     "BlockMixin",
+    "LivingEntityMixin",
     "PotionItemMixin",
     "SpawnMobAccessor"
   ],

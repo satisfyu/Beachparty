@@ -3,7 +3,7 @@ package net.satisfyu.beachparty.registry;
 import com.terraformersmc.terraform.sign.block.TerraformSignBlock;
 import com.terraformersmc.terraform.sign.block.TerraformWallSignBlock;
 import com.terraformersmc.terraform.wood.block.StrippableLogBlock;
-import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
+import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
@@ -15,6 +15,8 @@ import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.item.*;
+import net.minecraft.nbt.NbtCompound;
+import net.minecraft.nbt.NbtElement;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.Identifier;
@@ -27,7 +29,7 @@ import net.satisfyu.beachparty.item.*;
 import net.satisfyu.beachparty.item.BeachHatItem;
 import net.satisfyu.beachparty.item.BetterCustomArmorModelItem;
 import net.satisfyu.beachparty.item.DrinkBlockItem;
-import net.satisfyu.beachparty.item.SwimwearArmorItem;
+import net.satisfyu.beachparty.item.BeachpartyArmorItem;
 
 import java.util.*;
 import java.util.function.BiFunction;
@@ -69,8 +71,9 @@ public class ObjectRegistry {
     public static final Block CHAIR = register("chair", new ChairBlock(FabricBlockSettings.of(Material.WOOD).strength(2.0f, 3.0f).sounds(BlockSoundGroup.BAMBOO)));
     public static final Block TABLE = register("table", new TableBlock(FabricBlockSettings.copy(Blocks.OAK_PLANKS).sounds(BlockSoundGroup.BAMBOO)));
     public static final Block BEACH_CHAIR = register("beach_chair", new BeachChairBlock(FabricBlockSettings.copy(Blocks.OAK_PLANKS).sounds(BlockSoundGroup.BAMBOO)));
-    public static final Block DECK_CHAIR = register("deck_chair", new BeachChairBlock(FabricBlockSettings.copy(Blocks.OAK_PLANKS).sounds(BlockSoundGroup.BAMBOO)));
+    public static final Block DECK_CHAIR = register("deck_chair", new DeckChairBlock(FabricBlockSettings.copy(Blocks.OAK_PLANKS).sounds(BlockSoundGroup.BAMBOO)));
     public static final Block TIKI_CHAIR = register("tiki_chair", new TikiChairBlock(FabricBlockSettings.copy(Blocks.OAK_PLANKS).sounds(BlockSoundGroup.BAMBOO)));
+    public static final Block HAMMOCK = register("hammock", new HammockBlock(FabricBlockSettings.copy(Blocks.OAK_PLANKS).sounds(BlockSoundGroup.BAMBOO)));
     public static final Block TIKI_BAR = register("tiki_bar", new TikiBarBlock(FabricBlockSettings.copy(Blocks.OAK_PLANKS).sounds(BlockSoundGroup.BAMBOO)));
     public static final Block CABINET = register("cabinet", new CabinetBlock(FabricBlockSettings.of(Material.WOOD).strength(2.0F, 3.0F).sounds(BlockSoundGroup.BAMBOO), SoundEventRegistry.CABINET_OPEN, SoundEventRegistry.CABINET_CLOSE));
     private static final BeachpartyIdentifier PALM_SIGN_TEXTURE = new BeachpartyIdentifier("entity/signs/palm");
@@ -107,20 +110,17 @@ public class ObjectRegistry {
     public static final Item COOKED_MUSSEL_MEAT = register("cooked_mussel_meat", new Item(getSettings().food(FoodComponents.COOKED_BEEF)));
     public static final Block BEACH_TOWEL = register("beach_towel", new BeachTowelBlock(FabricBlockSettings.copy(Blocks.WHITE_WOOL).sounds(BlockSoundGroup.WOOL)));
     public static final Item BEACH_HAT = register("beach_hat", new BeachHatItem(getSettings().rarity(Rarity.COMMON)));
-    public static final Item SUNGLASSES = register("sunglasses", new SwimwearArmorItem(MaterialsRegistry.SUNGLASSES, EquipmentSlot.HEAD, getSettings()));
-    public static final Item TRUNKS = register("trunks", new SwimwearArmorItem(MaterialsRegistry.TRUNKS, EquipmentSlot.LEGS, getSettings().rarity(Rarity.COMMON)));
-    public static final Item BIKINI = register("bikini", new SwimwearArmorItem(MaterialsRegistry.BIKINI, EquipmentSlot.LEGS, getSettings().rarity(Rarity.COMMON)));
-    public static final Item CROCS = register("crocs", new SwimwearArmorItem(MaterialsRegistry.CROCS, EquipmentSlot.FEET, getSettings().rarity(Rarity.UNCOMMON)));
-    public static final Item SWIM_WINGS = register("swim_wings", new SwimwearArmorItem(MaterialsRegistry.SWIM_WINGS, EquipmentSlot.CHEST, getSettings()));
+    public static final Item SUNGLASSES = register("sunglasses", new BeachpartyArmorItem(MaterialsRegistry.SUNGLASSES, EquipmentSlot.HEAD, getSettings()));
+    public static final Item TRUNKS = register("trunks", new DyeableBeachpartyArmorItem(MaterialsRegistry.TRUNKS, EquipmentSlot.LEGS,getSettings().rarity(Rarity.COMMON)));
+    public static final Item BIKINI = register("bikini", new DyeableBeachpartyArmorItem(MaterialsRegistry.BIKINI, EquipmentSlot.LEGS, getSettings().rarity(Rarity.COMMON)));
+    public static final Item CROCS = register("crocs", new DyeableBeachpartyArmorItem(MaterialsRegistry.CROCS, EquipmentSlot.FEET, getSettings().rarity(Rarity.UNCOMMON)));
+    public static final Item SWIM_WINGS = register("swim_wings", new BeachpartyArmorItem(MaterialsRegistry.SWIM_WINGS, EquipmentSlot.CHEST, getSettings()));
     public static final Item RUBBER_RING_BLUE = register("rubber_ring_blue", new BetterCustomArmorModelItem(EquipmentSlot.CHEST, getSettings().rarity(Rarity.COMMON), new BeachpartyIdentifier("textures/entity/rubber_ring_blue.png"), -0.7f));
     public static final Item RUBBER_RING_PINK = register("rubber_ring_pink", new BetterCustomArmorModelItem(EquipmentSlot.CHEST, getSettings().rarity(Rarity.COMMON), new BeachpartyIdentifier("textures/entity/rubber_ring_pink.png"), -0.7f));
     public static final Item RUBBER_RING_STRIPPED = register("rubber_ring_stripped", new BetterCustomArmorModelItem(EquipmentSlot.CHEST, getSettings().rarity(Rarity.COMMON), new BeachpartyIdentifier("textures/entity/rubber_ring_stripped.png"), -0.7f));
     public static final Item RUBBER_RING_PELICAN = register("rubber_ring_pelican", new BetterCustomArmorModelItem(EquipmentSlot.CHEST, getSettings().rarity(Rarity.RARE), new BeachpartyIdentifier("textures/entity/rubber_ring_pelican.png"), -0.7f));
     public static final Item RUBBER_RING_AXOLOTL = register("rubber_ring_axolotl", new BetterCustomArmorModelItem(EquipmentSlot.CHEST, getSettings().rarity(Rarity.RARE), new BeachpartyIdentifier("textures/entity/rubber_ring_axolotl.png"), -0.7f));
-    public static final Item POOL_NOODLE_BLUE = register("pool_noodle_blue", new PoolnoodleItem(ToolMaterials.WOOD, 1, -1.4F, getSettings()));
-    public static final Item POOL_NOODLE_RED = register("pool_noodle_red", new SwordItem(ToolMaterials.WOOD, 1, -1.4F, getSettings()));
-    public static final Item POOL_NOODLE_GREEN = register("pool_noodle_green", new SwordItem(ToolMaterials.WOOD, 1, -1.4F, getSettings()));
-    public static final Item POOL_NOODLE_YELLOW = register("pool_noodle_yellow", new SwordItem(ToolMaterials.WOOD, 1, -1.4F, getSettings()));
+    public static final Item POOL_NOODLE = register("pool_noodle", new PoolNoodleItem(ToolMaterials.WOOD, 1, -1.4F, getSettings()));
     public static final Block PALM_TORCH = register("palm_torch", new TorchBlock(AbstractBlock.Settings.of(Material.DECORATION).noCollision().breakInstantly().luminance((state) -> 14).sounds(BlockSoundGroup.WOOD), ParticleTypes.FLAME), false);
     public static final Block PALM_WALL_TORCH = register("palm_wall_torch", new WallTorchBlock(AbstractBlock.Settings.of(Material.DECORATION).noCollision().breakInstantly().luminance((state) -> 14).sounds(BlockSoundGroup.WOOD).dropsLike(PALM_TORCH), ParticleTypes.FLAME), false);
     public static final Item PALM_TORCH_ITEM = register("palm_torch_item", new WallStandingBlockItem(ObjectRegistry.PALM_TORCH, ObjectRegistry.PALM_WALL_TORCH, getSettings()));
@@ -280,8 +280,21 @@ public class ObjectRegistry {
         registerCompostableItem(ObjectRegistry.COCONUT, 0.3F);
         registerCompostableItem(ObjectRegistry.COCONUT_OPEN, 0.3F);
 
+        registerColorArmor(ObjectRegistry.TRUNKS, 16715535);
+        registerColorArmor(ObjectRegistry.BIKINI, 987135);
+        registerColorArmor(ObjectRegistry.CROCS, 1048335);
+        registerColorArmor(ObjectRegistry.POOL_NOODLE, 1017855);
+    }
 
+    private static void registerColorArmor(Item item, int defaultColor) {
+        ColorProviderRegistry.ITEM.register((stack, tintIndex) -> tintIndex > 0 ? -1 : getColor(stack, defaultColor), item);
+    }
 
+    public static int getColor(ItemStack itemStack, int defaultColor) {
+        NbtCompound displayTag = itemStack.getSubNbt("display");
+        if (displayTag != null && displayTag.contains("color", NbtElement.NUMBER_TYPE))
+            return displayTag.getInt("color");
+        return defaultColor;
     }
 
     public static void registerCompostableItem(ItemConvertible item, float chance) {

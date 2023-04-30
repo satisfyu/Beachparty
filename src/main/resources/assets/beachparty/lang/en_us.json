@@ -112,7 +112,7 @@
   "tooltip.beachparty.message": "Right-Click to Open",
   "tooltip.beachparty.radioswitch": "Mousewheel-Up/Down to switch Radio Stations",
   "tooltip.beachparty.radioturnon": "Right-Click to turn it on/off",
-  "tooltip.beachparty.swimwear_effect" : "Dolphins Grace /n Water Breathing",
+  "tooltip.beachparty.swimwear_effect" : "Dolphins Grace &  Water Breathing",
   "tooltip.beachparty.swimwear_set" : "Swimwear Set",
   "tooltip.beachparty.swimwear_seteffect" : "SwimwearSet Effect",
   "tooltip.beachparty.swimwearboots" : "Swimwear Boots",
@@ -122,5 +122,7 @@
   "tooltip.beachparty.swimwearline1": "When Wearing:",
   "tooltip.beachparty.swimwearline2": "+17% Swim Speed",
   "tooltip.beachparty.tiki": "Used for mixing Cocktails and Drinks",
-  "tooltip.beachparty.icecream": "NeverMelt. Always cold and refreshing. No expense was spared"
+  "tooltip.beachparty.icecream": "NeverMelt. Always cold and refreshing. No expense was spared",
+
+  "block.beachparty.notimplemented" : "This block has functions that are not yet fully implemented. Stay Tuned!"
 }

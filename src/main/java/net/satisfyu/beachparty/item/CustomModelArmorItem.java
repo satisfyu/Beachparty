@@ -4,7 +4,7 @@ import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.ArmorMaterial;
 import net.minecraft.util.Identifier;
 
-public abstract class CustomModelArmorItem extends SwimwearArmorItem {
+public abstract class CustomModelArmorItem extends BeachpartyArmorItem {
     public CustomModelArmorItem(ArmorMaterial material, EquipmentSlot slot, Settings settings) {
         super(material, slot, settings);
     }

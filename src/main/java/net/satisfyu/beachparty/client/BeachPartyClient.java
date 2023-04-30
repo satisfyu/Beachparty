@@ -9,14 +9,12 @@ import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.ingame.HandledScreens;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.TexturedRenderLayers;
 import net.minecraft.client.render.entity.FlyingItemEntityRenderer;
 import net.minecraft.client.render.entity.model.EntityModelLayer;
 import net.minecraft.client.util.SpriteIdentifier;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Identifier;
 import net.satisfyu.beachparty.BeachpartyIdentifier;
 import net.satisfyu.beachparty.client.gui.MiniFridgeGui;
@@ -54,7 +52,7 @@ public class BeachPartyClient implements ClientModInitializer {
                 ObjectRegistry.DRY_BUSH, ObjectRegistry.DRY_BUSH_TALL, ObjectRegistry.MELON_COCKTAIL, ObjectRegistry.COCONUT_COCKTAIL,
                 ObjectRegistry.HONEY_COCKTAIL, ObjectRegistry.SWEETBERRIES_COCKTAIL, ObjectRegistry.PUMPKIN_COCKTAIL,
                 ObjectRegistry.COCOA_COCKTAIL, ObjectRegistry.SANDCASTLE, ObjectRegistry.BEACH_GRASS, ObjectRegistry.MESSAGE_IN_A_BOTTLE,
-                ObjectRegistry.BEACH_TOWEL, ObjectRegistry.DECK_CHAIR
+                ObjectRegistry.BEACH_TOWEL, ObjectRegistry.DECK_CHAIR, ObjectRegistry.HAMMOCK
         );
 
         RenderRegistry.registerModels();

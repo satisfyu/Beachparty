@@ -21,7 +21,7 @@ import java.util.Map;
 import java.util.Objects;
 
 
-public class SwimwearArmorItem extends ArmorItem {
+public class BeachpartyArmorItem extends ArmorItem {
 	private static final Map<ArmorMaterial, StatusEffectInstance> MATERIAL_TO_EFFECT_MAP =
 			(new ImmutableMap.Builder<ArmorMaterial, StatusEffectInstance>())
 					.put(MaterialsRegistry.BIKINI, new StatusEffectInstance(StatusEffects.DOLPHINS_GRACE, 14*20, 1))
@@ -29,7 +29,7 @@ public class SwimwearArmorItem extends ArmorItem {
 					.put(MaterialsRegistry.SWIM_WINGS, new StatusEffectInstance(StatusEffects.DOLPHINS_GRACE, 14*20, 0))
 					.put(MaterialsRegistry.RING, new StatusEffectInstance(StatusEffects.DOLPHINS_GRACE, 14*20, 1)).build();
 
-	public SwimwearArmorItem(ArmorMaterial material, EquipmentSlot slot, Settings settings) {
+	public BeachpartyArmorItem(ArmorMaterial material, EquipmentSlot slot, Settings settings) {
 		super(material, slot, settings);
 	}
 
@@ -40,9 +40,8 @@ public class SwimwearArmorItem extends ArmorItem {
 				if (hasSwimwearSet(player)) {
 					addStatusEffectForMaterial(player, new StatusEffectInstance(StatusEffects.DOLPHINS_GRACE, 14*20, 2));
 					addStatusEffectForMaterial(player, new StatusEffectInstance(StatusEffects.WATER_BREATHING, 14*20, 0));
-				} else {
-					hasSwimwear(player);
 				}
+				hasSwimwear(player);
 			}
 		}
 		super.inventoryTick(stack, world, entity, slot, selected);
@@ -93,10 +92,10 @@ public class SwimwearArmorItem extends ArmorItem {
 	}
 
 	private boolean hasSwimearBoots(PlayerEntity player) {
-		return true;
+		return !player.getInventory().getArmorStack(0).isEmpty() && isSwimwearBoots((ArmorItem)player.getInventory().getArmorStack(0).getItem());
 	}
 	private boolean isSwimwearBoots(ArmorItem armorItem) {
-		return true;
+		return armorItem.getMaterial() == MaterialsRegistry.CROCS;
 	}
 
 	private boolean hasSwimearLeggings(PlayerEntity player) {
@@ -133,14 +132,14 @@ public class SwimwearArmorItem extends ArmorItem {
 		boolean leggings = hasSwimearLeggings(player);
 		boolean boots = hasSwimearBoots(player);
 
-		tooltip.add(Text.of("")); //TODO
-		tooltip.add(Text.of(Formatting.DARK_GREEN.toString() + Text.translatable("tooltip.beachparty.swimwear_set")));
-		tooltip.add(Text.of((helmet ? Formatting.GREEN.toString() : Formatting.GRAY.toString()) + "- [" + (Text.translatable("tooltip.beachparty.swimwearhelmet")) + "]"));
-		tooltip.add(Text.of((breastplate ? Formatting.GREEN.toString() : Formatting.GRAY.toString()) + "- [" + Text.translatable("tooltip.beachparty.swimwearbreastplate") + "]"));
-		tooltip.add(Text.of((leggings ? Formatting.GREEN.toString() : Formatting.GRAY.toString()) + "- [" + Text.translatable("tooltip.beachparty.swimwearleggings") + "]"));
-		tooltip.add(Text.of((boots ? Formatting.GREEN.toString() : Formatting.GRAY.toString()) + "- [" + Text.translatable("tooltip.beachparty.swimwearboots") + "]"));
 		tooltip.add(Text.of(""));
-		tooltip.add(Text.of(Formatting.GRAY.toString() + Text.translatable("tooltip.beachparty.swimwear_seteffect")));
-		tooltip.add(Text.of(((helmet && breastplate && leggings && boots) ? Formatting.DARK_GREEN.toString() : Formatting.GRAY.toString()) + Text.translatable("tooltip.beachparty.swimwear_effect")));
+		tooltip.add(Text.translatable("tooltip.beachparty.swimwear_set").formatted(Formatting.DARK_GREEN));
+		tooltip.add(helmet ? Text.translatable("tooltip.beachparty.swimwearhelmet").formatted(Formatting.GREEN) : Text.translatable("tooltip.beachparty.swimwearhelmet").formatted(Formatting.GRAY));
+		tooltip.add(breastplate ? Text.translatable("tooltip.beachparty.swimwearbreastplate").formatted(Formatting.GREEN) : Text.translatable("tooltip.beachparty.swimwearbreastplate").formatted(Formatting.GRAY));
+		tooltip.add(leggings ? Text.translatable("tooltip.beachparty.swimwearleggings").formatted(Formatting.GREEN) : Text.translatable("tooltip.beachparty.swimwearleggings").formatted(Formatting.GRAY));
+		tooltip.add(boots ? Text.translatable("tooltip.beachparty.swimwearboots").formatted(Formatting.GREEN) : Text.translatable("tooltip.beachparty.swimwearboots").formatted(Formatting.GRAY));
+		tooltip.add(Text.of(""));
+		tooltip.add(Text.translatable("tooltip.beachparty.swimwear_seteffect").formatted(Formatting.GRAY));
+		tooltip.add(helmet && breastplate && leggings && boots ? Text.translatable("tooltip.beachparty.swimwear_effect").formatted(Formatting.DARK_GREEN) : Text.translatable("tooltip.beachparty.swimwear_effect").formatted(Formatting.GRAY));
 	}
 }

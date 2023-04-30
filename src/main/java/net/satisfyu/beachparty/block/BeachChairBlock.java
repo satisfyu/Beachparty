@@ -2,12 +2,12 @@ package net.satisfyu.beachparty.block;
 
 import net.minecraft.block.*;
 import net.minecraft.block.enums.BedPart;
+import net.minecraft.block.piston.PistonBehavior;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.state.StateManager;
-import net.minecraft.state.property.DirectionProperty;
 import net.minecraft.state.property.EnumProperty;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.ActionResult;
@@ -33,7 +33,7 @@ import java.util.function.Supplier;
 public class BeachChairBlock extends HorizontalFacingBlock {
 	public static final EnumProperty<BedPart> PART = Properties.BED_PART;
 
-	private static final Supplier<VoxelShape> voxelShapeSupplier = () -> {
+	private static final Supplier<VoxelShape> headShapeSupplier = () -> {
 		VoxelShape shape = VoxelShapes.empty();
 		shape = VoxelShapes.union(shape, VoxelShapes.cuboid(0.875, 0, 0, 1, 1, 1));
 		shape = VoxelShapes.union(shape, VoxelShapes.cuboid(0.874375, 0.5, 0, 0.936875, 1.5, 0.875));
@@ -44,19 +44,34 @@ public class BeachChairBlock extends HorizontalFacingBlock {
 		return shape;
 	};
 
-	public static final Map<Direction, VoxelShape> SHAPE = Util.make(new HashMap<>(), map -> {
+	public static final Map<Direction, VoxelShape> HEAD_SHAPE = Util.make(new HashMap<>(), map -> {
 		for (Direction direction : Direction.Type.HORIZONTAL) {
-			map.put(direction, BeachpartyUtil.rotateShape(Direction.EAST, direction, voxelShapeSupplier.get()));
+			map.put(direction, BeachpartyUtil.rotateShape(Direction.EAST, direction, headShapeSupplier.get()));
+		}
+	});
+
+	private static final Supplier<VoxelShape> foodShapeSupplier = () -> {
+		VoxelShape shape = VoxelShapes.empty();
+		shape = VoxelShapes.union(shape, VoxelShapes.cuboid(0, 0, 0, 0.125, 1, 1));
+		shape = VoxelShapes.union(shape, VoxelShapes.cuboid(0.063125, 0.5, 0, 0.125625, 1.5, 0.875));
+		shape = VoxelShapes.union(shape, VoxelShapes.cuboid(0.125, 0, 0, 1, 0.375, 0.8125));
+		shape = VoxelShapes.union(shape, VoxelShapes.cuboid(0.125, 0.375, 0, 1, 0.5, 0.875));
+		shape = VoxelShapes.union(shape, VoxelShapes.cuboid(0.0625, 1.5, 0, 1, 1.6875, 0.9375));
+		shape = VoxelShapes.union(shape, VoxelShapes.cuboid(0.125, 1.4375, 0.9375, 1, 1.625, 1.0625));
+		return shape;
+	};
+
+	public static final Map<Direction, VoxelShape> FOOD_SHAPE = Util.make(new HashMap<>(), map -> {
+		for (Direction direction : Direction.Type.HORIZONTAL) {
+			map.put(direction, BeachpartyUtil.rotateShape(Direction.EAST, direction, foodShapeSupplier.get()));
 		}
 	});
 
 
 	public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-		Direction direction = getOppositePartDirection(state).getOpposite();
-		return SHAPE.get(direction);
+		Direction direction = state.get(FACING);
+		return state.get(PART) == BedPart.HEAD ? HEAD_SHAPE.get(direction) : FOOD_SHAPE.get(direction);
 	}
-
-	public static final DirectionProperty FACING = HorizontalFacingBlock.FACING;
 
 	public BeachChairBlock(Settings settings) {
 		super(settings);
@@ -133,5 +148,10 @@ public class BeachChairBlock extends HorizontalFacingBlock {
 					world.syncWorldEvent(player, WorldEvents.BLOCK_BROKEN, blockPos, Block.getRawIdFromState(blockState));
 			}
 		}
+	}
+
+	@Override
+	public PistonBehavior getPistonBehavior(BlockState state) {
+		return PistonBehavior.IGNORE;
 	}
 }
