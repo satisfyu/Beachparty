@@ -3,7 +3,6 @@ package net.satisfyu.beachparty.registry;
 import com.terraformersmc.terraform.sign.block.TerraformSignBlock;
 import com.terraformersmc.terraform.sign.block.TerraformWallSignBlock;
 import com.terraformersmc.terraform.wood.block.StrippableLogBlock;
-import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
@@ -15,8 +14,6 @@ import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.item.*;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.nbt.NbtElement;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.Identifier;
@@ -279,22 +276,6 @@ public class ObjectRegistry {
         registerCompostableItem(ObjectRegistry.BEACH_GRASS, 0.4F);
         registerCompostableItem(ObjectRegistry.COCONUT, 0.3F);
         registerCompostableItem(ObjectRegistry.COCONUT_OPEN, 0.3F);
-
-        registerColorArmor(ObjectRegistry.TRUNKS, 16715535);
-        registerColorArmor(ObjectRegistry.BIKINI, 987135);
-        registerColorArmor(ObjectRegistry.CROCS, 1048335);
-        registerColorArmor(ObjectRegistry.POOL_NOODLE, 1017855);
-    }
-
-    private static void registerColorArmor(Item item, int defaultColor) {
-        ColorProviderRegistry.ITEM.register((stack, tintIndex) -> tintIndex > 0 ? -1 : getColor(stack, defaultColor), item);
-    }
-
-    public static int getColor(ItemStack itemStack, int defaultColor) {
-        NbtCompound displayTag = itemStack.getSubNbt("display");
-        if (displayTag != null && displayTag.contains("color", NbtElement.NUMBER_TYPE))
-            return displayTag.getInt("color");
-        return defaultColor;
     }
 
     public static void registerCompostableItem(ItemConvertible item, float chance) {

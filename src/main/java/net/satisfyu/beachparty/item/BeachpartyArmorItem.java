@@ -1,7 +1,6 @@
 package net.satisfyu.beachparty.item;
 
 import com.google.common.collect.ImmutableMap;
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EquipmentSlot;
@@ -12,14 +11,15 @@ import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ArmorMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
-import net.minecraft.util.Formatting;
 import net.minecraft.world.World;
+import net.satisfyu.beachparty.client.BeachPartyClient;
 import net.satisfyu.beachparty.registry.MaterialsRegistry;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-
 
 public class BeachpartyArmorItem extends ArmorItem {
 	private static final Map<ArmorMaterial, StatusEffectInstance> MATERIAL_TO_EFFECT_MAP =
@@ -91,55 +91,38 @@ public class BeachpartyArmorItem extends ArmorItem {
 		}
 	}
 
-	private boolean hasSwimearBoots(PlayerEntity player) {
+	public static boolean hasSwimearBoots(PlayerEntity player) {
 		return !player.getInventory().getArmorStack(0).isEmpty() && isSwimwearBoots((ArmorItem)player.getInventory().getArmorStack(0).getItem());
 	}
-	private boolean isSwimwearBoots(ArmorItem armorItem) {
+	private static boolean isSwimwearBoots(ArmorItem armorItem) {
 		return armorItem.getMaterial() == MaterialsRegistry.CROCS;
 	}
 
-	private boolean hasSwimearLeggings(PlayerEntity player) {
+	public static boolean hasSwimearLeggings(PlayerEntity player) {
 		return !player.getInventory().getArmorStack(1).isEmpty() && isSwimwearLeggings((ArmorItem)player.getInventory().getArmorStack(1).getItem());
 	}
-	private boolean isSwimwearLeggings(ArmorItem armorItem) {
+	private static boolean isSwimwearLeggings(ArmorItem armorItem) {
 		return armorItem.getMaterial() == MaterialsRegistry.TRUNKS || armorItem.getMaterial() == MaterialsRegistry.BIKINI;
 	}
 
-	private boolean hasSwimwearBreastplate(PlayerEntity player) {
+	public static boolean hasSwimwearBreastplate(PlayerEntity player) {
 		return !player.getInventory().getArmorStack(2).isEmpty() && isSwimwearBreastplate((ArmorItem)player.getInventory().getArmorStack(2).getItem());
 	}
-	private boolean isSwimwearBreastplate(ArmorItem armorItem) {
+	private static boolean isSwimwearBreastplate(ArmorItem armorItem) {
 		return armorItem.getMaterial() == MaterialsRegistry.RING || armorItem.getMaterial() == MaterialsRegistry.SWIM_WINGS;
 	}
 
-	private boolean hasSwimearHelmet(PlayerEntity player) {
+	public static boolean hasSwimearHelmet(PlayerEntity player) {
 		return !player.getInventory().getArmorStack(3).isEmpty() && isSwimwearHelmet((ArmorItem)player.getInventory().getArmorStack(3).getItem());
 	}
-	private boolean isSwimwearHelmet(ArmorItem armorItem) {
+	private static boolean isSwimwearHelmet(ArmorItem armorItem) {
 		return armorItem.getMaterial() == MaterialsRegistry.BEACH_HAT || armorItem.getMaterial() == MaterialsRegistry.SUNGLASSES;
 	}
 
 	@Override
-	public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext context) {
-		super.appendTooltip(stack, world, tooltip, context);
-		tooltip.add(Text.translatable(  "tooltip.beachparty.swimwearline1").formatted(Formatting.DARK_PURPLE));
-		tooltip.add(Text.translatable(  "tooltip.beachparty.swimwearline2").formatted(Formatting.BLUE));
-
-		PlayerEntity player = MinecraftClient.getInstance().player;
-
-		boolean helmet = hasSwimearHelmet(player);
-		boolean breastplate = hasSwimwearBreastplate(player);
-		boolean leggings = hasSwimearLeggings(player);
-		boolean boots = hasSwimearBoots(player);
-
-		tooltip.add(Text.of(""));
-		tooltip.add(Text.translatable("tooltip.beachparty.swimwear_set").formatted(Formatting.DARK_GREEN));
-		tooltip.add(helmet ? Text.translatable("tooltip.beachparty.swimwearhelmet").formatted(Formatting.GREEN) : Text.translatable("tooltip.beachparty.swimwearhelmet").formatted(Formatting.GRAY));
-		tooltip.add(breastplate ? Text.translatable("tooltip.beachparty.swimwearbreastplate").formatted(Formatting.GREEN) : Text.translatable("tooltip.beachparty.swimwearbreastplate").formatted(Formatting.GRAY));
-		tooltip.add(leggings ? Text.translatable("tooltip.beachparty.swimwearleggings").formatted(Formatting.GREEN) : Text.translatable("tooltip.beachparty.swimwearleggings").formatted(Formatting.GRAY));
-		tooltip.add(boots ? Text.translatable("tooltip.beachparty.swimwearboots").formatted(Formatting.GREEN) : Text.translatable("tooltip.beachparty.swimwearboots").formatted(Formatting.GRAY));
-		tooltip.add(Text.of(""));
-		tooltip.add(Text.translatable("tooltip.beachparty.swimwear_seteffect").formatted(Formatting.GRAY));
-		tooltip.add(helmet && breastplate && leggings && boots ? Text.translatable("tooltip.beachparty.swimwear_effect").formatted(Formatting.DARK_GREEN) : Text.translatable("tooltip.beachparty.swimwear_effect").formatted(Formatting.GRAY));
+	public void appendTooltip(ItemStack stack, @Nullable World world, @NotNull List<Text> tooltip, TooltipContext context) {
+		if (world != null && world.isClient()){
+			BeachPartyClient.appendTooltip(tooltip);
+		}
 	}
 }
