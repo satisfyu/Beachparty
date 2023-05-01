@@ -26,7 +26,7 @@ public class Beachparty {
         RecipeRegistry.init();
         SoundEventRegistry.init();
         ScreenHandlerTypesRegistry.init();
-
+PlacerTypesRegistry.init();
 
         //registerLootTable();
 
