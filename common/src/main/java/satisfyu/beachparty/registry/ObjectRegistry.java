@@ -128,7 +128,7 @@ public class ObjectRegistry {
     public static final RegistrySupplier<Block> PALM_TALL_TORCH = registerWithItem("palm_tall_torch", () -> new TallTorchBlock(BlockBehaviour.Properties.of(Material.DECORATION).noCollission().instabreak().lightLevel((state) -> 14).sound(SoundType.WOOD), ParticleTypes.FLAME));
     public static final RegistrySupplier<Item> PELICAN_SPAWN_EGG = registerItem("pelican_spawn_egg", () -> new ArchitecturySpawnEggItem(EntityRegistry.PELICAN, 16710877, 16116736, getSettings()));
     public static final RegistrySupplier<Block> SANDCASTLE = registerWithoutItem("sandcastle", () -> new SandCastleBlock(BlockBehaviour.Properties.copy(Blocks.SAND))); //TODO was für Material?
-
+    public static final RegistrySupplier<Block> COCONUT_HANGING_BLOCK = registerWithoutItem("coconut_hanging_block", () -> new Block(BlockBehaviour.Properties.of(Material.BAMBOO)));
 
     private static RegistrySupplier<Block> registerLog(String path) {
         return registerWithItem(path, () -> new RotatedPillarBlock(getLogBlockSettings()));
