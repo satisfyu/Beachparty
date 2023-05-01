@@ -46,5 +46,6 @@ public class CoconutItem extends BlockItem {
     @Override
     public void appendHoverText(ItemStack stack, @Nullable Level world, @NotNull List<Component> tooltip, TooltipFlag context) {
         tooltip.add(Component.translatable(  "tooltip.beachparty.coconut").withStyle(ChatFormatting.ITALIC, ChatFormatting.GRAY));
+        tooltip.add(Component.translatable(  "tooltip.beachparty.coconut").withStyle(ChatFormatting.ITALIC, ChatFormatting.GRAY));
     }
 }

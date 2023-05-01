@@ -1,15 +1,15 @@
 package satisfyu.beachparty.item;
 
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ArmorMaterial;
+import org.intellij.lang.annotations.Identifier;
 
-public abstract class CustomModelArmorItem extends SwimwearArmorItem {
-    public CustomModelArmorItem(ArmorMaterial material, EquipmentSlot slot, Properties settings) {
+public abstract class CustomModelArmorItem extends net.satisfyu.beachparty.item.BeachpartyArmorItem {
+    public CustomModelArmorItem(ArmorMaterial material, EquipmentSlot slot, Settings settings) {
         super(material, slot, settings);
     }
 
-    public abstract ResourceLocation getTexture();
+    public abstract Identifier getTexture();
 
     public abstract Float getOffset();
 

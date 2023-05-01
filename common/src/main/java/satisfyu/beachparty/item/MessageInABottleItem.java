@@ -71,11 +71,11 @@ public class MessageInABottleItem extends BlockItem {
             case 0 -> // Buried Treasure
                     map = createMansionMap(entity);
             case 1 -> // Shipwreck Map
-                    map = createMansionMap(entity);
+                    map = createShipwreckMap(entity);
             case 2 -> // Shipwreck Supply
                     map = createMonumentMap(entity);
             case 3 -> // Shipwreck Treasure
-                    map = createMonumentMap(entity);
+                    map = createTreasureMap(entity);
         }
         return map;
     }
@@ -88,6 +88,15 @@ public class MessageInABottleItem extends BlockItem {
     public static ItemStack createMansionMap(Entity entity){
         return createMap(entity, StructureTags.ON_WOODLAND_EXPLORER_MAPS, "filled_map.mansion", MapDecoration.Type.MANSION);
     }
+
+    public static ItemStack createShipwreckMap(Entity entity){
+        return createMap(entity, StructureTags.SHIPWRECK, "filled_map.shipwreck", MapDecoration.Type.RED_X);
+    }
+
+    public static ItemStack createTreasureMap(Entity entity){
+        return createMap(entity, StructureTags.ON_TREASURE_MAPS, "filled_map.treasure", MapDecoration.Type.RED_X);
+    }
+
 
     public static @Nullable ItemStack createMap(Entity entity, TagKey<Structure> structure, String nameKey, MapDecoration.Type iconType) {
         if (!(entity.level instanceof ServerLevel serverWorld)) {

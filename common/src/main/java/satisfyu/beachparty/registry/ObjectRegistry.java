@@ -108,11 +108,11 @@ public class ObjectRegistry {
     public static final RegistrySupplier<Item> COOKED_MUSSEL_MEAT = registerItem("cooked_mussel_meat", () -> new Item(getSettings().food(Foods.COOKED_BEEF)));
     public static final RegistrySupplier<Block> BEACH_TOWEL = registerWithItem("beach_towel", () -> new BeachTowelBlock(BlockBehaviour.Properties.copy(Blocks.WHITE_WOOL).sound(SoundType.WOOL)));
     public static final RegistrySupplier<Item> BEACH_HAT = registerItem("beach_hat", () -> new BeachHatItem(getSettings().rarity(Rarity.COMMON)));
-    public static final RegistrySupplier<Item> SUNGLASSES = registerItem("sunglasses", () -> new SwimwearArmorItem(MaterialsRegistry.SUNGLASSES, EquipmentSlot.HEAD, getSettings()));
-    public static final RegistrySupplier<Item> TRUNKS = registerItem("trunks", () -> new SwimwearArmorItem(MaterialsRegistry.TRUNKS, EquipmentSlot.LEGS, getSettings().rarity(Rarity.COMMON)));
-    public static final RegistrySupplier<Item> BIKINI = registerItem("bikini", () -> new SwimwearArmorItem(MaterialsRegistry.BIKINI, EquipmentSlot.LEGS, getSettings().rarity(Rarity.COMMON)));
-    public static final RegistrySupplier<Item> CROCS = registerItem("crocs", () -> new SwimwearArmorItem(MaterialsRegistry.CROCS, EquipmentSlot.FEET, getSettings().rarity(Rarity.UNCOMMON)));
-    public static final RegistrySupplier<Item> SWIM_WINGS = registerItem("swim_wings", () -> new SwimwearArmorItem(MaterialsRegistry.SWIM_WINGS, EquipmentSlot.CHEST, getSettings()));
+    public static final RegistrySupplier<Item> SUNGLASSES = registerItem("sunglasses", () -> new BeachpartyArmorItem(MaterialsRegistry.SUNGLASSES, EquipmentSlot.HEAD, getSettings()));
+    public static final RegistrySupplier<Item> TRUNKS = registerItem("trunks", () -> new BeachpartyArmorItem(MaterialsRegistry.TRUNKS, EquipmentSlot.LEGS, getSettings().rarity(Rarity.COMMON)));
+    public static final RegistrySupplier<Item> BIKINI = registerItem("bikini", () -> new BeachpartyArmorItem(MaterialsRegistry.BIKINI, EquipmentSlot.LEGS, getSettings().rarity(Rarity.COMMON)));
+    public static final RegistrySupplier<Item> CROCS = registerItem("crocs", () -> new BeachpartyArmorItem(MaterialsRegistry.CROCS, EquipmentSlot.FEET, getSettings().rarity(Rarity.UNCOMMON)));
+    public static final RegistrySupplier<Item> SWIM_WINGS = registerItem("swim_wings", () -> new BeachpartyArmorItem(MaterialsRegistry.SWIM_WINGS, EquipmentSlot.CHEST, getSettings()));
     public static final RegistrySupplier<Item> RUBBER_RING_BLUE = registerItem("rubber_ring_blue", () -> new BetterCustomArmorModelItem(EquipmentSlot.CHEST, getSettings().rarity(Rarity.COMMON), new BeachpartyIdentifier("textures/entity/rubber_ring_blue.png"), -0.7f));
     public static final RegistrySupplier<Item> RUBBER_RING_PINK = registerItem("rubber_ring_pink", () -> new BetterCustomArmorModelItem(EquipmentSlot.CHEST, getSettings().rarity(Rarity.COMMON), new BeachpartyIdentifier("textures/entity/rubber_ring_pink.png"), -0.7f));
     public static final RegistrySupplier<Item> RUBBER_RING_STRIPPED = registerItem("rubber_ring_stripped", () -> new BetterCustomArmorModelItem(EquipmentSlot.CHEST, getSettings().rarity(Rarity.COMMON), new BeachpartyIdentifier("textures/entity/rubber_ring_stripped.png"), -0.7f));
