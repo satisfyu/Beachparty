@@ -1,8 +1,10 @@
 package satisfyu.beachparty.registry;
 
 import dev.architectury.core.item.ArchitecturySpawnEggItem;
+import dev.architectury.platform.Platform;
 import dev.architectury.registry.fuel.FuelRegistry;
 import dev.architectury.registry.registries.DeferredRegister;
+import dev.architectury.registry.registries.Registrar;
 import dev.architectury.registry.registries.RegistrySupplier;
 import net.minecraft.core.Registry;
 import net.minecraft.core.particles.ParticleTypes;
@@ -29,7 +31,12 @@ import java.util.function.Supplier;
 
 public class ObjectRegistry {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(Beachparty.MOD_ID, Registry.ITEM_REGISTRY);
+    public static final Registrar<Item> ITEM_REGISTRAR = ITEMS.getRegistrar();
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(Beachparty.MOD_ID, Registry.BLOCK_REGISTRY);
+    public static final Registrar<Block> BLOCK_REGISTRAR = BLOCKS.getRegistrar();
+
+
+
 
     public static final RegistrySupplier<Block> BEACH_GRASS = registerWithItem("beach_grass", () -> new DeadBushBlock(BlockBehaviour.Properties.copy(Blocks.ALLIUM)));
     public static final RegistrySupplier<Block> DRY_BUSH = registerWithItem("dry_bush", () -> new DeadBushBlock(BlockBehaviour.Properties.copy(Blocks.DANDELION)));
@@ -66,7 +73,7 @@ public class ObjectRegistry {
     public static final RegistrySupplier<Block> DECK_CHAIR = registerWithItem("deck_chair", () -> new BeachChairBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).sound(SoundType.BAMBOO)));
     public static final RegistrySupplier<Block> TIKI_CHAIR = registerWithItem("tiki_chair", () -> new TikiChairBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).sound(SoundType.BAMBOO)));
     public static final RegistrySupplier<Block> TIKI_BAR = registerWithItem("tiki_bar", () -> new TikiBarBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).sound(SoundType.BAMBOO)));
-    public static final RegistrySupplier<Block> CABINET = registerWithItem("cabinet", () -> new CabinetBlock(BlockBehaviour.Properties.of(Material.WOOD).strength(2.0F, 3.0F).sound(SoundType.BAMBOO), SoundEventRegistry.CABINET_OPEN.get(), SoundEventRegistry.CABINET_CLOSE.get()));
+    public static final RegistrySupplier<Block> CABINET = registerWithItem("cabinet", () -> new CabinetBlock(BlockBehaviour.Properties.of(Material.WOOD).strength(2.0F, 3.0F).sound(SoundType.BAMBOO), SoundEventRegistry.CABINET_OPEN, SoundEventRegistry.CABINET_CLOSE));
     private static final BeachpartyIdentifier PALM_SIGN_TEXTURE = new BeachpartyIdentifier("entity/signs/palm");
     public static final RegistrySupplier<TerraformSignBlock> PALM_SIGN = registerWithoutItem("palm_sign", () -> new TerraformSignBlock(PALM_SIGN_TEXTURE, BlockBehaviour.Properties.copy(Blocks.OAK_SIGN)));
     public static final RegistrySupplier<Block> PALM_WALL_SIGN = registerWithoutItem("palm_wall_sign", () -> new TerraformWallSignBlock(PALM_SIGN_TEXTURE, BlockBehaviour.Properties.copy(Blocks.OAK_WALL_SIGN)));
@@ -144,11 +151,7 @@ public class ObjectRegistry {
 
 
 
-    private static <T extends Block> RegistrySupplier<T> registerCocktail(String name, Supplier<T> block, MobEffect effect) {
-        RegistrySupplier<T> toReturn = BLOCKS.register(name, block);
-        registerBlockItem(name, () -> new DrinkBlockItem(toReturn.get(), getSettings(settings -> settings.food(cocktailFoodComponent(effect)))));
-        return toReturn;
-    }
+
 
 
 
@@ -206,23 +209,40 @@ public class ObjectRegistry {
 
     }
 
-    private static <T extends Block> RegistrySupplier<T> registerWithoutItem(String path, Supplier<T> block) {
-        return BLOCKS.register(path, block);
+
+    private static <T extends Block> RegistrySupplier<T> registerCocktail(String name, Supplier<T> block, MobEffect effect) {
+        RegistrySupplier<T> toReturn = registerWithoutItem(name, block);
+        registerBlockItem(name, () -> new DrinkBlockItem(toReturn.get(), getSettings(settings -> settings.food(cocktailFoodComponent(effect)))));
+        return toReturn;
     }
 
     private static <T extends Block> RegistrySupplier<T> registerWithItem(String name, Supplier<T> block) {
-        RegistrySupplier<T> toReturn = BLOCKS.register(name, block);
+        RegistrySupplier<T> toReturn = registerWithoutItem(name, block);
         registerBlockItem(name, () -> new BlockItem(toReturn.get(), new Item.Properties().tab(Beachparty.CREATIVE_TAB)));
         return toReturn;
     }
-    private static <T extends Item> void registerBlockItem(String path, Supplier<T> itemSupplier) {
-        ITEMS.register(path, itemSupplier);
+
+    private static <T extends Block> RegistrySupplier<T> registerWithoutItem(String path, Supplier<T> block) {
+        if(Platform.isForge()){
+            return BLOCKS.register(path, block);
+        }
+        return BLOCK_REGISTRAR.register(new BeachpartyIdentifier(path), block);
     }
+
+    private static <T extends Item> void registerBlockItem(String path, Supplier<T> itemSupplier) {
+        if(Platform.isForge()){
+            ITEMS.register(path, itemSupplier);
+            return;
+        }
+        ITEM_REGISTRAR.register(new BeachpartyIdentifier(path), itemSupplier);
+    }
+
 
     public static <T extends Item> RegistrySupplier<T> registerItem(String name, Supplier<T> item) {
-        return ITEMS.register(name, item);
+        if(Platform.isForge()){
+            return ITEMS.register(name, item);
+        }
+        return ITEM_REGISTRAR.register(new BeachpartyIdentifier(name), item);
     }
-
-
 }
 

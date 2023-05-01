@@ -1,5 +1,6 @@
 package satisfyu.beachparty.block;
 
+import dev.architectury.registry.registries.RegistrySupplier;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvent;
@@ -32,10 +33,10 @@ import org.jetbrains.annotations.Nullable;
 public class CabinetBlock extends BaseEntityBlock {
 	public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
 	public static final BooleanProperty OPEN = BlockStateProperties.OPEN;
-	private final SoundEvent openSound;
-	private final SoundEvent closeSound;
+	private final RegistrySupplier<SoundEvent> openSound;
+	private final RegistrySupplier<SoundEvent> closeSound;
 
-	public CabinetBlock(Properties settings, SoundEvent openSound, SoundEvent closeSound) {
+	public CabinetBlock(Properties settings, RegistrySupplier<SoundEvent> openSound, RegistrySupplier<SoundEvent> closeSound) {
 		super(settings);
 		this.openSound = openSound;
 		this.closeSound = closeSound;
@@ -121,6 +122,6 @@ public class CabinetBlock extends BaseEntityBlock {
 	}
 
 	public void playSound(Level world, BlockPos pos, boolean open) {
-		world.playSound(null, pos, open ? openSound : closeSound, SoundSource.BLOCKS, 1.0f, 1.0f);
+		world.playSound(null, pos, open ? openSound.get() : closeSound.get(), SoundSource.BLOCKS, 1.0f, 1.0f);
 	}
 }
