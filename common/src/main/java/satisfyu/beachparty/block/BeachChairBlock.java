@@ -1,88 +1,93 @@
-package net.satisfyu.beachparty.block;
+package satisfyu.beachparty.block;
 
-import net.minecraft.block.*;
-import net.minecraft.block.enums.BedPart;
-import net.minecraft.block.piston.PistonBehavior;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemPlacementContext;
-import net.minecraft.item.ItemStack;
-import net.minecraft.state.StateManager;
-import net.minecraft.state.property.EnumProperty;
-import net.minecraft.state.property.Properties;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
-import net.minecraft.util.Util;
-import net.minecraft.util.hit.BlockHitResult;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.shape.VoxelShape;
-import net.minecraft.util.shape.VoxelShapes;
-import net.minecraft.world.BlockView;
-import net.minecraft.world.World;
-import net.minecraft.world.WorldAccess;
-import net.minecraft.world.WorldEvents;
-import net.satisfyu.beachparty.entity.chair.ChairUtil;
-import net.satisfyu.beachparty.util.BeachpartyUtil;
+import net.minecraft.Util;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.HorizontalDirectionalBlock;
+import net.minecraft.world.level.block.LevelEvent;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BedPart;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.world.level.material.PushReaction;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
+import satisfyu.beachparty.entity.chair.ChairUtil;
+import satisfyu.beachparty.util.BeachpartyUtil;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Supplier;
 
-public class BeachChairBlock extends HorizontalFacingBlock {
-	public static final EnumProperty<BedPart> PART = Properties.BED_PART;
+public class BeachChairBlock extends HorizontalDirectionalBlock {
+
+	public static final EnumProperty<BedPart> PART = BlockStateProperties.BED_PART;
 
 	private static final Supplier<VoxelShape> headShapeSupplier = () -> {
-		VoxelShape shape = VoxelShapes.empty();
-		shape = VoxelShapes.union(shape, VoxelShapes.cuboid(0.875, 0, 0, 1, 1, 1));
-		shape = VoxelShapes.union(shape, VoxelShapes.cuboid(0.874375, 0.5, 0, 0.936875, 1.5, 0.875));
-		shape = VoxelShapes.union(shape, VoxelShapes.cuboid(0, 0, 0, 0.875, 0.375, 0.8125));
-		shape = VoxelShapes.union(shape, VoxelShapes.cuboid(0, 0.375, 0, 0.875, 0.5, 0.875));
-		shape = VoxelShapes.union(shape, VoxelShapes.cuboid(0, 1.5, 0, 0.9375, 1.6875, 0.9375));
-		shape = VoxelShapes.union(shape, VoxelShapes.cuboid(0, 1.4375, 0.9375, 0.875, 1.625, 1.0625));
+		VoxelShape shape = Shapes.empty();
+		shape = Shapes.or(shape, Shapes.box(0.875, 0, 0, 1, 1, 1));
+		shape = Shapes.or(shape, Shapes.box(0.874375, 0.5, 0, 0.936875, 1.5, 0.875));
+		shape = Shapes.or(shape, Shapes.box(0, 0, 0, 0.875, 0.375, 0.8125));
+		shape = Shapes.or(shape, Shapes.box(0, 0.375, 0, 0.875, 0.5, 0.875));
+		shape = Shapes.or(shape, Shapes.box(0, 1.5, 0, 0.9375, 1.6875, 0.9375));
+		shape = Shapes.or(shape, Shapes.box(0, 1.4375, 0.9375, 0.875, 1.625, 1.0625));
 		return shape;
 	};
 
 	public static final Map<Direction, VoxelShape> HEAD_SHAPE = Util.make(new HashMap<>(), map -> {
-		for (Direction direction : Direction.Type.HORIZONTAL) {
+		for (Direction direction : Direction.Plane.HORIZONTAL) {
 			map.put(direction, BeachpartyUtil.rotateShape(Direction.EAST, direction, headShapeSupplier.get()));
 		}
 	});
 
 	private static final Supplier<VoxelShape> foodShapeSupplier = () -> {
-		VoxelShape shape = VoxelShapes.empty();
-		shape = VoxelShapes.union(shape, VoxelShapes.cuboid(0, 0, 0, 0.125, 1, 1));
-		shape = VoxelShapes.union(shape, VoxelShapes.cuboid(0.063125, 0.5, 0, 0.125625, 1.5, 0.875));
-		shape = VoxelShapes.union(shape, VoxelShapes.cuboid(0.125, 0, 0, 1, 0.375, 0.8125));
-		shape = VoxelShapes.union(shape, VoxelShapes.cuboid(0.125, 0.375, 0, 1, 0.5, 0.875));
-		shape = VoxelShapes.union(shape, VoxelShapes.cuboid(0.0625, 1.5, 0, 1, 1.6875, 0.9375));
-		shape = VoxelShapes.union(shape, VoxelShapes.cuboid(0.125, 1.4375, 0.9375, 1, 1.625, 1.0625));
+		VoxelShape shape = Shapes.empty();
+		shape = Shapes.or(shape, Shapes.box(0, 0, 0, 0.125, 1, 1));
+		shape = Shapes.or(shape, Shapes.box(0.063125, 0.5, 0, 0.125625, 1.5, 0.875));
+		shape = Shapes.or(shape, Shapes.box(0.125, 0, 0, 1, 0.375, 0.8125));
+		shape = Shapes.or(shape, Shapes.box(0.125, 0.375, 0, 1, 0.5, 0.875));
+		shape = Shapes.or(shape, Shapes.box(0.0625, 1.5, 0, 1, 1.6875, 0.9375));
+		shape = Shapes.or(shape, Shapes.box(0.125, 1.4375, 0.9375, 1, 1.625, 1.0625));
 		return shape;
 	};
 
 	public static final Map<Direction, VoxelShape> FOOD_SHAPE = Util.make(new HashMap<>(), map -> {
-		for (Direction direction : Direction.Type.HORIZONTAL) {
+		for (Direction direction : Direction.Plane.HORIZONTAL) {
 			map.put(direction, BeachpartyUtil.rotateShape(Direction.EAST, direction, foodShapeSupplier.get()));
 		}
 	});
 
 
-	public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-		Direction direction = state.get(FACING);
-		return state.get(PART) == BedPart.HEAD ? HEAD_SHAPE.get(direction) : FOOD_SHAPE.get(direction);
+	public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
+		Direction direction = state.getValue(FACING);
+		return state.getValue(PART) == BedPart.HEAD ? HEAD_SHAPE.get(direction) : FOOD_SHAPE.get(direction);
 	}
 
-	public BeachChairBlock(Settings settings) {
+	public BeachChairBlock(Properties settings) {
 		super(settings);
-		this.setDefaultState(this.getDefaultState().with(FACING, Direction.NORTH).with(PART, BedPart.FOOT));
+		this.registerDefaultState(this.defaultBlockState().setValue(FACING, Direction.NORTH).setValue(PART, BedPart.FOOT));
 	}
 
-	public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
-		if (direction == getDirectionTowardsOtherPart(state.get(PART), state.get(FACING))) {
-			return neighborState.isOf(this) && neighborState.get(PART) != state.get(PART) ? state : Blocks.AIR.getDefaultState();
+	public BlockState updateShape(BlockState state, Direction direction, BlockState neighborState, LevelAccessor world, BlockPos pos, BlockPos neighborPos) {
+		if (direction == getDirectionTowardsOtherPart(state.getValue(PART), state.getValue(FACING))) {
+			return neighborState.is(this) && neighborState.getValue(PART) != state.getValue(PART) ? state : Blocks.AIR.defaultBlockState();
 		} else {
-			return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
+			return super.updateShape(state, direction, neighborState, world, pos, neighborPos);
 		}
 	}
 
@@ -90,68 +95,68 @@ public class BeachChairBlock extends HorizontalFacingBlock {
 		return part == BedPart.FOOT ? direction : direction.getOpposite();
 	}
 
-	public void onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
-		if (!world.isClient && player.isCreative()) {
+	public void playerWillDestroy(Level world, BlockPos pos, BlockState state, Player player) {
+		if (!world.isClientSide && player.isCreative()) {
 			removeOtherPart(world, pos, state, player);
 		}
 
-		super.onBreak(world, pos, state, player);
+		super.playerWillDestroy(world, pos, state, player);
 	}
 
 	@Nullable
-	public BlockState getPlacementState(ItemPlacementContext ctx) {
-		Direction direction = ctx.getPlayerFacing().rotateYClockwise();
-		BlockPos blockPos = ctx.getBlockPos();
-		BlockPos blockPos2 = blockPos.offset(direction);
-		World world = ctx.getWorld();
-		return world.getBlockState(blockPos2).canReplace(ctx) && world.getWorldBorder().contains(blockPos2) ? this.getDefaultState().with(FACING, direction) : null;
+	public BlockState getStateForPlacement(BlockPlaceContext ctx) {
+		Direction direction = ctx.getHorizontalDirection().getClockWise();
+		BlockPos blockPos = ctx.getClickedPos();
+		BlockPos blockPos2 = blockPos.relative(direction);
+		Level world = ctx.getLevel();
+		return world.getBlockState(blockPos2).canBeReplaced(ctx) && world.getWorldBorder().isWithinBounds(blockPos2) ? this.defaultBlockState().setValue(FACING, direction) : null;
 	}
 
 	public static Direction getOppositePartDirection(BlockState state) {
-		Direction direction = state.get(FACING);
-		return state.get(PART) == BedPart.HEAD ? direction.getOpposite() : direction;
+		Direction direction = state.getValue(FACING);
+		return state.getValue(PART) == BedPart.HEAD ? direction.getOpposite() : direction;
 	}
 
-	public void onPlaced(World world, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack itemStack) {
-		super.onPlaced(world, pos, state, placer, itemStack);
-		if (!world.isClient) {
+	public void setPlacedBy(Level world, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack itemStack) {
+		super.setPlacedBy(world, pos, state, placer, itemStack);
+		if (!world.isClientSide) {
 			placeOtherPart(world, pos, state);
 		}
 	}
 
 	@Override
-	public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand
+	public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand
 			hand, BlockHitResult hit) {
 		return ChairUtil.onUse(world, player, hand, hit, 0.5);
 	}
 
 	@Override
-	protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
+	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
 		builder.add(FACING, PART);
 	}
 
-	private void placeOtherPart(World world, BlockPos pos, BlockState state) {
-		BlockPos blockPos = pos.offset(state.get(FACING));
-		world.setBlockState(blockPos, state.with(PART, BedPart.HEAD), Block.NOTIFY_ALL);
-		world.updateNeighbors(pos, Blocks.AIR);
-		state.updateNeighbors(world, pos, Block.NOTIFY_ALL);
+	private void placeOtherPart(Level world, BlockPos pos, BlockState state) {
+		BlockPos blockPos = pos.relative(state.getValue(FACING));
+		world.setBlock(blockPos, state.setValue(PART, BedPart.HEAD), Block.UPDATE_ALL);
+		world.blockUpdated(pos, Blocks.AIR);
+		state.updateNeighbourShapes(world, pos, Block.UPDATE_ALL);
 	}
 
-	private void removeOtherPart(World world, BlockPos pos, BlockState state, PlayerEntity player) {
-		BedPart bedPart = state.get(PART);
+	private void removeOtherPart(Level world, BlockPos pos, BlockState state, Player player) {
+		BedPart bedPart = state.getValue(PART);
 		if (bedPart == BedPart.FOOT) {
-			BlockPos blockPos = pos.offset(getDirectionTowardsOtherPart(bedPart, state.get(FACING)));
+			BlockPos blockPos = pos.relative(getDirectionTowardsOtherPart(bedPart, state.getValue(FACING)));
 			BlockState blockState = world.getBlockState(blockPos);
-			if (blockState.isOf(this) && blockState.get(PART) == BedPart.HEAD) {
-				world.setBlockState(blockPos, Blocks.AIR.getDefaultState(), Block.NOTIFY_ALL | Block.SKIP_DROPS);
+			if (blockState.is(this) && blockState.getValue(PART) == BedPart.HEAD) {
+				world.setBlock(blockPos, Blocks.AIR.defaultBlockState(), Block.UPDATE_ALL | Block.UPDATE_SUPPRESS_DROPS);
 				if (player != null)
-					world.syncWorldEvent(player, WorldEvents.BLOCK_BROKEN, blockPos, Block.getRawIdFromState(blockState));
+					world.levelEvent(player, LevelEvent.PARTICLES_DESTROY_BLOCK, blockPos, Block.getId(blockState));
 			}
 		}
 	}
 
 	@Override
-	public PistonBehavior getPistonBehavior(BlockState state) {
-		return PistonBehavior.IGNORE;
+	public PushReaction getPistonPushReaction(BlockState state) {
+		return PushReaction.IGNORE;
 	}
 }

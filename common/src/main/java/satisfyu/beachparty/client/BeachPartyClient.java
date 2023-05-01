@@ -1,12 +1,8 @@
 package satisfyu.beachparty.client;
 
 
-import dev.architectury.platform.Platform;
-import dev.architectury.registry.client.level.entity.EntityModelLayerRegistry;
-import dev.architectury.registry.client.level.entity.EntityRendererRegistry;
 import dev.architectury.registry.client.rendering.RenderTypeRegistry;
 import dev.architectury.registry.menu.MenuRegistry;
-import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.model.geom.ModelLayerLocation;
@@ -14,10 +10,8 @@ import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
-import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.client.resources.model.Material;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import satisfyu.beachparty.BeachpartyIdentifier;
@@ -27,20 +21,16 @@ import satisfyu.beachparty.entity.chair.ChairRenderer;
 import satisfyu.beachparty.entity.pelican.PelicanModel;
 import satisfyu.beachparty.entity.pelican.PelicanRenderer;
 import satisfyu.beachparty.networking.BeachpartyMessages;
+import satisfyu.beachparty.registry.CustomArmorRegistry;
 import satisfyu.beachparty.registry.EntityRegistry;
 import satisfyu.beachparty.registry.ObjectRegistry;
-import satisfyu.beachparty.registry.CustomArmorRegistry;
 import satisfyu.beachparty.registry.ScreenHandlerTypesRegistry;
 import satisfyu.beachparty.util.boat.api.client.TerraformBoatClientHelper;
 import satisfyu.beachparty.util.boat.impl.client.TerraformBoatClientInitializer;
 import satisfyu.beachparty.util.sign.SpriteIdentifierRegistry;
 
-import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Supplier;
-
-import static satisfyu.beachparty.Beachparty.MOD_ID;
 
 @Environment(EnvType.CLIENT)
 public class BeachPartyClient {

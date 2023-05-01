@@ -1,3 +1,5 @@
 accessWidener   v2  named
 accessible class net/minecraft/world/entity/npc/VillagerTrades$EmeraldForItems
 accessible field net/minecraft/world/entity/npc/VillagerType BY_BIOME Ljava/util/Map;
+accessible method net/minecraft/world/level/levelgen/feature/trunkplacers/TrunkPlacerType <init> (Lcom/mojang/serialization/Codec;)V
+accessible method net/minecraft/world/level/levelgen/feature/foliageplacers/FoliagePlacerType <init> (Lcom/mojang/serialization/Codec;)V
