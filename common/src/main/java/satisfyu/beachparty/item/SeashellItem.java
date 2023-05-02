@@ -1,5 +1,7 @@
 package satisfyu.beachparty.item;
 
+import net.minecraft.ChatFormatting;
+import net.minecraft.network.chat.Component;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
@@ -8,6 +10,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import satisfyu.beachparty.registry.ObjectRegistry;
 
@@ -62,6 +65,13 @@ public class SeashellItem extends Item {
         user.getItemInHand(hand).shrink(1);
 
         return InteractionResultHolder.success(user.getItemInHand(hand));
+    }
+
+    @Override
+    public void appendHoverText(ItemStack itemStack, Level world, List<Component> tooltip, TooltipFlag tooltipContext) {
+
+
+        tooltip.add(Component.translatable("tooltip.beachparty.message").withStyle(ChatFormatting.ITALIC, ChatFormatting.GRAY));
     }
 
 }
