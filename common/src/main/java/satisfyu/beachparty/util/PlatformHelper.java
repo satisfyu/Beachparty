@@ -10,7 +10,6 @@ import satisfyu.beachparty.BeachpartyIdentifier;
 import java.util.function.Supplier;
 
 public class PlatformHelper {
-
     public static <T extends FoliagePlacer> FoliagePlacerType<T> registerFoliagePlacerType(String name, Supplier<FoliagePlacerType<T>> foliagePlacerType) {
         return Registry.register(Registry.FOLIAGE_PLACER_TYPES, new BeachpartyIdentifier(name), foliagePlacerType.get());
     }

@@ -16,7 +16,6 @@ public class Beachparty {
 
     public static final CreativeModeTab CREATIVE_TAB = dev.architectury.registry.CreativeTabRegistry.create(new BeachpartyIdentifier("creative_tab"), () -> new ItemStack(ObjectRegistry.COCONUT_COCKTAIL.get()));
 
-
     public static void init() {
         ObjectRegistry.init();
         EntityRegistry.init();
@@ -25,14 +24,10 @@ public class Beachparty {
         RecipeRegistry.init();
         SoundEventRegistry.init();
         ScreenHandlerTypesRegistry.init();
-
-
-
+        PlacerTypesRegistry.init();
         //registerLootTable();
 
     }
-
-
 
     public static void commonSetup(){
         CompostablesRegistry.init();
