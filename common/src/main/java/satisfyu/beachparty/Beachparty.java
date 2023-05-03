@@ -26,7 +26,7 @@ public class Beachparty {
         SoundEventRegistry.init();
         ScreenHandlerTypesRegistry.init();
 
-        PlacerTypesRegistry.init();
+
 
         //registerLootTable();
 

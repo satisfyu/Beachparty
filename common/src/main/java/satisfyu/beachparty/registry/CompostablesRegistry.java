@@ -11,7 +11,6 @@ public class CompostablesRegistry {
         registerCompostableItem(ObjectRegistry.DRY_BUSH, 0.4F);
         registerCompostableItem(ObjectRegistry.DRY_BUSH_TALL, 0.4F);
         registerCompostableItem(ObjectRegistry.PALM_LEAVES, 0.6F);
-        registerCompostableItem(ObjectRegistry.PALM_SAPLING, 0.4F);
         registerCompostableItem(ObjectRegistry.BEACH_GRASS, 0.4F);
         registerCompostableItem(ObjectRegistry.COCONUT, 0.3F);
         registerCompostableItem(ObjectRegistry.COCONUT_OPEN, 0.3F);

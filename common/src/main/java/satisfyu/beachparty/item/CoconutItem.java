@@ -19,6 +19,8 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
+import static net.minecraft.ChatFormatting.ITALIC;
+
 public class CoconutItem extends BlockItem {
     public CoconutItem(Block block, Properties settings) {
         super(block, settings);
@@ -45,7 +47,7 @@ public class CoconutItem extends BlockItem {
 
     @Override
     public void appendHoverText(ItemStack stack, @Nullable Level world, @NotNull List<Component> tooltip, TooltipFlag context) {
-        tooltip.add(Component.translatable(  "tooltip.beachparty.coconut").withStyle(ChatFormatting.ITALIC, ChatFormatting.GRAY));
-        tooltip.add(Component.translatable(  "tooltip.beachparty.coconut").withStyle(ChatFormatting.ITALIC, ChatFormatting.GRAY));
+        tooltip.add(Component.translatable(  "tooltip.beachparty.coconut").withStyle(ChatFormatting.WHITE));
+        tooltip.add(Component.translatable("tooltip.beachparty.canbeplaced").withStyle(ITALIC, ChatFormatting.GRAY));
     }
 }
