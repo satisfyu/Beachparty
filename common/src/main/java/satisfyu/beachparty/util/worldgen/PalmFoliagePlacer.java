@@ -27,7 +27,7 @@ public class PalmFoliagePlacer extends FoliagePlacer {
 
     @Override
     protected FoliagePlacerType<?> type() {
-        return PlacerTypesRegistry.PALM_FOLIAGE_PLACER.get();
+        return PlacerTypesRegistry.PALM_FOLIAGE_PLACER;
     }
 
     @Override
@@ -60,12 +60,12 @@ public class PalmFoliagePlacer extends FoliagePlacer {
 
         if (pRandom.nextInt(2) == 0) {
             if (pLevel.isStateAtPosition(pos.below(), BlockBehaviour.BlockStateBase::isAir)) {
-                pBlockSetter.accept(pos.below(), ObjectRegistry.COCONUT_HANGING_BLOCK.get().defaultBlockState());
+                pBlockSetter.accept(pos.below(), ObjectRegistry.COCONUT_HANGING.get().defaultBlockState());//TODO
             }
         }
         if (pRandom.nextInt(2) == 0) {
             if (pLevel.isStateAtPosition(pos.below().relative(direction.getCounterClockWise()), BlockBehaviour.BlockStateBase::isAir)) {
-                pBlockSetter.accept(pos.below().relative(direction.getCounterClockWise()), ObjectRegistry.COCONUT_HANGING_BLOCK.get().defaultBlockState());
+                pBlockSetter.accept(pos.below().relative(direction.getCounterClockWise()), ObjectRegistry.COCONUT_HANGING.get().defaultBlockState());
             }
         }
 

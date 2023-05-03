@@ -27,7 +27,7 @@ public class CrookedTrunkPlacer extends TrunkPlacer {
 
     @Override
     protected TrunkPlacerType<?> type() {
-        return PlacerTypesRegistry.CROOKED_TRUNK_PLACER.get();
+        return PlacerTypesRegistry.CROOKED_TRUNK_PLACER;
     }
 
     @Override
