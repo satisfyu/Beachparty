@@ -6,6 +6,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.storage.loot.BuiltInLootTables;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import satisfyu.beachparty.event.CommonEvents;
 import satisfyu.beachparty.registry.*;
 
 import java.util.Set;
@@ -25,6 +26,7 @@ public class Beachparty {
         SoundEventRegistry.init();
         ScreenHandlerTypesRegistry.init();
         PlacerTypesRegistry.init();
+        CommonEvents.init();
 
     }
 
