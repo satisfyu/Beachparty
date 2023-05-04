@@ -1,10 +1,6 @@
 package satisfyu.beachparty;
 
-import dev.architectury.injectables.annotations.ExpectPlatform;
-
-import java.nio.file.Path;
-
-public class BeachpartyExpectPlatformImpl {
+public class BeachpartyExpectPlatform {
     /*
     @ExpectPlatform
     public static Path getConfigDirectory() {
