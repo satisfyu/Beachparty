@@ -27,10 +27,10 @@ public class VillagersFabric {
     
     public static void init() {
         TradeOfferHelper.registerVillagerOffers(BEACH_GUY, 1, factories -> {
-            factories.add(new VillagerTrades.EmeraldForItems(ObjectRegistry.SUNGLASSES.get(), 18, 1, 5));
-            factories.add(new VillagerTrades.EmeraldForItems(ObjectRegistry.BIKINI.get(), 12, 1, 5));
-            factories.add(new VillagerTrades.EmeraldForItems(ObjectRegistry.TRUNKS.get(), 8, 1, 5));
-            factories.add(new VillagerTrades.EmeraldForItems(ObjectRegistry.SWIM_WINGS.get(), 5, 1, 5));
+            factories.add(new VillagerTrades.EmeraldForItems(ObjectRegistry.SUNGLASSES.get(), 1, 18, 5));
+            factories.add(new VillagerTrades.EmeraldForItems(ObjectRegistry.BIKINI.get(), 1, 12, 5));
+            factories.add(new VillagerTrades.EmeraldForItems(ObjectRegistry.TRUNKS.get(), 1, 8, 5));
+            factories.add(new VillagerTrades.EmeraldForItems(ObjectRegistry.SWIM_WINGS.get(), 1, 5, 5));
         });
 
             TradeOfferHelper.registerVillagerOffers(BARKEEPER, 1, factories -> {

@@ -6,6 +6,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.storage.loot.BuiltInLootTables;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import satisfyu.beachparty.event.CommonEvents;
 import satisfyu.beachparty.registry.*;
 
 import java.util.Set;
@@ -25,25 +26,12 @@ public class Beachparty {
         SoundEventRegistry.init();
         ScreenHandlerTypesRegistry.init();
         PlacerTypesRegistry.init();
-        //registerLootTable();
+        CommonEvents.init();
 
     }
 
     public static void commonSetup(){
         CompostablesRegistry.init();
         ObjectRegistry.commonInit();
-    }
-
-    protected static void registerLootTable() {
-        Set<ResourceLocation> chestsId = Set.of(
-                BuiltInLootTables.BURIED_TREASURE);
-        /*
-        LootTableEvents.MODIFY.register((resourceManager, lootManager, id, tableBuilder, source) -> {
-            ResourceLocation injectId = new ResourceLocation(Beachparty.MOD_ID, "inject/" + id.getPath());
-            if (chestsId.contains(id)) {
-                tableBuilder.pool(LootPool.lootPool().add(LootTableReference.lootTableReference(injectId).setWeight(1).setQuality(0)).build());
-            }
-        });
-         */
     }
 }
