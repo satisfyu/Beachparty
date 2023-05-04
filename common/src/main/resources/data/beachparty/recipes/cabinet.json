@@ -3,7 +3,7 @@
   "pattern": [
     "#V#",
     "V V",
-    "#B#"
+    "#V#"
   ],
   "key": {
     "#": {
@@ -14,6 +14,6 @@
     }
 },
   "result": {
-    "item": "candlelight:acacia_cabinet"
+    "item": "beachparty:cabinet"
   }
 }

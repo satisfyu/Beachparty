@@ -25,25 +25,11 @@ public class Beachparty {
         SoundEventRegistry.init();
         ScreenHandlerTypesRegistry.init();
         PlacerTypesRegistry.init();
-        //registerLootTable();
 
     }
 
     public static void commonSetup(){
         CompostablesRegistry.init();
         ObjectRegistry.commonInit();
-    }
-
-    protected static void registerLootTable() {
-        Set<ResourceLocation> chestsId = Set.of(
-                BuiltInLootTables.BURIED_TREASURE);
-        /*
-        LootTableEvents.MODIFY.register((resourceManager, lootManager, id, tableBuilder, source) -> {
-            ResourceLocation injectId = new ResourceLocation(Beachparty.MOD_ID, "inject/" + id.getPath());
-            if (chestsId.contains(id)) {
-                tableBuilder.pool(LootPool.lootPool().add(LootTableReference.lootTableReference(injectId).setWeight(1).setQuality(0)).build());
-            }
-        });
-         */
     }
 }
