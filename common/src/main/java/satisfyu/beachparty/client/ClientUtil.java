@@ -4,7 +4,7 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
-import satisfyu.beachparty.item.BeachpartyArmorItem;
+import satisfyu.beachparty.item.IBeachpartyAmorSet;
 
 import java.util.List;
 
@@ -17,10 +17,10 @@ public class ClientUtil {
         Player player = Minecraft.getInstance().player;
         if (player == null) return;
 
-        boolean helmet = BeachpartyArmorItem.hasSwimearHelmet(player);
-        boolean breastplate = BeachpartyArmorItem.hasSwimwearBreastplate(player);
-        boolean leggings = BeachpartyArmorItem.hasSwimearLeggings(player);
-        boolean boots = BeachpartyArmorItem.hasSwimearBoots(player);
+        boolean helmet = IBeachpartyAmorSet.hasSwimearHelmet(player);
+        boolean breastplate = IBeachpartyAmorSet.hasSwimwearBreastplate(player);
+        boolean leggings = IBeachpartyAmorSet.hasSwimearLeggings(player);
+        boolean boots = IBeachpartyAmorSet.hasSwimearBoots(player);
 
         tooltip.add(Component.nullToEmpty(""));
         tooltip.add(Component.translatable("tooltip.beachparty.swimwear_set").withStyle(ChatFormatting.DARK_GREEN));

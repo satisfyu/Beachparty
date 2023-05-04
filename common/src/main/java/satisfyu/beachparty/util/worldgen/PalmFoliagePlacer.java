@@ -12,6 +12,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacerType;
+import org.jetbrains.annotations.NotNull;
 import satisfyu.beachparty.registry.ObjectRegistry;
 import satisfyu.beachparty.registry.PlacerTypesRegistry;
 
@@ -26,8 +27,8 @@ public class PalmFoliagePlacer extends FoliagePlacer {
     }
 
     @Override
-    protected FoliagePlacerType<?> type() {
-        return PlacerTypesRegistry.PALM_FOLIAGE_PLACER;
+    protected @NotNull FoliagePlacerType<?> type() {
+        return PlacerTypesRegistry.PALM_FOLIAGE_PLACER.get();
     }
 
     @Override

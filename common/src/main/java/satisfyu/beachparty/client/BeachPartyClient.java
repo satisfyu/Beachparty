@@ -6,8 +6,6 @@ import dev.architectury.registry.client.rendering.RenderTypeRegistry;
 import dev.architectury.registry.menu.MenuRegistry;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.ChatFormatting;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.renderer.RenderType;
@@ -17,10 +15,8 @@ import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.client.resources.model.Material;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
-import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import satisfyu.beachparty.BeachpartyIdentifier;
@@ -29,7 +25,6 @@ import satisfyu.beachparty.client.gui.TikiBarGui;
 import satisfyu.beachparty.entity.chair.ChairRenderer;
 import satisfyu.beachparty.entity.pelican.PelicanModel;
 import satisfyu.beachparty.entity.pelican.PelicanRenderer;
-import satisfyu.beachparty.item.BeachpartyArmorItem;
 import satisfyu.beachparty.networking.BeachpartyMessages;
 import satisfyu.beachparty.registry.*;
 import satisfyu.beachparty.util.boat.api.client.TerraformBoatClientHelper;
@@ -87,30 +82,6 @@ public class BeachPartyClient {
         return defaultColor;
     }
 
-    public static void appendTooltip(List<Component> tooltip) {
-        tooltip.add(Component.translatable(  "tooltip.beachparty.swimwearline1").withStyle(ChatFormatting.DARK_PURPLE));
-        tooltip.add(Component.translatable(  "tooltip.beachparty.swimwearline2").withStyle(ChatFormatting.BLUE));
-
-        Player player = Minecraft.getInstance().player;
-        if (player == null) return;
-
-        boolean helmet = BeachpartyArmorItem.hasSwimearHelmet(player);
-        boolean breastplate = BeachpartyArmorItem.hasSwimwearBreastplate(player);
-        boolean leggings = BeachpartyArmorItem.hasSwimearLeggings(player);
-        boolean boots = BeachpartyArmorItem.hasSwimearBoots(player);
-
-        tooltip.add(Component.nullToEmpty(""));
-        tooltip.add(Component.translatable("tooltip.beachparty.swimwear_set").withStyle(ChatFormatting.DARK_GREEN));
-        tooltip.add(helmet ? Component.translatable("tooltip.beachparty.swimwearhelmet").withStyle(ChatFormatting.GREEN) : Component.translatable("tooltip.beachparty.swimwearhelmet").withStyle(ChatFormatting.GRAY));
-        tooltip.add(breastplate ? Component.translatable("tooltip.beachparty.swimwearbreastplate").withStyle(ChatFormatting.GREEN) : Component.translatable("tooltip.beachparty.swimwearbreastplate").withStyle(ChatFormatting.GRAY));
-        tooltip.add(leggings ? Component.translatable("tooltip.beachparty.swimwearleggings").withStyle(ChatFormatting.GREEN) : Component.translatable("tooltip.beachparty.swimwearleggings").withStyle(ChatFormatting.GRAY));
-        tooltip.add(boots ? Component.translatable("tooltip.beachparty.swimwearboots").withStyle(ChatFormatting.GREEN) : Component.translatable("tooltip.beachparty.swimwearboots").withStyle(ChatFormatting.GRAY));
-        tooltip.add(Component.nullToEmpty(""));
-        tooltip.add(Component.translatable("tooltip.beachparty.swimwear_seteffect").withStyle(ChatFormatting.GRAY));
-        tooltip.add(helmet && breastplate && leggings && boots ? Component.translatable("tooltip.beachparty.swimwear_effect").withStyle(ChatFormatting.DARK_GREEN) : Component.translatable("tooltip.beachparty.swimwear_effect").withStyle(ChatFormatting.GRAY));
-    }
-
-
     public static void getEntityModelLayers(Map<ModelLayerLocation, Supplier<LayerDefinition>> map){
         map.put(PelicanModel.PELICAN_MODEL_LAYER, PelicanModel::getTexturedModelData);
 
@@ -129,7 +100,7 @@ public class BeachPartyClient {
     }
 
     public static <T extends Entity> void registerEntityRenderer(Map<Supplier<EntityType<?>>, EntityRendererProvider<?>> map, Supplier<? extends EntityType<? extends T>> type, EntityRendererProvider<T> factory) {
-        map.put((Supplier<EntityType<?>>) (Supplier<? extends EntityType<?>>) type, factory);
+        map.put((Supplier<EntityType<?>>) (Supplier<? extends EntityType<?>>)type, factory);
     }
 
 }
