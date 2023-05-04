@@ -63,7 +63,7 @@ public class SandCastleBlock extends Block {
     @Override
     public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
         ItemStack handStack = player.getItemInHand(hand);
-        if (handStack.getItem() == ObjectRegistry.SAND_BUCKET && !hasAllTowers(state)) {
+        if (handStack.getItem() == ObjectRegistry.SAND_BUCKET.get() && !hasAllTowers(state)) {
             BooleanProperty tower = getTowerHitPos(hit);
             if (!state.getValue(tower)) {
                 world.setBlockAndUpdate(pos, state.setValue(tower, true));
@@ -71,7 +71,7 @@ public class SandCastleBlock extends Block {
                 return InteractionResult.sidedSuccess(world.isClientSide);
             }
         }
-        else if (handStack.getItem() == ObjectRegistry.EMPTY_SAND_BUCKET) {
+        else if (handStack.getItem() == ObjectRegistry.EMPTY_SAND_BUCKET.get()) {
             if (hasNoTowers(state)) {
                 world.destroyBlock(pos, false);
                 exchangeStack(handStack, player, new ItemStack(ObjectRegistry.SAND_BUCKET.get()));
