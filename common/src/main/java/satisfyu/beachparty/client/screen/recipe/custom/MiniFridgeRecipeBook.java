@@ -35,7 +35,7 @@ public class MiniFridgeRecipeBook extends PrivateRecipeBookWidget {
 
     @Override
     public void insertRecipe(Recipe<?> recipe) {
-        int usedInputSlots = 0;
+        int usedInputSlots = 1;
         for (Ingredient ingredient : recipe.getIngredients()) {
             int slotIndex = 0;
             for (Slot slot : screenHandler.slots) {
@@ -76,6 +76,6 @@ public class MiniFridgeRecipeBook extends PrivateRecipeBookWidget {
     }
 
     static {
-        TOGGLE_COOKABLE_TEXT = Component.translatable("gui.vinery.recipebook.toggleRecipes.fidgeable");
+        TOGGLE_COOKABLE_TEXT = Component.translatable("gui.beachparty.recipebook.toggleRecipes.refridgable");
     }
 }

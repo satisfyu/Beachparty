@@ -67,7 +67,7 @@ public interface IBeachpartyAmorSet {
 
         if (!hasPlayerEffect || Objects.requireNonNull(player.getEffect(mapStatusEffect.getEffect())).getDuration() < 11 * 20) {
             player.addEffect(new MobEffectInstance(mapStatusEffect.getEffect(),
-                    mapStatusEffect.getDuration(), mapStatusEffect.getAmplifier()));
+                    mapStatusEffect.getDuration(), mapStatusEffect.getAmplifier(), true, false, true));
         }
     }
 

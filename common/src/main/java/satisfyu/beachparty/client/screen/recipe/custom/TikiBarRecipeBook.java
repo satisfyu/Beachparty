@@ -41,7 +41,7 @@ public class TikiBarRecipeBook extends PrivateRecipeBookWidget {
             for (Slot slot : screenHandler.slots) {
                 ItemStack itemStack = slot.getItem();
 
-                if (ingredient.test(itemStack) && usedInputSlots < 2) {
+                if (ingredient.test(itemStack) && usedInputSlots < 3) {
                     Minecraft.getInstance().gameMode.handleInventoryMouseClick(screenHandler.containerId, slotIndex, 0, ClickType.PICKUP, Minecraft.getInstance().player);
                     Minecraft.getInstance().gameMode.handleInventoryMouseClick(screenHandler.containerId, usedInputSlots, 0, ClickType.PICKUP, Minecraft.getInstance().player);
                     ++usedInputSlots;
@@ -76,6 +76,6 @@ public class TikiBarRecipeBook extends PrivateRecipeBookWidget {
     }
 
     static {
-        TOGGLE_COOKABLE_TEXT = Component.translatable("gui.vinery.recipebook.toggleRecipes.shakeable");
+        TOGGLE_COOKABLE_TEXT = Component.translatable("gui.beachparty.recipebook.toggleRecipes.shakeable");
     }
 }

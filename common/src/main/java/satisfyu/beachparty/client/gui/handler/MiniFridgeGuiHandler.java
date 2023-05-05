@@ -25,7 +25,7 @@ public class MiniFridgeGuiHandler extends AbstractRecipeBookGUIScreenHandler  {
         this(syncId, playerInventory, new SimpleContainer(6), new SimpleContainerData(2));
     }
     public MiniFridgeGuiHandler(int syncId, Inventory playerInventory, Container inventory, ContainerData propertyDelegate) {
-        super(ScreenHandlerTypesRegistry.MINI_FRIDGE_GUI_HANDLER.get(), syncId, 3, playerInventory, inventory, propertyDelegate);
+        super(ScreenHandlerTypesRegistry.MINI_FRIDGE_GUI_HANDLER.get(), syncId, 2, playerInventory, inventory, propertyDelegate);
 
         buildBlockEntityContainer(playerInventory, inventory);
         buildPlayerContainer(playerInventory);

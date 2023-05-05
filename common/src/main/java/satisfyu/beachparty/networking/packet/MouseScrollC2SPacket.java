@@ -1,7 +1,6 @@
 package satisfyu.beachparty.networking.packet;
 
 import dev.architectury.networking.NetworkManager;
-import io.netty.buffer.Unpooled;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
@@ -17,9 +16,6 @@ public class MouseScrollC2SPacket implements NetworkManager.NetworkReceiver {
 
     @Override
     public void receive(FriendlyByteBuf buf, NetworkManager.PacketContext context) {
-
-
-
         Level serverWorld = context.getPlayer().getLevel();
         BlockPos blockPos = buf.readBlockPos();
         BlockState blockState = serverWorld.getBlockState(blockPos);

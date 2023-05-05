@@ -115,7 +115,7 @@
   "tooltip.beachparty.message": "Right-Click to Open",
   "tooltip.beachparty.radioswitch": "Mousewheel-Up/Down to switch Radio Stations",
   "tooltip.beachparty.radioturnon": "Right-Click to turn it on/off",
-  "tooltip.beachparty.swimwear_effect" : "Dolphins Grace &  Water Breathing",
+  "tooltip.beachparty.swimwear_effect" : "Dolphins Grace & Water Breathing",
   "tooltip.beachparty.swimwear_set" : "Beachparty-Set:",
   "tooltip.beachparty.swimwear_seteffect" : "Set Bonus:",
   "tooltip.beachparty.swimwearboots" : "Swimwear Boots",
@@ -124,5 +124,7 @@
   "tooltip.beachparty.swimwearleggings" : "Swimwear Leggings",
   "tooltip.beachparty.swimwearline1": "When Wearing:",
   "tooltip.beachparty.swimwearline2": "+17% Swim Speed",
-  "tooltip.beachparty.tiki": "Used for mixing Cocktails and Drinks"
+  "tooltip.beachparty.tiki": "Used for mixing Cocktails and Drinks",
+  "gui.beachparty.recipebook.toggleRecipes.refridgable": "Refridgable",
+  "gui.beachparty.recipebook.toggleRecipes.shakeable": "Shakeable"
 }

@@ -27,15 +27,12 @@ public class MouseMixin {
             Minecraft client = Minecraft.getInstance();
             if(client.hitResult instanceof BlockHitResult blockHitResult){
 
-                if (blockHitResult.getType() != HitResult.Type.BLOCK) {
-                    return;
-                }
+                if (blockHitResult.getType() != HitResult.Type.BLOCK) return;
 
                 BlockPos blockPos = blockHitResult.getBlockPos();
+                if (client.level == null) return;
                 BlockState blockState = client.level.getBlockState(blockPos);
-                if (blockState.getBlock() != ObjectRegistry.RADIO || !blockState.getValue(RadioBlock.ON)) {
-                    return;
-                }
+                if (blockState.getBlock() != ObjectRegistry.RADIO.get() || !blockState.getValue(RadioBlock.ON)) return;
 
                 int scrollValue = (int)calculateScrollValue(vertical, client.options);
                 handleScrollEvent(blockPos, scrollValue);

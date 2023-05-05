@@ -198,7 +198,6 @@ public abstract class  PrivateRecipeBookWidget extends GuiComponent implements P
         if (this.searchField == null) return;
 
         List<? extends Recipe<Container>> recipes = getResultsForGroup(currentTab.getGroup(), client.level.getRecipeManager().getAllRecipesFor(getRecipeType()));
-        System.out.println(recipes);
         String string = this.searchField.getValue();
 
         if (!string.isEmpty()) {
