@@ -6,7 +6,6 @@
   "client": [
     "ArmorFeatureRendererMixin",
     "ArmorStandRendererMixin",
-    "MouseMixin",
     "PlayerEntityRendererMixin",
     "sign.MixinSignBlockEntityRenderer",
     "sign.MixinSignEditScreen"
@@ -17,7 +16,8 @@
     "HereBeNoDragonsMixin",
     "PotionItemMixin",
     "SpawnMobAccessor",
-    "sign.MixinBlockEntityType"
+    "sign.MixinBlockEntityType",
+    "MouseMixin"
   ],
   "injectors": {
     "defaultRequire": 1
