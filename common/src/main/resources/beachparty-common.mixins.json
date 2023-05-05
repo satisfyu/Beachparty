@@ -17,8 +17,6 @@
     "HereBeNoDragonsMixin",
     "PotionItemMixin",
     "SpawnMobAccessor",
-    "boat.MixinBoatEntity",
-    "boat.MixinShulkerEntity",
     "sign.MixinBlockEntityType"
   ],
   "injectors": {

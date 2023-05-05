@@ -39,6 +39,8 @@ public class DeckChairBlock extends BeachChairBlock {
         }
     });
 
+
+
     private static final Supplier<VoxelShape> topShapeSupplier = () -> {
         VoxelShape shape = Shapes.empty();
         shape = Shapes.or(shape, Shapes.box(0, 0.25, 0, 0.3125, 0.375, 1));
@@ -67,7 +69,19 @@ public class DeckChairBlock extends BeachChairBlock {
 
     @Override
     public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-        return ChairUtil.onUse(world, player, hand, hit, -1.0);
+        Direction clickedFace = hit.getDirection();
+        if (state.getValue(FACING) == clickedFace && state.getValue(PART) == BedPart.FOOT) {
+            return ChairUtil.onUse(world, player, hand, hit, 0.1);
+        } else {
+            return InteractionResult.PASS;
+        }
     }
+
+
+
+
+
+
+
 
 }

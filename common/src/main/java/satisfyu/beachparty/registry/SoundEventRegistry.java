@@ -12,9 +12,9 @@ import satisfyu.beachparty.BeachpartyIdentifier;
 import java.util.List;
 
 public class SoundEventRegistry {
-    
+
     public static Registrar<SoundEvent> SOUND_EVENTS = DeferredRegister.create(Beachparty.MOD_ID, Registry.SOUND_EVENT_REGISTRY).getRegistrar();
-    
+
     public static final RegistrySupplier<SoundEvent> RADIO_CLICK = registerSoundEvent("radio_click");
     public static final RegistrySupplier<SoundEvent> RADIO_TUNE = registerSoundEvent("radio_tune");
     public static final RegistrySupplier<SoundEvent> RADIO_REGGEA = registerSoundEvent("radio_reggea");
@@ -33,6 +33,9 @@ public class SoundEventRegistry {
     private static RegistrySupplier<SoundEvent> registerSoundEvent(String name) {
         return SOUND_EVENTS.register(new BeachpartyIdentifier(name), ()-> new SoundEvent(new BeachpartyIdentifier(name)));
     }
+
+
+
 
     public static void init() {
         Beachparty.LOGGER.debug("Register " + SoundEventRegistry.class);

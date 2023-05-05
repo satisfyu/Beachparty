@@ -38,7 +38,10 @@
   "ambient_beach": {
     "subtitle": "beachparty.sound.ambient_beach",
     "sounds": [
-      "beachparty:ambient_beach"
+      {
+        "name": "beachparty:ambient_beach",
+        "volume": 0.65
+      }
     ]
   },
   "pelican_death": {

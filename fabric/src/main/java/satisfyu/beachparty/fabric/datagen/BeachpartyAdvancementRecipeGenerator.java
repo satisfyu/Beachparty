@@ -52,7 +52,21 @@ public class BeachpartyAdvancementRecipeGenerator {
                 "minecraft:dried_kelp:pool_noodle_green",
                 "minecraft:dried_kelp:pool_noodle_red",
                 "raw_pelican:cooked_pelican",
-                "raw_mussel_meat:cooked_mussel_meat"
+                "raw_mussel_meat:cooked_mussel_meat",
+                "palm_log/palm_beam",
+                "palm_planks/palm_floorboard",
+                "palm_planks/hammock",
+                "minecraft:coal/palm_tall_torch",
+                "minecraft:string:crocs",
+                "minecraft:string:swim_wings",
+                "minecraft:string:rubber_ring_blue",
+                "minecraft:string:rubber_ring_pink",
+                "minecraft:string:rubber_ring_stripped",
+                "minecraft:string:pool_noodle_blue",
+                "minecraft:string:pool_noodle_pink",
+                "minecraft:string:pool_noodle_green",
+                "minecraft:string:pool_noodle_red",
+                "minecraft:wooden_shovel/sand_bucket_block"
 
 
 
@@ -60,7 +74,8 @@ public class BeachpartyAdvancementRecipeGenerator {
 
 
 
-        );
+
+                );
 
         for(String s : putRecipesHere){
             List<String> list1 = Arrays.stream(s.split("/")).toList();
