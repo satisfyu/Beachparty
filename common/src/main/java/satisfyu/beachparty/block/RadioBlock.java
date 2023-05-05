@@ -108,7 +108,7 @@ public class RadioBlock extends Block {
 
     private void turnON(BlockState state, Level world, BlockPos pos, Player player) {
         world.playSound(player, pos, SoundEventRegistry.RADIO_CLICK.get(), SoundSource.BLOCKS, 1.0f, 1.0f);
-        world.playSound(player, pos, SoundEventRegistry.RADIO_TUNE.get(), SoundSource.RECORDS, 1.0f, 1.0f);
+        world.playSound(player, pos, SoundEventRegistry.RADIO_TUNE.get(), SoundSource.RECORDS, 0.8f, 1.0f);
         if (!world.isClientSide) {
             pressButton(state, world, pos, true);
             sendPacket(state, world, pos, true);

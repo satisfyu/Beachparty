@@ -1,15 +1,12 @@
 package satisfyu.beachparty;
 
-import net.minecraft.resources.ResourceLocation;
+import dev.architectury.hooks.item.tool.AxeItemHooks;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.storage.loot.BuiltInLootTables;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import satisfyu.beachparty.event.CommonEvents;
 import satisfyu.beachparty.registry.*;
-
-import java.util.Set;
 
 public class Beachparty {
     public static final String MOD_ID = "beachparty";
@@ -33,5 +30,10 @@ public class Beachparty {
     public static void commonSetup(){
         CompostablesRegistry.init();
         ObjectRegistry.commonInit();
+
+        AxeItemHooks.addStrippable(ObjectRegistry.PALM_LOG.get(), ObjectRegistry.STRIPPED_PALM_LOG.get());
+        AxeItemHooks.addStrippable(ObjectRegistry.PALM_WOOD.get(), ObjectRegistry.STRIPPED_PALM_WOOD.get());
     }
+
+
 }

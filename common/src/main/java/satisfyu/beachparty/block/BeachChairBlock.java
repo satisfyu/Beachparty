@@ -103,6 +103,7 @@ public class BeachChairBlock extends HorizontalDirectionalBlock {
 		super.playerWillDestroy(world, pos, state, player);
 	}
 
+
 	@Nullable
 	public BlockState getStateForPlacement(BlockPlaceContext ctx) {
 		Direction direction = ctx.getHorizontalDirection().getClockWise();
@@ -127,7 +128,7 @@ public class BeachChairBlock extends HorizontalDirectionalBlock {
 	@Override
 	public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand
 			hand, BlockHitResult hit) {
-		return ChairUtil.onUse(world, player, hand, hit, 0.5);
+		return ChairUtil.onUse(world, player, hand, hit, 0);
 	}
 
 	@Override

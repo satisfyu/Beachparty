@@ -33,7 +33,7 @@ public class ModEvents {
     private static void addBarkeeperTrades(Int2ObjectMap<List<VillagerTrades.ItemListing>> trades){
         //level 1
         List<VillagerTrades.ItemListing> level1 = trades.get(1);
-        level1.add(new VillagerTrades.EmeraldForItems(Blocks.ICE, 2, 4, 5));
+        level1.add(new VillagerTrades.EmeraldForItems(Blocks.ICE, 1, 2, 5));
 
         //level 2
         List<VillagerTrades.ItemListing> level2 = trades.get(2);
