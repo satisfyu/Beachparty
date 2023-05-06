@@ -74,10 +74,10 @@ public class ObjectRegistry {
     public static final RegistrySupplier<Block> TIKI_CHAIR = registerWithItem("tiki_chair", () -> new TikiChairBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).sound(SoundType.BAMBOO)));
     public static final RegistrySupplier<Block> TIKI_BAR = registerWithItem("tiki_bar", () -> new TikiBarBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).sound(SoundType.BAMBOO)));
     public static final RegistrySupplier<Block> CABINET = registerWithItem("cabinet", () -> new CabinetBlock(BlockBehaviour.Properties.of(Material.WOOD).strength(2.0F, 3.0F).sound(SoundType.BAMBOO), SoundEventRegistry.CABINET_OPEN, SoundEventRegistry.CABINET_CLOSE));
-    private static final ResourceLocation PALM_SIGN_TEXTURE = new ResourceLocation("entity/signs/palm");
+    /*private static final ResourceLocation PALM_SIGN_TEXTURE = new ResourceLocation("entity/signs/palm");
     public static final RegistrySupplier<TerraformSignBlock> PALM_SIGN = registerWithoutItem("palm_sign", () -> new TerraformSignBlock(PALM_SIGN_TEXTURE, BlockBehaviour.Properties.copy(Blocks.OAK_SIGN)));
     public static final RegistrySupplier<Block> PALM_WALL_SIGN = registerWithoutItem("palm_wall_sign", () -> new TerraformWallSignBlock(PALM_SIGN_TEXTURE, BlockBehaviour.Properties.copy(Blocks.OAK_WALL_SIGN)));
-    public static final RegistrySupplier<Item> PALM_SIGN_ITEM = registerItem("palm_sign", () -> new SignItem(getSettings().stacksTo(16), PALM_SIGN.get(), PALM_WALL_SIGN.get()));
+    public static final RegistrySupplier<Item> PALM_SIGN_ITEM = registerItem("palm_sign", () -> new SignItem(getSettings().stacksTo(16), PALM_SIGN.get(), PALM_WALL_SIGN.get()));*/
     public static final RegistrySupplier<Block> MINI_FRIDGE = registerWithItem("mini_fridge", () -> new MiniFridgeBlock(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).sound(SoundType.COPPER)));
     public static final RegistrySupplier<Block> RADIO = registerWithItem("radio", () -> new RadioBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).sound(SoundType.BAMBOO)));
     public static final RegistrySupplier<Item> OVERGROWN_DISC = registerItem("overgrown_disc", () -> new RecordItem(1, SoundEventRegistry.RADIO_BEACHPARTY.get(), getSettings(), 214));

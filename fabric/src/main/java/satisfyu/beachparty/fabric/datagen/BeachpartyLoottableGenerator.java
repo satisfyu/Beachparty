@@ -49,7 +49,7 @@ public class BeachpartyLoottableGenerator extends FabricBlockLootTableProvider {
         this.dropSelf(ObjectRegistry.PALM_PRESSURE_PLATE);
         this.add(ObjectRegistry.PALM_DOOR, BlockLoot::createDoorTable);
         this.dropSelf(ObjectRegistry.PALM_TRAPDOOR);
-        this.dropSelf((Block) ObjectRegistry.PALM_SIGN);
+       // this.dropSelf((Block) ObjectRegistry.PALM_SIGN);
         this.dropSelf(ObjectRegistry.DRIED_WHEAT_BLOCK);
         this.dropSelf(ObjectRegistry.DRIED_WHEAT_STAIRS);
         this.dropSelf(ObjectRegistry.DRIED_WHEAT_SLAB);

@@ -3,13 +3,13 @@
     {
       "rolls": {
         "min": 1.0,
-        "max": 2.0,
+        "max": 3.0,
         "type": "minecraft:uniform"
       },
       "entries": [
         {
           "type": "minecraft:item",
-          "weight": 1,
+          "weight": 2,
           "functions": [
             {
               "function": "minecraft:set_count",
