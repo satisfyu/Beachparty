@@ -2,6 +2,7 @@ package satisfyu.beachparty.forge;
 
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import net.minecraft.world.entity.npc.VillagerTrades;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.event.village.VillagerTradesEvent;
@@ -46,7 +47,6 @@ public class ModEvents {
 
         //level 5
         List<VillagerTrades.ItemListing> level5 = trades.get(5);
-        level5.add(new VillagerTrades.EmeraldForItems((ItemLike) ObjectRegistry.COCOA_COCKTAIL, 2, 1, 2));
     }
 
     private static void addBeachGuyTrades(Int2ObjectMap<List<VillagerTrades.ItemListing>> trades){
