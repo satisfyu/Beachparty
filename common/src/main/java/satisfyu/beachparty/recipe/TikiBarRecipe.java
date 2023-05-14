@@ -3,6 +3,7 @@ package satisfyu.beachparty.recipe;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import net.minecraft.core.NonNullList;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
@@ -35,9 +36,10 @@ public class TikiBarRecipe implements Recipe<Container> {
     }
 
     @Override
-    public ItemStack assemble(Container inventory) {
+    public ItemStack assemble(Container inventory, RegistryAccess registryManager) {
         return ItemStack.EMPTY;
     }
+
 
     @Override
     public boolean canCraftInDimensions(int width, int height) {
@@ -45,7 +47,7 @@ public class TikiBarRecipe implements Recipe<Container> {
     }
 
     @Override
-    public ItemStack getResultItem() {
+    public ItemStack getResultItem(RegistryAccess registryManager) {
         return this.output.copy();
     }
 
@@ -72,6 +74,9 @@ public class TikiBarRecipe implements Recipe<Container> {
     @Override
     public boolean isSpecial() {
         return true;
+    }
+
+    public Container getResultItem() {
     }
 
     public static class Serializer implements RecipeSerializer<TikiBarRecipe> {

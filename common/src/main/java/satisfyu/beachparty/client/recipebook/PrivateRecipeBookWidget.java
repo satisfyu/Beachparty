@@ -10,8 +10,8 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiComponent;
 import net.minecraft.client.gui.components.EditBox;
+import net.minecraft.client.gui.components.Renderable;
 import net.minecraft.client.gui.components.StateSwitchingButton;
-import net.minecraft.client.gui.components.Widget;
 import net.minecraft.client.gui.components.events.GuiEventListener;
 import net.minecraft.client.gui.screens.recipebook.RecipeShownListener;
 import net.minecraft.client.renderer.GameRenderer;
@@ -27,9 +27,9 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeType;
+import org.jetbrains.annotations.Nullable;
 import satisfyu.beachparty.client.BeachPartyClient;
 import satisfyu.beachparty.client.screen.recipe.PrivateRecipeBookRecipeArea;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.Iterator;
 import java.util.List;
@@ -37,7 +37,7 @@ import java.util.Locale;
 import java.util.Objects;
 
 @Environment(EnvType.CLIENT)
-public abstract class  PrivateRecipeBookWidget extends GuiComponent implements PlaceRecipe<Ingredient>, Widget, GuiEventListener, RecipeShownListener {
+public abstract class  PrivateRecipeBookWidget extends GuiComponent implements PlaceRecipe<Ingredient>, Renderable, GuiEventListener, RecipeShownListener {
     public static final ResourceLocation TEXTURE = new ResourceLocation("textures/gui/recipe_book.png");
     private static final Component SEARCH_HINT_TEXT;
     private static final Component TOGGLE_CRAFTABLE_RECIPES_TEXT;
@@ -82,8 +82,7 @@ public abstract class  PrivateRecipeBookWidget extends GuiComponent implements P
         if (this.open) {
             this.reset();
         }
-
-        client.keyboardHandler.setSendRepeatsToGui(true);
+        //client.keyboard.setRepeatEvents(true);
     }
 
     protected void setOpen(boolean opened) {
@@ -106,9 +105,12 @@ public abstract class  PrivateRecipeBookWidget extends GuiComponent implements P
     public void toggleOpen() {
         this.setOpen(!this.isOpen());
     }
+    /*
     public void close() {
-        this.client.keyboardHandler.setSendRepeatsToGui(false);
+        this.client.keyboard.setRepeatEvents(false);
     }
+
+     */
     private boolean toggleFilteringCraftable() {
         boolean bl = !BeachPartyClient.rememberedCraftableToggle;
         BeachPartyClient.rememberedCraftableToggle = bl;
@@ -148,7 +150,7 @@ public abstract class  PrivateRecipeBookWidget extends GuiComponent implements P
     public void drawTooltip(PoseStack matrices, int x, int y, int mouseX, int mouseY) {
         if (this.isOpen()) {
             this.recipesArea.drawTooltip(matrices, mouseX, mouseY);
-            if (this.toggleCraftableButton.isHoveredOrFocused()) {
+            if (this.toggleCraftableButton.isHovered()) {
                 Component text = this.getCraftableButtonText();
                 if (this.client.screen != null) {
                     this.client.screen.renderTooltip(matrices, text, mouseX, mouseY);
@@ -193,15 +195,18 @@ public abstract class  PrivateRecipeBookWidget extends GuiComponent implements P
         }
     }
 
+
+
     private void refreshResults(boolean resetCurrentPage) {
         if (this.currentTab == null) return;
         if (this.searchField == null) return;
 
         List<? extends Recipe<Container>> recipes = getResultsForGroup(currentTab.getGroup(), client.level.getRecipeManager().getAllRecipesFor(getRecipeType()));
+
         String string = this.searchField.getValue();
 
         if (!string.isEmpty()) {
-            recipes.removeIf((recipe) -> !recipe.getResultItem().getHoverName().getString().toLowerCase(Locale.ROOT).contains(string.toLowerCase(Locale.ROOT)));
+            recipes.removeIf((recipe) -> !recipe.getResultItem(client.level.registryAccess()).getHoverName().getString().toLowerCase(Locale.ROOT).contains(string.toLowerCase(Locale.ROOT)));
         }
 
         if (BeachPartyClient.rememberedCraftableToggle) {
@@ -214,7 +219,7 @@ public abstract class  PrivateRecipeBookWidget extends GuiComponent implements P
     private <T extends Recipe<Container>> List<T> getResultsForGroup(IRecipeBookGroup group, List<T> recipes) {
         List<T> results = Lists.newArrayList();
         for (T recipe : recipes) {
-            if (group.fitRecipe(recipe)) {
+            if (group.fitRecipe(recipe, client.level.registryAccess())) {
                 results.add(recipe);
             }
         }
@@ -225,7 +230,7 @@ public abstract class  PrivateRecipeBookWidget extends GuiComponent implements P
     private void refreshTabButtons() {
         int i = (this.parentWidth - 147) / 2 - this.leftOffset - 30;
         int j = (this.parentHeight - 166) / 2 + 3;
-
+        
         int l = 0;
         for (PrivateRecipeGroupButtonWidget recipeGroupButtonWidget : this.tabButtons) {
             recipeGroupButtonWidget.visible = true;
@@ -289,6 +294,7 @@ public abstract class  PrivateRecipeBookWidget extends GuiComponent implements P
 
     }
 
+    @Override
     public boolean mouseClicked(double mouseX, double mouseY, int button) {
         if (this.open && !this.client.player.isSpectator()) {
             if (this.recipesArea.mouseClicked(mouseX, mouseY, button, (this.parentWidth - 147) / 2 - this.leftOffset, (this.parentHeight - 166) / 2, 147, 166)) {
@@ -363,7 +369,7 @@ public abstract class  PrivateRecipeBookWidget extends GuiComponent implements P
                 return true;
             } else if (this.client.options.keyChat.matches(keyCode, scanCode) && !this.searchField.isFocused()) {
                 this.searching = true;
-                this.searchField.setFocus(true);
+                this.searchField.setFocused(true);
                 return true;
             } else {
                 return false;
@@ -435,7 +441,7 @@ public abstract class  PrivateRecipeBookWidget extends GuiComponent implements P
         } else {
             boolean bl = mouseX < (double)x || mouseY < (double)y || mouseX >= (double)(x + backgroundWidth) || mouseY >= (double)(y + backgroundHeight);
             boolean bl2 = (double)(x - 147) < mouseX && mouseX < (double)x && (double)y < mouseY && mouseY < (double)(y + backgroundHeight);
-            return bl && !bl2 && !this.currentTab.isHoveredOrFocused();
+            return bl && !bl2 && !this.currentTab.isHovered();
         }
     }
 

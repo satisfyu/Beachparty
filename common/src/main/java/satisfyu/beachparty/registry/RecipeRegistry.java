@@ -3,6 +3,7 @@ package satisfyu.beachparty.registry;
 import dev.architectury.registry.registries.DeferredRegister;
 import dev.architectury.registry.registries.RegistrySupplier;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
@@ -16,8 +17,8 @@ import java.util.Map;
 import java.util.function.Supplier;
 
 public class RecipeRegistry {
-    private static final DeferredRegister<RecipeSerializer<?>> RECIPE_SERIALIZERS = DeferredRegister.create(Beachparty.MOD_ID, Registry.RECIPE_SERIALIZER_REGISTRY);
-    private static final DeferredRegister<RecipeType<?>> RECIPE_TYPES = DeferredRegister.create(Beachparty.MOD_ID, Registry.RECIPE_TYPE_REGISTRY);
+    private static final DeferredRegister<RecipeSerializer<?>> RECIPE_SERIALIZERS = DeferredRegister.create(Beachparty.MOD_ID, Registries.RECIPE_SERIALIZER);
+    private static final DeferredRegister<RecipeType<?>> RECIPE_TYPES = DeferredRegister.create(Beachparty.MOD_ID, Registries.RECIPE_TYPE);
     public static final RegistrySupplier<RecipeType<TikiBarRecipe>> TIKI_BAR_RECIPE_TYPE = create("tiki_bar_mixing");
     public static final RegistrySupplier<RecipeSerializer<TikiBarRecipe>> TIKI_BAR_RECIPE_SERIALIZER = create("tiki_bar_mixing", TikiBarRecipe.Serializer::new);
     public static final RegistrySupplier<RecipeType<MiniFridgeRecipe>> MINI_FRIDGE_RECIPE_TYPE = create("mini_fridge_mixing");

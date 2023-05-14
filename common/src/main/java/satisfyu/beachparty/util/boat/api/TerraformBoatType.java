@@ -1,36 +1,40 @@
 package satisfyu.beachparty.util.boat.api;
 
-import dev.architectury.registry.registries.RegistrySupplier;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.level.ItemLike;
 import satisfyu.beachparty.util.boat.impl.TerraformBoatTypeImpl;
 
-
 public interface TerraformBoatType {
-
+	boolean isRaft();
 	Item getItem();
-
 	Item getChestItem();
-	default Item getPlanks() {
-		return Items.OAK_PLANKS;
-	}
+	Item getPlanks();
 
 	public static class Builder {
-		private RegistrySupplier<Item> item;
-		private RegistrySupplier<Item> chestItem;
+		private boolean raft;
+		private Item item;
+		private Item chestItem;
+		private Item planks;
 
 		public TerraformBoatType build() {
-			return new TerraformBoatTypeImpl(this.item, this.chestItem);
+			return new TerraformBoatTypeImpl(this.raft, this.item, this.chestItem, this.planks);
+		}
+		public Builder raft() {
+			this.raft = true;
+			return this;
 		}
 
-		public Builder item(RegistrySupplier<Item> item) {
+		public Builder item(Item item) {
 			this.item = item;
 			return this;
 		}
 
-		public Builder chestItem(RegistrySupplier<Item> chestItem) {
+		public Builder chestItem(Item chestItem) {
 			this.chestItem = chestItem;
+			return this;
+		}
+
+		public Builder planks(Item planks) {
+			this.planks = planks;
 			return this;
 		}
 	}

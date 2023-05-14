@@ -18,8 +18,8 @@ import java.util.List;
 
 public class DyeableBeachpartyArmorItem extends DyeableArmorItem implements IBeachpartyAmorSet {
     private final int defaultColor;
-    public DyeableBeachpartyArmorItem(ArmorMaterial material, EquipmentSlot slot, int color, Item.Properties settings) {
-        super(material, slot, settings);
+    public DyeableBeachpartyArmorItem(ArmorMaterial material, Type type, int color, Item.Properties settings) {
+        super(material, type, settings);
         defaultColor = color;
     }
 

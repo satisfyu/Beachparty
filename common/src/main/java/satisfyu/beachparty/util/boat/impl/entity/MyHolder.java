@@ -2,11 +2,12 @@ package satisfyu.beachparty.util.boat.impl.entity;
 
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.vehicle.Boat;
 import satisfyu.beachparty.util.boat.api.TerraformBoatType;
 import satisfyu.beachparty.util.boat.api.TerraformBoatTypeRegistry;
 
-public interface TerraformBoatHolder {
-	static final String BOAT_KEY = "TerraformBoat";
+public interface MyHolder {
+	static final String BOAT_KEY = "VineryBoat";
 
 	TerraformBoatType getTerraformBoat();
 
@@ -31,5 +32,9 @@ public interface TerraformBoatHolder {
 		if (boatId != null) {
 			nbt.putString(BOAT_KEY, boatId.toString());
 		}
+	}
+
+	default Boat.Type getImpersonatedBoatType() {
+		return this.getTerraformBoat().isRaft() ? Boat.Type.BAMBOO : Boat.Type.OAK;
 	}
 }

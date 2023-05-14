@@ -48,12 +48,13 @@ public class CoconutEntity extends ThrowableItemProjectile {
 
     }
 
+    @Override
     protected void onHitEntity(EntityHitResult entityHitResult) {
         super.onHitEntity(entityHitResult);
         Entity entity = entityHitResult.getEntity();
-        int damage = 2;
-        entity.hurt(DamageSource.thrown(this, this.getOwner()), (float)damage);
+        entity.hurt(entity.damageSources().thrown(this, null), 2);
     }
+
     protected void onHit(HitResult hitResult) {
         super.onHit(hitResult);
         if (!this.level.isClientSide) {

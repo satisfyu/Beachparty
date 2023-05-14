@@ -10,6 +10,7 @@ import net.minecraft.client.gui.GuiComponent;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.world.item.ItemStack;
+
 import java.util.List;
 
 public class PrivateRecipeBookGhostSlots {
@@ -53,12 +54,12 @@ public class PrivateRecipeBookGhostSlots {
 
             ItemStack itemStack = ghostInputSlot.getCurrentItemStack();
             ItemRenderer itemRenderer = client.getItemRenderer();
-            itemRenderer.renderAndDecorateFakeItem(itemStack, l, m);
+            itemRenderer.renderAndDecorateFakeItem(matrices, itemStack, l, m);
             RenderSystem.depthFunc(516);
             GuiComponent.fill(matrices, l, m, l + 16, m + 16, 822083583);
             RenderSystem.depthFunc(515);
             if (k == 0) {
-                itemRenderer.renderGuiItemDecorations(client.font, itemStack, l, m);
+                itemRenderer.renderGuiItemDecorations(matrices, client.font, itemStack, l, m);
             }
         }
 

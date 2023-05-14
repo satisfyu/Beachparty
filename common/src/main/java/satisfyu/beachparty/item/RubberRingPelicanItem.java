@@ -9,7 +9,7 @@ public class RubberRingPelicanItem extends CustomModelArmorItem {
 
 
     public RubberRingPelicanItem(Properties settings) {
-        super(MaterialsRegistry.RING, EquipmentSlot.CHEST, settings);
+        super(MaterialsRegistry.RING, Type.HELMET, settings);
     }
 
     @Override

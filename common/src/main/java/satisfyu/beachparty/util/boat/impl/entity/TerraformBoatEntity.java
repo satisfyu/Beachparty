@@ -2,7 +2,6 @@ package satisfyu.beachparty.util.boat.impl.entity;
 
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.world.entity.EntityType;
@@ -13,9 +12,10 @@ import satisfyu.beachparty.util.boat.api.TerraformBoatType;
 import satisfyu.beachparty.util.boat.impl.TerraformBoatInitializer;
 import satisfyu.beachparty.util.boat.impl.TerraformBoatTrackedData;
 
+import java.util.Optional;
 
-public class TerraformBoatEntity extends Boat implements TerraformBoatHolder {
-	private static final EntityDataAccessor<TerraformBoatType> TERRAFORM_BOAT = SynchedEntityData.defineId(TerraformBoatEntity.class, TerraformBoatTrackedData.HANDLER);
+public class TerraformBoatEntity extends Boat implements MyHolder {
+	private static final EntityDataAccessor<Optional<TerraformBoatType>> TERRAFORM_BOAT = SynchedEntityData.defineId(TerraformBoatEntity.class, TerraformBoatTrackedData.HANDLER);
 
 	public TerraformBoatEntity(EntityType<? extends TerraformBoatEntity> type, Level world) {
 		super(type, world);
@@ -36,12 +36,12 @@ public class TerraformBoatEntity extends Boat implements TerraformBoatHolder {
 
 	@Override
 	public TerraformBoatType getTerraformBoat() {
-		return this.entityData.get(TERRAFORM_BOAT);
+		return this.entityData.get(TERRAFORM_BOAT).orElse(null);
 	}
 
 	@Override
 	public void setTerraformBoat(TerraformBoatType boat) {
-		this.entityData.set(TERRAFORM_BOAT, boat);
+		this.entityData.set(TERRAFORM_BOAT, Optional.of(boat));
 	}
 
 	@Override
@@ -69,19 +69,19 @@ public class TerraformBoatEntity extends Boat implements TerraformBoatHolder {
 	}
 
 	@Override
-	public void setType(Type type) {
+	public void setVariant(Type type) {
 		return;
 	}
 
 	@Override
-	public Type getBoatType() {
-		return Type.OAK;
+	public Type getVariant() {
+		return this.getImpersonatedBoatType();
 	}
 
 	@Override
 	protected void defineSynchedData() {
 		super.defineSynchedData();
-		this.entityData.define(TERRAFORM_BOAT, null);
+		this.entityData.define(TERRAFORM_BOAT, Optional.empty());
 	}
 
 	// Serialization

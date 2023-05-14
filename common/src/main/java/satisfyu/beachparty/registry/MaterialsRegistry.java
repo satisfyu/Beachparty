@@ -2,6 +2,7 @@ package satisfyu.beachparty.registry;
 
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.ArmorMaterials;
 import net.minecraft.world.item.Items;
@@ -12,13 +13,13 @@ public class MaterialsRegistry {
     public static final ArmorMaterial TRUNKS = new ArmorMaterial() {
 
         @Override
-        public int getDurabilityForSlot(EquipmentSlot slot) {
-            return ArmorMaterials.LEATHER.getDurabilityForSlot(slot);
+        public int getDurabilityForType(ArmorItem.Type type) {
+            return ArmorMaterials.LEATHER.getDurabilityForType(type);
         }
 
         @Override
-        public int getDefenseForSlot(EquipmentSlot slot) {
-            return 1;
+        public int getDefenseForType(ArmorItem.Type type) {
+            return ArmorMaterials.LEATHER.getDefenseForType(type);
         }
 
         @Override
@@ -55,14 +56,15 @@ public class MaterialsRegistry {
     public static final ArmorMaterial BIKINI = new ArmorMaterial() {
 
         @Override
-        public int getDurabilityForSlot(EquipmentSlot slot) {
-            return ArmorMaterials.LEATHER.getDurabilityForSlot(slot);
+        public int getDurabilityForType(ArmorItem.Type type) {
+            return ArmorMaterials.LEATHER.getDurabilityForType(type);
         }
 
         @Override
-        public int getDefenseForSlot(EquipmentSlot slot) {
-            return 1;
+        public int getDefenseForType(ArmorItem.Type type) {
+            return ArmorMaterials.LEATHER.getDefenseForType(type);
         }
+
         @Override
         public int getEnchantmentValue() {
             return ArmorMaterials.LEATHER.getEnchantmentValue();
@@ -97,13 +99,13 @@ public class MaterialsRegistry {
     public static final ArmorMaterial RING = new ArmorMaterial() {
 
         @Override
-        public int getDurabilityForSlot(EquipmentSlot slot) {
-            return ArmorMaterials.LEATHER.getDurabilityForSlot(slot);
+        public int getDurabilityForType(ArmorItem.Type type) {
+            return ArmorMaterials.LEATHER.getDurabilityForType(type);
         }
 
         @Override
-        public int getDefenseForSlot(EquipmentSlot slot) {
-            return 1;
+        public int getDefenseForType(ArmorItem.Type type) {
+            return ArmorMaterials.LEATHER.getDefenseForType(type);
         }
 
         @Override
@@ -140,14 +142,15 @@ public class MaterialsRegistry {
     public static final ArmorMaterial BEACH_HAT = new ArmorMaterial() {
 
         @Override
-        public int getDurabilityForSlot(EquipmentSlot slot) {
-            return ArmorMaterials.LEATHER.getDurabilityForSlot(slot);
+        public int getDurabilityForType(ArmorItem.Type type) {
+            return ArmorMaterials.LEATHER.getDurabilityForType(type);
         }
 
         @Override
-        public int getDefenseForSlot(EquipmentSlot slot) {
-            return 1;
+        public int getDefenseForType(ArmorItem.Type type) {
+            return ArmorMaterials.LEATHER.getDefenseForType(type);
         }
+
         @Override
         public int getEnchantmentValue() {
             return ArmorMaterials.LEATHER.getEnchantmentValue();
@@ -182,14 +185,15 @@ public class MaterialsRegistry {
     public static final ArmorMaterial SUNGLASSES = new ArmorMaterial() {
 
         @Override
-        public int getDurabilityForSlot(EquipmentSlot slot) {
-            return ArmorMaterials.LEATHER.getDurabilityForSlot(slot);
+        public int getDurabilityForType(ArmorItem.Type type) {
+            return ArmorMaterials.LEATHER.getDurabilityForType(type);
         }
 
         @Override
-        public int getDefenseForSlot(EquipmentSlot slot) {
-            return 1;
+        public int getDefenseForType(ArmorItem.Type type) {
+            return ArmorMaterials.LEATHER.getDefenseForType(type);
         }
+
         @Override
         public int getEnchantmentValue() {
             return ArmorMaterials.LEATHER.getEnchantmentValue();
@@ -224,14 +228,15 @@ public class MaterialsRegistry {
     public static final ArmorMaterial SWIM_WINGS = new ArmorMaterial() {
 
         @Override
-        public int getDurabilityForSlot(EquipmentSlot slot) {
-            return ArmorMaterials.LEATHER.getDurabilityForSlot(slot);
+        public int getDurabilityForType(ArmorItem.Type type) {
+            return ArmorMaterials.LEATHER.getDurabilityForType(type);
         }
 
         @Override
-        public int getDefenseForSlot(EquipmentSlot slot) {
-            return 1;
+        public int getDefenseForType(ArmorItem.Type type) {
+            return ArmorMaterials.LEATHER.getDefenseForType(type);
         }
+
         @Override
         public int getEnchantmentValue() {
             return ArmorMaterials.LEATHER.getEnchantmentValue();
@@ -264,16 +269,16 @@ public class MaterialsRegistry {
     };
 
     public static final ArmorMaterial CROCS = new ArmorMaterial() {
-
         @Override
-        public int getDurabilityForSlot(EquipmentSlot slot) {
-            return ArmorMaterials.LEATHER.getDurabilityForSlot(slot);
+        public int getDurabilityForType(ArmorItem.Type type) {
+            return ArmorMaterials.LEATHER.getDurabilityForType(type);
         }
 
         @Override
-        public int getDefenseForSlot(EquipmentSlot slot) {
-            return 1;
+        public int getDefenseForType(ArmorItem.Type type) {
+            return ArmorMaterials.LEATHER.getDefenseForType(type);
         }
+
         @Override
         public int getEnchantmentValue() {
             return ArmorMaterials.LEATHER.getEnchantmentValue();

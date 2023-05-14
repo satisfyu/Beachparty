@@ -116,13 +116,12 @@ public class MiniFridgeBlockEntity extends BlockEntity implements Container, Blo
     }
 
     private boolean canCraft(MiniFridgeRecipe recipe) {
-        if (recipe == null || recipe.getResultItem().isEmpty()) {
+        if (recipe == null || recipe.getResultItem(this.level.registryAccess()).isEmpty()) {
             return false;
         } else if (areInputsEmpty()) {
             return false;
         }
-        ItemStack itemStack = this.getItem(OUTPUT_SLOT);
-        return itemStack.isEmpty() || itemStack == recipe.getResultItem();
+        return this.getItem(OUTPUT_SLOT).isEmpty();
     }
 
 

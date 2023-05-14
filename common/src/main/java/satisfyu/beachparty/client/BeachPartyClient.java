@@ -9,17 +9,14 @@ import net.fabricmc.api.Environment;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
-import net.minecraft.client.resources.model.Material;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import satisfyu.beachparty.BeachpartyIdentifier;
 import satisfyu.beachparty.client.gui.MiniFridgeGui;
 import satisfyu.beachparty.client.gui.TikiBarGui;
 import satisfyu.beachparty.entity.chair.ChairRenderer;
@@ -27,11 +24,8 @@ import satisfyu.beachparty.entity.pelican.PelicanModel;
 import satisfyu.beachparty.entity.pelican.PelicanRenderer;
 import satisfyu.beachparty.networking.BeachpartyMessages;
 import satisfyu.beachparty.registry.*;
-import satisfyu.beachparty.util.boat.api.client.TerraformBoatClientHelper;
-import satisfyu.beachparty.util.boat.impl.client.TerraformBoatClientInitializer;
-import satisfyu.beachparty.util.sign.SpriteIdentifierRegistry;
+import satisfyu.beachparty.util.boat.api.client.CustomBoatClientHelper;
 
-import java.util.List;
 import java.util.Map;
 import java.util.function.Supplier;
 
@@ -87,7 +81,7 @@ public class BeachPartyClient {
 
         //"API"
         CustomArmorRegistry.registerCustomArmorLayers(map);
-        TerraformBoatClientHelper.registerModelLayers(map, new BeachpartyIdentifier("palm"));
+        CustomBoatClientHelper.registerModelLayers(BoatRegistry.PALM_BOAT_ID, false);
     }
 
     public static void getEntityEntityRenderers(Map<Supplier<EntityType<?>>, EntityRendererProvider<?>> map){
@@ -95,8 +89,6 @@ public class BeachPartyClient {
         registerEntityRenderer(map, EntityRegistry.CHAIR, ChairRenderer::new);
         registerEntityRenderer(map, EntityRegistry.COCONUT, ThrownItemRenderer::new);
 
-        //"API"
-        TerraformBoatClientInitializer.init(map);
     }
 
     public static <T extends Entity> void registerEntityRenderer(Map<Supplier<EntityType<?>>, EntityRendererProvider<?>> map, Supplier<? extends EntityType<? extends T>> type, EntityRendererProvider<T> factory) {

@@ -1,6 +1,5 @@
 package satisfyu.beachparty.entity.pelican;
 
-import satisfyu.beachparty.client.BeachPartyClient;
 
 import static satisfyu.beachparty.Beachparty.MOD_ID;
 

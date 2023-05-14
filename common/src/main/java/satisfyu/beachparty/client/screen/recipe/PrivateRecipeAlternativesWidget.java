@@ -8,7 +8,7 @@ import net.fabricmc.api.Environment;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiComponent;
 import net.minecraft.client.gui.components.AbstractWidget;
-import net.minecraft.client.gui.components.Widget;
+import net.minecraft.client.gui.components.Renderable;
 import net.minecraft.client.gui.components.events.GuiEventListener;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.network.chat.CommonComponents;
@@ -18,13 +18,13 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
-import satisfyu.beachparty.client.BeachPartyClient;
 import org.jetbrains.annotations.Nullable;
+import satisfyu.beachparty.client.BeachPartyClient;
 
 import java.util.Iterator;
 import java.util.List;
 
-public class PrivateRecipeAlternativesWidget extends GuiComponent implements Widget, GuiEventListener {
+public class PrivateRecipeAlternativesWidget extends GuiComponent implements Renderable, GuiEventListener {
     static final ResourceLocation BACKGROUND_TEXTURE = new ResourceLocation("textures/gui/recipe_book.png");
     private final List<CustomAlternativeButtonWidget> alternativeButtons = Lists.newArrayList();
     private boolean visible;
@@ -114,6 +114,16 @@ public class PrivateRecipeAlternativesWidget extends GuiComponent implements Wid
         }
     }
 
+    @Override
+    public void setFocused(boolean focused) {
+
+    }
+
+    @Override
+    public boolean isFocused() {
+        return false;
+    }
+
     public void render(PoseStack matrices, int mouseX, int mouseY, float delta) {
         if (this.visible) {
             this.time += delta;
@@ -187,9 +197,11 @@ public class PrivateRecipeAlternativesWidget extends GuiComponent implements Wid
             this.placeRecipe(3, 3, -1, recipe, recipe.getIngredients().iterator(), 0);
         }
 
-        public void updateNarration(NarrationElementOutput builder) {
+        protected void updateWidgetNarration(NarrationElementOutput builder) {
             this.defaultButtonNarrationText(builder);
         }
+
+
 
         public void addItemToSlot(Iterator<Ingredient> inputs, int slot, int amount, int gridX, int gridY) {
             ItemStack[] itemStacks = inputs.next().getItems();
@@ -199,7 +211,7 @@ public class PrivateRecipeAlternativesWidget extends GuiComponent implements Wid
 
         }
 
-        public void renderButton(PoseStack matrices, int mouseX, int mouseY, float delta) {
+        public void renderWidget(PoseStack matrices, int mouseX, int mouseY, float delta) {
             RenderSystem.setShaderTexture(0, BACKGROUND_TEXTURE);
             int i = 152;
             if (!this.craftable) {
@@ -207,14 +219,14 @@ public class PrivateRecipeAlternativesWidget extends GuiComponent implements Wid
             }
 
             int j = 78;
-            if (this.isHoveredOrFocused()) {
+            if (this.isHovered()) {
                 j += 26;
             }
 
-            this.blit(matrices, this.x, this.y, i, j, this.width, this.height);
+            this.blit(matrices, this.getX(), this.getY(), i, j, this.width, this.height);
             PoseStack matrixStack = RenderSystem.getModelViewStack();
             matrixStack.pushPose();
-            matrixStack.translate( (this.x + 2), (this.y + 2), 125.0);
+            matrixStack.translate( (this.getX() + 2), (this.getY() + 2), 125.0);
 
             for (InputSlot inputSlot : this.slots) {
                 matrixStack.pushPose();
@@ -222,7 +234,7 @@ public class PrivateRecipeAlternativesWidget extends GuiComponent implements Wid
                 matrixStack.scale(0.375F, 0.375F, 1.0F);
                 matrixStack.translate(-8.0, -8.0, 0.0);
                 RenderSystem.applyModelViewMatrix();
-                PrivateRecipeAlternativesWidget.this.client.getItemRenderer().renderAndDecorateItem(inputSlot.stacks[Mth.floor(PrivateRecipeAlternativesWidget.this.time / 30.0F) % inputSlot.stacks.length], 0, 0);
+                PrivateRecipeAlternativesWidget.this.client.getItemRenderer().renderAndDecorateItem(matrices, inputSlot.stacks[Mth.floor(PrivateRecipeAlternativesWidget.this.time / 30.0F) % inputSlot.stacks.length], 0, 0);
                 matrixStack.popPose();
             }
 

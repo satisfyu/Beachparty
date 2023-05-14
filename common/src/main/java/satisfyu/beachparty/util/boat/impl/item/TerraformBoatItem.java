@@ -1,9 +1,7 @@
 package satisfyu.beachparty.util.boat.impl.item;
 
-import java.util.List;
-import java.util.function.Predicate;
-import java.util.function.Supplier;
 import net.minecraft.core.BlockPos;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
@@ -20,22 +18,28 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import satisfyu.beachparty.util.boat.api.TerraformBoatType;
+import satisfyu.beachparty.util.boat.api.TerraformBoatTypeRegistry;
 import satisfyu.beachparty.util.boat.impl.entity.TerraformBoatEntity;
 import satisfyu.beachparty.util.boat.impl.entity.TerraformChestBoatEntity;
 
+
+import java.util.List;
+import java.util.function.Predicate;
+
+/**
+ * An {@linkplain Item item} that spawns a {@linkplain TerraformBoatEntity boat entity} with a given {@linkplain TerraformBoatType Terraform boat type}.
+ */
 public class TerraformBoatItem extends Item {
 	private static final Predicate<Entity> RIDERS = EntitySelector.NO_SPECTATORS.and(Entity::isPickable);
 
-	private final Supplier<TerraformBoatType> boatSupplier;
+	private final ResourceLocation key;
 	private final boolean chest;
 
-	/**
-	 * @param boatSupplier a {@linkplain Supplier supplier} for the {@linkplain TerraformBoatType Terraform boat type} that should be spawned by this item
-	 */
-	public TerraformBoatItem(Supplier<TerraformBoatType> boatSupplier, boolean chest, Properties settings) {
+
+	public TerraformBoatItem(ResourceLocation key, boolean chest, Properties settings) {
 		super(settings);
 
-		this.boatSupplier = boatSupplier;
+		this.key = key;
 		this.chest = chest;
 	}
 
@@ -67,7 +71,9 @@ public class TerraformBoatItem extends Item {
 			double y = hitResult.getLocation().y;
 			double z = hitResult.getLocation().z;
 
-			TerraformBoatType boatType = this.boatSupplier.get();
+
+			TerraformBoatType boatType = TerraformBoatTypeRegistry.get(key);
+
 			Boat boatEntity;
 
 			if (this.chest) {
@@ -88,7 +94,7 @@ public class TerraformBoatItem extends Item {
 			
 			if (!world.isClientSide()) {
 				world.addFreshEntity(boatEntity);
-				world.gameEvent(user, GameEvent.ENTITY_PLACE, new BlockPos(hitResult.getLocation()));
+				world.gameEvent(user, GameEvent.ENTITY_PLACE, BlockPos.containing(hitResult.getLocation()));
 
 				if (!user.getAbilities().instabuild) {
 					stack.shrink(1);

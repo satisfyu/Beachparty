@@ -9,9 +9,10 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.StateSwitchingButton;
 import net.minecraft.world.Container;
 import net.minecraft.world.item.crafting.Recipe;
+import org.jetbrains.annotations.Nullable;
 import satisfyu.beachparty.client.recipebook.AbstractPrivateRecipeScreenHandler;
 import satisfyu.beachparty.client.recipebook.PrivateRecipeBookWidget;
-import org.jetbrains.annotations.Nullable;
+
 
 import java.util.Iterator;
 import java.util.List;
@@ -97,7 +98,7 @@ public class PrivateRecipeBookRecipeArea {
 
         for (PrivateAnimatedResultButton animatedResultButton : this.resultButtons) {
             animatedResultButton.render(matrices, mouseX, mouseY, delta);
-            if (animatedResultButton.visible && animatedResultButton.isHoveredOrFocused()) {
+            if (animatedResultButton.visible && animatedResultButton.isHovered()) {
                 this.hoveredResultButton = animatedResultButton;
             }
         }

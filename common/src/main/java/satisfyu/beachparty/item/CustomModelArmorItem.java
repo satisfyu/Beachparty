@@ -6,8 +6,8 @@ import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.Item;
 
 public abstract class CustomModelArmorItem extends BeachpartyArmorItem {
-    public CustomModelArmorItem(ArmorMaterial material, EquipmentSlot slot, Item.Properties settings) {
-        super(material, slot, settings);
+    public CustomModelArmorItem(ArmorMaterial material, Type type, Properties settings) {
+        super(material, type, settings);
     }
 
     public abstract ResourceLocation getTexture();

@@ -18,8 +18,8 @@ import java.util.List;
 public class BeachpartyArmorItem extends ArmorItem implements IBeachpartyAmorSet {
 
 
-    public BeachpartyArmorItem(ArmorMaterial material, EquipmentSlot slot, Properties settings) {
-        super(material, slot, settings);
+    public BeachpartyArmorItem(ArmorMaterial material, Type type, Properties settings) {
+        super(material, type, settings);
     }
 
     @Override

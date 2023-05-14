@@ -1,31 +1,41 @@
 package satisfyu.beachparty.util.boat.impl;
 
-import dev.architectury.registry.registries.RegistrySupplier;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
 import satisfyu.beachparty.util.boat.api.TerraformBoatType;
 
+/**
+ * A simple implementation of {@link TerraformBoatType}.
+ */
 public class TerraformBoatTypeImpl implements TerraformBoatType {
-	private final RegistrySupplier<Item> item;
-	private final RegistrySupplier<Item> chestItem;
+	private final boolean raft;
+	private final Item item;
+	private final Item chestItem;
+	private final Item planks;
 
-	public TerraformBoatTypeImpl(RegistrySupplier<Item> item, RegistrySupplier<Item> chestItem) {
+	public TerraformBoatTypeImpl(boolean raft, Item item, Item chestItem, Item planks) {
+		this.raft = raft;
 		this.item = item;
 		this.chestItem = chestItem;
+		this.planks = planks;
+	}
+
+	@Override
+	public boolean isRaft() {
+		return this.raft;
 	}
 
 	@Override
 	public Item getItem() {
-		return this.item.get();
+		return this.item;
 	}
 
 	@Override
 	public Item getChestItem() {
-		return this.chestItem.get();
+		return this.chestItem;
 	}
 
 	@Override
 	public Item getPlanks() {
-		return Items.OAK_PLANKS;
+		return this.planks;
 	}
 }
