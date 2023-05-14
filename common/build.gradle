@@ -11,6 +11,8 @@ dependencies {
     // Do NOT use other classes from fabric loader
     modImplementation "net.fabricmc:fabric-loader:${rootProject.fabric_loader_version}"
     // Remove the next line if you don't want to depend on the API
+    modApi "de:doapi:${project.doapi_version}"
+
     modApi "dev.architectury:architectury:${rootProject.architectury_version}"
 }
 

@@ -1,5 +1,6 @@
 package satisfyu.beachparty.registry;
 
+import dev.architectury.registry.client.level.entity.EntityModelLayerRegistry;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.EntityModelSet;
 import net.minecraft.client.model.geom.ModelLayerLocation;
@@ -17,11 +18,11 @@ import java.util.function.Supplier;
 public class CustomArmorRegistry {
 
 
-    public static void registerCustomArmorLayers(Map<ModelLayerLocation, Supplier<LayerDefinition>> map){
-        map.put(BeachHatModel.LAYER_LOCATION, BeachHatModel::getTexturedModelData);
-        map.put(RubberRingPelicanModel.LAYER_LOCATION, RubberRingPelicanModel::getTexturedModelData);
-        map.put(RubberRingAxolotlModel.LAYER_LOCATION, RubberRingAxolotlModel::getTexturedModelData);
-        map.put(RubberRingModel.LAYER_LOCATION, RubberRingModel::getTexturedModelData);
+    public static void registerCustomArmorLayers(){
+        EntityModelLayerRegistry.register(BeachHatModel.LAYER_LOCATION, BeachHatModel::getTexturedModelData);
+        EntityModelLayerRegistry.register(RubberRingPelicanModel.LAYER_LOCATION, RubberRingPelicanModel::getTexturedModelData);
+        EntityModelLayerRegistry.register(RubberRingAxolotlModel.LAYER_LOCATION, RubberRingAxolotlModel::getTexturedModelData);
+        EntityModelLayerRegistry.register(RubberRingModel.LAYER_LOCATION, RubberRingModel::getTexturedModelData);
 
     }
 

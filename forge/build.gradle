@@ -7,6 +7,7 @@ architectury {
     forge()
 }
 
+
 loom {
     accessWidenerPath = project(":common").loom.accessWidenerPath
 
@@ -16,7 +17,9 @@ loom {
 
         mixinConfig "beachparty-common.mixins.json"
         mixinConfig "beachparty.mixins.json"
+
     }
+
 }
 
 configurations {
@@ -30,6 +33,9 @@ configurations {
 dependencies {
     forge "net.minecraftforge:forge:${rootProject.forge_version}"
     // Remove the next line if you don't want to depend on the API
+
+    include(modApi("de:doapi:${project.doapi_version}"))
+
     modApi "dev.architectury:architectury-forge:${rootProject.architectury_version}"
 
     common(project(path: ":common", configuration: "namedElements")) { transitive false }
@@ -61,6 +67,7 @@ remapJar {
 jar {
     classifier "dev"
 }
+
 
 sourcesJar {
     def commonSources = project(":common").sourcesJar

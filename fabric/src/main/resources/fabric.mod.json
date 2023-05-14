@@ -21,6 +21,9 @@
     "client": [
       "satisfyu.beachparty.fabriclike.client.BeachpartyFabricLikeClient"
     ],
+    "doapi": [
+      "satisfyu.beachparty.util.api.BeachPatyDoAPI"
+    ],
     "fabric-datagen": [
       "satisfyu.beachparty.fabric.datagen.BeachpartyDataGeneration"
     ]

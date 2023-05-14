@@ -1,14 +1,14 @@
 package satisfyu.beachparty.registry;
 
+import de.cristelknight.doapi.Util;
+import de.cristelknight.doapi.item.BetterCustomArmorModelItem;
 import dev.architectury.core.item.ArchitecturySpawnEggItem;
-import dev.architectury.platform.Platform;
 import dev.architectury.registry.fuel.FuelRegistry;
 import dev.architectury.registry.registries.DeferredRegister;
 import dev.architectury.registry.registries.Registrar;
 import dev.architectury.registry.registries.RegistrySupplier;
 import net.minecraft.core.Registry;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -20,12 +20,14 @@ import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
+import org.jetbrains.annotations.Nullable;
 import satisfyu.beachparty.Beachparty;
 import satisfyu.beachparty.BeachpartyIdentifier;
 import satisfyu.beachparty.block.*;
 import satisfyu.beachparty.item.*;
-import satisfyu.beachparty.util.sign.block.TerraformSignBlock;
-import satisfyu.beachparty.util.sign.block.TerraformWallSignBlock;
+import satisfyu.beachparty.item.armor.BeachHatItem;
+import satisfyu.beachparty.item.armor.BeachpartyArmorItem;
+import satisfyu.beachparty.item.armor.DyeableBeachpartyArmorItem;
 
 import java.util.function.Consumer;
 import java.util.function.Supplier;
@@ -113,11 +115,11 @@ public class ObjectRegistry {
     public static final RegistrySupplier<Item> BIKINI = registerItem("bikini", () -> new DyeableBeachpartyArmorItem(MaterialsRegistry.BIKINI, EquipmentSlot.LEGS, 987135, getSettings().rarity(Rarity.COMMON)));
     public static final RegistrySupplier<Item> CROCS = registerItem("crocs", () -> new DyeableBeachpartyArmorItem(MaterialsRegistry.CROCS, EquipmentSlot.FEET, 1048335, getSettings().rarity(Rarity.UNCOMMON)));
     public static final RegistrySupplier<Item> SWIM_WINGS = registerItem("swim_wings", () -> new BeachpartyArmorItem(MaterialsRegistry.SWIM_WINGS, EquipmentSlot.CHEST, getSettings()));
-    public static final RegistrySupplier<Item> RUBBER_RING_BLUE = registerItem("rubber_ring_blue", () -> new BetterCustomArmorModelItem(EquipmentSlot.CHEST, getSettings().rarity(Rarity.COMMON), new BeachpartyIdentifier("textures/entity/rubber_ring_blue.png"), -0.7f));
-    public static final RegistrySupplier<Item> RUBBER_RING_PINK = registerItem("rubber_ring_pink", () -> new BetterCustomArmorModelItem(EquipmentSlot.CHEST, getSettings().rarity(Rarity.COMMON), new BeachpartyIdentifier("textures/entity/rubber_ring_pink.png"), -0.7f));
-    public static final RegistrySupplier<Item> RUBBER_RING_STRIPPED = registerItem("rubber_ring_stripped", () -> new BetterCustomArmorModelItem(EquipmentSlot.CHEST, getSettings().rarity(Rarity.COMMON), new BeachpartyIdentifier("textures/entity/rubber_ring_stripped.png"), -0.7f));
-    public static final RegistrySupplier<Item> RUBBER_RING_PELICAN = registerItem("rubber_ring_pelican", () -> new BetterCustomArmorModelItem(EquipmentSlot.CHEST, getSettings().rarity(Rarity.RARE), new BeachpartyIdentifier("textures/entity/rubber_ring_pelican.png"), -0.7f));
-    public static final RegistrySupplier<Item> RUBBER_RING_AXOLOTL = registerItem("rubber_ring_axolotl", () -> new BetterCustomArmorModelItem(EquipmentSlot.CHEST, getSettings().rarity(Rarity.RARE), new BeachpartyIdentifier("textures/entity/rubber_ring_axolotl.png"), -0.7f));
+    public static final RegistrySupplier<Item> RUBBER_RING_BLUE = registerItem("rubber_ring_blue", () -> new BetterCustomArmorModelItem(MaterialsRegistry.RING, EquipmentSlot.CHEST, getSettings().rarity(Rarity.COMMON), new BeachpartyIdentifier("textures/entity/rubber_ring_blue.png"), -0.7f));
+    public static final RegistrySupplier<Item> RUBBER_RING_PINK = registerItem("rubber_ring_pink", () -> new BetterCustomArmorModelItem(MaterialsRegistry.RING, EquipmentSlot.CHEST, getSettings().rarity(Rarity.COMMON), new BeachpartyIdentifier("textures/entity/rubber_ring_pink.png"), -0.7f));
+    public static final RegistrySupplier<Item> RUBBER_RING_STRIPPED = registerItem("rubber_ring_stripped", () -> new BetterCustomArmorModelItem(MaterialsRegistry.RING, EquipmentSlot.CHEST, getSettings().rarity(Rarity.COMMON), new BeachpartyIdentifier("textures/entity/rubber_ring_stripped.png"), -0.7f));
+    public static final RegistrySupplier<Item> RUBBER_RING_PELICAN = registerItem("rubber_ring_pelican", () -> new BetterCustomArmorModelItem(MaterialsRegistry.RING, EquipmentSlot.CHEST, getSettings().rarity(Rarity.RARE), new BeachpartyIdentifier("textures/entity/rubber_ring_pelican.png"), -0.7f));
+    public static final RegistrySupplier<Item> RUBBER_RING_AXOLOTL = registerItem("rubber_ring_axolotl", () -> new BetterCustomArmorModelItem(MaterialsRegistry.RING, EquipmentSlot.CHEST, getSettings().rarity(Rarity.RARE), new BeachpartyIdentifier("textures/entity/rubber_ring_axolotl.png"), -0.7f));
     public static final RegistrySupplier<Item> POOL_NOODLE = registerItem("pool_noodle", () -> new PoolNoodleItem(Tiers.WOOD, 1, -1.4F, getSettings()));
     public static final RegistrySupplier<Block> PALM_TORCH = registerWithoutItem("palm_torch", () -> new TorchBlock(BlockBehaviour.Properties.of(Material.DECORATION).noCollission().instabreak().lightLevel((state) -> 14).sound(SoundType.WOOD), ParticleTypes.FLAME));
     public static final RegistrySupplier<Block> PALM_WALL_TORCH = registerWithoutItem("palm_wall_torch", () -> new WallTorchBlock(BlockBehaviour.Properties.of(Material.DECORATION).noCollission().instabreak().lightLevel((state) -> 14).sound(SoundType.WOOD).dropsLike(PALM_TORCH.get()), ParticleTypes.FLAME));
@@ -178,37 +180,24 @@ public class ObjectRegistry {
 
     private static <T extends Block> RegistrySupplier<T> registerCocktail(String name, Supplier<T> block, MobEffect effect) {
         RegistrySupplier<T> toReturn = registerWithoutItem(name, block);
-        registerBlockItem(name, () -> new DrinkBlockItem(toReturn.get(), getSettings(settings -> settings.food(cocktailFoodComponent(effect)))));
+        registerItem(name, () -> new DrinkBlockItem(toReturn.get(), getSettings(settings -> settings.food(cocktailFoodComponent(effect)))));
         return toReturn;
     }
 
-    private static <T extends Block> RegistrySupplier<T> registerWithItem(String name, Supplier<T> block) {
-        RegistrySupplier<T> toReturn = registerWithoutItem(name, block);
-        registerBlockItem(name, () -> new BlockItem(toReturn.get(), new Item.Properties().tab(Beachparty.CREATIVE_TAB)));
-        return toReturn;
+    public static <T extends Block> RegistrySupplier<T> registerWithItem(String name, Supplier<T> block) {
+        return registerWithItem(name, block, Beachparty.CREATIVE_TAB);
     }
 
-    private static <T extends Block> RegistrySupplier<T> registerWithoutItem(String path, Supplier<T> block) {
-        if (Platform.isForge()) {
-            return BLOCKS.register(path, block);
-        }
-        return BLOCK_REGISTRAR.register(new BeachpartyIdentifier(path), block);
+    public static <T extends Block> RegistrySupplier<T> registerWithItem(String name, Supplier<T> block, @Nullable CreativeModeTab tab) {
+        return Util.registerWithItem(BLOCKS, BLOCK_REGISTRAR, ITEMS, ITEM_REGISTRAR, new BeachpartyIdentifier(name), block, tab);
     }
 
-    private static <T extends Item> void registerBlockItem(String path, Supplier<T> itemSupplier) {
-        if (Platform.isForge()) {
-            ITEMS.register(path, itemSupplier);
-            return;
-        }
-        ITEM_REGISTRAR.register(new BeachpartyIdentifier(path), itemSupplier);
+    public static <T extends Block> RegistrySupplier<T> registerWithoutItem(String path, Supplier<T> block) {
+        return Util.registerWithoutItem(BLOCKS, BLOCK_REGISTRAR, new BeachpartyIdentifier(path), block);
     }
 
-
-    public static <T extends Item> RegistrySupplier<T> registerItem(String name, Supplier<T> item) {
-        if (Platform.isForge()) {
-            return ITEMS.register(name, item);
-        }
-        return ITEM_REGISTRAR.register(new BeachpartyIdentifier(name), item);
+    public static <T extends Item> RegistrySupplier<T> registerItem(String path, Supplier<T> itemSupplier) {
+        return Util.registerItem(ITEMS, ITEM_REGISTRAR, new BeachpartyIdentifier(path), itemSupplier);
     }
 
 }

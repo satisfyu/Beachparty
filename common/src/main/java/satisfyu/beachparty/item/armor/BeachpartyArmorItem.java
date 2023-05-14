@@ -1,4 +1,4 @@
-package satisfyu.beachparty.item;
+package satisfyu.beachparty.item.armor;
 
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.Entity;
@@ -12,6 +12,7 @@ import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import satisfyu.beachparty.client.ClientUtil;
+import satisfyu.beachparty.item.IBeachpartyAmorSet;
 
 import java.util.List;
 
@@ -21,6 +22,7 @@ public class BeachpartyArmorItem extends ArmorItem implements IBeachpartyAmorSet
     public BeachpartyArmorItem(ArmorMaterial material, EquipmentSlot slot, Properties settings) {
         super(material, slot, settings);
     }
+
 
     @Override
     public void inventoryTick(ItemStack stack, Level world, Entity entity, int slot, boolean selected) {

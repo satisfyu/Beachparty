@@ -4,28 +4,14 @@ import dev.architectury.registry.level.entity.EntityAttributeRegistry;
 import dev.architectury.registry.registries.DeferredRegister;
 import dev.architectury.registry.registries.RegistrySupplier;
 import net.minecraft.core.Registry;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
-import net.minecraft.world.entity.SpawnPlacements;
-import net.minecraft.world.entity.animal.Animal;
-import net.minecraft.world.level.biome.Biomes;
-import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraft.world.level.levelgen.Heightmap;
 import satisfyu.beachparty.Beachparty;
 import satisfyu.beachparty.BeachpartyIdentifier;
-import satisfyu.beachparty.entity.CabinetBlockEntity;
-import satisfyu.beachparty.entity.MiniFridgeBlockEntity;
 import satisfyu.beachparty.entity.CoconutEntity;
-import satisfyu.beachparty.entity.TikiBarBlockEntity;
 import satisfyu.beachparty.entity.chair.ChairEntity;
 import satisfyu.beachparty.entity.pelican.PelicanEntity;
-import satisfyu.beachparty.mixin.SpawnMobAccessor;
-import satisfyu.beachparty.util.boat.impl.TerraformBoatInitializer;
 
-
-import java.util.HashMap;
-import java.util.Map;
 import java.util.function.Supplier;
 
 public class EntityRegistry {
@@ -56,7 +42,6 @@ public class EntityRegistry {
 
     public static void init(){
         Beachparty.LOGGER.debug("Registering Mod Entities for " + Beachparty.MOD_ID);
-        TerraformBoatInitializer.init();
         ENTITY_TYPES.register();
         registerPelican();
     }

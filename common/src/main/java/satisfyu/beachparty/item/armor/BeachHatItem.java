@@ -1,12 +1,13 @@
-package satisfyu.beachparty.item;
+package satisfyu.beachparty.item.armor;
 
+import de.cristelknight.doapi.item.CustomArmorModelItem;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.Item;
 import satisfyu.beachparty.BeachpartyIdentifier;
 import satisfyu.beachparty.registry.MaterialsRegistry;
 
-public class BeachHatItem extends CustomModelArmorItem {
+public class BeachHatItem extends BeachpartyCustomArmorItem {
 
 
     public BeachHatItem(Item.Properties settings) {
