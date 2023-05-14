@@ -114,12 +114,12 @@ public class TikiBarBlockEntity extends BlockEntity implements Container, BlockE
     }
 
     private boolean canCraft(TikiBarRecipe recipe) {
-        if (recipe == null || recipe.getResultItem().isEmpty()) {
+        if (recipe == null || recipe.getResultItem(this.level.registryAccess()).isEmpty()) {
             return false;
         } else if (areInputsEmpty()) {
             return false;
         }
-        return this.getItem(OUTPUT_SLOT).isEmpty()  || this.getItem(OUTPUT_SLOT) == recipe.getResultItem();
+        return this.getItem(OUTPUT_SLOT).isEmpty()  || this.getItem(OUTPUT_SLOT) == recipe.getResultItem(this.level.registryAccess());
     }
 
 
@@ -135,7 +135,7 @@ public class TikiBarBlockEntity extends BlockEntity implements Container, BlockE
         if (!canCraft(recipe)) {
             return;
         }
-        final ItemStack recipeOutput = recipe.getResultItem();
+        final ItemStack recipeOutput = recipe.getResultItem(this.level.registryAccess());
         final ItemStack outputSlotStack = this.getItem(OUTPUT_SLOT);
         if (outputSlotStack.isEmpty()) {
             ItemStack output = recipeOutput.copy();

@@ -115,7 +115,7 @@ public abstract class AbstractRecipeBookGUIScreen<T extends AbstractPrivateRecip
 
     @Override
     public void removed() {
-        this.recipeBook.close();
+        //this.recipeBook.cl
         super.removed();
     }
 

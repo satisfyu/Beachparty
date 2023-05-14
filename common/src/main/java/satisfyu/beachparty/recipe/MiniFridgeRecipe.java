@@ -3,6 +3,7 @@ package satisfyu.beachparty.recipe;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import net.minecraft.core.NonNullList;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
@@ -35,9 +36,10 @@ public class MiniFridgeRecipe implements Recipe<Container> {
     }
 
     @Override
-    public ItemStack assemble(Container inventory) {
+    public ItemStack assemble(Container container, RegistryAccess registryAccess) {
         return ItemStack.EMPTY;
     }
+
 
     @Override
     public boolean canCraftInDimensions(int width, int height) {
@@ -45,9 +47,11 @@ public class MiniFridgeRecipe implements Recipe<Container> {
     }
 
     @Override
-    public ItemStack getResultItem() {
-        return this.output.copy();
+    public ItemStack getResultItem(RegistryAccess registryAccess) {
+        return null;
     }
+
+
 
     @Override
     public ResourceLocation getId() {
@@ -99,7 +103,7 @@ public class MiniFridgeRecipe implements Recipe<Container> {
         public void toNetwork(FriendlyByteBuf buf, MiniFridgeRecipe recipe) {
             buf.writeVarInt(recipe.inputs.size());
             recipe.inputs.forEach(entry -> entry.toNetwork(buf));
-            buf.writeItem(recipe.getResultItem());
+            buf.writeItem(recipe.output);
         }
     }
 

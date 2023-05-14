@@ -32,7 +32,7 @@ public class PalmFoliagePlacer extends FoliagePlacer {
     }
 
     @Override
-    protected void createFoliage(LevelSimulatedReader pLevel, BiConsumer<BlockPos, BlockState> pBlockSetter, RandomSource pRandom, TreeConfiguration pConfig, int pMaxFreeTreeHeight, FoliageAttachment pAttachment, int pFoliageHeight, int pFoliageRadius, int pOffset) {
+    protected void createFoliage(LevelSimulatedReader pLevel, FoliageSetter foliageSetter, RandomSource pRandom, TreeConfiguration pConfig, int pMaxFreeTreeHeight, FoliageAttachment pAttachment, int pFoliageHeight, int pFoliageRadius, int pOffset) {
         BlockPos startingPos = pAttachment.pos();
 
         tryPlaceLeaf(pLevel, pBlockSetter, pRandom, pConfig, startingPos);
@@ -41,6 +41,11 @@ public class PalmFoliagePlacer extends FoliagePlacer {
         createQuadrant(Direction.EAST, startingPos, pLevel, pBlockSetter, pRandom, pConfig);
         createQuadrant(Direction.SOUTH, startingPos, pLevel, pBlockSetter, pRandom, pConfig);
         createQuadrant(Direction.WEST, startingPos, pLevel, pBlockSetter, pRandom, pConfig);
+    }
+
+    @Override
+    protected void createFoliage(LevelSimulatedReader pLevel, BiConsumer<BlockPos, BlockState> pBlockSetter, RandomSource pRandom, TreeConfiguration pConfig, int pMaxFreeTreeHeight, FoliageAttachment pAttachment, int pFoliageHeight, int pFoliageRadius, int pOffset) {
+
     }
 
     @Override

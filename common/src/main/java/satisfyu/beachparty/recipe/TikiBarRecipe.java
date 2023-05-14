@@ -76,8 +76,7 @@ public class TikiBarRecipe implements Recipe<Container> {
         return true;
     }
 
-    public Container getResultItem() {
-    }
+
 
     public static class Serializer implements RecipeSerializer<TikiBarRecipe> {
 
@@ -104,7 +103,7 @@ public class TikiBarRecipe implements Recipe<Container> {
         public void toNetwork(FriendlyByteBuf buf, TikiBarRecipe recipe) {
             buf.writeVarInt(recipe.inputs.size());
             recipe.inputs.forEach(entry -> entry.toNetwork(buf));
-            buf.writeItem(recipe.getResultItem());
+            buf.writeItem(recipe.output);
         }
 
     }

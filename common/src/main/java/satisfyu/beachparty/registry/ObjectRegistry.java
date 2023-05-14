@@ -188,7 +188,7 @@ public class ObjectRegistry {
 
     private static <T extends Block> RegistrySupplier<T> registerWithItem(String name, Supplier<T> block) {
         RegistrySupplier<T> toReturn = registerWithoutItem(name, block);
-        registerBlockItem(name, () -> new BlockItem(toReturn.get(), new Item.Properties()(Beachparty.BEACHPARTY_TAB)));
+        registerBlockItem(name, () -> new BlockItem(toReturn.get(), new Item.Properties()));
         return toReturn;
     }
 

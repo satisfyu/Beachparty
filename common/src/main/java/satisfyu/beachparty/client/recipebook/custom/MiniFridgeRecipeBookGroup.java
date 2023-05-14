@@ -3,6 +3,7 @@ package satisfyu.beachparty.client.recipebook.custom;
 import com.google.common.collect.ImmutableList;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Recipe;
@@ -26,7 +27,7 @@ public enum MiniFridgeRecipeBookGroup implements IRecipeBookGroup {
         this.icons = ImmutableList.copyOf(entries);
     }
 
-    public boolean fitRecipe(Recipe<?> recipe) {
+    public boolean fitRecipe(Recipe<?> recipe, RegistryAccess registryManager) {
         if (recipe instanceof MiniFridgeRecipe miniFridgeRecipe) {
             switch (this) {
                 case SEARCH -> {

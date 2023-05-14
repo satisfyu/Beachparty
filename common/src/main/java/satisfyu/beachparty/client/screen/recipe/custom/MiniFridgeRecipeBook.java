@@ -24,7 +24,7 @@ public class MiniFridgeRecipeBook extends PrivateRecipeBookWidget {
 
     @Override
     public void showGhostRecipe(Recipe<?> recipe, List<Slot> slots) {
-        this.ghostSlots.addSlot(recipe.getResultItem(), slots.get(0).x, slots.get(0).y);
+        this.ghostSlots.addSlot(recipe.getResultItem(this.client.level.registryAccess()), slots.get(0).x, slots.get(0).y);
         int slot = 1;
         for (Ingredient ingredient : recipe.getIngredients()) {
             ItemStack[] inputStacks = ingredient.getItems();
@@ -77,5 +77,15 @@ public class MiniFridgeRecipeBook extends PrivateRecipeBookWidget {
 
     static {
         TOGGLE_COOKABLE_TEXT = Component.translatable("gui.beachparty.recipebook.toggleRecipes.refridgable");
+    }
+
+    @Override
+    public void setFocused(boolean bl) {
+
+    }
+
+    @Override
+    public boolean isFocused() {
+        return false;
     }
 }
