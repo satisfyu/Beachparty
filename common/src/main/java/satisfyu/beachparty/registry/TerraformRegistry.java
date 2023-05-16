@@ -15,11 +15,7 @@ import satisfyu.beachparty.BeachpartyIdentifier;
 public class TerraformRegistry {
 
     public static ResourceLocation PALM_BOAT_TYPE_LOCATION = new BeachpartyIdentifier("palm");
-
     public static final ResourceLocation PALM_SIGN_TEXTURE_ID = new BeachpartyIdentifier("entity/sign/palm");
-
-    private static final String PALM_SIGN_ID = "palm_sign";
-    private static final String PALM_WALL_SIGN_ID = "palm_wall_sign";
 
     public static void init() {
         RegistrySupplier<Item> palmBoat = TerraformBoatItemHelper.registerBoatItem(ObjectRegistry.ITEMS, "palm_boat", PALM_BOAT_TYPE_LOCATION, false, Beachparty.CREATIVE_TAB);
@@ -29,10 +25,10 @@ public class TerraformRegistry {
 
 
 
-        RegistrySupplier<Block> sign = ObjectRegistry.registerWithoutItem(PALM_SIGN_ID, () -> TerraformSignHelper.getSign(PALM_SIGN_TEXTURE_ID));
-        RegistrySupplier<Block> wallSign = ObjectRegistry.registerWithoutItem(PALM_WALL_SIGN_ID, () -> TerraformSignHelper.getWallSign(PALM_SIGN_TEXTURE_ID));
+        RegistrySupplier<Block> sign = ObjectRegistry.registerWithoutItem("palm_sign", () -> TerraformSignHelper.getSign(PALM_SIGN_TEXTURE_ID));
+        RegistrySupplier<Block> wallSign = ObjectRegistry.registerWithoutItem("palm_wall_sign", () -> TerraformSignHelper.getWallSign(PALM_SIGN_TEXTURE_ID));
 
-        RegistrySupplier<Item> palmSignItem = ObjectRegistry.registerItem(PALM_SIGN_ID, () -> new SignItem(new Item.Properties().stacksTo(16).tab(Beachparty.CREATIVE_TAB), sign.get(), wallSign.get()));
+        RegistrySupplier<Item> palmSignItem = ObjectRegistry.registerItem("palm_sign", () -> new SignItem(new Item.Properties().stacksTo(16).tab(Beachparty.CREATIVE_TAB), sign.get(), wallSign.get()));
     }
 
 }
