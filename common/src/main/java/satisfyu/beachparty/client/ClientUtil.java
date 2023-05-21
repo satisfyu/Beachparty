@@ -9,7 +9,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import satisfyu.beachparty.item.IBeachpartyAmorSet;
+import satisfyu.beachparty.item.IBeachpartyArmorSet;
 
 import java.util.List;
 
@@ -22,10 +22,10 @@ public class ClientUtil {
         Player player = Minecraft.getInstance().player;
         if (player == null) return;
 
-        boolean helmet = IBeachpartyAmorSet.hasSwimearHelmet(player);
-        boolean breastplate = IBeachpartyAmorSet.hasSwimwearBreastplate(player);
-        boolean leggings = IBeachpartyAmorSet.hasSwimearLeggings(player);
-        boolean boots = IBeachpartyAmorSet.hasSwimearBoots(player);
+        boolean helmet = IBeachpartyArmorSet.hasSwimearHelmet(player);
+        boolean breastplate = IBeachpartyArmorSet.hasSwimwearBreastplate(player);
+        boolean leggings = IBeachpartyArmorSet.hasSwimearLeggings(player);
+        boolean boots = IBeachpartyArmorSet.hasSwimearBoots(player);
 
         tooltip.add(Component.nullToEmpty(""));
         tooltip.add(Component.translatable("tooltip.beachparty.swimwear_set").withStyle(ChatFormatting.DARK_GREEN));

@@ -12,12 +12,12 @@ import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import satisfyu.beachparty.client.ClientUtil;
-import satisfyu.beachparty.item.IBeachpartyAmorSet;
+import satisfyu.beachparty.item.IBeachpartyArmorSet;
 
 import java.util.List;
 
 
-public class DyeableBeachpartyArmorItem extends DyeableArmorItem implements IBeachpartyAmorSet {
+public class DyeableBeachpartyArmorItem extends DyeableArmorItem implements IBeachpartyArmorSet {
     private final int defaultColor;
     public DyeableBeachpartyArmorItem(ArmorMaterial material, EquipmentSlot slot, int color, Item.Properties settings) {
         super(material, slot, settings);

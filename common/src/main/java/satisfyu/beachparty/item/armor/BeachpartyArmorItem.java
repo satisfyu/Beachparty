@@ -12,11 +12,11 @@ import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import satisfyu.beachparty.client.ClientUtil;
-import satisfyu.beachparty.item.IBeachpartyAmorSet;
+import satisfyu.beachparty.item.IBeachpartyArmorSet;
 
 import java.util.List;
 
-public class BeachpartyArmorItem extends ArmorItem implements IBeachpartyAmorSet {
+public class BeachpartyArmorItem extends ArmorItem implements IBeachpartyArmorSet {
 
 
     public BeachpartyArmorItem(ArmorMaterial material, EquipmentSlot slot, Properties settings) {

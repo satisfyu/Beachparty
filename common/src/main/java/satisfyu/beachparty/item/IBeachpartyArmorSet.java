@@ -6,12 +6,13 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
+import net.minecraft.world.item.ItemStack;
 import satisfyu.beachparty.registry.MaterialsRegistry;
 
 import java.util.Map;
 import java.util.Objects;
 
-public interface IBeachpartyAmorSet {
+public interface IBeachpartyArmorSet {
 
     Map<ArmorMaterial, MobEffectInstance> MATERIAL_TO_EFFECT_MAP =
             (new ImmutableMap.Builder<ArmorMaterial, MobEffectInstance>())
@@ -97,8 +98,14 @@ public interface IBeachpartyAmorSet {
     }
 
     static boolean hasSwimearHelmet(Player player) {
-        return !player.getInventory().getArmor(3).isEmpty() && isSwimwearHelmet((ArmorItem) player.getInventory().getArmor(3).getItem());
+        ItemStack helmetStack = player.getInventory().getArmor(3);
+        if (helmetStack.isEmpty() || !(helmetStack.getItem() instanceof ArmorItem)) {
+            return false;
+        }
+
+        return isSwimwearHelmet((ArmorItem) helmetStack.getItem());
     }
+
 
     private static boolean isSwimwearHelmet(ArmorItem armorItem) {
         return armorItem.getMaterial() == MaterialsRegistry.BEACH_HAT || armorItem.getMaterial() == MaterialsRegistry.SUNGLASSES;
