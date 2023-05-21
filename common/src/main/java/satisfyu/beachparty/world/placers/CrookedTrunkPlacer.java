@@ -1,4 +1,4 @@
-package satisfyu.beachparty.util.worldgen;
+package satisfyu.beachparty.world.placers;
 
 import com.google.common.collect.ImmutableList;
 import com.mojang.serialization.Codec;

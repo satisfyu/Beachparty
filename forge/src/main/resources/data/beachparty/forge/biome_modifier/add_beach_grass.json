@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#beachparty:beach",
+  "features": "beachparty:beach_grass",
+  "step": "vegetal_decoration"
+}

@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#beachparty:beach",
+  "features": "beachparty:dry_tall_bush",
+  "step": "vegetal_decoration"
+}

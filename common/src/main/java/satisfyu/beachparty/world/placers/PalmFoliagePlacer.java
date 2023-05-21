@@ -1,4 +1,4 @@
-package satisfyu.beachparty.util.worldgen;
+package satisfyu.beachparty.world.placers;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;

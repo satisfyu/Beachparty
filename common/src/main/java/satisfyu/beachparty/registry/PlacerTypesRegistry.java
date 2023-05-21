@@ -6,8 +6,8 @@ import net.minecraft.core.Registry;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacerType;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.TrunkPlacerType;
 import satisfyu.beachparty.Beachparty;
-import satisfyu.beachparty.util.worldgen.PalmFoliagePlacer;
-import satisfyu.beachparty.util.worldgen.CrookedTrunkPlacer;
+import satisfyu.beachparty.world.placers.PalmFoliagePlacer;
+import satisfyu.beachparty.world.placers.CrookedTrunkPlacer;
 
 public class PlacerTypesRegistry {
     public static final DeferredRegister<FoliagePlacerType<?>> FOLIAGE_PLACER_TYPES = DeferredRegister.create(Beachparty.MOD_ID, Registry.FOLIAGE_PLACER_TYPE_REGISTRY);

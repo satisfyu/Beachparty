@@ -57,10 +57,7 @@
             "minecraft:underwater_magma",
             "minecraft:disk_sand",
             "minecraft:disk_clay",
-            "minecraft:disk_gravel",
-            "beachparty:seastars",
-            "beachparty:sandwaves",
-            "beachparty:sand_slab"
+            "minecraft:disk_gravel"
         ],
         [],
         [
@@ -70,16 +67,11 @@
         [
             "minecraft:glow_lichen",
             "minecraft:flower_default",
-            "beachparty:dry_bush",
-            "beachparty:dry_tall_bush",
-            "beachparty:dirty_sand",
-            "beachparty:beach_grass",
             "minecraft:patch_grass_badlands",
             "minecraft:brown_mushroom_normal",
             "minecraft:red_mushroom_normal",
             "minecraft:patch_sugar_cane",
-            "minecraft:patch_pumpkin",
-            "beachparty:palm_tree"
+            "minecraft:patch_pumpkin"
         ],
         [
             "minecraft:freeze_top_layer"
