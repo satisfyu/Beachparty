@@ -34,6 +34,7 @@
   "block.beachparty.palm_log": "Palm Log",
   "block.beachparty.palm_planks": "Palm Planks",
   "block.beachparty.palm_pressure_plate": "Palm Pressure Plate",
+  "block.beachparty.palm_sapling": "Palm Sapling",
   "block.beachparty.palm_sign": "Palm Sign",
   "block.beachparty.palm_slab": "Palm Slab",
   "block.beachparty.palm_stairs": "Palm Stairs",
@@ -62,6 +63,8 @@
   "entity.beachparty.pelican": "Pelican",
   "entity.minecraft.villager.beachparty.barkeeper": "Barkeeper",
   "entity.minecraft.villager.beachparty.beach_boy": "Beachboy",
+  "gui.beachparty.recipebook.toggleRecipes.refridgable": "Refridgable",
+  "gui.beachparty.recipebook.toggleRecipes.shakeable": "Shakeable",
   "item.beachparty.beach_hat": "Beach Hat",
   "item.beachparty.bikini": "Bikini",
   "item.beachparty.coconut_open": "Open Coconut",
@@ -77,7 +80,6 @@
   "item.beachparty.overgrown_disc.desc": "MissLilitu - Over the Rainbow",
   "item.beachparty.palm_boat": "Palm Boat",
   "item.beachparty.palm_chest_boat": "Palm Boat with Chest",
-  "item.beachparty.palm_sapling": "Palm Sapling",
   "item.beachparty.pelican_spawn_egg": "Pelican Spawn Egg",
   "item.beachparty.pool_noodle": "Pool Noodle",
   "item.beachparty.raw_mussel_meat": "Raw Mussel Meat",
@@ -124,7 +126,5 @@
   "tooltip.beachparty.swimwearleggings" : "Swimwear Leggings",
   "tooltip.beachparty.swimwearline1": "When Wearing:",
   "tooltip.beachparty.swimwearline2": "+17% Swim Speed",
-  "tooltip.beachparty.tiki": "Used for mixing Cocktails and Drinks",
-  "gui.beachparty.recipebook.toggleRecipes.refridgable": "Refridgable",
-  "gui.beachparty.recipebook.toggleRecipes.shakeable": "Shakeable"
+  "tooltip.beachparty.tiki": "Used for mixing Cocktails and Drinks"
 }
