@@ -55,8 +55,9 @@ public interface IBeachpartyArmorSet {
         if (material.equals(MaterialsRegistry.SWIM_WINGS) || material.equals(MaterialsRegistry.RING)) {
             int slot = 2;
             if (!player.getInventory().getArmor(slot).isEmpty()) {
-                ArmorItem armor = (ArmorItem) player.getInventory().getArmor(slot).getItem();
-                return armor.getMaterial() == material;
+                if (player.getInventory().getArmor(slot).getItem() instanceof ArmorItem armor) {
+                    return armor.getMaterial() == material;
+                }
             }
             return false;
         }
