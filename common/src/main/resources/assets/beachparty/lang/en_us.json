@@ -126,5 +126,8 @@
   "tooltip.beachparty.swimwearleggings" : "Swimwear Leggings",
   "tooltip.beachparty.swimwearline1": "When Wearing:",
   "tooltip.beachparty.swimwearline2": "+17% Swim Speed",
-  "tooltip.beachparty.tiki": "Used for mixing Cocktails and Drinks"
+  "tooltip.beachparty.tiki": "Used for mixing Cocktails and Drinks",
+
+  "rei.beachparty.mini_fridge_category": "Mini Fridge",
+  "rei.beachparty.tiki_bar_category": "Tiki Bar"
 }

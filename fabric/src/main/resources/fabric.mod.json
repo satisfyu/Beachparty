@@ -26,6 +26,9 @@
     ],
     "fabric-datagen": [
       "satisfyu.beachparty.fabric.datagen.BeachpartyDataGeneration"
+    ],
+    "rei_client": [
+      "satisfyu.beachparty.fabric.rei.BeachpartyREI"
     ]
   },
   "mixins": [

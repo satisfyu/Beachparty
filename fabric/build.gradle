@@ -24,6 +24,7 @@ repositories {
         name "terraform wood api, trinkets"
         url "https://maven.terraformersmc.com"
     }
+    maven { url "https://maven.shedaniel.me/" }
 }
 
 
@@ -41,6 +42,9 @@ dependencies {
     shadowCommon(project(path: ":common", configuration: "transformProductionFabric")) { transitive false }
     common(project(path: ":fabric-like", configuration: "namedElements")) { transitive false }
     shadowCommon(project(path: ":fabric-like", configuration: "transformProductionFabric")) { transitive false }
+
+    // REI Runtime for Fabric
+    modApi("me.shedaniel:RoughlyEnoughItems-fabric:9.1.595"){ exclude group: 'net.fabricmc', module: 'fabric-loader' }
 }
 
 loom {
@@ -110,5 +114,6 @@ publishing {
     // See https://docs.gradle.org/current/userguide/publishing_maven.html for information on how to set up publishing.
     repositories {
         // Add repositories to publish to here.
+        maven { url "https://maven.shedaniel.me/"}
     }
 }
