@@ -43,7 +43,6 @@ dependencies {
     common(project(path: ":fabric-like", configuration: "namedElements")) { transitive false }
     shadowCommon(project(path: ":fabric-like", configuration: "transformProductionFabric")) { transitive false }
 
-    // REI Runtime for Fabric
     modApi("me.shedaniel:RoughlyEnoughItems-fabric:9.1.595"){ exclude group: 'net.fabricmc', module: 'fabric-loader' }
 }
 

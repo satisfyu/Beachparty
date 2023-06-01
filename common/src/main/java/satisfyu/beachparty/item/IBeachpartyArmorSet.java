@@ -6,7 +6,7 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
-import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Item;
 import satisfyu.beachparty.registry.MaterialsRegistry;
 
 import java.util.Map;
@@ -20,6 +20,7 @@ public interface IBeachpartyArmorSet {
                     .put(MaterialsRegistry.TRUNKS, new MobEffectInstance(MobEffects.DOLPHINS_GRACE, 14 * 20, 1))
                     .put(MaterialsRegistry.SWIM_WINGS, new MobEffectInstance(MobEffects.DOLPHINS_GRACE, 14 * 20, 0))
                     .put(MaterialsRegistry.RING, new MobEffectInstance(MobEffects.DOLPHINS_GRACE, 14 * 20, 1)).build();
+
     default boolean hasSwimwearSet(Player player) {
         return hasSwimearBoots(player) && hasSwimearLeggings(player) && hasSwimwearBreastplate(player) && hasSwimearHelmet(player);
     }
@@ -73,25 +74,39 @@ public interface IBeachpartyArmorSet {
         }
     }
 
-    public static boolean hasSwimearBoots(Player player) {
-        return !player.getInventory().getArmor(0).isEmpty() && isSwimwearBoots((ArmorItem) player.getInventory().getArmor(0).getItem());
-
+    static boolean hasSwimearBoots(Player player) {
+        if (player.getInventory().getArmor(0).isEmpty()) return false;
+        Item item = player.getInventory().getArmor(0).getItem();
+        if (item instanceof ArmorItem armorItem) {
+            return isSwimwearBoots(armorItem);
+        }
+        return false;
     }
 
     private static boolean isSwimwearBoots(ArmorItem armorItem) {
         return armorItem.getMaterial() == MaterialsRegistry.CROCS;
     }
 
-    public static boolean hasSwimearLeggings(Player player) {
-        return !player.getInventory().getArmor(1).isEmpty() && isSwimwearLeggings((ArmorItem) player.getInventory().getArmor(1).getItem());
+    static boolean hasSwimearLeggings(Player player) {
+        if (player.getInventory().getArmor(1).isEmpty()) return false;
+        Item item = player.getInventory().getArmor(1).getItem();
+        if (item instanceof ArmorItem armorItem) {
+            return isSwimwearLeggings(armorItem);
+        }
+        return false;
     }
 
     private static boolean isSwimwearLeggings(ArmorItem armorItem) {
         return armorItem.getMaterial() == MaterialsRegistry.TRUNKS || armorItem.getMaterial() == MaterialsRegistry.BIKINI;
     }
 
-    public static boolean hasSwimwearBreastplate(Player player) {
-        return !player.getInventory().getArmor(2).isEmpty() && isSwimwearBreastplate((ArmorItem) player.getInventory().getArmor(2).getItem());
+    static boolean hasSwimwearBreastplate(Player player) {
+        if (player.getInventory().getArmor(2).isEmpty()) return false;
+        Item item = player.getInventory().getArmor(2).getItem();
+        if (item instanceof ArmorItem armorItem) {
+            return isSwimwearBreastplate(armorItem);
+        }
+        return false;
     }
 
     private static boolean isSwimwearBreastplate(ArmorItem armorItem) {
@@ -99,12 +114,12 @@ public interface IBeachpartyArmorSet {
     }
 
     static boolean hasSwimearHelmet(Player player) {
-        ItemStack helmetStack = player.getInventory().getArmor(3);
-        if (helmetStack.isEmpty() || !(helmetStack.getItem() instanceof ArmorItem)) {
-            return false;
+        if (player.getInventory().getArmor(3).isEmpty()) return false;
+        Item item = player.getInventory().getArmor(3).getItem();
+        if (item instanceof ArmorItem armorItem) {
+            return isSwimwearHelmet(armorItem);
         }
-
-        return isSwimwearHelmet((ArmorItem) helmetStack.getItem());
+        return false;
     }
 
 

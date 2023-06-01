@@ -4,7 +4,6 @@ import dev.architectury.registry.registries.DeferredRegister;
 import dev.architectury.registry.registries.Registrar;
 import dev.architectury.registry.registries.RegistrySupplier;
 import net.minecraft.core.Registry;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import satisfyu.beachparty.Beachparty;
 import satisfyu.beachparty.BeachpartyIdentifier;
@@ -31,7 +30,7 @@ public class SoundEventRegistry {
     public static final List<RegistrySupplier<SoundEvent>> RADIO_SOUNDS = List.of(RADIO_REGGEA, RADIO_HAWAII, RADIO_TROPICAL, RADIO_BEACHPARTY);
 
     private static RegistrySupplier<SoundEvent> registerSoundEvent(String name) {
-        return SOUND_EVENTS.register(new BeachpartyIdentifier(name), ()-> new SoundEvent(new BeachpartyIdentifier(name)));
+        return SOUND_EVENTS.register(new BeachpartyIdentifier(name), () -> new SoundEvent(new BeachpartyIdentifier(name)));
     }
 
 
