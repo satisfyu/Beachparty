@@ -95,6 +95,14 @@ public class ObjectRegistry {
     public static final RegistrySupplier<Block> PUMPKIN_COCKTAIL = registerCocktail("pumpkin_cocktail", () -> new CocktailBlock(getCocktailSettings()), MobEffects.FIRE_RESISTANCE);
     public static final RegistrySupplier<Block> HONEY_COCKTAIL = registerCocktail("honey_cocktail", () -> new CocktailBlock(getCocktailSettings()), MobEffects.DIG_SPEED);
     public static final RegistrySupplier<Block> MELON_COCKTAIL = registerCocktail("melon_cocktail", () -> new CocktailBlock(getCocktailSettings()), MobEffects.LUCK);
+
+    public static final RegistrySupplier<Item> SWEETBERRY_MILKSHAKE = registerItem("sweetberry_milkshake", () -> new DrinkItem(getSettings().food(Foods.BAKED_POTATO), 32, true));
+    public static final RegistrySupplier<Item> COCONUT_MILKSHAKE = registerItem("coconut_milkshake", () -> new DrinkItem(getSettings().food(Foods.BAKED_POTATO), 32, true));
+    public static final RegistrySupplier<Item> CHOCOLATE_MILKSHAKE = registerItem("chocolate_milkshake", () -> new DrinkItem(getSettings().food(Foods.BAKED_POTATO), 32, true));
+    public static final RegistrySupplier<Item> SWEETBERRY_ICECREAM = registerItem("sweetberry_icecream", () -> new IcecreamItem(getSettings().food(Foods.COOKED_BEEF)));
+    public static final RegistrySupplier<Item> COCONUT_ICECREAM = registerItem("coconut_icecream", () -> new IcecreamItem(getSettings().food(Foods.COOKED_BEEF)));
+    public static final RegistrySupplier<Item> CHOCOLATE_ICECREAM = registerItem("chocolate_icecream", () -> new IcecreamItem(getSettings().food(Foods.COOKED_BEEF)));
+
     public static final RegistrySupplier<Item> ICECREAM_COCONUT = registerItem("icecream_coconut", () -> new IcecreamItem(getSettings().food(Foods.BAKED_POTATO)));
     public static final RegistrySupplier<Item> ICECREAM_MELON = registerItem("icecream_melon", () -> new IcecreamItem(getSettings().food(Foods.BAKED_POTATO)));
     public static final RegistrySupplier<Item> ICECREAM_CACTUS = registerItem("icecream_cactus", () -> new IcecreamItem(getSettings().food(Foods.BAKED_POTATO)));

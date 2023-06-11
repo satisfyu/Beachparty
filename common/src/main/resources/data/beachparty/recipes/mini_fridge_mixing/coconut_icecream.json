@@ -1,0 +1,14 @@
+{
+  "type": "beachparty:mini_fridge_mixing",
+  "ingredients": [
+    {
+      "item": "beachparty:coconut_open"
+    },
+    {
+      "item": "minecraft:snowball"
+    }
+  ],
+  "result": {
+    "item": "beachparty:coconut_icecream"
+  }
+}

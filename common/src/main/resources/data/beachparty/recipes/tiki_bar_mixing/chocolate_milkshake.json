@@ -1,0 +1,14 @@
+{
+  "type": "beachparty:tiki_bar_mixing",
+  "ingredients": [
+    {
+      "item": "beachparty:chocolate_icecream"
+    },
+    {
+      "item": "minecraft:milk_bucket"
+    }
+  ],
+  "result": {
+    "item": "beachparty:chocolate_milkshake"
+  }
+}

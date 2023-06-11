@@ -127,7 +127,12 @@
   "tooltip.beachparty.swimwearline1": "When Wearing:",
   "tooltip.beachparty.swimwearline2": "+17% Swim Speed",
   "tooltip.beachparty.tiki": "Used for mixing Cocktails and Drinks",
-
+  "item.beachparty.sweetberry_milkshake": "Sweetberry Milkshake",
+  "item.beachparty.coconut_milkshake": "Coconut Milkshake",
+  "item.beachparty.chocolate_milkshake": "Chocolate Milkshake",
+  "item.beachparty.sweetberry_icecream": "Sweetberry Sundae",
+  "item.beachparty.coconut_icecream": "Coconut Sundae",
+  "item.beachparty.chocolate_icecream": "Chocolate Sundae",
   "rei.beachparty.mini_fridge_category": "Mini Fridge",
   "rei.beachparty.tiki_bar_category": "Tiki Bar"
 }
