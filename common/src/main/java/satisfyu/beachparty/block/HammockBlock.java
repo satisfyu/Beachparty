@@ -105,9 +105,9 @@ public class HammockBlock extends HorizontalDirectionalBlock {
         BlockPos left = middle.relative(direction.getCounterClockWise(Direction.Axis.Y));
         BlockPos right = middle.relative(direction.getClockWise(Direction.Axis.Y));
         Level world = ctx.getLevel();
-        if (ctx.getPlayer() != null) {
-            ctx.getPlayer().displayClientMessage(Component.translatable("block.beachparty.notimplemented").withStyle(ChatFormatting.AQUA), true);
-        }
+        // if (ctx.getPlayer() != null) {
+        //    ctx.getPlayer().displayClientMessage(Component.translatable("block.beachparty.notimplemented").withStyle(ChatFormatting.AQUA), true);
+        //}
         return world.getBlockState(left).canBeReplaced(ctx) && world.getWorldBorder().isWithinBounds(left) && world.getBlockState(right).canBeReplaced(ctx) && world.getWorldBorder().isWithinBounds(right)  ? this.defaultBlockState().setValue(FACING, direction) : null;
     }
 
