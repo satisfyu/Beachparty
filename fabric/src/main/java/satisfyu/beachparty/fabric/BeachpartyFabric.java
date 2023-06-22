@@ -7,7 +7,9 @@ import net.minecraft.world.level.storage.loot.BuiltInLootTables;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.entries.LootTableReference;
 import satisfyu.beachparty.Beachparty;
+import satisfyu.beachparty.fabric.entity.EntitySpawnFabric;
 import satisfyu.beachparty.fabriclike.BeachpartyFabricLike;
+import satisfyu.beachparty.registry.EntityRegistry;
 
 import java.util.Set;
 
@@ -16,7 +18,7 @@ public class BeachpartyFabric implements ModInitializer {
     public void onInitialize() {
         BeachpartyFabricLike.init();
         registerLootTable();
-
+        EntitySpawnFabric.addEntitySpawn();
     }
 
     protected static void registerLootTable() {

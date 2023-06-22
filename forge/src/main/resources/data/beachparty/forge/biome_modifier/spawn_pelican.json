@@ -1,0 +1,13 @@
+{
+  "type": "forge:add_spawns",
+  "biomes": [
+    "minecraft:river",
+    "minecraft:beach"
+  ],
+  "spawners": {
+    "type": "beachparty:pelican",
+    "weight": 6,
+    "minCount": 3,
+    "maxCount": 5
+  }
+}

@@ -30,11 +30,8 @@ repositories {
 
 dependencies {
     modImplementation "net.fabricmc:fabric-loader:${rootProject.fabric_loader_version}"
-    modApi( "net.fabricmc.fabric-api:fabric-api:${rootProject.fabric_api_version}")
-    { exclude group: 'net.fabricmc', module: 'fabric-loader' }
-    // Remove the next line if you don't want to depend on the API
-    modApi( "dev.architectury:architectury-fabric:${rootProject.architectury_version}")
-    { exclude group: 'net.fabricmc', module: 'fabric-loader' }
+    modApi( "net.fabricmc.fabric-api:fabric-api:${rootProject.fabric_api_version}") { exclude group: 'net.fabricmc', module: 'fabric-loader' }
+    modApi( "dev.architectury:architectury-fabric:${rootProject.architectury_version}") { exclude group: 'net.fabricmc', module: 'fabric-loader' }
     modApi("de:doapi:${project.doapi_version}")
     modImplementation "com.terraformersmc.terraform-api:terraform-wood-api-v1:${project.terraform_wood_api_version}"
 
@@ -48,9 +45,6 @@ dependencies {
 
 loom {
     runs {
-        //
-        // This adds a new gradle task that runs the datagen API: "gradlew runDatagenClient"
-        //
         datagenClient {
             inherit client
             name "Data Generation"
@@ -110,9 +104,7 @@ publishing {
         }
     }
 
-    // See https://docs.gradle.org/current/userguide/publishing_maven.html for information on how to set up publishing.
     repositories {
-        // Add repositories to publish to here.
         maven { url "https://maven.shedaniel.me/"}
     }
 }

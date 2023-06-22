@@ -1,6 +1,6 @@
 package satisfyu.beachparty.item.armor;
 
-import de.cristelknight.doapi.item.CustomArmorModelItem;
+import de.cristelknight.doapi.item.CustomArmorItem;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -16,7 +16,7 @@ import satisfyu.beachparty.item.IBeachpartyArmorSet;
 
 import java.util.List;
 
-public abstract class BeachpartyCustomArmorItem extends CustomArmorModelItem implements IBeachpartyArmorSet {
+public abstract class BeachpartyCustomArmorItem extends CustomArmorItem implements IBeachpartyArmorSet {
 
 
     public BeachpartyCustomArmorItem(ArmorMaterial material, EquipmentSlot slot, Properties settings) {
