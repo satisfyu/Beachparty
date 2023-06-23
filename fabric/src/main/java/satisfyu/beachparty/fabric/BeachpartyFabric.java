@@ -8,8 +8,8 @@ import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.entries.LootTableReference;
 import satisfyu.beachparty.Beachparty;
 import satisfyu.beachparty.fabric.entity.EntitySpawnFabric;
-import satisfyu.beachparty.fabriclike.BeachpartyFabricLike;
-import satisfyu.beachparty.registry.EntityRegistry;
+import satisfyu.beachparty.fabric.registry.VillagersFabric;
+import satisfyu.beachparty.fabric.world.BeachpartyBiomeModification;
 
 import java.util.Set;
 

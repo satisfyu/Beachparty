@@ -1,4 +1,4 @@
-package satisfyu.beachparty.fabriclike.world;
+package satisfyu.beachparty.fabric.world;
 
 import net.fabricmc.fabric.api.biome.v1.*;
 import net.minecraft.core.Registry;

@@ -1,4 +1,4 @@
-package satisfyu.beachparty.fabriclike.registry;
+package satisfyu.beachparty.fabric.registry;
 
 import net.fabricmc.fabric.api.object.builder.v1.trade.TradeOfferHelper;
 import net.fabricmc.fabric.api.object.builder.v1.villager.VillagerProfessionBuilder;
