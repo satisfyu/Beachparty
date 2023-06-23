@@ -1,4 +1,4 @@
-package satisfyu.beachparty.client.gui.slot;
+package satisfyu.beachparty.client.gui.handler.slot;
 
 import net.minecraft.world.Container;
 import net.minecraft.world.inventory.Slot;

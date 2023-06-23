@@ -1,5 +1,6 @@
-package satisfyu.beachparty.client.screen.recipe.custom;
+package satisfyu.beachparty.client.recipebook;
 
+import de.cristelknight.doapi.client.recipebook.screen.widgets.PrivateRecipeBookWidget;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.RandomSource;
@@ -10,16 +11,15 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeType;
-import satisfyu.beachparty.client.recipebook.PrivateRecipeBookWidget;
 import satisfyu.beachparty.registry.RecipeRegistry;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class TikiBarRecipeBook extends PrivateRecipeBookWidget {
+public class MiniFridgeRecipeBook extends PrivateRecipeBookWidget {
     private static final Component TOGGLE_COOKABLE_TEXT;
 
-    public TikiBarRecipeBook() {
+    public MiniFridgeRecipeBook() {
     }
 
     @Override
@@ -34,11 +34,11 @@ public class TikiBarRecipeBook extends PrivateRecipeBookWidget {
     }
 
     @Override
-    public void insertRecipe(Recipe<?> recipe) {
+    public void insertRecipe(Recipe<?> recipe, List<Slot> slots) {
         int usedInputSlots = 1;
         for (Ingredient ingredient : recipe.getIngredients()) {
             int slotIndex = 0;
-            for (Slot slot : screenHandler.slots) {
+            for (Slot slot : slots) {
                 ItemStack itemStack = slot.getItem();
 
                 if (ingredient.test(itemStack) && usedInputSlots < 3) {
@@ -67,7 +67,7 @@ public class TikiBarRecipeBook extends PrivateRecipeBookWidget {
 
     @Override
     protected RecipeType<? extends Recipe<Container>> getRecipeType() {
-        return RecipeRegistry.TIKI_BAR_RECIPE_TYPE.get();
+        return RecipeRegistry.MINI_FRIDGE_RECIPE_TYPE.get();
     }
 
     @Override
@@ -76,6 +76,6 @@ public class TikiBarRecipeBook extends PrivateRecipeBookWidget {
     }
 
     static {
-        TOGGLE_COOKABLE_TEXT = Component.translatable("gui.beachparty.recipebook.toggleRecipes.shakeable");
+        TOGGLE_COOKABLE_TEXT = Component.translatable("gui.beachparty.recipebook.toggleRecipes.refridgable");
     }
 }

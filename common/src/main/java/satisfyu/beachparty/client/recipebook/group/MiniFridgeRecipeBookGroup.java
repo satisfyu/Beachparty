@@ -1,45 +1,44 @@
-package satisfyu.beachparty.client.recipebook.custom;
+package satisfyu.beachparty.client.recipebook.group;
 
 import com.google.common.collect.ImmutableList;
+import de.cristelknight.doapi.client.recipebook.IRecipeBookGroup;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.level.block.Blocks;
-import satisfyu.beachparty.client.recipebook.IRecipeBookGroup;
-import satisfyu.beachparty.recipe.TikiBarRecipe;
-import satisfyu.beachparty.registry.ObjectRegistry;
+import satisfyu.beachparty.recipe.MiniFridgeRecipe;
 
 import java.util.List;
 
 @Environment(EnvType.CLIENT)
-public enum TikiBarRecipeBookGroup implements IRecipeBookGroup {
+public enum MiniFridgeRecipeBookGroup implements IRecipeBookGroup {
     SEARCH(new ItemStack(Items.COMPASS)),
-    COCKTAIL(new ItemStack(ObjectRegistry.COCONUT_COCKTAIL.get())),
-    MISC(new ItemStack(ObjectRegistry.COCONUT.get()));
+    FRIDGE(new ItemStack(Blocks.ICE)),
+    MISC(new ItemStack(Items.SNOWBALL));
 
-    public static final List<IRecipeBookGroup> TIKI_GROUPS = ImmutableList.of(SEARCH, COCKTAIL, MISC);
+    public static final List<IRecipeBookGroup> FRIDGE_GROUPS = ImmutableList.of(SEARCH, FRIDGE, MISC);
 
     private final List<ItemStack> icons;
 
-    TikiBarRecipeBookGroup(ItemStack... entries) {
+    MiniFridgeRecipeBookGroup(ItemStack... entries) {
         this.icons = ImmutableList.copyOf(entries);
     }
 
     public boolean fitRecipe(Recipe<?> recipe) {
-        if (recipe instanceof TikiBarRecipe tikiBarRecipe) {
+        if (recipe instanceof MiniFridgeRecipe miniFridgeRecipe) {
             switch (this) {
                 case SEARCH -> {
                     return true;
                 }
-                case COCKTAIL -> {
-                    if (tikiBarRecipe.getIngredients().stream().anyMatch((ingredient) -> ingredient.test(Blocks.ICE.asItem().getDefaultInstance()))) {
+                case FRIDGE -> {
+                    if (miniFridgeRecipe.getIngredients().stream().anyMatch((ingredient) -> ingredient.test(Blocks.ICE.asItem().getDefaultInstance()))) {
                         return true;
                     }
                 }
                 case MISC -> {
-                    if (tikiBarRecipe.getIngredients().stream().noneMatch((ingredient) -> ingredient.test(Blocks.ICE.asItem().getDefaultInstance()))) {
+                    if (miniFridgeRecipe.getIngredients().stream().noneMatch((ingredient) -> ingredient.test(Blocks.ICE.asItem().getDefaultInstance()))) {
                         return true;
                     }
                 }

@@ -1,5 +1,7 @@
 package satisfyu.beachparty.client.gui.handler;
 
+import de.cristelknight.doapi.client.recipebook.IRecipeBookGroup;
+import de.cristelknight.doapi.client.recipebook.handler.AbstractRecipeBookGUIScreenHandler;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
@@ -8,16 +10,15 @@ import net.minecraft.world.inventory.SimpleContainerData;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
-import satisfyu.beachparty.client.gui.slot.IceSlot;
-import satisfyu.beachparty.client.gui.slot.TikiBarOutputSlot;
-import satisfyu.beachparty.client.recipebook.IRecipeBookGroup;
-import satisfyu.beachparty.client.recipebook.custom.MiniFridgeRecipeBookGroup;
+import satisfyu.beachparty.client.gui.handler.slot.IceSlot;
+import satisfyu.beachparty.client.gui.handler.slot.TikiBarOutputSlot;
+import satisfyu.beachparty.client.recipebook.group.MiniFridgeRecipeBookGroup;
 import satisfyu.beachparty.recipe.MiniFridgeRecipe;
 import satisfyu.beachparty.registry.ScreenHandlerTypesRegistry;
 
 import java.util.List;
 
-public class MiniFridgeGuiHandler extends AbstractRecipeBookGUIScreenHandler  {
+public class MiniFridgeGuiHandler extends AbstractRecipeBookGUIScreenHandler {
 
     private final ContainerData delegate;
 

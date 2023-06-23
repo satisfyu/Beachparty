@@ -34,7 +34,7 @@ dependencies {
     forge "net.minecraftforge:forge:${rootProject.forge_version}"
     // Remove the next line if you don't want to depend on the API
 
-    modApi("de:doapi:${project.doapi_version}")
+    modImplementation("de:doapi:${project.doapi_version}")
 
     modApi "dev.architectury:architectury-forge:${rootProject.architectury_version}"
 
@@ -55,17 +55,17 @@ shadowJar {
     exclude "architectury.common.json"
 
     configurations = [project.configurations.shadowCommon]
-    classifier "dev-shadow"
+    archiveClassifier.set("dev-shadow")
 }
 
 remapJar {
     input.set shadowJar.archiveFile
     dependsOn shadowJar
-    classifier null
+    archiveClassifier.set(null)
 }
 
 jar {
-    classifier "dev"
+    archiveClassifier.set("dev")
 }
 
 

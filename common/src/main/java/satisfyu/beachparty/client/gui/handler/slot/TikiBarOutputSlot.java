@@ -1,4 +1,4 @@
-package satisfyu.beachparty.client.gui.slot;
+package satisfyu.beachparty.client.gui.handler.slot;
 
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;

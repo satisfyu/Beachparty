@@ -16,7 +16,12 @@ import java.util.Set;
 public class BeachpartyFabric implements ModInitializer {
     @Override
     public void onInitialize() {
-        BeachpartyFabricLike.init();
+        Beachparty.init();
+        Beachparty.commonSetup();
+
+        //Fabric only
+        BeachpartyBiomeModification.init();
+        VillagersFabric.init();
         registerLootTable();
         EntitySpawnFabric.addEntitySpawn();
     }

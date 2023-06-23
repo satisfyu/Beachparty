@@ -1,11 +1,12 @@
 package satisfyu.beachparty.client.gui;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import de.cristelknight.doapi.client.recipebook.screen.AbstractRecipeBookGUIScreen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
 import satisfyu.beachparty.BeachpartyIdentifier;
 import satisfyu.beachparty.client.gui.handler.TikiBarGuiHandler;
-import satisfyu.beachparty.client.screen.recipe.custom.TikiBarRecipeBook;
+import satisfyu.beachparty.client.recipebook.TikiBarRecipeBook;
 
 public class TikiBarGui extends AbstractRecipeBookGUIScreen<TikiBarGuiHandler> {
 

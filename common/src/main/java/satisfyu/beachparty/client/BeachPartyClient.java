@@ -1,7 +1,6 @@
 package satisfyu.beachparty.client;
 
 
-import de.cristelknight.doapi.DoApiExpectPlatform;
 import de.cristelknight.doapi.terraform.TerraformSignHelper;
 import dev.architectury.registry.client.level.entity.EntityModelLayerRegistry;
 import dev.architectury.registry.client.level.entity.EntityRendererRegistry;
@@ -21,9 +20,6 @@ import satisfyu.beachparty.registry.*;
 
 @Environment(EnvType.CLIENT)
 public class BeachPartyClient {
-
-    public static boolean rememberedRecipeBookOpen = false;
-    public static boolean rememberedCraftableToggle = true;
 
 
     public static void initClient() {

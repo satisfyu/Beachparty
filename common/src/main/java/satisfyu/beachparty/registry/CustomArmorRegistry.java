@@ -3,17 +3,14 @@ package satisfyu.beachparty.registry;
 import dev.architectury.registry.client.level.entity.EntityModelLayerRegistry;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.EntityModelSet;
-import net.minecraft.client.model.geom.ModelLayerLocation;
-import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
-import satisfyu.beachparty.client.model.feature.BeachHatModel;
-import satisfyu.beachparty.client.model.feature.RubberRingAxolotlModel;
-import satisfyu.beachparty.client.model.feature.RubberRingModel;
-import satisfyu.beachparty.client.model.feature.RubberRingPelicanModel;
+import satisfyu.beachparty.client.model.BeachHatModel;
+import satisfyu.beachparty.client.model.RubberRingAxolotlModel;
+import satisfyu.beachparty.client.model.RubberRingModel;
+import satisfyu.beachparty.client.model.RubberRingPelicanModel;
 
 import java.util.Map;
-import java.util.function.Supplier;
 
 public class CustomArmorRegistry {
 

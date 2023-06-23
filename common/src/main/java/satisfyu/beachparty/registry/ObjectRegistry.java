@@ -26,6 +26,7 @@ import satisfyu.beachparty.block.*;
 import satisfyu.beachparty.item.*;
 import satisfyu.beachparty.item.armor.BeachHatItem;
 import satisfyu.beachparty.item.armor.BeachpartyArmorItem;
+import satisfyu.beachparty.item.armor.BetterCustomArmorModelItem;
 import satisfyu.beachparty.item.armor.DyeableBeachpartyArmorItem;
 
 import java.util.function.Consumer;
