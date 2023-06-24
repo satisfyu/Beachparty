@@ -1,6 +1,6 @@
 package satisfyu.beachparty.item.armor;
 
-import de.cristelknight.doapi.item.CustomArmorItem;
+import de.cristelknight.doapi.common.item.CustomArmorItem;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
