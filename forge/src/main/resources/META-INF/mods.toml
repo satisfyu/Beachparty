@@ -11,7 +11,7 @@ authors = "Me!"
 description = '''
 This is an example description! Tell everyone what your mod is about!
 '''
-logoFile = "assets/beachparty/icon.png"
+logoFile = "pack.png"
 
 [[dependencies.beachparty]]
 modId = "forge"

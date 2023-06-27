@@ -12,7 +12,7 @@
     "sources": "https://github.com/FabricMC/fabric-example-mod"
   },
   "license": "ARR",
-  "icon": "assets/beachparty/icon.png",
+  "icon": "pack.png",
   "environment": "*",
   "entrypoints": {
     "main": [
@@ -28,7 +28,7 @@
       "satisfyu.beachparty.fabric.datagen.BeachpartyDataGeneration"
     ],
     "rei_client": [
-      "satisfyu.beachparty.fabric.rei.BeachpartyREI"
+      "satisfyu.beachparty.fabric.rei.BeachpartyREIClientPluginFabric"
     ]
   },
   "mixins": [

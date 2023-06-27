@@ -1,4 +1,4 @@
-package satisfyu.beachparty.fabric.rei.category;
+package satisfyu.beachparty.compat.rei.category;
 
 import com.google.common.collect.Lists;
 import me.shedaniel.math.Point;
@@ -10,11 +10,8 @@ import me.shedaniel.rei.api.client.registry.display.DisplayCategory;
 import me.shedaniel.rei.api.common.category.CategoryIdentifier;
 import me.shedaniel.rei.api.common.util.EntryStacks;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.level.block.entity.SmokerBlockEntity;
 import satisfyu.beachparty.Beachparty;
-import satisfyu.beachparty.entity.MiniFridgeBlockEntity;
-import satisfyu.beachparty.fabric.rei.display.MiniFridgeDisplay;
-import satisfyu.beachparty.fabric.rei.display.TikiBarDisplay;
+import satisfyu.beachparty.compat.rei.display.TikiBarDisplay;
 import satisfyu.beachparty.registry.ObjectRegistry;
 
 import java.util.List;
