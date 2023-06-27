@@ -6,7 +6,6 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import satisfyu.beachparty.Beachparty;
-import satisfyu.beachparty.forge.entity.EntitySpawnForge;
 import satisfyu.beachparty.forge.registry.VillagersForge;
 
 @Mod(Beachparty.MOD_ID)
@@ -16,7 +15,6 @@ public class BeachpartyForge {
         EventBuses.registerModEventBus(Beachparty.MOD_ID, modEventBus);
         Beachparty.init();
         VillagersForge.register(modEventBus);
-        EntitySpawnForge.registerEntitySpawn();
         modEventBus.addListener(this::commonSetup);
     }
 
