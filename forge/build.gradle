@@ -34,7 +34,7 @@ dependencies {
     forge "net.minecraftforge:forge:${rootProject.forge_version}"
     // Remove the next line if you don't want to depend on the API
 
-    modImplementation("de:doapi:${project.doapi_version}")
+    modImplementation "maven.modrinth:do-api:${project.doapi_version}-forge"
 
     modApi "dev.architectury:architectury-forge:${rootProject.architectury_version}"
 
