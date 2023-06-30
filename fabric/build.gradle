@@ -7,13 +7,17 @@ architectury {
     fabric()
 }
 
+def jarFileName = 'letsdo-beachparty-fabric.jar'
+
+archivesBaseName = jarFileName
+
 loom {
     accessWidenerPath = project(":common").loom.accessWidenerPath
 }
 
 configurations {
     common
-    shadowCommon // Don't use shadow from the shadow plugin since it *excludes* files.
+    shadowCommon
     compileClasspath.extendsFrom common
     runtimeClasspath.extendsFrom common
     developmentFabric.extendsFrom common
@@ -25,7 +29,6 @@ repositories {
         url "https://maven.terraformersmc.com"
     }
 }
-
 
 dependencies {
     modImplementation "net.fabricmc:fabric-loader:${rootProject.fabric_loader_version}"
@@ -53,7 +56,6 @@ loom {
         }
     }
 }
-
 
 processResources {
     inputs.property "version", project.version
@@ -96,7 +98,7 @@ components.java {
 publishing {
     publications {
         mavenFabric(MavenPublication) {
-            artifactId = rootProject.archives_base_name + "-" + project.name
+            artifactId = jarFileName
             from components.java
         }
     }
