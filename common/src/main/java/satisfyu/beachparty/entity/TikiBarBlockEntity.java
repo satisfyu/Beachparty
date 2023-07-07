@@ -2,6 +2,7 @@ package satisfyu.beachparty.entity;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
@@ -96,12 +97,13 @@ public class TikiBarBlockEntity extends BlockEntity implements Container, BlockE
         final var recipeType = world.getRecipeManager()
                 .getRecipeFor(RecipeRegistry.TIKI_BAR_RECIPE_TYPE.get(), blockEntity, world)
                 .orElse(null);
-        if (canCraft(recipeType)) {
+        RegistryAccess access = level.registryAccess();
+        if (canCraft(recipeType, access)) {
             this.fermentationTime++;
 
             if (this.fermentationTime == this.totalFermentationTime) {
                 this.fermentationTime = 0;
-                craft(recipeType);
+                craft(recipeType, access);
                 dirty = true;
             }
         } else {
@@ -113,13 +115,13 @@ public class TikiBarBlockEntity extends BlockEntity implements Container, BlockE
 
     }
 
-    private boolean canCraft(TikiBarRecipe recipe) {
-        if (recipe == null || recipe.getResultItem().isEmpty()) {
+    private boolean canCraft(TikiBarRecipe recipe, RegistryAccess access) {
+        if (recipe == null || recipe.getResultItem(access).isEmpty()) {
             return false;
         } else if (areInputsEmpty()) {
             return false;
         }
-        return this.getItem(OUTPUT_SLOT).isEmpty()  || this.getItem(OUTPUT_SLOT) == recipe.getResultItem();
+        return this.getItem(OUTPUT_SLOT).isEmpty()  || this.getItem(OUTPUT_SLOT) == recipe.getResultItem(access);
     }
 
 
@@ -131,11 +133,11 @@ public class TikiBarBlockEntity extends BlockEntity implements Container, BlockE
         return emptyStacks == 2;
     }
 
-    private void craft(TikiBarRecipe recipe) {
-        if (!canCraft(recipe)) {
+    private void craft(TikiBarRecipe recipe, RegistryAccess access) {
+        if (!canCraft(recipe, access)) {
             return;
         }
-        final ItemStack recipeOutput = recipe.getResultItem();
+        final ItemStack recipeOutput = recipe.getResultItem(access);
         final ItemStack outputSlotStack = this.getItem(OUTPUT_SLOT);
         if (outputSlotStack.isEmpty()) {
             ItemStack output = recipeOutput.copy();
@@ -179,7 +181,7 @@ public class TikiBarBlockEntity extends BlockEntity implements Container, BlockE
     @Override
     public void setItem(int slot, ItemStack stack) {
         final ItemStack stackInSlot = this.inventory.get(slot);
-        boolean dirty = !stack.isEmpty() && stack.sameItem(stackInSlot) && ItemStack.tagMatches(stack, stackInSlot);
+        boolean dirty = !stack.isEmpty() && ItemStack.isSameItem(stack, stackInSlot) && ItemStack.matches(stack, stackInSlot);
         this.inventory.set(slot, stack);
         if (stack.getCount() > this.getMaxStackSize()) {
             stack.setCount(this.getMaxStackSize());

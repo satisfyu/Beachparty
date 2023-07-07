@@ -3,6 +3,7 @@ package satisfyu.beachparty.util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
@@ -26,8 +27,8 @@ public abstract class BeachpartyTreeGrower extends AbstractTreeGrower {
 
     @Override
     public boolean growTree(ServerLevel level, ChunkGenerator chunkGenerator, BlockPos pos, BlockState state, RandomSource random) {
-        Optional<Holder<ConfiguredFeature<?, ?>>> optional = level.registryAccess().registryOrThrow(Registry.CONFIGURED_FEATURE_REGISTRY).getHolder(
-                ResourceKey.create(Registry.CONFIGURED_FEATURE_REGISTRY, getConfiguredFeatureLocation()));
+        Optional<Holder<ConfiguredFeature<?, ?>>> optional = level.registryAccess().registryOrThrow(Registries.CONFIGURED_FEATURE).getHolder(
+                ResourceKey.create(Registries.CONFIGURED_FEATURE, getConfiguredFeatureLocation()));
         if (optional.isEmpty()) {
             return false;
         } else {

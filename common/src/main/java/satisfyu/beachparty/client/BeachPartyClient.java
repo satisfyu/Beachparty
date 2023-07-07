@@ -1,7 +1,7 @@
 package satisfyu.beachparty.client;
 
 
-import de.cristelknight.doapi.terraform.TerraformSignHelper;
+import de.cristelknight.doapi.terraform.sign.TerraformSignHelper;
 import dev.architectury.registry.client.level.entity.EntityModelLayerRegistry;
 import dev.architectury.registry.client.level.entity.EntityRendererRegistry;
 import dev.architectury.registry.client.rendering.RenderTypeRegistry;

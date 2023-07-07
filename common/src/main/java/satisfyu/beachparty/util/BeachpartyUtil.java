@@ -6,6 +6,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -29,7 +30,7 @@ import java.util.Optional;
 public class BeachpartyUtil {
 	
 	public static ResourceKey<ConfiguredFeature<?, ?>> configuredFeatureKey(String name) {
-		return ResourceKey.create(Registry.CONFIGURED_FEATURE_REGISTRY, new ResourceLocation(Beachparty.MOD_ID, name));
+		return ResourceKey.create(Registries.CONFIGURED_FEATURE, new ResourceLocation(Beachparty.MOD_ID, name));
 	}
 	
 	public static boolean matchesRecipe(Container inventory, NonNullList<Ingredient> recipe, int startIndex, int endIndex) {

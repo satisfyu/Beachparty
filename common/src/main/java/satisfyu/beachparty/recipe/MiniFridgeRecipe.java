@@ -3,6 +3,7 @@ package satisfyu.beachparty.recipe;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import net.minecraft.core.NonNullList;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
@@ -35,7 +36,7 @@ public class MiniFridgeRecipe implements Recipe<Container> {
     }
 
     @Override
-    public ItemStack assemble(Container inventory) {
+    public ItemStack assemble(Container inventory, RegistryAccess registryAccess) {
         return ItemStack.EMPTY;
     }
 
@@ -45,7 +46,7 @@ public class MiniFridgeRecipe implements Recipe<Container> {
     }
 
     @Override
-    public ItemStack getResultItem() {
+    public ItemStack getResultItem(RegistryAccess registryAccess) {
         return this.output.copy();
     }
 
@@ -98,9 +99,11 @@ public class MiniFridgeRecipe implements Recipe<Container> {
         @Override
         public void toNetwork(FriendlyByteBuf buf, MiniFridgeRecipe recipe) {
             buf.writeVarInt(recipe.inputs.size());
-            recipe.inputs.forEach(entry -> entry.toNetwork(buf));
-            buf.writeItem(recipe.getResultItem());
+            for (Ingredient ingredient : recipe.inputs) {
+                ingredient.toNetwork(buf);
+            }
+
+            buf.writeItem(recipe.output);
         }
     }
-
 }

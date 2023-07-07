@@ -229,11 +229,6 @@ public class HammockBlock extends HorizontalDirectionalBlock {
     }
 
     @Override
-    public PushReaction getPistonPushReaction(BlockState state) {
-        return PushReaction.IGNORE;
-    }
-
-    @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         builder.add(FACING, PART, OCCUPIED);
     }

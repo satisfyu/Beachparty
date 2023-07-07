@@ -11,7 +11,7 @@ public class BetterCustomArmorModelItem extends CustomHatItem {
 
     private float offset;
 
-    public BetterCustomArmorModelItem(ArmorMaterial material, EquipmentSlot slot, Properties settings, ResourceLocation textureLocation, float offset){
+    public BetterCustomArmorModelItem(ArmorMaterial material, Type slot, Properties settings, ResourceLocation textureLocation, float offset){
         super(material, slot, settings);
         this.textureLocation = textureLocation;
         this.offset = offset;

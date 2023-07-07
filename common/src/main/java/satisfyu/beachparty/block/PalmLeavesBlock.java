@@ -4,18 +4,17 @@ package satisfyu.beachparty.block;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.LeavesBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
-import net.minecraft.world.level.material.Material;
 import satisfyu.beachparty.registry.ObjectRegistry;
 
 
@@ -99,7 +98,7 @@ public class PalmLeavesBlock extends LeavesBlock {
             return 9;
         } else if (block instanceof PalmLeavesBlock) {
             return pNeighbor.getValue(DISTANCE_9);
-        } else if (pNeighbor.getMaterial() == Material.WOOD) {
+        } else if (pNeighbor.getBlock() == ObjectRegistry.PALM_LOG) {
             return 0;
         } else {
             return 9;

@@ -2,6 +2,7 @@ package satisfyu.beachparty.client.recipebook;
 
 import de.cristelknight.doapi.client.recipebook.screen.widgets.PrivateRecipeBookWidget;
 import net.minecraft.client.Minecraft;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.Container;
@@ -23,8 +24,8 @@ public class TikiBarRecipeBook extends PrivateRecipeBookWidget {
     }
 
     @Override
-    public void showGhostRecipe(Recipe<?> recipe, List<Slot> slots) {
-        this.ghostSlots.addSlot(recipe.getResultItem(), slots.get(0).x, slots.get(0).y);
+    public void showGhostRecipe(Recipe<?> recipe, List<Slot> slots, RegistryAccess registryAccess) {
+        this.ghostSlots.addSlot(recipe.getResultItem(registryAccess), slots.get(0).x, slots.get(0).y);
         int slot = 1;
         for (Ingredient ingredient : recipe.getIngredients()) {
             ItemStack[] inputStacks = ingredient.getItems();
@@ -34,13 +35,12 @@ public class TikiBarRecipeBook extends PrivateRecipeBookWidget {
     }
 
     @Override
-    public void insertRecipe(Recipe<?> recipe, List<Slot> slots) {
+    public void insertRecipe(Recipe<?> recipe) {
         int usedInputSlots = 1;
         for (Ingredient ingredient : recipe.getIngredients()) {
             int slotIndex = 0;
-            for (Slot slot : slots) {
+            for (Slot slot : this.screenHandler.slots) {
                 ItemStack itemStack = slot.getItem();
-
                 if (ingredient.test(itemStack) && usedInputSlots < 3) {
                     Minecraft.getInstance().gameMode.handleInventoryMouseClick(screenHandler.containerId, slotIndex, 0, ClickType.PICKUP, Minecraft.getInstance().player);
                     Minecraft.getInstance().gameMode.handleInventoryMouseClick(screenHandler.containerId, usedInputSlots, 0, ClickType.PICKUP, Minecraft.getInstance().player);
@@ -77,5 +77,14 @@ public class TikiBarRecipeBook extends PrivateRecipeBookWidget {
 
     static {
         TOGGLE_COOKABLE_TEXT = Component.translatable("gui.beachparty.recipebook.toggleRecipes.shakeable");
+    }
+    @Override
+    public void setFocused(boolean bl) {
+
+    }
+
+    @Override
+    public boolean isFocused() {
+        return false;
     }
 }

@@ -1,6 +1,7 @@
 package satisfyu.beachparty.world;
 
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import satisfyu.beachparty.BeachpartyIdentifier;
@@ -10,7 +11,7 @@ public class ConfiguredFeatures {
 
 
     public static ResourceKey<ConfiguredFeature<?, ?>> registerKey(String name) {
-        return ResourceKey.create(Registry.CONFIGURED_FEATURE_REGISTRY, new BeachpartyIdentifier(name));
+        return ResourceKey.create(Registries.CONFIGURED_FEATURE, new BeachpartyIdentifier(name));
     }
 }
 

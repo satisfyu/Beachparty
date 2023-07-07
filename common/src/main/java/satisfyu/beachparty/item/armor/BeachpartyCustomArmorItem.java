@@ -19,7 +19,7 @@ import java.util.List;
 public abstract class BeachpartyCustomArmorItem extends CustomArmorItem implements IBeachpartyArmorSet {
 
 
-    public BeachpartyCustomArmorItem(ArmorMaterial material, EquipmentSlot slot, Properties settings) {
+    public BeachpartyCustomArmorItem(ArmorMaterial material, Type slot, Properties settings) {
         super(material, slot, settings);
     }
 
