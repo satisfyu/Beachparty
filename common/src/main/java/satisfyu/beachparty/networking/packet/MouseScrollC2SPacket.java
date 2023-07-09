@@ -16,7 +16,7 @@ public class MouseScrollC2SPacket implements NetworkManager.NetworkReceiver {
 
     @Override
     public void receive(FriendlyByteBuf buf, NetworkManager.PacketContext context) {
-        Level serverWorld = context.getPlayer().getLevel();
+        Level serverWorld = context.getPlayer().level();
         BlockPos blockPos = buf.readBlockPos();
         BlockState blockState = serverWorld.getBlockState(blockPos);
 

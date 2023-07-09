@@ -1,5 +1,6 @@
 package satisfyu.beachparty.block;
 
+import de.cristelknight.doapi.common.util.ChairUtil;
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -14,7 +15,6 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import satisfyu.beachparty.entity.chair.ChairUtil;
 import satisfyu.beachparty.util.BeachpartyUtil;
 
 import java.util.HashMap;

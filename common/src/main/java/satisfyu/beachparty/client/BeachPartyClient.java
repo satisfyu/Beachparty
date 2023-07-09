@@ -12,7 +12,6 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import satisfyu.beachparty.client.gui.MiniFridgeGui;
 import satisfyu.beachparty.client.gui.TikiBarGui;
-import satisfyu.beachparty.entity.chair.ChairRenderer;
 import satisfyu.beachparty.entity.pelican.PelicanModel;
 import satisfyu.beachparty.entity.pelican.PelicanRenderer;
 import satisfyu.beachparty.networking.BeachpartyMessages;
@@ -46,14 +45,15 @@ public class BeachPartyClient {
     }
 
     public static void preInitClient(){
-        TerraformSignHelper.regsterSignSprite(TerraformRegistry.PALM_SIGN_TEXTURE_ID);
+        TerraformSignHelper.regsterSignSprite(TerraformRegistry.PALM_SIGN_TEXTURE);
+        TerraformSignHelper.regsterSignSprite(TerraformRegistry.PALM_HANGING_SIGN_TEXTURE);
+
         registerEntityEntityRenderers();
         registerEntityModelLayers();
     }
 
     public static void registerEntityEntityRenderers(){
         EntityRendererRegistry.register(EntityRegistry.PELICAN, PelicanRenderer::new);
-        EntityRendererRegistry.register(EntityRegistry.CHAIR, ChairRenderer::new);
         EntityRendererRegistry.register(EntityRegistry.COCONUT, ThrownItemRenderer::new);
     }
 

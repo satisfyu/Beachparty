@@ -2,6 +2,7 @@ package satisfyu.beachparty.fabric.world;
 
 import net.fabricmc.fabric.api.biome.v1.*;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.levelgen.GenerationStep;
 import satisfyu.beachparty.BeachpartyIdentifier;
@@ -29,7 +30,7 @@ public class BeachpartyBiomeModification {
     }
 
     private static Predicate<BiomeSelectionContext> getBeachpartySelector(String path) {
-        return BiomeSelectors.tag(TagKey.create(Registry.BIOME_REGISTRY, new BeachpartyIdentifier(path)));
+        return BiomeSelectors.tag(TagKey.create(Registries.BIOME, new BeachpartyIdentifier(path)));
     }
 
 

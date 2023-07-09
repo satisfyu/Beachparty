@@ -2,27 +2,24 @@ package satisfyu.beachparty.forge.registry;
 
 import com.google.common.collect.ImmutableSet;
 import net.minecraft.core.Registry;
-import net.minecraft.data.BuiltinRegistries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.ai.village.poi.PoiType;
 import net.minecraft.world.entity.npc.VillagerProfession;
-import net.minecraft.world.entity.npc.VillagerTrades;
 import net.minecraft.world.entity.npc.VillagerType;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.util.ObfuscationReflectionHelper;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import satisfyu.beachparty.Beachparty;
-import satisfyu.beachparty.BeachpartyIdentifier;
 import satisfyu.beachparty.registry.ObjectRegistry;
 
 import java.lang.reflect.InvocationTargetException;
 
 public class VillagersForge {
+    /*
 
     public static final DeferredRegister<PoiType> POI_TYPES = DeferredRegister.create(ForgeRegistries.POI_TYPES, Beachparty.MOD_ID);
     public static final DeferredRegister<VillagerProfession> VILLAGER_PROFESSIONS = DeferredRegister.create(ForgeRegistries.VILLAGER_PROFESSIONS, Beachparty.MOD_ID);
@@ -48,17 +45,25 @@ public class VillagersForge {
         VillagerType.BY_BIOME.put(ResourceKey.create(Registry.BIOME_REGISTRY, new ResourceLocation("beach")), BEACH.get());
     }
 
+     */
+
 
     public static void registerPOIs(){
+        /*
         try {
             ObfuscationReflectionHelper.findMethod(PoiType.class, "registerBlockStates", PoiType.class).invoke(null, BARKEEPER_POI.get(), BEACH_GUY_POI.get());
         } catch (InvocationTargetException | IllegalAccessException exception){
             exception.printStackTrace();
         }
+
+         */
     }
 
     public static void register(IEventBus eventBus) {
+        /*
         POI_TYPES.register(eventBus);
         VILLAGER_PROFESSIONS.register(eventBus);
+
+         */
     }
 }

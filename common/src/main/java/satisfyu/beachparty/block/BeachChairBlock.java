@@ -1,5 +1,6 @@
 package satisfyu.beachparty.block;
 
+import de.cristelknight.doapi.common.util.ChairUtil;
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -21,13 +22,11 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BedPart;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
-import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
-import satisfyu.beachparty.entity.chair.ChairUtil;
 import satisfyu.beachparty.util.BeachpartyUtil;
 
 import java.util.HashMap;
@@ -154,10 +153,5 @@ public class BeachChairBlock extends HorizontalDirectionalBlock {
 					world.levelEvent(player, LevelEvent.PARTICLES_DESTROY_BLOCK, blockPos, Block.getId(blockState));
 			}
 		}
-	}
-
-	@Override
-	public PushReaction getPistonPushReaction(BlockState state) {
-		return PushReaction.IGNORE;
 	}
 }

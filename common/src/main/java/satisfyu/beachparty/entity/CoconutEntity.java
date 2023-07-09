@@ -42,7 +42,7 @@ public class CoconutEntity extends ThrowableItemProjectile {
             ParticleOptions particleEffect = this.getParticleParameters();
 
             for(int i = 0; i < 8; ++i) {
-                this.level.addParticle(particleEffect, this.getX(), this.getY(), this.getZ(), 0.0, 0.0, 0.0);
+                this.level().addParticle(particleEffect, this.getX(), this.getY(), this.getZ(), 0.0, 0.0, 0.0);
             }
         }
 
@@ -52,12 +52,12 @@ public class CoconutEntity extends ThrowableItemProjectile {
         super.onHitEntity(entityHitResult);
         Entity entity = entityHitResult.getEntity();
         int damage = 2;
-        entity.hurt(DamageSource.thrown(this, this.getOwner()), (float)damage);
+        entity.hurt(entity.damageSources().thrown(this, this.getOwner()), (float)damage);
     }
     protected void onHit(HitResult hitResult) {
         super.onHit(hitResult);
-        if (!this.level.isClientSide) {
-            this.level.broadcastEntityEvent(this, (byte)3);
+        if (!this.level().isClientSide) {
+            this.level().broadcastEntityEvent(this, (byte)3);
             this.playSound(SoundEvents.WOOD_FALL, 1.0F, 1.0F);
             this.spawnAtLocation(ObjectRegistry.COCONUT_OPEN.get());
             this.discard();

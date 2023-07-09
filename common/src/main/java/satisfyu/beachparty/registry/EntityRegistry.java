@@ -3,14 +3,12 @@ package satisfyu.beachparty.registry;
 import dev.architectury.registry.level.entity.EntityAttributeRegistry;
 import dev.architectury.registry.registries.DeferredRegister;
 import dev.architectury.registry.registries.RegistrySupplier;
-import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import satisfyu.beachparty.Beachparty;
 import satisfyu.beachparty.BeachpartyIdentifier;
 import satisfyu.beachparty.entity.CoconutEntity;
-import satisfyu.beachparty.entity.chair.ChairEntity;
 import satisfyu.beachparty.entity.pelican.PelicanEntity;
 
 import java.util.function.Supplier;
@@ -19,11 +17,6 @@ public class EntityRegistry {
 
 
     private static final DeferredRegister<EntityType<?>> ENTITY_TYPES = DeferredRegister.create(Beachparty.MOD_ID, Registries.ENTITY_TYPE);
-
-
-    public static final RegistrySupplier<EntityType<ChairEntity>> CHAIR = create("chair",
-            () -> EntityType.Builder.of(ChairEntity::new, MobCategory.MISC).sized(0.001F, 0.001F).build(new BeachpartyIdentifier("chair").toString())
-    );
 
     public static final RegistrySupplier<EntityType<PelicanEntity>> PELICAN = create(
             "pelican",

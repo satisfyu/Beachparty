@@ -20,6 +20,7 @@ public class ModEvents {
     public static class ForgeEvents {
         @SubscribeEvent
         public static void addCustomTrades(VillagerTradesEvent event){
+            /*
             if(event.getType().equals(VillagersForge.BARKEEPER.get())){
                 Int2ObjectMap<List<VillagerTrades.ItemListing>> trades = event.getTrades();
                 addBarkeeperTrades(trades);
@@ -28,6 +29,8 @@ public class ModEvents {
                 Int2ObjectMap<List<VillagerTrades.ItemListing>> trades = event.getTrades();
                 addBeachGuyTrades(trades);
             }
+
+             */
         }
     }
 

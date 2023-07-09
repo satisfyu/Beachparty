@@ -13,7 +13,7 @@ public class Beachparty {
     public static final String MOD_ID = "beachparty";
     public static final Logger LOGGER = LogManager.getLogger(MOD_ID);
 
-    public static final CreativeModeTab CREATIVE_TAB = CreativeTabRegistry.create(new BeachpartyIdentifier("creative_tab"), () -> new ItemStack(ObjectRegistry.COCONUT_COCKTAIL.get()));
+    //public static final CreativeModeTab CREATIVE_TAB = CreativeTabRegistry.create(new BeachpartyIdentifier("creative_tab"), () -> new ItemStack(ObjectRegistry.COCONUT_COCKTAIL.get()));
 
     public static void init() {
         ObjectRegistry.init();

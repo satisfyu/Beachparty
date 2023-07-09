@@ -2,8 +2,9 @@ package satisfyu.beachparty.fabric.datagen;
 
 import dev.architectury.registry.registries.RegistrySupplier;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
+import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider;
-import net.minecraft.data.loot.BlockLoot;
+import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.BedBlock;
@@ -21,13 +22,13 @@ public class BeachpartyLoottableGenerator extends FabricBlockLootTableProvider {
 
     private static final float[] SAPLING_DROP_CHANCE = new float[]{0.05F, 0.0625F, 0.083333336F, 0.1F};
 
-    protected BeachpartyLoottableGenerator(FabricDataGenerator dataGenerator) {
-        super(dataGenerator);
+    protected BeachpartyLoottableGenerator(FabricDataOutput dataOutput) {
+        super(dataOutput);
     }
 
     @Override
-    protected void generateBlockLootTables() {
-        this.add(ObjectRegistry.SAND_SLAB, BlockLoot::createSlabItemTable);
+    public void generate() {
+        this.add(ObjectRegistry.SAND_SLAB.get(), this::createSlabItemTable);
         this.dropSelf(ObjectRegistry.LOUNGE_CHAIR);
         this.dropSelf(ObjectRegistry.CHAIR);
         this.dropSelf(ObjectRegistry.TABLE);
@@ -41,15 +42,15 @@ public class BeachpartyLoottableGenerator extends FabricBlockLootTableProvider {
         this.dropSelf(ObjectRegistry.MESSAGE_IN_A_BOTTLE);
         this.dropSelf(ObjectRegistry.PALM_PLANKS);
         this.dropSelf(ObjectRegistry.PALM_STAIRS);
-        this.add(ObjectRegistry.PALM_SLAB, BlockLoot::createSlabItemTable);
+        this.add(ObjectRegistry.PALM_SLAB, this::createSlabItemTable);
         this.dropSelf(ObjectRegistry.PALM_FENCE);
         this.dropSelf(ObjectRegistry.PALM_BEAM);
         this.dropSelf(ObjectRegistry.PALM_FENCE_GATE);
         this.dropSelf(ObjectRegistry.PALM_BUTTON);
         this.dropSelf(ObjectRegistry.PALM_PRESSURE_PLATE);
-        this.add(ObjectRegistry.PALM_DOOR, BlockLoot::createDoorTable);
+        this.add(ObjectRegistry.PALM_DOOR, this::createDoorTable);
         this.dropSelf(ObjectRegistry.PALM_TRAPDOOR);
-       // this.dropSelf((Block) ObjectRegistry.PALM_SIGN);
+        // this.dropSelf((Block) ObjectRegistry.PALM_SIGN);
         this.dropSelf(ObjectRegistry.DRIED_WHEAT_BLOCK);
         this.dropSelf(ObjectRegistry.DRIED_WHEAT_STAIRS);
         this.dropSelf(ObjectRegistry.DRIED_WHEAT_SLAB);
@@ -71,12 +72,19 @@ public class BeachpartyLoottableGenerator extends FabricBlockLootTableProvider {
         this.add(ObjectRegistry.DRY_BUSH_TALL, b -> createSinglePropConditionTable(b, DoublePlantBlock.HALF, DoubleBlockHalf.LOWER));
     }
 
+
     public void add(RegistrySupplier<Block> block, Function<Block, LootTable.Builder> function){
         this.add(block.get(), function);
     }
 
+    public void add(RegistrySupplier<Block> block, LootTable.Builder function){
+        this.add(block.get(), function);
+    }
+
+
     public void dropSelf(RegistrySupplier<Block> block){
         this.dropSelf(block.get());
     }
+
 
 }

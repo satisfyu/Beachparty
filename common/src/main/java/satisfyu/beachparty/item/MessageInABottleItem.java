@@ -63,7 +63,7 @@ public class MessageInABottleItem extends BlockItem {
 
 
     public static @Nullable ItemStack getRandomMap(Entity entity){
-        int lootChest = entity.level.getRandom().nextInt(4);
+        int lootChest = entity.level().getRandom().nextInt(4);
 
         ItemStack map = null;
 
@@ -99,7 +99,7 @@ public class MessageInABottleItem extends BlockItem {
 
 
     public static @Nullable ItemStack createMap(Entity entity, TagKey<Structure> structure, String nameKey, MapDecoration.Type iconType) {
-        if (!(entity.level instanceof ServerLevel serverWorld)) {
+        if (!(entity.level() instanceof ServerLevel serverWorld)) {
             return null;
         }
         BlockPos blockPos = serverWorld.findNearestMapStructure(structure, entity.blockPosition(), 100, true);

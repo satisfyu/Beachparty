@@ -50,9 +50,9 @@ public class TikiBarOutputSlot extends Slot {
 
     @Override
     protected void checkTakeAchievements(ItemStack stack) {
-        stack.onCraftedBy(this.player.level, this.player, this.amount);
-        if (this.player instanceof ServerPlayer && this.container instanceof TikiBarBlockEntity && player.level instanceof ServerLevel) {
-            ((TikiBarBlockEntity)this.container).dropExperience((ServerLevel) this.player.level, player.position());
+        stack.onCraftedBy(this.player.level(), this.player, this.amount);
+        if (this.player instanceof ServerPlayer && this.container instanceof TikiBarBlockEntity && player.level() instanceof ServerLevel) {
+            ((TikiBarBlockEntity)this.container).dropExperience((ServerLevel) this.player.level(), player.position());
         }
         this.amount = 0;
     }
